@@ -39,6 +39,6 @@ setup(name='rosavto',
       [paste.app_factory]
       main = rosavto:main
       [console_scripts]
-      initialize_rosavto_db = rosavto.scripts.initializedb:main
+      initialize_rosavto_db = rosavto.initializedb.initializedb:main
       """,
 )
