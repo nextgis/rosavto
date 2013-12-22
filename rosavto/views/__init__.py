@@ -5,9 +5,11 @@ from pyramid.view import view_config
 def map(request):
     return {}
 
+
 @view_config(route_name='layer', renderer='layer.mako')
 def layer(request):
     return {}
+
 
 @view_config(route_name='marker', renderer='marker.mako')
 def marker(request):
