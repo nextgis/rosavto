@@ -12,13 +12,9 @@
             var map = new Map('map', {
                     center: [55.7501, 37.6687], // Задаем центр
                     zoom: 10 // Указываем начальный зум
-                }),
-                osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', // URL к тайлам OSM
-                settingsOsmLayer = {
-                    attribution: 'Map data © OpenStreetMap contributors' // Описание слоя
-                };
+                });
 
-            map.addTileLayer(osmUrl, settingsOsmLayer); // Добавляем тайловый слой к карте
+            map.addOsmTileLayer(); // Добавляем тайловый слой OpenStreetMap к карте
         });
     </code>
 </pre>
@@ -28,12 +24,8 @@
         var map = new Map('map', {
                 center: [55.7501, 37.6687],
                 zoom: 10
-            }),
-            osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            settingsOsmLayer = {
-                attribution: 'Map data © OpenStreetMap contributors'
-            };
+            });
 
-        map.addTileLayer(osmUrl, settingsOsmLayer);
+        map.addOsmTileLayer();
     });
 </%block>

@@ -10,6 +10,14 @@ define([
 
         addTileLayer: function (url, settings) {
             this._map.addLayer(new L.TileLayer(url, settings));
+        },
+
+        addOsmTileLayer: function () {
+            var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                settingsOsmLayer = {
+                    attribution: 'Map data © OpenStreetMap contributors'
+                };
+            this.addTileLayer(osmUrl, settingsOsmLayer);
         }
     });
 });
