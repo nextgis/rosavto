@@ -9,7 +9,7 @@ from pyramid.paster import (
     setup_logging,
     )
 
-from rosavto.model import Base, DBSession
+from rosavto.model import Base, DBSession, GasStation, Bridge
 
 
 def usage(argv):
@@ -27,5 +27,8 @@ def main(argv=sys.argv):
     settings = get_appsettings(config_uri)
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
+    Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
-    #with transaction.manager:
+    with transaction.manager:
+        GasStation.import_from_geojson_file('rosavto/initializedb/data/fuel.geojson')
+        Bridge.import_from_geojson_file('rosavto/initializedb/data/bridges.geojson')
