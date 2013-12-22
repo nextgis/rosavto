@@ -1,5 +1,5 @@
 <%inherit file="master.mako"/>
 
-<%block name="title">Карта + слой</%block>
+<%block name="title">Маркер</%block>
 
 <div id="map"></div>
