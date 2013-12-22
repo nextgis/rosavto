@@ -17,7 +17,8 @@ requires = [
     'waitress',
     'geojson',
     'shapely',
-    'geoalchemy2'
+    'geoalchemy2',
+    'flup'
 ]
 
 setup(name='rosavto',
@@ -30,9 +31,9 @@ setup(name='rosavto',
           "Topic :: Internet :: WWW/HTTP",
           "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
       ],
-      author='',
-      author_email='',
-      url='',
+      author='nextgis',
+      author_email='info@nextgis.ru',
+      url='http://github.com/nextgis/rosavto',
       keywords='web wsgi bfg pylons pyramid',
       packages=find_packages(),
       include_package_data=True,
