@@ -6,7 +6,9 @@
     <meta name="keywords" content="python web application"/>
     <meta name="description" content="pyramid web application"/>
 
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/styles/default.min.css">
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/main.css')}">
 </head>
 <body>
@@ -26,12 +28,11 @@ ${self.body()}
             };
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.2/dojo/dojo.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/lang/javascript.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script>
-    require(['dojo/ready', 'rosavto/Map'], function (ready, Map) {
-        ready(function () {
-            (new Map()).placeAt('map');
-        });
-    });
+    <%block name="inlineScripts"/>
 </script>
 </body>
 </html>

@@ -1,8 +1,12 @@
 body {
-    margin: 3px;
+    margin: 4px;
 }
 
 #map {
-    width: 300px;
-    height: 300px;
+    margin: 3px 0;
+    height: 500px;
+}
+
+pre {
+    margin: 10px 0;
 }
