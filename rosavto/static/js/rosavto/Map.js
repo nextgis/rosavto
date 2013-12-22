@@ -6,6 +6,7 @@ define([
     return declare('Map', [], {
         constructor: function (domNode, settings) {
             this._map = new L.Map(domNode, settings);
+            this.addOsmTileLayer();
         },
 
         addTileLayer: function (url, settings) {
