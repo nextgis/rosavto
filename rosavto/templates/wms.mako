@@ -10,7 +10,7 @@
         // Загружаем модуль <a href="${request.static_url('rosavto:static/js/rosavto/Map.js')}">rosavto/Map</a> после готовности DOM дерева
         require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
             var map = new Map('map', {
-                    center: [55.7501, 37.6687], // Задаем центр
+                    center: [59.9175, 30.1410], // Задаем центр
                     zoom: 10 // Указываем начальный зум
                 });
 
@@ -18,6 +18,7 @@
             map.addWmsLayer('http://nextgis.ru/cgi-bin/wms?', 'NextGIS Demo WMS', {
                 layers: 'sattelite_image', // Указываем название слоя
                 format: 'image/png', // Указываем формат изображения
+                transparent: true,
                 attribution: "NextGIS wms layer" // Указываем аттрибутивную информацию о слое
             });
         });
@@ -27,7 +28,7 @@
 <%block name="inlineScripts">
     require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
         var map = new Map('map', {
-                center: [55.7501, 37.6687],
+                center: [59.9175, 30.1410],
                 zoom: 10
             });
 
@@ -35,6 +36,7 @@
             layers: 'sattelite_image',
             format: 'image/png',
             tileSize: 256,
+            transparent: true,
             attribution: "NextGIS Demo WMS"
         });
     });
