@@ -15,7 +15,7 @@
                 });
 
             // Добавляем WMS слой
-            map.addWmsLayer('http://nextgis.ru/cgi-bin/wms?', {
+            map.addWmsLayer('http://nextgis.ru/cgi-bin/wms?', 'NextGIS Demo WMS', {
                 layers: 'layer', // Указываем название слоя
                 format: 'image/png', // Указываем формат изображения
                 attribution: "NextGIS wms layer" // Указываем аттрибутивную информацию о слое
@@ -31,7 +31,7 @@
                 zoom: 10
             });
 
-        map.addWmsLayer('http://nextgis.ru/cgi-bin/wms?', {
+        map.addWmsLayer('http://nextgis.ru/cgi-bin/wms?', 'NextGIS Demo WMS', {
             layers: 'sattelite_image',
             format: 'image/png',
             tileSize: 256,
