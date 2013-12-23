@@ -14,3 +14,8 @@ def layer(request):
 @view_config(route_name='marker', renderer='marker.mako')
 def marker(request):
     return {}
+
+
+@view_config(route_name='wms', renderer='wms.mako')
+def wms(request):
+    return {}

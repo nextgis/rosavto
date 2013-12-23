@@ -7,7 +7,7 @@
     <meta name="description" content="pyramid web application"/>
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${request.static_url('rosavto:static/css/bootstrap.3.0.3.min.css')}">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/styles/default.min.css">
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/main.css')}">
 </head>
