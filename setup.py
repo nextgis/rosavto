@@ -19,7 +19,8 @@ requires = [
     'geojson',
     'shapely',
     'geoalchemy2',
-    'flup'
+    'flup',
+    'cornice'
 ]
 
 setup(name='rosavto',
