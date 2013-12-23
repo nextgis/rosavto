@@ -27,6 +27,7 @@ define([
         addWmsLayer: function (url, name, settings) {
             var wmsLayer = L.tileLayer.wms(url, settings);
 
+            this._map.addLayer(wmsLayer);
             this._baseLayers[name] = wmsLayer;
             if (this._legend) this._legend.addBaseLayer(wmsLayer, name);
         },
