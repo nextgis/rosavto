@@ -32,9 +32,10 @@
             });
 
         map.addWmsLayer('http://nextgis.ru/cgi-bin/wms?', {
-            layers: 'layer',
+            layers: 'sattelite_image',
             format: 'image/png',
-            attribution: "NextGIS wms layer"
+            tileSize: 256,
+            attribution: "NextGIS Demo WMS"
         });
     });
 </%block>
