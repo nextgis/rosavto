@@ -1,4 +1,4 @@
-from utilites import DictionaryMixin
+from utilites import DictionaryMixin, GeoJsonMixin
 
 from sqlalchemy import (
     Column,
@@ -15,7 +15,7 @@ from sqlalchemy.orm import (
     )
 from zope.sqlalchemy import ZopeTransactionExtension
 
-from geoalchemy2 import Geometry
+from geoalchemy2 import Geometry, shape
 
 from shapely.geometry import asShape
 
@@ -26,7 +26,7 @@ DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
 
-class GasStation(Base, DictionaryMixin):
+class GasStation(Base, DictionaryMixin, GeoJsonMixin):
     __tablename__ = 'gas_stations'
 
     id = Column(BigInteger, primary_key=True)
@@ -51,7 +51,7 @@ class GasStation(Base, DictionaryMixin):
 
             for gas_station in gas_stations_geojson:
                 properties = gas_station['properties']
-                properties['geometry'] = asShape(gas_station['geometry'])
+                properties['geometry'] = shape.from_shape(asShape(gas_station['geometry']), 4326)
                 properties['id'] = long(gas_station['id'].split('/')[1])
                 if 'fuel:diesel' in properties: properties['fuel_diesel'] = True
                 if 'fuel:octane_92' in properties: properties['fuel_octane_92'] = True
@@ -62,9 +62,10 @@ class GasStation(Base, DictionaryMixin):
                 gas_station.set_fields_from_dict(properties)
 
                 dbsession.add(gas_station)
+                dbsession.flush()
 
 
-class Bridge(Base, DictionaryMixin):
+class Bridge(Base, DictionaryMixin, GeoJsonMixin):
     __tablename__ = 'bridges'
 
     id = Column(BigInteger, primary_key=True)
@@ -81,10 +82,12 @@ class Bridge(Base, DictionaryMixin):
 
             for bridge in bridge_geojson:
                 properties = bridge['properties']
-                properties['geometry'] = asShape(bridge['geometry'])
-                properties['id'] = long(bridge['id'].split('/')[1])
+                if 'bridge' in properties and properties['bridge'] == 'yes':
+                    properties['geometry'] = shape.from_shape(asShape(bridge['geometry']), 4326)
+                    properties['id'] = long(bridge['id'].split('/')[1])
 
-                bridge = Bridge()
-                bridge.set_fields_from_dict(properties)
+                    bridge = Bridge()
+                    bridge.set_fields_from_dict(properties)
 
-                dbsession.add(bridge)
+                    dbsession.add(bridge)
+                    dbsession.flush()
