@@ -1,2 +1,3 @@
 #office lock files
 .~lock*
+/src/lineref/build*

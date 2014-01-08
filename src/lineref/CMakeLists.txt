@@ -26,11 +26,14 @@ project (${APP_NAME})
 
 set(CMAKE_COLOR_MAKEFILE ON)
 
-# set (HEADERS 
-# )
+ set (HEADERS 
+    commonutils.h
+    )
  
 set (SOURCES 
-        ogrlineref.cpp)
+        ogrlineref.cpp
+        commonutils.cpp
+    )
 
 find_package(GDAL REQUIRED)
 if(GDAL_FOUND)
