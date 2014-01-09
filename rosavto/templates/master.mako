@@ -30,6 +30,10 @@ ${self.body()}
 <script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.2/dojo/dojo.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/lang/javascript.min.js"></script>
+
+<script src="${request.static_url('rosavto:static/js/socket/SockJS.js')}"></script>
+<script src="${request.static_url('rosavto:static/js/socket/Stomp.js')}"></script>
+
 <script>hljs.initHighlightingOnLoad();</script>
 <script>
     <%block name="inlineScripts"/>

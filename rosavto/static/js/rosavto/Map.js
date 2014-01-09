@@ -4,7 +4,7 @@ define([
     'dojo/request/xhr',
     'http://cdn.leafletjs.com/leaflet-0.7.1/leaflet-src.js'
 ], function (declare, lang, xhr) {
-    return declare('Map', [], {
+    return declare('Map', null, {
         _map: {},
         _baseLayers: {},
         _overlaylayers: {},
@@ -83,6 +83,89 @@ define([
                         this._map.addLayer(layer);
                     }
                 }));
+        },
+
+        _realTimeLayers: {},
+        _subscribeUrl: {},
+        addRealtimeLayer: function (layerName, settings) {
+            var layer = L.layerGroup([]).addTo(this._map),
+                socket = new SockJS(settings.socketUrl),
+                client = Stomp.over(socket),
+                callback = lang.hitch(this, function (message) {
+                    var body = JSON.parse(message.body);
+                    this._renderMarker(layerName, body[settings.id], [body.latitude, body.longitude],
+                        body[settings.styleField]);
+                });
+
+            this._realTimeLayers[layerName] = {
+                layer: layer,
+                settings: settings,
+                markers: {} // Map of markers: id of entity to id of map
+            };
+
+            if (this._map.getZoom() >= settings.minVisibleZoom)
+                this._subscribeForRealtimeLayer(client, callback, this._realTimeLayers[layerName].settings.subscribeUrl);
+
+            this._map.on('dragend zoomend', lang.hitch(this, function () {
+                var realTimeLayer = this._realTimeLayers[layerName];
+                if (this._map.getZoom() < realTimeLayer.settings.minVisibleZoom) {
+                    realTimeLayer.layer.clearLayers();
+                    realTimeLayer.markers = {};
+                    this._unsubscribeForRealtimeLayer(client);
+                    return;
+                }
+                this._subscribeForRealtimeLayer(client, callback,
+                    realTimeLayer.settings.subscribeUrl);
+            }));
+        },
+
+        _renderMarker: function (layerName, markerId, latlng, type) {
+            var realtimeLayer = this._realTimeLayers[layerName];
+            if (!realtimeLayer) return;
+
+            if (realtimeLayer.markers[markerId]) {
+                realtimeLayer.layer.getLayer(realtimeLayer.markers[markerId]).setLatLng(latlng);
+            } else {
+                var marker = L.marker(latlng, {
+                    icon: L.divIcon({
+                        className: realtimeLayer.settings.styles[type].className
+                    })
+                });
+                realtimeLayer.layer.addLayer(marker);
+                realtimeLayer.markers[markerId] = L.stamp(marker);
+            }
+        },
+
+        _lastMapBounds: null,
+        _lastSubscribedId: null,
+        _subscribeForRealtimeLayer: function (client, callback, subscribeUrl) {
+            var bounds = this._map.getBounds(),
+                boundsHeaders = {
+                    'LatitudeFrom': bounds.getSouth(),
+                    'LatitudeTo': bounds.getNorth(),
+                    'LongitudeFrom': bounds.getWest(),
+                    'LongitudeTo': bounds.getEast()
+                };
+
+            if (bounds.equals(this._lastMapBounds)) return;
+
+            this._lastMapBounds = bounds;
+
+            if (client.connected) {
+                client.unsubscribe(this._lastSubscribedId);
+                this._lastSubscribedId = client.subscribe(subscribeUrl, callback, boundsHeaders).id;
+                return;
+            } else {
+                client.connect('spring', 'spring', lang.hitch(this, function () {
+                    this._lastSubscribedId = client.subscribe(subscribeUrl, callback, boundsHeaders).id;
+                }));
+            }
+        },
+
+        _unsubscribeForRealtimeLayer: function (client) {
+            if (this._lastSubscribedId) {
+                client.unsubscribe(this._lastSubscribedId);
+            }
         }
     });
 });

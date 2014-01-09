@@ -5,7 +5,8 @@
     ('map', u'Карта'),
     ('layer', u'Карта + слой'),
     ('marker', u'Маркер'),
-    ('wms', u'Карта + WMS')
+    ('wms', u'Карта + WMS'),
+    ('realtime', u'Realtime')
 ]
 %>
 
