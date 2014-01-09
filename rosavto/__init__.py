@@ -18,5 +18,6 @@ def main(global_config, **settings):
     config.add_route('layer', '/layer')
     config.add_route('marker', '/marker')
     config.add_route('wms', '/wms')
+    config.add_route('realtime', '/realtime')
     config.scan()
     return config.make_wsgi_app()

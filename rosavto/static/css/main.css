@@ -1,3 +1,10 @@
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 body {
     margin: 4px;
 }
@@ -9,4 +16,17 @@ body {
 
 pre {
     margin: 10px 0;
+}
+
+div.leaflet-marker-icon {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+div.leaflet-marker-icon.machine {
+    background-image: url('images/car.png');
+}
+
+div.leaflet-marker-icon.accident {
+    background-image: url('images/accident.png');
 }

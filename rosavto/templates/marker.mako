@@ -6,7 +6,7 @@
 
 <pre>
     Код для добавления слоев заправок и мостов, а также тайлового слоя OpenStreetMap:
-    <code>
+    <code data-language="javascript">
         // Загружаем модуль <a href="${request.static_url('rosavto:static/js/rosavto/Map.js')}">rosavto/Map</a> после готовности DOM дерева
         require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
             var map = new Map('map', {

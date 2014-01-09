@@ -19,3 +19,8 @@ def marker(request):
 @view_config(route_name='wms', renderer='wms.mako')
 def wms(request):
     return {}
+
+
+@view_config(route_name='realtime', renderer='realtime.mako')
+def realtime(request):
+    return {}
