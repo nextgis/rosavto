@@ -1,0 +1,1 @@
+﻿SELECT ST_AsText( ng_getlrpos('test_rd.parts', 1234321));

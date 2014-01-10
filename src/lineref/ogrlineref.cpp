@@ -568,7 +568,7 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
                 OGRLineString* pTransformPartLS = (OGRLineString*)pTransformPart;
                 dfLen = pTransformPartLS->get_Length();
             }
-            AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, pPart->get_Length() / dfLen, bQuiet);
+            AddFeature(poOutLayer, pPart, dfPosition, dfPosition + dfLen, pPart->get_Length() / dfLen, bQuiet);
             delete pTransformPart;
         }
         else
@@ -594,7 +594,7 @@ int GetPosition(OGRLayer const *poPkLayer, double dfX, double dfY, int bDisplayP
 int GetCoordinates(OGRLayer* const poPkLayer, double dfPos, int bDisplayProgress, int bQuiet)
 {
     CPLString szAttributeFilter;
-    szAttributeFilter.Printf("%s < %f ADN %s > %f", FIELD_START, dfPos, FIELD_FINISH, dfPos);
+    szAttributeFilter.Printf("%s < %f AND %s > %f", FIELD_START, dfPos, FIELD_FINISH, dfPos);
     poPkLayer->SetAttributeFilter(szAttributeFilter); //TODO: ExecuteSQL should be faster
     poPkLayer->ResetReading();
     OGRFeature *pFeature = poPkLayer->GetNextFeature();
