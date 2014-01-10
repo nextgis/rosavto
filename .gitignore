@@ -1,3 +1,7 @@
 #office lock files
 .~lock*
 /src/lineref/build*
+*.pyc
+*.*~
+*~
+*.log*
