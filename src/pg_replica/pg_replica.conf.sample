@@ -1,0 +1,15 @@
+[connection]
+host=gis-lab.info
+port=5432
+database=rosavto
+user=luser
+password=secret
+
+[zones]
+table_name=some_table
+field_name=some_field
+
+[logging]
+log_file=/path/to/log/pg_replica.log
+;available log levels: critical, error, warning, info, debug, notset
+log_level=debug

@@ -1,0 +1,124 @@
+#!/usr/bin/env python
+
+# -*- coding: utf-8 -*-
+
+"""
+***************************************************************************
+    pg_replica.py
+    ---------------------
+    Date                 : January 2014
+    Copyright            : (C) 2014 by NextGIS
+    Email                : info at nextgis dot org
+***************************************************************************
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+***************************************************************************
+"""
+
+__author__ = 'NextGIS'
+__date__ = 'January 2014'
+__copyright__ = '(C) 2014, NextGIS'
+
+# This will get replaced with a git SHA1 when you do a git archive
+
+__revision__ = '$Format:%H$'
+
+import os
+import sys
+import argparse
+import logging
+import ConfigParser
+
+import pg_utils
+
+
+logger = logging.getLogger('pg_replica')
+
+
+def register_table(host, port, dbname, user, passwd, table):
+    db = pg_utils.PgDB(host, port, dbname, user, passwd)
+    db.register_table('public', table)
+    logger.info('Table "%s" registered for replication.')
+
+if __name__ == '__main__':
+    logger.setLevel(logging.NOTSET)
+
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.ERROR)
+
+    formatter = logging.Formatter(
+        '%(asctime)s %(name)s: %(levelname)s: %(message)s',
+        datefmt='%b %d %H:%M:%S')
+    ch.setFormatter(formatter)
+
+    logger.addHandler(ch)
+
+    parser = argparse.ArgumentParser(
+        description='Replication of the PostgreSQL database.',
+        epilog='Report bugs at bugtracker')
+
+    parser.add_argument('-a', '--add', metavar='TABLE', dest='tableName',
+        help='Register table TABLE for replication')
+    parser.add_argument('-c', '--create', action='store_true',
+        dest='createChangesets', help='Create changesets')
+    parser.add_argument('-s', '--sync', action='store_true',
+        dest='syncChangesets', help='Apply changesets to database')
+
+    if len(sys.argv) <= 1:
+        parser.print_usage()
+
+    args = parser.parse_args()
+
+    config_name = os.path.join(os.path.dirname(__file__), 'pg_replica.conf.sample')
+    if not os.path.isfile(config_name):
+        logger.critical('Configuration file "%s" not found.' % config_name)
+        sys.exit(1)
+
+    cfg = ConfigParser.SafeConfigParser(
+        {#'log_file': '/var/log/pg_replica.log',
+         'log_file': os.path.join(os.path.dirname(__file__), 'pg_replica.log'),
+         'log_level': 'debug'})
+
+    cfg.read(config_name)
+    log_file = cfg.get('logging', 'log_file')
+    log_level = cfg.get('logging', 'log_level')
+    num_level = getattr(logging, log_level.upper(), None)
+    if not isinstance(num_level, int):
+        num_level = 10
+
+    fh = logging.FileHandler(log_file)
+    fh.setLevel(num_level)
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+    logger.info('Start logging.')
+
+    if cfg.has_section('connection'):
+        host = cfg.get('connection', 'host')
+        port = cfg.getint('connection', 'port')
+        dbname = cfg.get('connection', 'database')
+        user = cfg.get('connection', 'user')
+        passwd = cfg.get('connection', 'password')
+    else:
+        logger.error('Connection settings not found in config file.')
+        sys.exit(1)
+
+    if cfg.has_section('zones'):
+        table_name = cfg.get('zones', 'table_name')
+        field_name = cfg.get('zones', 'field_name')
+    else:
+        logger.error('Helper table settings not found in config file.')
+        sys.exit(1)
+
+    if args.tableName:
+        register_table(host, port, dbname, user, passwd, args.tableName)
+    elif args.createChangesets:
+        pass
+    elif args.syncChangesets:
+        pass
+
+    logger.info('Stop logging.')
+    logging.shutdown()
