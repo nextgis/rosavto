@@ -37,9 +37,6 @@
 #include <vector>
 #include "cpl_error.h"
 
-#ifdef HAVE_GEOS
-#endif //HAVE_GEOS
-
 #define FIELD_START "beg"
 #define FIELD_FINISH "end"
 #define FIELD_SCALE_FACTOR "scale"
@@ -60,7 +57,7 @@ static void Usage(const char* pszAdditionalMsg, int bShort = TRUE)
     OGRSFDriverRegistrar        *poR = OGRSFDriverRegistrar::GetRegistrar();
 
 
-    printf("Usage: ogrlineref [--help-general] [-progress] \n"
+    printf("Usage: ogrlineref [--help-general] [-progress] [-quiet]\n"
         "               [-f format_name] [[-dsco NAME=VALUE] ...] [[-lco NAME=VALUE]...]\n"
         "               [-create]\n"
         "               [-l src_line_datasource_name] [-ln name]\n"
@@ -117,11 +114,15 @@ static OGRLayer* SetupTargetLayer(OGRLayer * poSrcLayer,
     OGRFeatureDefn *poSrcFDefn;
     OGRSpatialReference *poOutputSRS;
 
-    CPLString szLayerName(pszNewLayerName);
-    if (szLayerName.empty())
+    CPLString szLayerName;
+    
+    if (pszNewLayerName == NULL)
     {
-        szLayerName = poSrcLayer->GetName();
-        szLayerName += "_parts";
+        szLayerName = CPLGetBasename(poDstDS->GetName());
+    }
+    else
+    {
+        szLayerName = pszNewLayerName;
     }
 
     /* -------------------------------------------------------------------- */
@@ -242,7 +243,7 @@ static OGRLayer* SetupTargetLayer(OGRLayer * poSrcLayer,
     OGRFeatureDefn *poDstFDefn = poDstLayer->GetLayerDefn();
 
     /* Sanity check : if it fails, the driver is buggy */
-    if (poDstFDefn != NULL && poDstFDefn->GetFieldCount() != 4)
+    if (poDstFDefn != NULL && poDstFDefn->GetFieldCount() != 3)
     {
         CPLError(CE_Warning, CPLE_AppDefined,
             "The output driver has claimed to have added the %s field, but it did not!",
@@ -331,11 +332,38 @@ void CheckDestDataSourceNameConsistency(const char* pszDestFilename,
 }
 
 //------------------------------------------------------------------------
+// AddFeature
+//------------------------------------------------------------------------
+
+OGRErr AddFeature(OGRLayer* const poOutLayer, OGRLineString* pPart, double dfFrom, double dfTo, double dfScaleFactor, int bQuiet)
+{
+    OGRFeature *poFeature;
+
+    poFeature = OGRFeature::CreateFeature(poOutLayer->GetLayerDefn());
+
+    poFeature->SetField(FIELD_START, dfFrom);
+    poFeature->SetField(FIELD_FINISH, dfTo);
+    poFeature->SetField(FIELD_SCALE_FACTOR, dfScaleFactor);
+
+    poFeature->SetGeometryDirectly(pPart);
+
+    if (poOutLayer->CreateFeature(poFeature) != OGRERR_NONE)
+    {
+        if (!bQuiet)
+            printf("Failed to create feature in shapefile.\n");
+        return OGRERR_FAILURE;
+    }
+
+    OGRFeature::DestroyFeature(poFeature);
+
+    return OGRERR_NONE;
+}
+
+//------------------------------------------------------------------------
 // CreateParts
 //------------------------------------------------------------------------
 int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValField, OGRLayer* const poOutLayer, int bDisplayProgress, int bQuiet)
 {
-#ifdef HAVE_GEOS
     OGRLineString* pPathGeom = NULL;
 
     //check path and get first line
@@ -407,6 +435,7 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
     OGRPoint *pt1, *pt2;
     std::map<double, OGRPoint*>::const_iterator IT;
     IT = moRepers.begin();
+    double dfPosition = IT->first;
     pt1 = IT->second;
     ++IT;
     pt2 = IT->second;
@@ -428,9 +457,50 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
     //If first point is not at the beginning of the path
     //The first part should be from the beginning of the path to the first point. length == part.getLength
     
-    if (dfDistance1 < 0.00000001) //0.00000001 - delta
+    if (dfDistance1 > 0.00000001) //0.00000001 - delta
     {
-        pPart = GetSubLine(0, dfDistance1);
+        pPart = pPathGeom->getSubLine(0, dfDistance1, FALSE);
+        if (NULL != pPart)
+        {
+            OGRSpatialReference* pSpaRef = poLnLayer->GetSpatialRef();
+            double dfLen = pPart->get_Length();
+            if (pSpaRef->IsGeographic())
+            {
+                //convert to UTM/WGS84
+                OGRPoint pt;
+                pPart->Value(dfLen / 2, &pt);
+                int nZoneEnv = 30 + (pt.getX() + 3.0) / 6.0 + 0.5;
+                int nEPSG;
+                if (pt.getY() > 0)
+                {
+                    nEPSG = 32600 + nZoneEnv;
+                }
+                else
+                {
+                    nEPSG = 32700 + nZoneEnv;
+                }
+                OGRSpatialReference SpatRef;
+                SpatRef.importFromEPSG(nEPSG);
+                OGRGeometry *pTransformPart = pPart->clone();
+                if (pTransformPart->transformTo(&SpatRef) == OGRERR_NONE)
+                {
+                    OGRLineString* pTransformPartLS = (OGRLineString*)pTransformPart;
+                    dfLen = pTransformPartLS->get_Length();
+                }
+                AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, pPart->get_Length() / dfLen, bQuiet);
+                delete pTransformPart;
+            }
+            else
+            {
+                AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, 1.0, bQuiet);
+            }
+        }
+    }
+
+    pPart = pPathGeom->getSubLine(dfDistance1, dfDistance2, FALSE);
+    if (NULL != pPart)
+    {
+        AddFeature(poOutLayer, pPart, dfPosition, IT->first, pPart->get_Length() / (IT->first - dfPosition), bQuiet);
     }
 
     GDALProgressFunc pfnProgress = NULL;
@@ -443,186 +513,71 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
         pProgressArg = GDALCreateScaledProgress(0, dfFactor, GDALTermProgress, NULL);
     }
 
-    //if (bDisplayProgress)
-    //    pfnProgress(nCount * dfFactor, "", pProgressArg);
+    int nCount = 2;
+    dfDistance1 = dfDistance2;
+    dfPosition = IT->first;
+    ++IT;//get third point    
 
-
-    /*
-http://edndoc.esri.com/arcobjects/9.2/ComponentHelp/esriGeometry/ICurve_GetSubcurve.htm
-    int          bDisplayProgress = FALSE;
-    GDALProgressFunc pfnProgress = NULL;
-    void        *pProgressArg = NULL;
-
-
-    long nCountFeatures = 0;
-    long nAccCountFeatures = 0;
-
-    // First pass to apply filters and count all features if necessary 
-    for (iLayer = 0;
-        iLayer < nLayerCount;
-        iLayer++)
+    while (IT != moRepers.end())
     {
-        OGRLayer        *poLayer = papoLayers[iLayer];
-        if (poLayer == NULL)
-            continue;
-
-        if (pszWHERE != NULL)
-        {
-            if (poLayer->SetAttributeFilter(pszWHERE) != OGRERR_NONE)
-            {
-                fprintf(stderr, "FAILURE: SetAttributeFilter(%s) on layer '%s' failed.\n",
-                    pszWHERE, poLayer->GetName());
-                if (!bSkipFailures)
-                    exit(1);
-            }
-        }
-
-        ApplySpatialFilter(poLayer, poSpatialFilter, pszGeomField);
-
-        if (bDisplayProgress && !bSrcIsOSM)
-        {
-            if (!poLayer->TestCapability(OLCFastFeatureCount))
-            {
-                fprintf(stderr, "Progress turned off as fast feature count is not available.\n");
-                bDisplayProgress = FALSE;
-            }
-            else
-            {
-                panLayerCountFeatures[iLayer] = poLayer->GetFeatureCount();
-                nCountLayersFeatures += panLayerCountFeatures[iLayer];
-            }
-        }
-    }
-
-    // Second pass to do the real job
-    for (iLayer = 0;
-        iLayer < nLayerCount && nRetCode == 0;
-        iLayer++)
-    {
-        OGRLayer        *poLayer = papoLayers[iLayer];
-        if (poLayer == NULL)
-            continue;
-
-
-        OGRLayer* poPassedLayer = poLayer;
-        if (bSplitListFields)
-        {
-            poPassedLayer = new OGRSplitListFieldLayer(poPassedLayer, nMaxSplitListSubFields);
-
-            if (bDisplayProgress && nMaxSplitListSubFields != 1)
-            {
-                pfnProgress = GDALScaledProgress;
-                pProgressArg =
-                    GDALCreateScaledProgress(nAccCountFeatures * 1.0 / nCountLayersFeatures,
-                    (nAccCountFeatures + panLayerCountFeatures[iLayer] / 2) * 1.0 / nCountLayersFeatures,
-                    GDALTermProgress,
-                    NULL);
-            }
-            else
-            {
-                pfnProgress = NULL;
-                pProgressArg = NULL;
-            }
-
-            int nRet = ((OGRSplitListFieldLayer*)poPassedLayer)->BuildLayerDefn(pfnProgress, pProgressArg);
-            if (!nRet)
-            {
-                delete poPassedLayer;
-                poPassedLayer = poLayer;
-            }
-
-            if (bDisplayProgress)
-                GDALDestroyScaledProgress(pProgressArg);
-        }
-
-
         if (bDisplayProgress)
         {
-            if (bSrcIsOSM)
-                pfnProgress = GDALTermProgress;
-            else
-            {
-                pfnProgress = GDALScaledProgress;
-                int nStart = 0;
-                if (poPassedLayer != poLayer && nMaxSplitListSubFields != 1)
-                    nStart = panLayerCountFeatures[iLayer] / 2;
-                pProgressArg =
-                    GDALCreateScaledProgress((nAccCountFeatures + nStart) * 1.0 / nCountLayersFeatures,
-                    (nAccCountFeatures + panLayerCountFeatures[iLayer]) * 1.0 / nCountLayersFeatures,
-                    GDALTermProgress,
-                    NULL);
-            }
+            pfnProgress(nCount * dfFactor, "", pProgressArg);
+            nCount++;
         }
 
-        nAccCountFeatures += panLayerCountFeatures[iLayer];
+        dfDistance2 = pPathGeom->Project(IT->second);
 
-        TargetLayerInfo* psInfo = SetupTargetLayer(poDS,
-            poPassedLayer,
-            poODS,
-            papszLCO,
-            pszNewLayerName,
-            poOutputSRS,
-            bNullifyOutputSRS,
-            papszSelFields,
-            bAppend, bAddMissingFields, eGType,
-            bPromoteToMulti,
-            nCoordDim, bOverwrite,
-            papszFieldTypesToString,
-            bUnsetFieldWidth,
-            bExplodeCollections,
-            pszZField,
-            papszFieldMap,
-            pszWHERE,
-            bExactFieldNameMatch);
-
-        poPassedLayer->ResetReading();
-
-        if ((psInfo == NULL ||
-            !TranslateLayer(psInfo, poDS, poPassedLayer, poODS,
-            bTransform, bWrapDateline, pszDateLineOffset,
-            poOutputSRS, bNullifyOutputSRS,
-            poSourceSRS,
-            poGCPCoordTrans,
-            eGType, bPromoteToMulti, nCoordDim,
-            eGeomOp, dfGeomOpParam,
-            panLayerCountFeatures[iLayer],
-            poClipSrc, poClipDst,
-            bExplodeCollections,
-            nSrcFileSize, NULL,
-            pfnProgress, pProgressArg))
-            && !bSkipFailures)
+        pPart = pPathGeom->getSubLine(dfDistance1, dfDistance2, FALSE);
+        if (NULL != pPart)
         {
-            CPLError(CE_Failure, CPLE_AppDefined,
-                "Terminating translation prematurely after failed\n"
-                "translation of layer %s (use -skipfailures to skip errors)\n",
-                poLayer->GetName());
-
-            nRetCode = 1;
+            AddFeature(poOutLayer, pPart, dfPosition, IT->first, pPart->get_Length() / (IT->first - dfPosition), bQuiet);
+            dfDistance1 = dfDistance2;
+            dfPosition = IT->first;
         }
 
-        FreeTargetLayerInfo(psInfo);
-
-        if (poPassedLayer != poLayer)
-            delete poPassedLayer;
-
-        if (bDisplayProgress && !bSrcIsOSM)
-            GDALDestroyScaledProgress(pProgressArg);
+        ++IT;
     }
 
-    CPLFree(panLayerCountFeatures);
-    CPLFree(papoLayers);
-}
+    //get last part
+    pPart = pPathGeom->getSubLine(dfDistance1, pPathGeom->get_Length(), FALSE);
+    if (NULL != pPart)
+    {
+        OGRSpatialReference* pSpaRef = poLnLayer->GetSpatialRef();
+        double dfLen = pPart->get_Length();
+        if (pSpaRef->IsGeographic())
+        {
+            //convert to UTM/WGS84
+            OGRPoint pt;
+            pPart->Value(dfLen / 2, &pt);
+            int nZoneEnv = 30 + (pt.getX() + 3.0) / 6.0 + 0.5;
+            int nEPSG;
+            if (pt.getY() > 0)
+            {
+                nEPSG = 32600 + nZoneEnv;
+            }
+            else
+            {
+                nEPSG = 32700 + nZoneEnv;
+            }
+            OGRSpatialReference SpatRef;
+            SpatRef.importFromEPSG(nEPSG);
+            OGRGeometry *pTransformPart = pPart->clone();
+            if (pTransformPart->transformTo(&SpatRef) == OGRERR_NONE)
+            {
+                OGRLineString* pTransformPartLS = (OGRLineString*)pTransformPart;
+                dfLen = pTransformPartLS->get_Length();
+            }
+            AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, pPart->get_Length() / dfLen, bQuiet);
+            delete pTransformPart;
+        }
+        else
+        {
+            AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, 1.0, bQuiet);
+        }
+    }
 
-
-// Destroy them after the last potential user/
-OGRSpatialReference::DestroySpatialReference(poOutputSRS);
-OGRSpatialReference::DestroySpatialReference(poSourceSRS);
-*/
     return 0;
-#else //HAVE_GEOS
-    fprintf(stderr, "Cannot create parts without libgeos\n");
-    return 1;
-#endif //HAVE_GEOS
 }
 
 //------------------------------------------------------------------------
@@ -636,9 +591,36 @@ int GetPosition(OGRLayer const *poPkLayer, double dfX, double dfY, int bDisplayP
 //------------------------------------------------------------------------
 // GetCoordinates
 //------------------------------------------------------------------------
-int GetCoordinates(OGRLayer const *poPkLayer, double dfPos, int bDisplayProgress, int bQuiet)
+int GetCoordinates(OGRLayer* const poPkLayer, double dfPos, int bDisplayProgress, int bQuiet)
 {
-    return 0;
+    CPLString szAttributeFilter;
+    szAttributeFilter.Printf("%s < %f ADN %s > %f", FIELD_START, dfPos, FIELD_FINISH, dfPos);
+    poPkLayer->SetAttributeFilter(szAttributeFilter); //TODO: ExecuteSQL should be faster
+    poPkLayer->ResetReading();
+    OGRFeature *pFeature = poPkLayer->GetNextFeature();
+    if (NULL != pFeature)
+    {
+        double dfStart = pFeature->GetFieldAsDouble(FIELD_START);
+        double dfPosCorr = dfPos - dfStart;
+        double dfSF = pFeature->GetFieldAsDouble(FIELD_SCALE_FACTOR);
+        dfPosCorr *= dfSF;
+        OGRLineString *pLine = (OGRLineString*)pFeature->GetGeometryRef();
+
+        OGRPoint pt;
+        pLine->Value(dfPosCorr, &pt);
+
+        if (bQuiet == TRUE)
+        {
+            fprintf(stdout, "%f,%f,%f\n", pt.getX(), pt.getY(), pt.getZ());
+        }
+        else
+        {
+            fprintf(stdout, "The position for distance %f is lat:%f, long:%f, height:%f\n", dfPos, pt.getY(), pt.getX(), pt.getZ());
+        }
+        return 0;
+    }
+    fprintf(stderr, "Get coordinates for position %f failed\n", dfPos);
+    return 1;
 }
 
 /************************************************************************/
@@ -758,12 +740,12 @@ int main( int nArgc, char ** papszArgv )
         else if( EQUAL(papszArgv[iArg],"-p") )
         {
             CHECK_HAS_ENOUGH_ADDITIONAL_ARGS(1);
-            pszLineDataSource = papszArgv[++iArg];
+            pszPicketsDataSource = papszArgv[++iArg];
         }        
         else if( EQUAL(papszArgv[iArg],"-pn") )
         {
             CHECK_HAS_ENOUGH_ADDITIONAL_ARGS(1);
-            pszLineLayerName = papszArgv[++iArg];
+            pszPicketsLayerName = papszArgv[++iArg];
         }    
         else if( EQUAL(papszArgv[iArg],"-pm") )
         {
@@ -783,7 +765,7 @@ int main( int nArgc, char ** papszArgv )
         else if( EQUAL(papszArgv[iArg],"-o") )
         {
             CHECK_HAS_ENOUGH_ADDITIONAL_ARGS(1);
-            pszLineDataSource = papszArgv[++iArg];
+            pszOutputDataSource = papszArgv[++iArg];
         }   
         else if( EQUAL(papszArgv[iArg],"-on") )
         {
@@ -923,11 +905,11 @@ int main( int nArgc, char ** papszArgv )
 
         if(pszLineLayerName == NULL)
         {
-            poLnLayer = poLnDS->GetLayerByName(pszLineLayerName);
+            poLnLayer = poLnDS->GetLayer(0);
         }
         else
         {
-            poLnLayer = poLnDS->GetLayer(0);
+            poLnLayer = poLnDS->GetLayerByName(pszLineLayerName);
         }
         
         if(poLnLayer == NULL)
@@ -938,11 +920,11 @@ int main( int nArgc, char ** papszArgv )
         
         if(pszPicketsLayerName == NULL)
         {
-            poPkLayer = poPkDS->GetLayerByName(pszPicketsLayerName);
+            poPkLayer = poPkDS->GetLayer(0);
         }
         else
         {
-            poPkLayer = poPkDS->GetLayer(0);
+            poPkLayer = poPkDS->GetLayerByName(pszPicketsLayerName);
         }
         
         if(poPkLayer == NULL)
@@ -1004,11 +986,11 @@ int main( int nArgc, char ** papszArgv )
             
         if(pszPartsLayerName == NULL)
         {
-            poPartsLayer = poPartsDS->GetLayerByName(pszPartsLayerName);
+            poPartsLayer = poPartsDS->GetLayer(0);
         }
         else
         {
-            poPartsLayer = poPartsDS->GetLayer(0);
+            poPartsLayer = poPartsDS->GetLayerByName(pszPartsLayerName);
         }
         
         if (poPartsLayer == NULL)
@@ -1055,11 +1037,11 @@ int main( int nArgc, char ** papszArgv )
             
         if(pszPartsLayerName == NULL)
         {
-            poPartsLayer = poPartsDS->GetLayerByName(pszPartsLayerName);
+            poPartsLayer = poPartsDS->GetLayer(0);
         }
         else
         {
-            poPartsLayer = poPartsDS->GetLayer(0);
+            poPartsLayer = poPartsDS->GetLayerByName(pszPartsLayerName);
         }
         
         if (poPartsLayer == NULL)
