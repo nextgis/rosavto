@@ -30,3 +30,12 @@ div.leaflet-marker-icon.machine {
 div.leaflet-marker-icon.accident {
     background-image: url('images/accident.png');
 }
+
+
+div.leaflet-marker-icon.video {
+    background-image: url('images/video.png');
+}
+
+div.leaflet-marker-icon.meteo {
+    background-image: url('images/meteo.png');
+}
