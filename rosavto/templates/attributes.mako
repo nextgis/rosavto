@@ -28,14 +28,16 @@
 <%block name="inlineScripts">
     require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'dojo/domReady!'], function (Map, LayersInfo, MapIdentify) {
         var map = new Map('map', {
-                center: [55.7501, 37.6687],
-                zoom: 10,
+                center: [55.529, 37.584],
+                zoom: 7,
                 zoomControl: true,
                 legend: true
             }),
             layersInfo;
 
         map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 5);
+        map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 7);
+        map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
 
         layersInfo = new LayersInfo({
             url: 'http://demo.nextgis.ru/ngw_rosavto/api/layer_group/0/tree',
@@ -47,7 +49,5 @@
             proxy: application_root + '/proxy'
         });
         mapIdentify.on();
-
-
     });
 </%block>
