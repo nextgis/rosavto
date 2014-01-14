@@ -40,6 +40,7 @@
 #define FIELD_START "beg"
 #define FIELD_FINISH "end"
 #define FIELD_SCALE_FACTOR "scale"
+#define DELTA 0.00000001 //- delta
 
 enum operation
 {
@@ -64,7 +65,7 @@ static void Usage(const char* pszAdditionalMsg, int bShort = TRUE)
         "               [-l src_line_datasource_name] [-ln name]\n"
         "               [-p src_repers_datasource_name] [-pn name] [-pm pos_field_name]\n"
         "               [-r src_parts_datasource_name] [-rn name]\n"
-        "               [-o dst_datasource_name] [-on name]\n"
+        "               [-o dst_datasource_name] [-on name] [-s step]\n"
         "               [-get_pos] [-x long] [-y lat]\n"
         "               [-get_coord] [-m position] \n"
         "               [-get_subline] [-mb position] [-me position]\n");
@@ -366,14 +367,32 @@ OGRErr AddFeature(OGRLayer* const poOutLayer, OGRLineString* pPart, double dfFro
 //------------------------------------------------------------------------
 int CreateSubline(OGRLayer* const poPkLayer, double dfPosBeg, double dfPosEnd, OGRLayer* const poOutLayer, int bDisplayProgress, int bQuiet)
 {
+    OGRFeature* pFeature = NULL;
+    //get step
+    poPkLayer->ResetReading();
+    pFeature = poPkLayer->GetNextFeature();
+    //get second part
+    pFeature = poPkLayer->GetNextFeature();
+    if (pFeature == NULL)
+    {
+        fprintf(stderr, "Get step for positions %f - %f failed\n", dfPosBeg, dfPosEnd);
+        return 1;
+    }
+    double dfBeg = pFeature->GetFieldAsDouble(FIELD_START);
+    double dfEnd = pFeature->GetFieldAsDouble(FIELD_FINISH);
+    double dfStep = dfEnd - dfBeg;
+
+    //round input to step
     CPLString szAttributeFilter;
-    szAttributeFilter.Printf("%s >= %f AND %s <= %f", FIELD_START, dfPosBeg, FIELD_FINISH, dfPosEnd);
+    double dfPosBegLow = floor(dfPosBeg / dfStep) * dfStep;
+    double dfPosEndHigh = ceil(dfPosEnd / dfStep) * dfStep;
+
+    szAttributeFilter.Printf("%s >= %f AND %s <= %f", FIELD_START, dfPosBegLow, FIELD_FINISH, dfPosEndHigh);
     poPkLayer->SetAttributeFilter(szAttributeFilter); //TODO: ExecuteSQL should be faster
     poPkLayer->ResetReading();
 
     std::map<double, OGRFeature *> moParts;
     
-    OGRFeature* pFeature = NULL;
     while ((pFeature = poPkLayer->GetNextFeature()) != NULL)
     {
         double dfStart = pFeature->GetFieldAsDouble(FIELD_START);
@@ -450,7 +469,7 @@ int CreateSubline(OGRLayer* const poPkLayer, double dfPosBeg, double dfPosEnd, O
 
         OGRFeature::DestroyFeature(IT->second);
         //store
-        if (AddFeature(poOutLayer, pSubLine, dfPosBeg, dfPosEnd, 1.0, bQuiet) == OGRERR_NONE)
+        if (AddFeature(poOutLayer, pOutLine, dfPosBeg, dfPosEnd, 1.0, bQuiet) == OGRERR_NONE)
             return 0;
     }
 
@@ -460,7 +479,7 @@ int CreateSubline(OGRLayer* const poPkLayer, double dfPosBeg, double dfPosEnd, O
 //------------------------------------------------------------------------
 // CreateParts
 //------------------------------------------------------------------------
-int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValField, OGRLayer* const poOutLayer, int bDisplayProgress, int bQuiet)
+int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValField, double dfStep, OGRLayer* const poOutLayer, int bDisplayProgress, int bQuiet)
 {
     OGRLineString* pPathGeom = NULL;
 
@@ -534,6 +553,7 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
     std::map<double, OGRPoint*>::const_iterator IT;
     IT = moRepers.begin();
     double dfPosition = IT->first;
+    double dfBeginPosition = IT->first;
     pt1 = IT->second;
     ++IT;
     pt2 = IT->second;
@@ -554,11 +574,26 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
     }
 
     OGRLineString* pPart = NULL;
+    typedef struct _curve_data
+    {
+        OGRLineString* pPart;
+        double dfBeg, dfEnd, dfFactor;
+        bool IsInside(const double& dfDist) const{ return (dfDist + DELTA >= dfBeg) && (dfDist - DELTA <= dfEnd); }
+    } CURVE_DATA;
+    std::vector<CURVE_DATA> astSubLines;
+
+    if (!bQuiet)
+    {
+        fprintf(stdout, "Create parts\n");
+    }
+
     //get first part 
     //If first point is not at the beginning of the path
     //The first part should be from the beginning of the path to the first point. length == part.getLength
-    
-    if (dfDistance1 > 0.00000001) //0.00000001 - delta
+    OGRPoint *pPtBeg(NULL), *pPtEnd(NULL);
+    double dfPtBegPosition, dfPtEndPosition;
+
+    if (dfDistance1 > DELTA)
     {
         pPart = pPathGeom->getSubLine(0, dfDistance1, FALSE);
         if (NULL != pPart)
@@ -588,12 +623,25 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
                     OGRLineString* pTransformPartLS = (OGRLineString*)pTransformPart;
                     dfLen = pTransformPartLS->get_Length();
                 }
-                AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, pPart->get_Length() / dfLen, bQuiet);
+
+                CURVE_DATA data = { pPart, dfPosition - dfLen, dfPosition, pPart->get_Length() / dfLen };
+                astSubLines.push_back(data);
+
+                pPtBeg = new OGRPoint();
+                pPart->getPoint(0, pPtBeg);
+                dfPtBegPosition = dfPosition - dfLen;
+
+                //AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, pPart->get_Length() / dfLen, bQuiet);
                 delete pTransformPart;
             }
             else
             {
-                AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, 1.0, bQuiet);
+                CURVE_DATA data = { pPart, dfPosition - dfLen, dfPosition, 1.0 };
+                astSubLines.push_back(data);
+                //AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, 1.0, bQuiet);
+                pPtBeg = new OGRPoint();
+                pPart->getPoint(0, pPtBeg);
+                dfPtBegPosition = dfPosition - dfLen;
             }
         }
     }
@@ -601,7 +649,9 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
     pPart = pPathGeom->getSubLine(dfDistance1, dfDistance2, FALSE);
     if (NULL != pPart)
     {
-        AddFeature(poOutLayer, pPart, dfPosition, IT->first, pPart->get_Length() / (IT->first - dfPosition), bQuiet);
+        CURVE_DATA data = { pPart, dfPosition, IT->first, pPart->get_Length() / (IT->first - dfPosition) };
+        astSubLines.push_back(data);
+//        AddFeature(poOutLayer, pPart, dfPosition, IT->first, pPart->get_Length() / (IT->first - dfPosition), bQuiet);
     }
 
     GDALProgressFunc pfnProgress = NULL;
@@ -619,6 +669,7 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
     dfPosition = IT->first;
     ++IT;//get third point    
 
+    double dfEndPosition;
     while (IT != moRepers.end())
     {
         if (bDisplayProgress)
@@ -627,12 +678,16 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
             nCount++;
         }
 
+        dfEndPosition = IT->first;
+
         dfDistance2 = pPathGeom->Project(IT->second);
 
         pPart = pPathGeom->getSubLine(dfDistance1, dfDistance2, FALSE);
         if (NULL != pPart)
         {
-            AddFeature(poOutLayer, pPart, dfPosition, IT->first, pPart->get_Length() / (IT->first - dfPosition), bQuiet);
+            CURVE_DATA data = { pPart, dfPosition, IT->first, pPart->get_Length() / (IT->first - dfPosition) };
+            astSubLines.push_back(data);
+//            AddFeature(poOutLayer, pPart, dfPosition, IT->first, pPart->get_Length() / (IT->first - dfPosition), bQuiet);
             dfDistance1 = dfDistance2;
             dfPosition = IT->first;
         }
@@ -669,13 +724,99 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
                 OGRLineString* pTransformPartLS = (OGRLineString*)pTransformPart;
                 dfLen = pTransformPartLS->get_Length();
             }
-            AddFeature(poOutLayer, pPart, dfPosition, dfPosition + dfLen, pPart->get_Length() / dfLen, bQuiet);
+            CURVE_DATA data = { pPart, dfPosition, dfPosition + dfLen, pPart->get_Length() / dfLen };
+            astSubLines.push_back(data);
+            //AddFeature(poOutLayer, pPart, dfPosition, dfPosition + dfLen, pPart->get_Length() / dfLen, bQuiet);
+
+            pPtEnd = new OGRPoint();
+            pPart->getPoint(pPart->getNumPoints() - 1, pPtEnd);
+            dfPtEndPosition = dfPosition + dfLen;
+
             delete pTransformPart;
         }
         else
         {
-            AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, 1.0, bQuiet);
+            CURVE_DATA data = { pPart, dfPosition, dfPosition + dfLen, 1.0 };
+            astSubLines.push_back(data);
+            //AddFeature(poOutLayer, pPart, dfPosition - dfLen, dfPosition, 1.0, bQuiet);
+            pPtEnd = new OGRPoint();
+            pPart->getPoint(pPart->getNumPoints() - 1, pPtEnd);
+            dfPtEndPosition = dfPosition + dfLen;
         }
+    }
+
+    //create pickets
+    if (!bQuiet)
+    {
+        fprintf(stdout, "\nCreate pickets\n");
+    }
+
+    long nBegin = ceil(dfBeginPosition / dfStep) * dfStep;
+    double dfRoundBeg = nBegin;
+    dfFactor = dfStep / (dfEndPosition - dfRoundBeg);
+    nCount = 0;
+    moRepers.clear();
+
+    if (pPtBeg != NULL)
+        moRepers[dfPtBegPosition] = pPtBeg;
+    if (pPtEnd != NULL)
+        moRepers[dfPtEndPosition] = pPtEnd;
+
+    for (double dfDist = dfRoundBeg; dfDist < dfEndPosition; dfDist += dfStep)
+    {
+        if (bDisplayProgress)
+        {
+            pfnProgress(nCount * dfFactor, "", pProgressArg);
+            nCount++;
+        }
+
+        for (int j = 0; j < astSubLines.size(); j++)
+        {
+            if (astSubLines[j].IsInside(dfDist))
+            {
+                double dfRealDist = (dfDist - astSubLines[j].dfBeg) * astSubLines[j].dfFactor;
+                OGRPoint *pReperPoint = new OGRPoint();
+                astSubLines[j].pPart->Value(dfRealDist, pReperPoint);
+
+                moRepers[dfDist] = pReperPoint;
+                break;
+            }
+        }
+    }
+
+    if (!bQuiet)
+    {
+        fprintf(stdout, "\nCreate sublines\n");
+    }
+
+    IT = moRepers.begin();
+    dfFactor = 1.0 / moRepers.size();
+    nCount = 0;
+    dfDistance1 = 0;
+    dfPosition = IT->first;
+
+    while (IT != moRepers.end())
+    {
+        if (bDisplayProgress)
+        {
+            pfnProgress(nCount * dfFactor, "", pProgressArg);
+            nCount++;
+        }
+
+        dfDistance2 = pPathGeom->Project(IT->second);
+
+        if (dfDistance1 != dfDistance2)
+        {
+            pPart = pPathGeom->getSubLine(dfDistance1, dfDistance2, FALSE);
+            if (NULL != pPart)
+            {
+                AddFeature(poOutLayer, pPart, dfPosition, IT->first, pPart->get_Length() / (IT->first - dfPosition), bQuiet);
+                dfDistance1 = dfDistance2;
+                dfPosition = IT->first;
+            }
+        }
+
+        ++IT;
     }
 
     return 0;
@@ -698,9 +839,12 @@ int GetCoordinates(OGRLayer* const poPkLayer, double dfPos, int bDisplayProgress
     szAttributeFilter.Printf("%s < %f AND %s > %f", FIELD_START, dfPos, FIELD_FINISH, dfPos);
     poPkLayer->SetAttributeFilter(szAttributeFilter); //TODO: ExecuteSQL should be faster
     poPkLayer->ResetReading();
-    OGRFeature *pFeature = poPkLayer->GetNextFeature();
-    if (NULL != pFeature)
+
+    bool bHaveCoords = false;
+    OGRFeature* pFeature = NULL;
+    while ((pFeature = poPkLayer->GetNextFeature()) != NULL)
     {
+        bHaveCoords = true;
         double dfStart = pFeature->GetFieldAsDouble(FIELD_START);
         double dfPosCorr = dfPos - dfStart;
         double dfSF = pFeature->GetFieldAsDouble(FIELD_SCALE_FACTOR);
@@ -719,10 +863,17 @@ int GetCoordinates(OGRLayer* const poPkLayer, double dfPos, int bDisplayProgress
             fprintf(stdout, "The position for distance %f is lat:%f, long:%f, height:%f\n", dfPos, pt.getY(), pt.getX(), pt.getZ());
         }
         OGRFeature::DestroyFeature(pFeature);
+    }
+
+    if (bHaveCoords)
+    {
         return 0;
     }
-    fprintf(stderr, "Get coordinates for position %f failed\n", dfPos);
-    return 1;
+    else
+    {
+        fprintf(stderr, "Get coordinates for position %f failed\n", dfPos);
+        return 1;
+    }
 }
 
 /************************************************************************/
@@ -764,6 +915,7 @@ int main( int nArgc, char ** papszArgv )
     int bDisplayProgress = FALSE;
     
     double dfPosBeg(-100000000), dfPosEnd(-100000000);
+    double dfStep(-100000000);
 
     /* Check strict compilation and runtime library version as we use C++ API */
     if (! GDAL_CHECK_VERSION(papszArgv[0]))
@@ -905,6 +1057,11 @@ int main( int nArgc, char ** papszArgv )
             CHECK_HAS_ENOUGH_ADDITIONAL_ARGS(1);
             dfPosEnd = CPLAtofM(papszArgv[++iArg]);
         }  
+        else if( EQUAL(papszArgv[iArg],"-s") )
+        {
+            CHECK_HAS_ENOUGH_ADDITIONAL_ARGS(1);
+            dfStep = CPLAtofM(papszArgv[++iArg]);
+        }  
         else if( EQUAL(papszArgv[iArg],"-progress") )
         {
             bDisplayProgress = TRUE;
@@ -926,6 +1083,8 @@ int main( int nArgc, char ** papszArgv )
             Usage("no repers datasource provided");
         else  if(pszPicketsMField == NULL)
             Usage("no position field provided");
+        else  if (dfStep == -100000000)
+            Usage("no step provided");
             
     /* -------------------------------------------------------------------- */
     /*      Open data source.                                               */
@@ -1062,7 +1221,7 @@ int main( int nArgc, char ** papszArgv )
         }     
         
         //do the work
-        nRetCode = CreateParts(poLnLayer, poPkLayer, nMValField, poOutLayer, bDisplayProgress, bQuiet);
+        nRetCode = CreateParts(poLnLayer, poPkLayer, nMValField, dfStep, poOutLayer, bDisplayProgress, bQuiet);
         
         //clean up        
         OGRDataSource::DestroyDataSource(poLnDS);
