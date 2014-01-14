@@ -6,7 +6,8 @@
     ('layer', u'Карта + слой'),
     ('marker', u'Маркер'),
     ('wms', u'Карта + WMS'),
-    ('realtime', u'Realtime')
+    ('realtime', u'Realtime'),
+    ('attributes', u'Аттрибуты')
 ]
 %>
 
