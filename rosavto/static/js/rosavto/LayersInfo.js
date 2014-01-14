@@ -5,9 +5,10 @@ define([
     'dojo/store/Memory',
     'dojo/store/Observable',
     'dijit/tree/ObjectStoreModel',
-    'dojo/request/xhr'
+    'dojo/request/xhr',
+    'dojo/Deferred'
 ],
-    function (declare, array, lang, Memory, Observable, ObjectStoreModel, xhr) {
+    function (declare, array, lang, Memory, Observable, ObjectStoreModel, xhr, Deferred) {
         return declare('rosavto.LayersInfo', null, {
 
             constructor: function (settings) {
@@ -33,7 +34,7 @@ define([
                     xhrGetLayersInfo = this.proxy ?
                         xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: this.url}}) :
                         xhr(this.url, {handleAs: 'json'});
-                xhrGetLayersInfo.then(
+                return xhrGetLayersInfo.then(
                     function (data) {
                         function traverse(item, parent_id) {
                             var xid = item.type + '-' + item.id;
@@ -80,6 +81,7 @@ define([
 
                         traverse(data);
 
+                        that._filled = true;
                     },
                     function (err) {
                         console.log(err);
@@ -87,8 +89,33 @@ define([
                 );
             },
 
-            getLayerIdByStyle: function (idStyle) {
-                this.store.get('style-' + idStyle);
+            getLayersIdByStyles: function (idStyles) {
+                var that = this;
+
+                if (this._filled) {
+                    var def = new Deferred();
+                    def.resolve(this._getLayersIdByStyles(idStyles));
+                    return def;
+                } else {
+                    return this.fillLayersInfo().then(function () {
+                        return that._getLayersIdByStyles(idStyles);
+                    });
+                }
+            },
+
+            _getLayersIdByStyles: function (idStyles) {
+                var ids = [];
+
+                if (lang.isArray(idStyles)) {
+                    array.forEach(idStyles, lang.hitch(this, function (idStyle) {
+                        var res = this.store.query({xid: 'style-' + idStyle});
+                        if (res.length > 0) {
+                            ids.push(res[0].parent.split('-')[1]);
+                        }
+                    }));
+                }
+
+                return ids;
             }
         });
-    })
+    });

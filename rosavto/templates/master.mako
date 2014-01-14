@@ -16,7 +16,8 @@
                     async: true,
                     baseUrl: "${request.static_url('rosavto:static/js/')}",
                     packages: [
-                        { name: "rosavto", location: 'rosavto' }
+                        { name: "rosavto", location: 'rosavto' },
+                        { name: "proj4js", location: 'proj4js' }
                     ]
                 };
     </script>
@@ -30,8 +31,8 @@
     <script src="${request.static_url('rosavto:static/js/socket/Stomp.js')}"></script>
 
     <script>
-    <%block name="inlineScripts"/>
-</script>
+        <%block name="inlineScripts"/>
+    </script>
 </head>
 <body onload="window.scrollTo(0,0)">
     <%include file='tabs.mako'/>

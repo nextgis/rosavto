@@ -1,6 +1,8 @@
 from pyramid.view import view_config
+import urllib
 import urllib2
 import ast
+import json
 
 
 @view_config(route_name='map', renderer='map.mako')
@@ -33,9 +35,15 @@ def attributes(request):
     return {}
 
 
-@view_config(route_name='getLayersInfo', renderer='json')
-def get_layers_info(request):
+@view_config(route_name='proxy', renderer='json')
+def proxy(request):
     result = None
+
     if 'url' in request.POST:
-        result = ast.literal_eval(urllib2.urlopen(request.POST['url']).read())
+        url = request.POST['url']
+        params = None
+        if 'params' in request.POST:
+            params = json.loads(request.POST['params'])
+        result = ast.literal_eval(urllib2.urlopen(request.POST['url'], data=str(params)).read())
+
     return result

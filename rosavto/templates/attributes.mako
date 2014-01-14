@@ -26,19 +26,28 @@
 </pre>
 
 <%block name="inlineScripts">
-    require(['rosavto/Map', 'rosavto/LayersInfo', 'dojo/domReady!'], function (Map, LayersInfo) {
+    require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'dojo/domReady!'], function (Map, LayersInfo, MapIdentify) {
         var map = new Map('map', {
                 center: [55.7501, 37.6687],
                 zoom: 10,
                 zoomControl: true,
                 legend: true
             }),
-            layersInfo = new LayersInfo({
-                url: 'http://demo.nextgis.ru/ngw_rosavto/api/layer_group/0/tree',
-                proxy: application_root + '/getLayersInfo'
-            });
+            layersInfo;
 
-        layersInfo.fillLayersInfo();
+        map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 5);
+
+        layersInfo = new LayersInfo({
+            url: 'http://demo.nextgis.ru/ngw_rosavto/api/layer_group/0/tree',
+            proxy: application_root + '/proxy'
+        })
+
+        mapIdentify = new MapIdentify(map, layersInfo, {
+            url: 'http://demo.nextgis.ru/ngw_rosavto/feature_layer/identify',
+            proxy: application_root + '/proxy'
+        });
+        mapIdentify.on();
+
 
     });
 </%block>
