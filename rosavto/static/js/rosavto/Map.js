@@ -5,7 +5,7 @@ define([
     'http://cdn.leafletjs.com/leaflet-0.7.1/leaflet-src.js'
 ], function (declare, lang, xhr) {
     return declare('rosavto.Map', null, {
-        _map: {},
+        _lmap: {},
         _baseLayers: {},
         _overlaylayers: {},
         _legend: null,
@@ -15,10 +15,10 @@ define([
                 settings.zoomControl = false;
             }
 
-            this._map = new L.Map(domNode, settings);
+            this._lmap = new L.Map(domNode, settings);
 
             if (settings.legend) {
-                this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._map);
+                this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
             }
 
             this.addOsmTileLayer();
@@ -27,16 +27,26 @@ define([
         addWmsLayer: function (url, name, settings) {
             var wmsLayer = L.tileLayer.wms(url, settings);
 
-            this._map.addLayer(wmsLayer);
+            this._lmap.addLayer(wmsLayer);
             this._baseLayers[name] = wmsLayer;
             if (this._legend) this._legend.addBaseLayer(wmsLayer, name);
         },
 
         addTileLayer: function (name, url, settings) {
             var tileLayer = new L.TileLayer(url, settings);
-            this._map.addLayer(tileLayer);
+            this._lmap.addLayer(tileLayer);
             this._baseLayers[name] = tileLayer;
             if (this._legend) this._legend.addBaseLayer(tileLayer, name);
+        },
+
+        _ngwTileLayers: [],
+        addNgwTileLayer: function (name, ngwUrl, idStyle, settings) {
+            var ngwTilesUrl = ngwUrl + '/style/' + idStyle + '/tms?z={z}&x={x}&y={y}',
+                ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
+            this._ngwTileLayers.push(idStyle);
+            this._lmap.addLayer(ngwTileLayer);
+            this._overlaylayers[name] = ngwTileLayer;
+            if (this._legend) this._legend.addOverlay(ngwTileLayer, name);
         },
 
         addOsmTileLayer: function () {
@@ -60,7 +70,7 @@ define([
                             }
                         });
 
-                        layer.addTo(this._map);
+                        layer.addTo(this._lmap);
 
                         this._overlaylayers[name] = layer;
                         if (this._legend) this._legend.addOverlay(layer, name);
@@ -80,7 +90,7 @@ define([
                                 }
                             }
                         });
-                        this._map.addLayer(layer);
+                        this._lmap.addLayer(layer);
                     }
                 }));
         },
@@ -88,13 +98,17 @@ define([
         _realTimeLayers: {},
         _subscribeUrl: {},
         addRealtimeLayer: function (layerName, settings) {
-            var layer = L.layerGroup([]).addTo(this._map),
+            var layer = L.layerGroup([]).addTo(this._lmap),
                 socket = new SockJS(settings.socketUrl),
                 client = Stomp.over(socket),
                 callback = lang.hitch(this, function (message) {
                     var body = JSON.parse(message.body);
-                    this._renderMarker(layerName, body[settings.id], [body.latitude, body.longitude],
-                        body[settings.styleField]);
+                    if (body.latitude == undefined || body.longitude == undefined) {
+                        this._deleteMarker(layerName, body[settings.id]);
+                    } else {
+                        this._renderMarker(layerName, body[settings.id], [body.latitude, body.longitude],
+                            body[settings.styleField]);
+                    }
                 });
 
             this._realTimeLayers[layerName] = {
@@ -103,12 +117,12 @@ define([
                 markers: {} // Map of markers: id of entity to id of map
             };
 
-            if (this._map.getZoom() >= settings.minVisibleZoom)
+            if (this._lmap.getZoom() >= settings.minVisibleZoom)
                 this._subscribeForRealtimeLayer(client, callback, this._realTimeLayers[layerName].settings.subscribeUrl);
 
-            this._map.on('dragend zoomend', lang.hitch(this, function () {
+            this._lmap.on('dragend zoomend', lang.hitch(this, function () {
                 var realTimeLayer = this._realTimeLayers[layerName];
-                if (this._map.getZoom() < realTimeLayer.settings.minVisibleZoom) {
+                if (this._lmap.getZoom() < realTimeLayer.settings.minVisibleZoom) {
                     realTimeLayer.layer.clearLayers();
                     realTimeLayer.markers = {};
                     this._unsubscribeForRealtimeLayer(client);
@@ -136,10 +150,20 @@ define([
             }
         },
 
+        _deleteMarker: function (layerName, markerId) {
+            var realtimeLayer = this._realTimeLayers[layerName];
+            if (!realtimeLayer) return;
+
+            if (realtimeLayer.markers[markerId]) {
+                realtimeLayer.removeLayer(realtimeLayer.markers[markerId]);
+                delete realtimeLayer.markers[markerId];
+            }
+        },
+
         _lastMapBounds: null,
         _lastSubscribedId: null,
         _subscribeForRealtimeLayer: function (client, callback, subscribeUrl) {
-            var bounds = this._map.getBounds(),
+            var bounds = this._lmap.getBounds(),
                 boundsHeaders = {
                     'LatitudeFrom': bounds.getSouth(),
                     'LatitudeTo': bounds.getNorth(),
