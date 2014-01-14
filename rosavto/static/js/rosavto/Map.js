@@ -4,7 +4,7 @@ define([
     'dojo/request/xhr',
     'http://cdn.leafletjs.com/leaflet-0.7.1/leaflet-src.js'
 ], function (declare, lang, xhr) {
-    return declare('Map', null, {
+    return declare('rosavto.Map', null, {
         _map: {},
         _baseLayers: {},
         _overlaylayers: {},
