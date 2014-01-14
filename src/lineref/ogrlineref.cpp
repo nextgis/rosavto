@@ -46,7 +46,8 @@ enum operation
     op_unknown = 0,
     op_create,
     op_get_pos,
-    op_get_coord
+    op_get_coord,
+    op_get_subline
 };
 
 /************************************************************************/
@@ -65,7 +66,8 @@ static void Usage(const char* pszAdditionalMsg, int bShort = TRUE)
         "               [-r src_parts_datasource_name] [-rn name]\n"
         "               [-o dst_datasource_name] [-on name]\n"
         "               [-get_pos] [-x long] [-y lat]\n"
-        "               [-get_coord] [-m position] \n");
+        "               [-get_coord] [-m position] \n"
+        "               [-get_subline] [-mb position] [-me position]\n");
 
     if (bShort)
     {
@@ -360,6 +362,102 @@ OGRErr AddFeature(OGRLayer* const poOutLayer, OGRLineString* pPart, double dfFro
 }
 
 //------------------------------------------------------------------------
+// CreateSubline
+//------------------------------------------------------------------------
+int CreateSubline(OGRLayer* const poPkLayer, double dfPosBeg, double dfPosEnd, OGRLayer* const poOutLayer, int bDisplayProgress, int bQuiet)
+{
+    CPLString szAttributeFilter;
+    szAttributeFilter.Printf("%s >= %f AND %s <= %f", FIELD_START, dfPosBeg, FIELD_FINISH, dfPosEnd);
+    poPkLayer->SetAttributeFilter(szAttributeFilter); //TODO: ExecuteSQL should be faster
+    poPkLayer->ResetReading();
+
+    std::map<double, OGRFeature *> moParts;
+    
+    OGRFeature* pFeature = NULL;
+    while ((pFeature = poPkLayer->GetNextFeature()) != NULL)
+    {
+        double dfStart = pFeature->GetFieldAsDouble(FIELD_START);
+        moParts[dfStart] = pFeature;
+    }
+
+    OGRLineString SubLine;
+    
+    if (moParts.size() == 0)
+    {
+        fprintf(stderr, "Get parts for positions %f - %f failed\n", dfPosBeg, dfPosEnd);
+        return 1;
+    }
+    else if (moParts.size() == 1)
+    {
+        std::map<double, OGRFeature *>::iterator IT = moParts.begin();
+        double dfStart = IT->first;
+        double dfPosBegCorr = dfPosBeg - dfStart;
+        double dfSF = IT->second->GetFieldAsDouble(FIELD_SCALE_FACTOR);
+        dfPosBegCorr *= dfSF;
+
+        double dfPosEndCorr = dfPosEnd - dfStart;
+        dfPosEndCorr *= dfSF;
+
+        OGRLineString *pLine = (OGRLineString*)IT->second->GetGeometryRef();
+
+        OGRLineString *pSubLine = pLine->getSubLine(dfPosBegCorr, dfPosEndCorr, FALSE);
+
+        OGRFeature::DestroyFeature(IT->second);
+        //store
+        if (AddFeature(poOutLayer, pSubLine, dfPosBeg, dfPosEnd, 1.0, bQuiet) == OGRERR_NONE)
+            return 0;
+    }
+    else
+    {
+        int nCounter = moParts.size();
+        std::map<double, OGRFeature *>::iterator IT = moParts.begin();
+        OGRLineString *pOutLine = new OGRLineString();
+        //get first part
+        double dfStart = IT->first;
+        double dfPosBegCorr = dfPosBeg - dfStart;
+        double dfSF = IT->second->GetFieldAsDouble(FIELD_SCALE_FACTOR);
+        dfPosBegCorr *= dfSF;
+
+        OGRLineString *pLine = (OGRLineString*)IT->second->GetGeometryRef();
+
+        OGRLineString *pSubLine = pLine->getSubLine(dfPosBegCorr, pLine->get_Length(), FALSE);
+
+        pOutLine->addSubLineString(pSubLine);
+        OGRFeature::DestroyFeature(IT->second);
+
+        ++IT;
+        nCounter--;
+
+        while (nCounter > 1)
+        {
+            pLine = (OGRLineString*)IT->second->GetGeometryRef();
+            pOutLine->addSubLineString(pLine);
+            OGRFeature::DestroyFeature(IT->second);
+            ++IT;
+            nCounter--;
+        }
+
+        //get last part
+        double dfPosEndCorr = dfPosEnd - IT->first;
+        dfSF = IT->second->GetFieldAsDouble(FIELD_SCALE_FACTOR);
+        dfPosEndCorr *= dfSF;
+
+        pLine = (OGRLineString*)IT->second->GetGeometryRef();
+
+        pSubLine = pLine->getSubLine(0, dfPosEndCorr, FALSE);
+
+        pOutLine->addSubLineString(pSubLine);
+
+        OGRFeature::DestroyFeature(IT->second);
+        //store
+        if (AddFeature(poOutLayer, pSubLine, dfPosBeg, dfPosEnd, 1.0, bQuiet) == OGRERR_NONE)
+            return 0;
+    }
+
+    return 0;
+}
+
+//------------------------------------------------------------------------
 // CreateParts
 //------------------------------------------------------------------------
 int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValField, OGRLayer* const poOutLayer, int bDisplayProgress, int bQuiet)
@@ -450,6 +548,9 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
             fprintf(stderr, "Warning: The path is opposite the repers direction. Let's reverse path\n");
         }
         pPathGeom->reversePoints();
+
+        dfDistance1 = pPathGeom->Project(pt1);
+        dfDistance2 = pPathGeom->Project(pt2);
     }
 
     OGRLineString* pPart = NULL;
@@ -510,7 +611,7 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
     if (bDisplayProgress)
     {
         pfnProgress = GDALScaledProgress;
-        pProgressArg = GDALCreateScaledProgress(0, dfFactor, GDALTermProgress, NULL);
+        pProgressArg = GDALCreateScaledProgress(0.0, 1.0, GDALTermProgress, NULL);
     }
 
     int nCount = 2;
@@ -617,6 +718,7 @@ int GetCoordinates(OGRLayer* const poPkLayer, double dfPos, int bDisplayProgress
         {
             fprintf(stdout, "The position for distance %f is lat:%f, long:%f, height:%f\n", dfPos, pt.getY(), pt.getX(), pt.getZ());
         }
+        OGRFeature::DestroyFeature(pFeature);
         return 0;
     }
     fprintf(stderr, "Get coordinates for position %f failed\n", dfPos);
@@ -661,6 +763,8 @@ int main( int nArgc, char ** papszArgv )
 
     int bDisplayProgress = FALSE;
     
+    double dfPosBeg(-100000000), dfPosEnd(-100000000);
+
     /* Check strict compilation and runtime library version as we use C++ API */
     if (! GDAL_CHECK_VERSION(papszArgv[0]))
         exit(1);
@@ -727,6 +831,10 @@ int main( int nArgc, char ** papszArgv )
         {
             stOper = op_get_coord;
         }        
+        else if( EQUAL(papszArgv[iArg],"-get_subline") )
+        {
+            stOper = op_get_subline;
+        }        
         else if( EQUAL(papszArgv[iArg],"-l") )
         {
              CHECK_HAS_ENOUGH_ADDITIONAL_ARGS(1);
@@ -786,6 +894,16 @@ int main( int nArgc, char ** papszArgv )
         {
             CHECK_HAS_ENOUGH_ADDITIONAL_ARGS(1);
             dfPos = CPLAtofM(papszArgv[++iArg]);
+        }  
+        else if( EQUAL(papszArgv[iArg],"-mb") )
+        {
+            CHECK_HAS_ENOUGH_ADDITIONAL_ARGS(1);
+            dfPosBeg = CPLAtofM(papszArgv[++iArg]);
+        }  
+        else if( EQUAL(papszArgv[iArg],"-me") )
+        {
+            CHECK_HAS_ENOUGH_ADDITIONAL_ARGS(1);
+            dfPosEnd = CPLAtofM(papszArgv[++iArg]);
         }  
         else if( EQUAL(papszArgv[iArg],"-progress") )
         {
@@ -1054,6 +1172,120 @@ int main( int nArgc, char ** papszArgv )
 
         //clean up
         OGRDataSource::DestroyDataSource(poPartsDS);
+    }
+    else if (stOper == op_get_subline)
+    {
+        if (pszOutputDataSource == NULL)
+            Usage("no output datasource provided");
+        else if (pszPartsDataSource == NULL)
+            Usage("no parts datasource provided");
+        else  if (dfPosBeg == -100000000)
+            Usage("no begin position provided");
+        else  if (dfPosEnd == -100000000)
+            Usage("no end position provided");
+
+        /* -------------------------------------------------------------------- */
+        /*      Open data source.                                               */
+        /* -------------------------------------------------------------------- */
+        OGRDataSource       *poPartsDS;
+        OGRDataSource       *poODS = NULL;
+        OGRSFDriver         *poDriver = NULL;
+
+        poPartsDS = OGRSFDriverRegistrar::Open(pszPartsDataSource, FALSE);
+
+        /* -------------------------------------------------------------------- */
+        /*      Report failure                                                  */
+        /* -------------------------------------------------------------------- */
+        if (poPartsDS == NULL)
+        {
+            OGRSFDriverRegistrar    *poR = OGRSFDriverRegistrar::GetRegistrar();
+
+            fprintf(stderr, "FAILURE:\n"
+                "Unable to open parts datasource `%s' with the following drivers.\n",
+                pszLineDataSource);
+
+            for (int iDriver = 0; iDriver < poR->GetDriverCount(); iDriver++)
+            {
+                fprintf(stderr, "  -> %s\n", poR->GetDriver(iDriver)->GetName());
+            }
+
+            exit(1);
+        }
+
+        /* -------------------------------------------------------------------- */
+        /*      Find the output driver.                                         */
+        /* -------------------------------------------------------------------- */
+
+        if (!bQuiet)
+            CheckDestDataSourceNameConsistency(pszOutputDataSource, pszFormat);
+
+        OGRSFDriverRegistrar *poR = OGRSFDriverRegistrar::GetRegistrar();
+        int                  iDriver;
+
+        poDriver = poR->GetDriverByName(pszFormat);
+        if (poDriver == NULL)
+        {
+            fprintf(stderr, "Unable to find driver `%s'.\n", pszFormat);
+            fprintf(stderr, "The following drivers are available:\n");
+
+            for (iDriver = 0; iDriver < poR->GetDriverCount(); iDriver++)
+            {
+                fprintf(stderr, "  -> `%s'\n", poR->GetDriver(iDriver)->GetName());
+            }
+            exit(1);
+        }
+
+        if (!poDriver->TestCapability(ODrCCreateDataSource))
+        {
+            fprintf(stderr, "%s driver does not support data source creation.\n",
+                pszFormat);
+            exit(1);
+        }
+
+        /* -------------------------------------------------------------------- */
+        /*      Create the output data source.                                  */
+        /* -------------------------------------------------------------------- */
+        poODS = poDriver->CreateDataSource(pszOutputDataSource, papszDSCO);
+        if (poODS == NULL)
+        {
+            fprintf(stderr, "%s driver failed to create %s\n",
+                pszFormat, pszOutputDataSource);
+            exit(1);
+        }
+
+        OGRLayer *poPartsLayer, *poOutLayer;
+
+        if (pszLineLayerName == NULL)
+        {
+            poPartsLayer = poPartsDS->GetLayer(0);
+        }
+        else
+        {
+            poPartsLayer = poPartsDS->GetLayerByName(pszLineLayerName);
+        }
+
+        if (poPartsLayer == NULL)
+        {
+            fprintf(stderr, "Get parts layer failed.\n");
+            exit(1);
+        }
+
+        poOutLayer = SetupTargetLayer(poPartsLayer, poODS, papszLCO, pszOutputLayerName);
+        if (poOutLayer == NULL)
+        {
+            fprintf(stderr, "Create output layer failed.\n");
+            exit(1);
+        }
+
+        //do the work
+        nRetCode = CreateSubline(poPartsLayer, dfPosBeg, dfPosEnd, poOutLayer, bDisplayProgress, bQuiet);
+
+        //clean up        
+        OGRDataSource::DestroyDataSource(poPartsDS);
+        OGRDataSource::DestroyDataSource(poODS);
+
+        if (NULL != pszOutputLayerName)
+            CPLFree(pszOutputLayerName);
     }
     else
     {
