@@ -21,7 +21,7 @@
 
                 // Задаем настройки для слоя RealTime
                 settings = {
-                    socketUrl: 'http://zulu.centre-it.com:7030/monitoring-web/socket',
+                    socketUrl: 'http://zulu.centre-it.com:7040/monitoring-web/socket',
                     subscribeUrl: '/app/subscribe/map/' + getGuid(),
                     minVisibleZoom: 11, // Минимальный зум, ниже которого маркеры не показываются
                     id: 'guid', // Название поля для идентификации объектов
@@ -54,7 +54,7 @@
                 return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
             },
             settings = {
-                socketUrl: 'http://zulu.centre-it.com:7030/monitoring-web/socket',
+                socketUrl: 'http://zulu.centre-it.com:7040/monitoring-web/socket',
                 subscribeUrl: '/app/subscribe/map/' + getGuid(),
                 minVisibleZoom: 11,
                 id: 'guid', // Название поля для идентификации объектов
