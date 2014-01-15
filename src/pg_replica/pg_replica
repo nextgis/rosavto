@@ -90,7 +90,7 @@ if __name__ == '__main__':
     if not isinstance(num_level, int):
         num_level = 10
 
-    fh = logging.FileHandler(log_file)
+    fh = logging.FileHandler(log_file, encoding='utf-8')
     fh.setLevel(num_level)
     fh.setFormatter(formatter)
     logger.addHandler(fh)
