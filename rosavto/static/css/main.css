@@ -39,3 +39,11 @@ div.leaflet-marker-icon.video {
 div.leaflet-marker-icon.meteo {
     background-image: url('images/meteo.png');
 }
+
+div.leaflet-popup-content div.layers-selector p {
+    margin: 0;
+}
+
+div.leaflet-popup-content div.layers-selector ul li {
+    list-style: none;
+}
