@@ -3,12 +3,13 @@ define([
     'dojo/_base/array',
     'dojo/_base/lang',
     'dojo/query',
+    'dojo/html',
     'dojo/topic',
     'dojo/request/xhr',
     'rosavto/LayersInfo',
     'rosavto/MapIdentify'
 ],
-    function (declare, array, lang, query, topic, xhr, LayersInfo, MapIdentify) {
+    function (declare, array, lang, query, html, topic, xhr, LayersInfo, MapIdentify) {
         return declare('rosavto.AttributeGetter', null, {
             _container: null,
 
@@ -22,11 +23,8 @@ define([
                     throw 'There is multiple attributes elements or element was not found';
                 }
 
-
                 this._map = map;
-
                 this.layersInfo = new LayersInfo(layersInfoSettings);
-
                 this.mapIdentify = new MapIdentify(map, this.layersInfo, mapIdentifysettings);
                 this.mapIdentify.on();
 
@@ -34,9 +32,17 @@ define([
             },
 
             subscribe: function () {
-                topic.subscribe('map/identity', function (id) {
-                    console.log(id);
-                });
+                topic.subscribe('map/identity', lang.hitch(this, function (id) {
+                    var url = this.urlBuilder(id);
+
+                    xhr.get(url).then(lang.hitch(this, function (content) {
+                        this.updateAttributes(content);
+                    }));
+                }));
+            },
+
+            updateAttributes: function (content) {
+                html.set(this._container, content);
             }
         });
     });
