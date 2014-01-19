@@ -3,6 +3,7 @@
 <%block name="title">Аттрибуты</%block>
 
 <div id="map"></div>
+<div id="attributes"></div>
 
 <pre>
     Код для добавления слоев заправок и мостов, а также тайлового слоя OpenStreetMap:
@@ -26,28 +27,26 @@
 </pre>
 
 <%block name="inlineScripts">
-    require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'dojo/domReady!'], function (Map, LayersInfo, MapIdentify) {
+    require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'rosavto/AttributeGetter', 'dojo/domReady!'], function (Map, LayersInfo, MapIdentify, AttributeGetter) {
         var map = new Map('map', {
                 center: [55.529, 37.584],
                 zoom: 7,
                 zoomControl: true,
                 legend: true
             }),
-            layersInfo;
+            layersInfoSettings = {
+                url: 'http://demo.nextgis.ru/ngw_rosavto/api/layer_group/0/tree',
+                proxy: application_root + '/proxy'
+            },
+            mapIdentifySettings = {
+                url: 'http://demo.nextgis.ru/ngw_rosavto/feature_layer/identify',
+                proxy: application_root + '/proxy',
+                fieldIdentify: 'guid'
+            };
 
-        map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 5);
-        map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 7);
+        map.addNgwTileLayer('Регионы', 'http://demo.nextgis.ru/ngw_rosavto', 7);
         map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
 
-        layersInfo = new LayersInfo({
-            url: 'http://demo.nextgis.ru/ngw_rosavto/api/layer_group/0/tree',
-            proxy: application_root + '/proxy'
-        })
-
-        mapIdentify = new MapIdentify(map, layersInfo, {
-            url: 'http://demo.nextgis.ru/ngw_rosavto/feature_layer/identify',
-            proxy: application_root + '/proxy'
-        });
-        mapIdentify.on();
+        var attributeGetter = new AttributeGetter(map, layersInfoSettings, mapIdentifySettings);
     });
 </%block>
