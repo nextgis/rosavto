@@ -18,6 +18,14 @@ pre {
     margin: 10px 0;
 }
 
+div.code-description {
+    margin: 5px;
+}
+
+div.code-description a {
+    font-weight: bold;
+}
+
 div.leaflet-marker-icon {
     width: 32px !important;
     height: 32px !important;
@@ -46,6 +54,10 @@ div.leaflet-popup-content div.layers-selector p {
 
 div.leaflet-popup-content div.layers-selector ul li {
     list-style: none;
+}
+
+div.leaflet-popup-content {
+    width: auto !important;
 }
 
 #attributes {
