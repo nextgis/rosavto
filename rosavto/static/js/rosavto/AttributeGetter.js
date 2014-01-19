@@ -21,7 +21,7 @@ define([
                 this.subscribe();
             },
 
-            subscribe: function() {
+            subscribe: function () {
                 topic.subscribe('map/identity', function (data) {
 
                 });
