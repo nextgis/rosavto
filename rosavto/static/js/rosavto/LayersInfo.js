@@ -31,9 +31,7 @@ define([
 
             fillLayersInfo: function () {
                 var that = this,
-                    xhrGetLayersInfo = this.proxy ?
-                        xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: this.url}}) :
-                        xhr(this.url, {handleAs: 'json'});
+                    xhrGetLayersInfo = this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: this.url}}) : xhr(this.url, {handleAs: 'json'});
                 return xhrGetLayersInfo.then(
                     function (data) {
                         function traverse(item, parent_id) {
@@ -75,7 +73,7 @@ define([
                                         'display_name': s.display_name,
                                         'layer_display_name': s.layer_display_name
                                     });
-                                })
+                                });
                             });
                         }
 
@@ -90,10 +88,11 @@ define([
             },
 
             getLayersIdByStyles: function (idStyles) {
-                var that = this;
+                var that = this,
+                    def;
 
                 if (this._filled) {
-                    var def = new Deferred();
+                    def = new Deferred();
                     def.resolve(this._getLayersIdByStyles(idStyles));
                     return def;
                 } else {
@@ -116,6 +115,22 @@ define([
                 }
 
                 return ids;
+            },
+
+            getLayerNameByStyleId: function (idStyle) {
+                var res = this.store.query({xid: 'style-' + idStyle});
+                if (res.length > 0) {
+                    return res[0].layer_display_name;
+                }
+            },
+
+            getLayerNameByLayerId: function (idLayer) {
+                var display_name,
+                    res = this.store.query({id: idLayer});
+                if (res.length > 0) {
+                    display_name = res[0].display_name
+                    return display_name;
+                }
             }
         });
     });
