@@ -3,7 +3,7 @@
 <%block name="title">Аттрибуты</%block>
 
 <div id="map"></div>
-<div id="attributes"></div>
+<div id="attributes">Здесь будут атрибуты выбранного обекта</div>
 
 <pre>
     Код для добавления слоев заправок и мостов, а также тайлового слоя OpenStreetMap:
@@ -42,11 +42,17 @@
                 url: 'http://demo.nextgis.ru/ngw_rosavto/feature_layer/identify',
                 proxy: application_root + '/proxy',
                 fieldIdentify: 'guid'
+            },
+            attributeGetterSettings = {
+                domSelector: '#attributes',
+                urlBuilder: function (id) {
+                    return application_root + '/attributes/html/' + id
+                }
             };
 
         map.addNgwTileLayer('Регионы', 'http://demo.nextgis.ru/ngw_rosavto', 7);
         map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
 
-        var attributeGetter = new AttributeGetter(map, layersInfoSettings, mapIdentifySettings);
+        var attributeGetter = new AttributeGetter(map, layersInfoSettings, mapIdentifySettings, attributeGetterSettings);
     });
 </%block>
