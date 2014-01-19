@@ -8,21 +8,47 @@
 <pre>
     Код для добавления слоев заправок и мостов, а также тайлового слоя OpenStreetMap:
     <code data-language="javascript">
-        // Загружаем модуль <a href="${request.static_url('rosavto:static/js/rosavto/Map.js')}">rosavto/Map</a> после готовности DOM дерева
-        require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
-            var map = new Map('map', {
-                    center: [55.7501, 37.6687], // Задаем центр
-                    zoom: 10 // Указываем начальный зум
-                    zoomControl: true, // Показываем элемент управления зумом
-                    legend: true // Показываем легенду карты
-                });
+        // Загружаем модуль необходимые модули после готовности DOM дерева
+        require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'rosavto/AttributeGetter', 'dojo/domReady!'],
+            function (Map, LayersInfo, MapIdentify, AttributeGetter) {
+                var map = new Map('map', {
+                        center: [55.7501, 37.6687], // Задаем центр
+                        zoom: 10 // Указываем начальный зум
+                        zoomControl: true, // Показываем элемент управления зумом
+                        legend: true // Показываем легенду карты
+                    }),
+                    layersInfoSettings = { // Настройки модуль для получения информации о слоях на сервере
+                        // Путь к NextGIS Web сервису с информацией о слоях
+                        url: 'http://demo.nextgis.ru/ngw_rosavto/api/layer_group/0/tree',
+                        proxy: application_root + '/proxy' // Простой прокси для кроссдоменных запросов
+                    },
+                    mapIdentifySettings = { // Настройки модуля идентификации объектов-геометрий
+                        // Путь к NextGIS Web сервису идентификации сущностей
+                        url: 'http://demo.nextgis.ru/ngw_rosavto/feature_layer/identify',
+                        proxy: application_root + '/proxy', // Простой прокси для кроссдоменных запросов
+                        fieldIdentify: 'guid' // название поля, содержащего ID объекта
+                    },
+                    attributeGetterSettings = { // Настройки модуля получения атрибутов
+                        // CSS селектор HTML элемента, который будет содаржать таблицу аттрибутов
+                        domSelector: '#attributes',
+                        // Функция обратного вызова для построения URL адреса оконечной точки сервиса,
+                        // возвращающего аттрибутивные данные о сущности по ее ID
+                        urlBuilder: function (id) {
+                            return application_root + '/attributes/html/' + id
+                        }
+                    };
 
-            // Добавляем слой с заправками
-            map.addGeoJsonLayer('Заправки', '/gas_stations', {color:'#FF0000', opacity: 0.9 });
+                // Добавление слоев NextGIS Web, которые будут использоваться для идентификации
+                // Синтаксис: (name, url, styleId)
+                // name - имя слоя в легенде
+                // url - url к NextGIS Web
+                // styleId - ID стиля слоя
+                map.addNgwTileLayer('Регионы', 'http://demo.nextgis.ru/ngw_rosavto', 7);
+                map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
 
-            // Добавляем слой с мостами
-            map.addGeoJsonLayer('Мосты', '/bridges', {opacity:0.9, weight: 2});
-        });
+                // Инициализация модулей
+                var attributeGetter = new AttributeGetter(map, layersInfoSettings, mapIdentifySettings, attributeGetterSettings);
+            });
     </code>
 </pre>
 
