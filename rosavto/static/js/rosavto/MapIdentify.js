@@ -4,6 +4,7 @@ define([
     'dojo/_base/lang',
     'dojo/query',
     'dojo/on',
+    'dojo/dom-attr',
     'dojo/request/xhr',
     'dojo/topic',
     'dijit/_WidgetBase',
@@ -12,7 +13,7 @@ define([
     'dojo/text!./templates/MapIdentify.html',
     'mustache/mustache'
 ],
-    function (declare, array, lang, query, on, xhr, topic, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, mustache) {
+    function (declare, array, lang, query, on, domAttr, xhr, topic, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, mustache) {
 
         return declare('rosavto.MapIdentify', [], {
             template: template,
@@ -79,7 +80,8 @@ define([
                         identifiedFeatures = this._parseNgwFeatures(ngwFeatures);
 
                         if (identifiedFeatures.count < 2) {
-                            topic.publish('map/identity', identifiedFeatures.layers[0]);
+                            topic.publish('map/identity', identifiedFeatures.layers[0].features[0].id);
+                            this._map.hideLoader();
                         } else {
                             this._buildPopup(latlngClick, identifiedFeatures);
                         }
@@ -131,11 +133,10 @@ define([
 
             _buildPopup: function (latlngClick, identifiedFeatures) {
                 var map = this._map._lmap,
-                    popupId = map._container.id + '-MapIdentify';
+                    popupId = map._container.id + '-MapIdentify',
+                    popup;
 
-                this._map.hideLoader();
-
-                L.popup().setLatLng(latlngClick)
+                popup = L.popup().setLatLng(latlngClick)
                     .setContent(mustache.render(this.template, {
                         id: popupId,
                         layers: identifiedFeatures.layers
@@ -143,8 +144,11 @@ define([
                     .openOn(map);
 
                 on(query('#' + popupId + ' li'), 'click', function () {
-
+                    topic.publish('map/identity', domAttr.get(this, 'data-id'));
+                    map.closePopup(popup);
                 });
+
+                this._map.hideLoader();
             }
         });
     });
