@@ -22,7 +22,7 @@ define([
                 this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
             }
 
-            this._buildStandBy();
+            this._buildStandBy(domNode);
 
             this.addOsmTileLayer();
         },
