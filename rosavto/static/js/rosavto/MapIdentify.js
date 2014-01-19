@@ -2,6 +2,8 @@ define([
     'dojo/_base/declare',
     'dojo/_base/array',
     'dojo/_base/lang',
+    'dojo/query',
+    'dojo/on',
     'dojo/request/xhr',
     'dojo/topic',
     'dijit/_WidgetBase',
@@ -10,7 +12,7 @@ define([
     'dojo/text!./templates/MapIdentify.html',
     'mustache/mustache'
 ],
-    function (declare, array, lang, xhr, topic, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, mustache) {
+    function (declare, array, lang, query, on, xhr, topic, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, mustache) {
 
         return declare('rosavto.MapIdentify', [], {
             template: template,
@@ -71,72 +73,78 @@ define([
                     xhrIdentity = this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: this.url, params: JSON.stringify(postParams)}}) :
                         xhr(this.url, {handleAs: 'json', method: 'POST', data: postParams, headers: {'X-Requested-With': 'XMLHttpRequest'}});
 
-                    xhrIdentity.then(lang.hitch(this, function (featuresInfo) {
-                        var layerName,
-                            layerId,
-                            featureCount,
-                            feature,
-                            i,
-                            featuresIdentified = {
-                                count: 0,
-                                features: {}
-                            };
+                    xhrIdentity.then(lang.hitch(this, function (ngwFeatures) {
+                        var identifiedFeatures;
 
-                        for (layerId in featuresInfo) {
-                            if (featuresInfo.hasOwnProperty(layerId)) {
-                                featureCount = featuresInfo[layerId]['featureCount'];
-                                if (featureCount > 0) {
-                                    featuresIdentified.count += featureCount;
-                                    layerName = this._layersInfo.getLayerNameByLayerId(parseInt(layerId, 10));
-                                    featuresIdentified.features[layerName] = [];
-                                    for (i = 0; i < featureCount; i += 1) {
-                                        feature = featuresInfo[layerId].features[i];
-                                        featuresIdentified.features[layerName].push({
-                                            label: feature.label,
-                                            id: feature.fields[this.fieldIdentify]
-                                        });
-                                    }
-                                }
-                            }
-                        }
+                        identifiedFeatures = this._parseNgwFeatures(ngwFeatures);
 
-                        if (featuresIdentified.count < 2) {
-                            topic.publish('map/identity', featuresIdentified);
+                        if (identifiedFeatures.count < 2) {
+                            topic.publish('map/identity', identifiedFeatures.layers[0]);
                         } else {
-                            var layersTemplated = [],
-                                layerTemplated;
-                            for (layerName in featuresIdentified.features) {
-                                if (featuresIdentified.features.hasOwnProperty(layerName)) {
-                                    feturesCount = featuresIdentified.features[layerName].length;
-
-                                    if (featureCount < 1) {
-                                        continue;
-                                    }
-
-                                    layerTemplated = {
-                                        'name': layerName,
-                                        'features': []
-                                    };
-
-                                    for (i = 0; i < feturesCount; i++) {
-                                        feature = featuresIdentified.features[layerName][i];
-                                        layerTemplated.features.push({
-                                            id: feature.id,
-                                            name: feature.label
-                                        });
-                                    }
-
-                                    layersTemplated.push(layerTemplated);
-                                }
-                            }
-
-                            this._map.hideLoader();
-                            L.popup().setLatLng(latlngClick)
-                                .setContent(mustache.render(this.template, {layers: layersTemplated}))
-                                .openOn(map);
+                            this._buildPopup(latlngClick, identifiedFeatures);
                         }
                     }));
                 }));
+            },
+
+            _parseNgwFeatures: function (ngwFeatures) {
+                var identifiedFeatures = {
+                        count: 0,
+                        layers: []
+                    },
+                    identifiedLayer,
+                    layerId,
+                    ngwLayerFeaturesCount,
+                    ngwFeature,
+                    i;
+
+                for (layerId in ngwFeatures) {
+                    if (ngwFeatures.hasOwnProperty(layerId)) {
+
+                        ngwLayerFeaturesCount = ngwFeatures[layerId].featureCount;
+
+                        if (ngwLayerFeaturesCount > 0) {
+
+                            identifiedFeatures.count += ngwLayerFeaturesCount;
+                            layerName = this._layersInfo.getLayerNameByLayerId(parseInt(layerId, 10));
+
+                            identifiedLayer = {
+                                name: layerName,
+                                features: []
+                            };
+
+                            for (i = 0; i < ngwLayerFeaturesCount; i += 1) {
+                                ngwFeature = ngwFeatures[layerId].features[i];
+                                identifiedLayer.features.push({
+                                    label: ngwFeature.label,
+                                    id: ngwFeature.fields[this.fieldIdentify]
+                                });
+                            }
+
+                            identifiedFeatures.layers.push(identifiedLayer);
+                        }
+                    }
+                }
+
+                return identifiedFeatures;
+            },
+
+            _buildPopup: function (latlngClick, identifiedFeatures) {
+                var map = this._map._lmap,
+                    popupId = map._container.id + '-MapIdentify';
+
+                this._map.hideLoader();
+
+                L.popup().setLatLng(latlngClick)
+                    .setContent(mustache.render(this.template, {
+                        id: popupId,
+                        layers: identifiedFeatures.layers
+                    }))
+                    .openOn(map);
+
+                on(query('#' + popupId + ' li'), 'click', function () {
+
+                });
             }
         });
     });
