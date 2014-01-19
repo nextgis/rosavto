@@ -1,0 +1,10 @@
+<div class="layers-selector">
+    {{#layers}}
+        <p>{{name}}</p>
+        <ul>
+            {{#features}}
+                <li data-id="{{id}}"><a href="javascript:void(0)">{{name}}></a></li>
+            {{/features}}
+        </ul>
+    {{/layers}}
+</div>
