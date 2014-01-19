@@ -20,6 +20,7 @@ def main(global_config, **settings):
     config.add_route('wms', '/wms')
     config.add_route('realtime', '/realtime')
     config.add_route('attributes', '/attributes')
+    config.add_route('attributes_html', '/attributes/html/{id}')
     config.add_route('proxy', '/proxy')
     config.scan()
     return config.make_wsgi_app()
