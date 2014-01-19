@@ -7,7 +7,8 @@
     ('marker', u'Маркер'),
     ('wms', u'Карта + WMS'),
     ('realtime', u'Realtime'),
-    ('attributes', u'Аттрибуты')
+    ('attributes', u'Аттрибуты'),
+    ('code', u'Примеры кода')
 ]
 %>
 

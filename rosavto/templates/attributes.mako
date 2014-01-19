@@ -2,55 +2,13 @@
 
 <%block name="title">Аттрибуты</%block>
 
+<div class="code-description">
+    <p>Для получения сведений о атрибутах объекта кликните по объекту на карте. Если в области клика будет несколько объектов - выберите нужный.</p>
+    <p>Код с комментариями <a href="${request.route_url('code') + '#attributes'}">здесь</a></p>
+</div>
+
 <div id="map"></div>
 <div id="attributes">Здесь будут атрибуты выбранного обекта</div>
-
-<pre>
-    Код для добавления слоев заправок и мостов, а также тайлового слоя OpenStreetMap:
-    <code data-language="javascript">
-        // Загружаем модуль необходимые модули после готовности DOM дерева
-        require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'rosavto/AttributeGetter', 'dojo/domReady!'],
-            function (Map, LayersInfo, MapIdentify, AttributeGetter) {
-                var map = new Map('map', {
-                        center: [55.7501, 37.6687], // Задаем центр
-                        zoom: 10 // Указываем начальный зум
-                        zoomControl: true, // Показываем элемент управления зумом
-                        legend: true // Показываем легенду карты
-                    }),
-                    layersInfoSettings = { // Настройки модуль для получения информации о слоях на сервере
-                        // Путь к NextGIS Web сервису с информацией о слоях
-                        url: 'http://demo.nextgis.ru/ngw_rosavto/api/layer_group/0/tree',
-                        proxy: application_root + '/proxy' // Простой прокси для кроссдоменных запросов
-                    },
-                    mapIdentifySettings = { // Настройки модуля идентификации объектов-геометрий
-                        // Путь к NextGIS Web сервису идентификации сущностей
-                        url: 'http://demo.nextgis.ru/ngw_rosavto/feature_layer/identify',
-                        proxy: application_root + '/proxy', // Простой прокси для кроссдоменных запросов
-                        fieldIdentify: 'guid' // название поля, содержащего ID объекта
-                    },
-                    attributeGetterSettings = { // Настройки модуля получения атрибутов
-                        // CSS селектор HTML элемента, который будет содаржать таблицу аттрибутов
-                        domSelector: '#attributes',
-                        // Функция обратного вызова для построения URL адреса оконечной точки сервиса,
-                        // возвращающего аттрибутивные данные о сущности по ее ID
-                        urlBuilder: function (id) {
-                            return application_root + '/attributes/html/' + id
-                        }
-                    };
-
-                // Добавление слоев NextGIS Web, которые будут использоваться для идентификации
-                // Синтаксис: (name, url, styleId)
-                // name - имя слоя в легенде
-                // url - url к NextGIS Web
-                // styleId - ID стиля слоя
-                map.addNgwTileLayer('Регионы', 'http://demo.nextgis.ru/ngw_rosavto', 7);
-                map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
-
-                // Инициализация модулей
-                var attributeGetter = new AttributeGetter(map, layersInfoSettings, mapIdentifySettings, attributeGetterSettings);
-            });
-    </code>
-</pre>
 
 <%block name="inlineScripts">
     require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'rosavto/AttributeGetter', 'dojo/domReady!'], function (Map, LayersInfo, MapIdentify, AttributeGetter) {
@@ -76,8 +34,11 @@
                 }
             };
 
+        map.addNgwTileLayer('Федеральные дороги', 'http://demo.nextgis.ru/ngw_rosavto', 6);
+        map.addNgwTileLayer('Тестовые дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
         map.addNgwTileLayer('Регионы', 'http://demo.nextgis.ru/ngw_rosavto', 7);
-        map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
+        map.addNgwTileLayer('Нормативные участки дорог', 'http://demo.nextgis.ru/ngw_rosavto', 10);
+        map.addNgwTileLayer('Участки подрядных организаций', 'http://demo.nextgis.ru/ngw_rosavto', 9);
 
         var attributeGetter = new AttributeGetter(map, layersInfoSettings, mapIdentifySettings, attributeGetterSettings);
     });

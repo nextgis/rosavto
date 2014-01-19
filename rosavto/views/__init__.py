@@ -39,8 +39,8 @@ def attributes(request):
     return {}
 
 
-@view_config(route_name='attributes', renderer='attributes.mako')
-def attributes(request):
+@view_config(route_name='code', renderer='code.mako')
+def code(request):
     return {}
 
 
