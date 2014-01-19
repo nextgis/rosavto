@@ -47,3 +47,10 @@ div.leaflet-popup-content div.layers-selector p {
 div.leaflet-popup-content div.layers-selector ul li {
     list-style: none;
 }
+
+#attributes {
+    width: 99%;
+    margin: 4px 3px 10px 3px;
+    padding: 2px;
+    border: 1px solid lightgray;
+}
