@@ -2,10 +2,10 @@ define([
     'dojo/_base/declare',
     'dojo/_base/lang',
     'dojo/request/xhr',
-    'dojox/widget/Standby',
+    'rosavto/Loader',
     'http://cdn.leafletjs.com/leaflet-0.7.1/leaflet-src.js'
-], function (declare, lang, xhr, Standby) {
-    return declare('rosavto.Map', null, {
+], function (declare, lang, xhr, Loader) {
+    return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
         _overlaylayers: {},
@@ -22,7 +22,7 @@ define([
                 this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
             }
 
-            this._buildStandBy(domNode);
+            this.buildLoader(domNode);
 
             this.addOsmTileLayer();
         },
@@ -193,19 +193,6 @@ define([
             if (this._lastSubscribedId) {
                 client.unsubscribe(this._lastSubscribedId);
             }
-        },
-
-        _buildStandBy: function (domNode) {
-            this.standby = new Standby({target: domNode});
-            document.body.appendChild(this.standby.domNode);
-        },
-
-        showLoader: function () {
-            this.standby.show();
-        },
-
-        hideLoader: function () {
-            this.standby.hide();
         }
     });
 });
