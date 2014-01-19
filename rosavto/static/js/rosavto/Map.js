@@ -22,7 +22,7 @@ define([
                 this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
             }
 
-            this.buildStandBy();
+            this._buildStandBy();
 
             this.addOsmTileLayer();
         },
@@ -195,7 +195,7 @@ define([
             }
         },
 
-        buildStandBy: function (domNode) {
+        _buildStandBy: function (domNode) {
             this.standby = new Standby({target: domNode});
             document.body.appendChild(this.standby.domNode);
         },
