@@ -46,6 +46,8 @@ define([
                 var map = this._map._lmap,
                     latlngClick = e.latlng;
 
+                this._map.showLoader();
+
                 return this._layersInfo.getLayersIdByStyles(this._map._ngwTileLayers).then(lang.hitch(this, function (layersId) {
                     var point = map.project([e.latlng.lat, e.latlng.lng], map.getZoom()),
                         pointTopLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), map.getZoom())),
@@ -128,6 +130,7 @@ define([
                                 }
                             }
 
+                            this._map.hideLoader();
                             L.popup().setLatLng(latlngClick)
                                 .setContent(mustache.render(this.template, {layers: layersTemplated}))
                                 .openOn(map);
