@@ -17,10 +17,12 @@
                     baseUrl: "${request.static_url('rosavto:static/js/')}",
                     packages: [
                         { name: "rosavto", location: 'rosavto' },
-                        { name: "proj4js", location: 'proj4js' }
+                        { name: "proj4js", location: 'proj4js' },
+                        { name: "mustache", location: 'mustache' }
                     ]
                 };
     </script>
+
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.2/dojo/dojo.js"></script>
 
     <link rel="stylesheet" href="${request.static_url('rosavto:static/js/rainbow/solarized-light.css')}">
