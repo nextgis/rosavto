@@ -35,6 +35,11 @@ def attributes(request):
     return {}
 
 
+@view_config(route_name='attributes', renderer='attributes.mako')
+def attributes(request):
+    return {}
+
+
 @view_config(route_name='proxy', renderer='json')
 def proxy(request):
     result = None
@@ -43,7 +48,8 @@ def proxy(request):
         url = request.POST['url']
         params = None
         if 'params' in request.POST:
-            params = json.loads(request.POST['params'])
-        result = ast.literal_eval(urllib2.urlopen(request.POST['url'], data=str(params)).read())
+            params = ast.literal_eval(json.dumps(request.POST['params']))
+        res = urllib2.urlopen(request.POST['url'], data=params).read()
+        result = ast.literal_eval(res)
 
     return result
