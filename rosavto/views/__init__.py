@@ -61,7 +61,7 @@ def proxy(request):
         params = None
         if 'params' in request.POST:
             params = ast.literal_eval(json.dumps(request.POST['params']))
-        res = urllib2.urlopen(request.POST['url'], data=params).read()
+        res = urllib2.urlopen(request.POST['url'], data=params, timeout=10).read()
         result = json.loads(res)
 
     return result
