@@ -79,10 +79,13 @@ define([
 
                         identifiedFeatures = this._parseNgwFeatures(ngwFeatures);
 
-                        if (identifiedFeatures.count < 2) {
+                        if (identifiedFeatures.count === 0) {
+                            alert('В этом месте объектов нет');
+                            this._map.hideLoader();
+                        } else if (identifiedFeatures.count === 1) {
                             topic.publish('map/identity', identifiedFeatures.layers[0].features[0].id);
                             this._map.hideLoader();
-                        } else {
+                        } else if (identifiedFeatures.count > 1) {
                             this._buildPopup(latlngClick, identifiedFeatures);
                         }
                     }));
