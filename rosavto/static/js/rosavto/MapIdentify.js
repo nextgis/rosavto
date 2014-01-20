@@ -37,19 +37,9 @@ define([
                 });
             },
 
-            off: function () {
-                var that = this;
-
-                this._map._lmap.off('click', function (e) {
-                    that.getIdsByClick(e);
-                });
-            },
-
             getIdsByClick: function (e) {
                 var map = this._map._lmap,
                     latlngClick = e.latlng;
-
-                this._map.showLoader();
 
                 return this._layersInfo.getLayersIdByStyles(this._map._ngwTileLayers).then(lang.hitch(this, function (layersId) {
                     var point = map.project([e.latlng.lat, e.latlng.lng], map.getZoom()),
@@ -114,6 +104,7 @@ define([
                             layerName = this._layersInfo.getLayerNameByLayerId(parseInt(layerId, 10));
 
                             identifiedLayer = {
+                                id: layerId,
                                 name: layerName,
                                 features: []
                             };

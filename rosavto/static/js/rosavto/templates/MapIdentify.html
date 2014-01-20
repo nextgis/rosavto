@@ -1,7 +1,7 @@
 <div id="{{id}}" class="layers-selector">
     {{#layers}}
         <p>{{name}}</p>
-        <ul>
+        <ul data-layer-id="{{id}}">
             {{#features}}
                 <li data-id="{{id}}"><a href="javascript:void(0)">{{label}}</a></li>
             {{/features}}
