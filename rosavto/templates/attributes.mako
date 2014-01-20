@@ -34,7 +34,6 @@
                 }
             };
 
-        map.addNgwTileLayer('Федеральные дороги', 'http://demo.nextgis.ru/ngw_rosavto', 6);
         map.addNgwTileLayer('Тестовые дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
         map.addNgwTileLayer('Регионы', 'http://demo.nextgis.ru/ngw_rosavto', 7);
         map.addNgwTileLayer('Нормативные участки дорог', 'http://demo.nextgis.ru/ngw_rosavto', 10);
