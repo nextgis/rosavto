@@ -7,16 +7,12 @@ define([
     'dojo/dom-attr',
     'dojo/request/xhr',
     'dojo/topic',
-    'dijit/_WidgetBase',
-    'dijit/_TemplatedMixin',
-    'dijit/_WidgetsInTemplateMixin',
-    'dojo/text!./templates/MapIdentify.html',
     'mustache/mustache'
 ],
-    function (declare, array, lang, query, on, domAttr, xhr, topic, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template, mustache) {
+    function (declare, array, lang, query, on, domAttr, xhr, topic, mustache) {
 
         return declare('rosavto.MapIdentify', [], {
-            template: template,
+            template: '<div id="{{id}}" class="layers-selector">{{#layers}}<p>{{name}}</p><ul data-layer-id="{{id}}">{{#features}}<li data-id="{{id}}"><a href="javascript:void(0)">{{label}}</a></li>{{/features}}</ul>{{/layers}}</div>',
 
             constructor: function (map, layersInfo, settings) {
                 mustache.parse(this.template);
