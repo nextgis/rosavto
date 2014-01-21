@@ -33,6 +33,7 @@ define([
                 var that = this;
 
                 this._map._lmap.on('click', function (e) {
+                    topic.publish('map/identityUi/block');
                     that.getIdsByClick(e);
                 });
             },
@@ -71,7 +72,7 @@ define([
 
                         if (identifiedFeatures.count === 0) {
                             alert('В этом месте объектов нет');
-                            this._map.hideLoader();
+                            topic.publish('map/identityUi/unblock');
                         } else if (identifiedFeatures.count === 1) {
                             topic.publish('map/identity', identifiedFeatures.layers[0].features[0].id);
                             this._map.hideLoader();
@@ -126,7 +127,8 @@ define([
             },
 
             _buildPopup: function (latlngClick, identifiedFeatures) {
-                var map = this._map._lmap,
+                var that = this,
+                    map = this._map._lmap,
                     popupId = map._container.id + '-MapIdentify',
                     popup;
 
@@ -138,11 +140,16 @@ define([
                     .openOn(map);
 
                 on(query('#' + popupId + ' li'), 'click', function () {
-                    topic.publish('map/identity', domAttr.get(this, 'data-id'));
+                    that.identify(domAttr.get(this, 'data-id'));
                     map.closePopup(popup);
                 });
 
-                this._map.hideLoader();
+                topic.publish('map/identityUi/unblock');
+            },
+
+            identify: function (id) {
+                topic.publish('map/identityUi/block');
+                topic.publish('map/identity', id);
             }
         });
     });

@@ -7,10 +7,11 @@ define([
     'dojo/topic',
     'dojo/request/xhr',
     'rosavto/LayersInfo',
-    'rosavto/MapIdentify'
+    'rosavto/MapIdentify',
+    'rosavto/Loader'
 ],
-    function (declare, array, lang, query, html, topic, xhr, LayersInfo, MapIdentify) {
-        return declare('rosavto.AttributeGetter', null, {
+    function (declare, array, lang, query, html, topic, xhr, LayersInfo, MapIdentify, Loader) {
+        return declare('rosavto.AttributeGetter', [Loader], {
             _container: null,
 
             constructor: function (map, layersInfoSettings, mapIdentifysettings, settings) {
@@ -22,6 +23,8 @@ define([
                 } else {
                     throw 'There is multiple attributes elements or element was not found';
                 }
+
+                this.buildLoader(this._container);
 
                 this._map = map;
                 this.layersInfo = new LayersInfo(layersInfoSettings);
@@ -37,7 +40,18 @@ define([
 
                     xhr.get(url).then(lang.hitch(this, function (content) {
                         this.updateAttributes(content);
+                        topic.publish('map/identityUi/unblock');
                     }));
+                }));
+
+                topic.subscribe('map/identityUi/block', lang.hitch(this, function () {
+                    this.showLoader();
+                    this._map.showLoader();
+                }));
+
+                topic.subscribe('map/identityUi/unblock', lang.hitch(this, function () {
+                    this.hideLoader();
+                    this._map.hideLoader();
                 }));
             },
 
