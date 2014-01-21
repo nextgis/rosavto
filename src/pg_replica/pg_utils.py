@@ -31,6 +31,8 @@ import logging
 import psycopg2
 import psycopg2.extensions
 
+import requests
+
 
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
@@ -55,8 +57,8 @@ class PgDB:
                  passwd=None):
 
         self.logger = logging.getLogger('pg_replica')
-
         self.re_ident_ok = re.compile(r"^\w+$")
+        self.re_is_integer = re.compile('int[0-9]')
 
         self.host = host
         self.port = port
@@ -158,7 +160,7 @@ class PgDB:
         c = self.con.cursor()
         schema_where = (" AND nspname='%s' "
                         % self._quote_str(schema) if schema is not None else ''
-                        )
+                       )
         sql = '''SELECT a.attnum AS ordinal_position,
                         a.attname AS column_name,
                         t.typname AS data_type,
@@ -182,9 +184,8 @@ class PgDB:
         attrs = c.fetchall()
         return attrs
 
-
     def register_table(self, schema, table):
-        if not self._create_replog_table():
+        if not self.create_replog_table():
             return False
 
         table_name = self._table_name(schema, table)
@@ -204,18 +205,18 @@ class PgDB:
                      BEGIN
                          IF (TG_OP = 'INSERT') THEN
                              INSERT INTO %s(
-                                 table_name, operation, stamp, fid)
-                             VALUES('%s', 2, current_timestamp, NEW.ogc_fid);
+                                 table_name, operation, stamp, uid)
+                             VALUES('%s', 2, current_timestamp, NEW.uniq_uid);
                              RETURN NEW;
                          ELSIF (TG_OP = 'UPDATE') THEN
                              INSERT INTO %s(
-                                 table_name, operation, stamp, fid)
-                             VALUES('%s', 3, current_timestamp, OLD.ogc_fid);
+                                 table_name, operation, stamp, uid)
+                             VALUES('%s', 3, current_timestamp, OLD.uniq_uid);
                              RETURN NEW;
                          ELSIF (TG_OP = 'DELETE') THEN
                              INSERT INTO %s(
-                                 table_name, operation, stamp, fid)
-                             VALUES('%s', 1, current_timestamp, OLD.ogc_fid);
+                                 table_name, operation, stamp, uid)
+                             VALUES('%s', 1, current_timestamp, OLD.uniq_uid);
                              RETURN NEW;
                          END IF;
                      END;
@@ -232,7 +233,125 @@ class PgDB:
         self._exec_sql_and_commit(sql)
         return True
 
-    def _create_replog_table(self):
+    def prepare_changes(self, timestamp):
+        records = self.list_changes(timestamp)
+
+        data = dict()
+        for table, uid in records:
+            if table not in data:
+                data[table] = [uid]
+            else:
+                data[table].append(uid)
+
+        repl_table = self._table_name(self.rep_schema, self.rep_table)
+
+        c = self.con.cursor()
+
+        for full_table_name, uids in data.iteritems():
+            schema = full_table_name.split('.')[0]
+            table = full_table_name.split('.')[1]
+
+            fields = self.get_table_fields(table, schema)
+            plain_field_list = []
+            select_field_list = []
+            for count, field in enumerate(fields):
+                field_name = field[1]
+                field_type = field[2]
+                if field_name == 'ogc_fid':
+                    continue
+                if field_type in ['geometry']:
+                    select_field_list.append(
+                        "encode(ST_AsEWKB(%s), 'hex')" % field_name)
+                    plain_field_list.append(field_name)
+                    geom_name = field_name
+                    continue
+                plain_field_list.append(field_name)
+                select_field_list.append(field_name)
+
+            geom_index = plain_field_list.index(geom_name)
+
+            for uid in uids:
+                sql = '''SELECT *
+                         FROM %s
+                         WHERE uid='%s'
+                         ORDER BY stamp DESC
+                         LIMIT 1;
+                      ''' % (repl_table, uid)
+                self._exec_sql(c, sql)
+                result = c.fetchone()
+
+                operation = result[1]
+
+                if operation != 1:
+                    sql = "SELECT %s FROM %s WHERE uniq_uid='%s';" % (
+                        ', '.join(select_field_list), full_table_name, uid)
+                    self._exec_sql(c, sql)
+                    values = c.fetchone()
+
+                    value_list = []
+                    for (count, value) in enumerate(values):
+                        if count == geom_index:
+                            value_list.append(
+                                "ST_GeomFromEWKB(decode('%s', 'hex'))" % value)
+                            continue
+                        value_list.append(value)
+
+                    values = self.populate_values(
+                        fields, value_list, plain_field_list)
+
+                s = ''
+                if operation == 1:
+                    self.logger.debug('Found DELETE operation.')
+
+                    s = "DELETE FROM %s WHERE uniq_uid='%s'" % (
+                        full_table_name, uid)
+                    self.logger.debug(
+                        'Replication SQL: %s' % ' '.join(s.split()))
+                elif operation == 2:
+                    self.logger.debug('Found INSERT operation.')
+
+                    s = u'INSERT INTO %s(%s) VALUES(%s);' % (
+                        full_table_name, ', '.join(plain_field_list), values)
+                    self.logger.debug(
+                        'Replication SQL: %s' % ' '.join(s.split()))
+                elif operation == 3:
+                    self.logger.debug('Found UPDATE operation.')
+
+                    s = u'''UPDATE %s
+                           SET (%s) = (%s)
+                           WHERE uniq_uid='%s';
+                        ''' % (full_table_name,
+                               ', '.join(plain_field_list),
+                               values,
+                               uid)
+                    self.logger.debug(
+                        'Replication SQL: %s' % ' '.join(s.split()))
+
+        self.clear_old_records(timestamp)
+
+    def list_changes(self, timestamp):
+        c = self.con.cursor()
+
+        table_name = self._table_name(self.rep_schema, self.rep_table)
+        sql = '''SELECT DISTINCT table_name, uid
+                 FROM %s
+                 WHERE stamp < '%s'::timestamp with time zone
+                 ORDER BY table_name;
+              ''' % (table_name, timestamp)
+
+        self._exec_sql(c, sql)
+        attrs = c.fetchall()
+        return attrs
+
+    def clear_old_records(self, timestamp):
+        table_name = self._table_name(self.rep_schema, self.rep_table)
+        sql = 'DELETE FROM %s WHERE stamp < %s;' % (table_name, timestamp)
+
+        self._exec_sql_and_commit(sql)
+        self.logger.info('Old records removed.')
+        return True
+
+    def create_replog_table(self):
         schema = self.rep_schema
         table = self.rep_table
         table_name = self._table_name(schema, table)
@@ -244,12 +363,12 @@ class PgDB:
                 '"%s" table already exists. Skipping creation.' % table_name)
             return True
 
-        sql = u'''CREATE TABLE %s (
+        sql = '''CREATE TABLE %s (
                      table_name character varying(255) NOT NULL,
                      operation smallint NOT NULL,
                      stamp timestamp with time zone NOT NULL DEFAULT
                          ('now'::text)::timestamp(2) with time zone,
-                     fid integer NOT NULL)
+                     uid uuid NOT NULL)
               WITH (OIDS=FALSE);
               ALTER TABLE %s OWNER TO %s;
               COMMENT ON COLUMN %s.operation IS
@@ -260,8 +379,56 @@ class PgDB:
         self.logger.info('Created table "%s".' % table_name)
         return True
 
+    def populate_values(self, fields, values, field_list):
+        out = u''
+        for count, field_name in enumerate(field_list):
+            field_defn = [f for f in fields if f[1] == field_name][0]
+            field_type = field_defn[2]
+            value = values[count]
+
+            if field_type in ['text', 'varchar']:
+                if value is not None:
+                    out += u"'%s', " % value
+                else:
+                    out += u'NULL, '
+            elif field_type == 'bool':
+                if value is not None:
+                    out += u'%s, ' % value
+                else:
+                    out += u'NULL, '
+            elif field_type == 'uuid':
+                if value is not None:
+                    out += u"'%s', " % value
+                else:
+                    out += u'NULL, '
+            elif self.re_is_integer.match(field_type) is not None:
+                if value is not None:
+                    out += '%s, ' % value
+                else:
+                    out += 'NULL, '
+            elif field_type in ['numeric']:
+                if value is not None:
+                    out += u'%s, ' % value
+                else:
+                    out += u'NULL, '
+            elif field_type in ['timestamp', 'timestamptz', 'date', 'time',
+                                'interval']:
+                if value is not None:
+                    out += u"'%s', " % value
+                else:
+                    out += u'NULL, '
+            elif field_type in ['geometry']:
+                if value is not None:
+                    out += u'%s, ' % value
+                else:
+                    out += u'NULL, '
+
+        out = out[:-2]
+        return out
+
     def _exec_sql(self, cursor, sql):
         try:
+            self.logger.debug('Execute query: "%s"' % ' '.join(sql.split()))
             cursor.execute(sql)
         except psycopg2.Error, e:
             raise DbError(e.message, e.cursor.query)

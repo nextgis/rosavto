@@ -29,6 +29,8 @@ __revision__ = '$Format:%H$'
 
 import os
 import sys
+import datetime
+import pytz
 import argparse
 import logging
 import ConfigParser
@@ -40,12 +42,21 @@ logger = logging.getLogger('pg_replica')
 
 
 def register_table(host, port, dbname, user, passwd, table):
+    logger.debug('register_table entered.')
     db = pg_utils.PgDB(host, port, dbname, user, passwd)
     db.register_table('public', table)
-    logger.info('Table "%s" registered for replication.')
+    logger.info('Table "%s" registered for replication.' % table)
+
+
+def create_changesets(host, port, dbname, user, passwd):
+    logger.debug('create_changesets entered.')
+    timestamp = datetime.datetime.now().isoformat()
+    logger.debug('Process records for %s.' % timestamp)
+    db = pg_utils.PgDB(host, port, dbname, user, passwd)
+    db.prepare_changes(timestamp)
 
 if __name__ == '__main__':
-    logger.setLevel(logging.NOTSET)
+    logger.setLevel(logging.DEBUG)
 
     ch = logging.StreamHandler()
     ch.setLevel(logging.ERROR)
@@ -73,6 +84,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    #config_name = '/etc/pg_replica.conf'
     config_name = os.path.join(os.path.dirname(__file__), 'pg_replica.conf.sample')
     if not os.path.isfile(config_name):
         logger.critical('Configuration file "%s" not found.' % config_name)
@@ -103,20 +115,20 @@ if __name__ == '__main__':
         user = cfg.get('connection', 'user')
         passwd = cfg.get('connection', 'password')
     else:
-        logger.error('Connection settings not found in config file.')
+        logger.critical('Connection settings not found in config file.')
         sys.exit(1)
 
     if cfg.has_section('zones'):
         table_name = cfg.get('zones', 'table_name')
         field_name = cfg.get('zones', 'field_name')
     else:
-        logger.error('Helper table settings not found in config file.')
+        logger.critical('Helper table settings not found in config file.')
         sys.exit(1)
 
     if args.tableName:
         register_table(host, port, dbname, user, passwd, args.tableName)
     elif args.createChangesets:
-        pass
+        create_changesets(host, port, dbname, user, passwd)
     elif args.syncChangesets:
         pass
 
