@@ -35,7 +35,7 @@ define([
             },
 
             subscribe: function () {
-                topic.subscribe('map/identity', lang.hitch(this, function (id) {
+                topic.subscribe('attributes/get', lang.hitch(this, function (id) {
                     var url = this.urlBuilder(id);
 
                     xhr.get(url).then(lang.hitch(this, function (content) {

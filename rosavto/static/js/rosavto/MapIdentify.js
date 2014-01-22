@@ -39,7 +39,7 @@ define([
                     latlngClick = e.latlng;
 
                 return this._layersInfo.getLayersIdByStyles(this._map._ngwTileLayers).then(lang.hitch(this, function (layersId) {
-                    var url = this.url + 'feature_layer/identify';
+                    var url = this.urlNgw + 'feature_layer/identify';
                         point = map.project([e.latlng.lat, e.latlng.lng], map.getZoom()),
                         pointTopLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), map.getZoom())),
                         pointBottomRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), map.getZoom())),
@@ -59,8 +59,8 @@ define([
                         layers: layersId
                     };
 
-                    xhrIdentity = this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url, params: JSON.stringify(postParams)}}) :
-                        xhr(url, {handleAs: 'json', method: 'POST', data: postParams, headers: {'X-Requested-With': 'XMLHttpRequest'}});
+                    xhrIdentity = this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: urlNgw, params: JSON.stringify(postParams)}}) :
+                        xhr(urlNgw, {handleAs: 'json', method: 'POST', data: postParams, headers: {'X-Requested-With': 'XMLHttpRequest'}});
 
                     xhrIdentity.then(lang.hitch(this, function (ngwFeatures) {
                         var identifiedFeatures;
@@ -71,7 +71,7 @@ define([
                             alert('В этом месте объектов нет');
                             topic.publish('map/identityUi/unblock');
                         } else if (identifiedFeatures.count === 1) {
-                            topic.publish('map/identity', identifiedFeatures.layers[0].features[0].id);
+                            topic.publish('attributes/get', identifiedFeatures.layers[0].features[0].id);
                             this._map.hideLoader();
                         } else if (identifiedFeatures.count > 1) {
                             this._buildPopup(latlngClick, identifiedFeatures);
@@ -146,7 +146,11 @@ define([
 
             identify: function (id) {
                 topic.publish('map/identityUi/block');
-                topic.publish('map/identity', id);
+                topic.publish('attributes/get', id);
+            },
+
+            getGeometryById: function (idFeature, idLayer) {
+
             }
         });
     });
