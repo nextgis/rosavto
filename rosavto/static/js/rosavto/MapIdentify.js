@@ -39,7 +39,8 @@ define([
                     latlngClick = e.latlng;
 
                 return this._layersInfo.getLayersIdByStyles(this._map._ngwTileLayers).then(lang.hitch(this, function (layersId) {
-                    var point = map.project([e.latlng.lat, e.latlng.lng], map.getZoom()),
+                    var url = this.url + 'feature_layer/identify';
+                        point = map.project([e.latlng.lat, e.latlng.lng], map.getZoom()),
                         pointTopLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), map.getZoom())),
                         pointBottomRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), map.getZoom())),
                         wktBounds,
@@ -58,8 +59,8 @@ define([
                         layers: layersId
                     };
 
-                    xhrIdentity = this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: this.url, params: JSON.stringify(postParams)}}) :
-                        xhr(this.url, {handleAs: 'json', method: 'POST', data: postParams, headers: {'X-Requested-With': 'XMLHttpRequest'}});
+                    xhrIdentity = this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url, params: JSON.stringify(postParams)}}) :
+                        xhr(url, {handleAs: 'json', method: 'POST', data: postParams, headers: {'X-Requested-With': 'XMLHttpRequest'}});
 
                     xhrIdentity.then(lang.hitch(this, function (ngwFeatures) {
                         var identifiedFeatures;

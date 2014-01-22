@@ -23,7 +23,7 @@
                 proxy: application_root + '/proxy'
             },
             mapIdentifySettings = {
-                url: 'http://demo.nextgis.ru/ngw_rosavto/feature_layer/identify',
+                urlNgw: 'http://demo.nextgis.ru/ngw_rosavto/',
                 proxy: application_root + '/proxy',
                 fieldIdentify: 'guid'
             },
