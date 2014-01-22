@@ -12,18 +12,19 @@
 
 <%block name="inlineScripts">
     require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'rosavto/AttributeGetter', 'dojo/domReady!'], function (Map, LayersInfo, MapIdentify, AttributeGetter) {
-        var map = new Map('map', {
+        var ngwUrl = 'http://demo.nextgis.ru:6566/',
+            map = new Map('map', {
                 center: [55.529, 37.584],
                 zoom: 7,
                 zoomControl: true,
                 legend: true
             }),
             layersInfoSettings = {
-                url: 'http://demo.nextgis.ru/ngw_rosavto/api/layer_group/0/tree',
+                url: 'http://demo.nextgis.ru:6566/api/layer_group/0/tree',
                 proxy: application_root + '/proxy'
             },
             mapIdentifySettings = {
-                urlNgw: 'http://demo.nextgis.ru/ngw_rosavto/',
+                urlNgw: ngwUrl,
                 proxy: application_root + '/proxy',
                 fieldIdentify: 'guid'
             },
@@ -34,10 +35,10 @@
                 }
             };
 
-        map.addNgwTileLayer('Тестовые дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
-        map.addNgwTileLayer('Регионы', 'http://demo.nextgis.ru/ngw_rosavto', 7);
-        map.addNgwTileLayer('Нормативные участки дорог', 'http://demo.nextgis.ru/ngw_rosavto', 10);
-        map.addNgwTileLayer('Участки подрядных организаций', 'http://demo.nextgis.ru/ngw_rosavto', 9);
+        map.addNgwTileLayer('Тестовые дороги', ngwUrl, 8);
+        map.addNgwTileLayer('Регионы', ngwUrl, 7);
+        map.addNgwTileLayer('Нормативные участки дорог', ngwUrl, 10);
+        map.addNgwTileLayer('Участки подрядных организаций', ngwUrl, 9);
 
         var attributeGetter = new AttributeGetter(map, layersInfoSettings, mapIdentifySettings, attributeGetterSettings);
     });
