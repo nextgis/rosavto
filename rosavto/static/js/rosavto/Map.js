@@ -44,7 +44,7 @@ define([
 
         _ngwTileLayers: [],
         addNgwTileLayer: function (name, ngwUrl, idStyle, settings) {
-            var ngwTilesUrl = ngwUrl + '/style/' + idStyle + '/tms?z={z}&x={x}&y={y}',
+            var ngwTilesUrl = ngwUrl + 'style/' + idStyle + '/tms?z={z}&x={x}&y={y}',
                 ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
             this._ngwTileLayers.push(idStyle);
             this._lmap.addLayer(ngwTileLayer);
