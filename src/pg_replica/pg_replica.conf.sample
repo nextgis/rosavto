@@ -9,6 +9,9 @@ password=secret
 table_name=some_table
 field_name=some_field
 
+[changes]
+dir_name=/path/to/changeset/files
+
 [logging]
 log_file=/path/to/log/pg_replica.log
 ;available log levels: critical, error, warning, info, debug, notset

@@ -26,6 +26,8 @@ __copyright__ = '(C) 2014, NextGIS'
 __revision__ = '$Format:%H$'
 
 import re
+import os
+import glob
 import logging
 
 import psycopg2
@@ -184,6 +186,7 @@ class PgDB:
         attrs = c.fetchall()
         return attrs
 
+
     def register_table(self, schema, table):
         if not self.create_replog_table():
             return False
@@ -328,6 +331,18 @@ class PgDB:
                         'Replication SQL: %s' % ' '.join(s.split()))
 
         self.clear_old_records(timestamp)
+
+    def apply_changes(self, directory):
+        file_list = sorted(glob.glob(os.path.join(directory, '*.sql')))
+        self.logger.debug('Found %s changesets' % len(file_list))
+
+        for file_name in file_list:
+            self.logger.debug('Processing file: "%s"' % file_name)
+            with open(file_name) as f:
+                sql = f.readlines()
+                self._exec_sql_and_commit(sql)
+            os.remove(file_name)
+            self.logger.debug('File "%s" processed and removed' % file_name)
 
     def list_changes(self, timestamp):
         c = self.con.cursor()
