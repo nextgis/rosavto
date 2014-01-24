@@ -6,11 +6,13 @@ define([
     'dojo/html',
     'dojo/topic',
     'dojo/request/xhr',
+    'dojo/Deferred',
+    'dojo/DeferredList',
     'rosavto/LayersInfo',
     'rosavto/MapIdentify',
     'rosavto/Loader'
 ],
-    function (declare, array, lang, query, html, topic, xhr, LayersInfo, MapIdentify, Loader) {
+    function (declare, array, lang, query, html, topic, xhr, Deferred, DeferredList, LayersInfo, MapIdentify, Loader) {
         return declare('rosavto.AttributeGetter', [Loader], {
             _container: null,
 
@@ -31,17 +33,20 @@ define([
                 this.mapIdentify = new MapIdentify(map, this.layersInfo, mapIdentifysettings);
                 this.mapIdentify.on();
 
+                this._geoJsonGroupLayer = L.geoJson().addTo(this._map);
+
                 this.subscribe();
             },
 
             subscribe: function () {
                 topic.subscribe('attributes/get', lang.hitch(this, function (id) {
-                    var url = this.urlBuilder(id);
+                    var updateAttributesBlock = this.updateAttributes(id),
+                        updateGeometry = this.updateGeometry(id),
+                        dl = new DeferredList([updateAttributesBlock, updateGeometry]);
 
-                    xhr.get(url).then(lang.hitch(this, function (content) {
-                        this.updateAttributes(content);
+                    dl.then(function () {
                         topic.publish('map/identityUi/unblock');
-                    }));
+                    });
                 }));
 
                 topic.subscribe('map/identityUi/block', lang.hitch(this, function () {
@@ -55,8 +60,27 @@ define([
                 }));
             },
 
-            updateAttributes: function (content) {
+            updateAttributes: function (id) {
+                var deferred = new Deferred(),
+                    url = this.urlBuilder(id);
+
+                xhr.get(url).then(lang.hitch(this, function (content) {
+                    this._updateAttributesHtmlBlock(content);
+                    deferred.resolve();
+                }));
+
+                return deferred;
+            },
+
+            _updateAttributesHtmlBlock: function (content) {
                 html.set(this._container, content);
+            },
+
+            _geoJsonGroupLayer: null,
+            updateGeometry: function (id) {
+                var deferred = new Deferred();
+
+                return deferred;
             }
         });
     });

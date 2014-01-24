@@ -73,7 +73,6 @@ define([
                             topic.publish('map/identityUi/unblock');
                         } else if (identifiedFeatures.count === 1) {
                             topic.publish('attributes/get', identifiedFeatures.layers[0].features[0].id);
-                            this._map.hideLoader();
                         } else if (identifiedFeatures.count > 1) {
                             this._buildPopup(latlngClick, identifiedFeatures);
                         }
