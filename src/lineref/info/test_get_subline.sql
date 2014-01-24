@@ -1,0 +1,1 @@
+﻿SELECT ST_AsText( ng_getlrsublinebyuuid('thematic.parts', '4886ad28-7b11-9eba-5c9d-a4ecfd608099', 64321, 79321, 1000));
