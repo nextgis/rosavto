@@ -825,8 +825,52 @@ int CreateParts(OGRLayer* const poLnLayer, OGRLayer* const poPkLayer, int nMValF
 //------------------------------------------------------------------------
 // GetPosition
 //------------------------------------------------------------------------
-int GetPosition(OGRLayer const *poPkLayer, double dfX, double dfY, int bDisplayProgress, int bQuiet)
+int GetPosition(OGRLayer* const poPkLayer, double dfX, double dfY, int bDisplayProgress, int bQuiet)
 {
+    //create point
+    OGRPoint pt;
+    pt.setX(dfX);
+    pt.setY(dfY);
+    pt.assignSpatialReference(poPkLayer->GetSpatialRef());
+
+    poPkLayer->ResetReading();
+    OGRLineString *pCloserPart = NULL;
+    double dfBeg, dfScale;
+    double dfMinDistance = std::numeric_limits<double>::max();
+    OGRFeature* pFeature = NULL;
+    while ((pFeature = poPkLayer->GetNextFeature()) != NULL)
+    {
+        OGRGeometry* pCurrentGeom = pFeature->GetGeometryRef();
+        if (pCurrentGeom != NULL)
+        {
+            double dfCurrentDistance = pCurrentGeom->Distance(&pt);
+            if (dfCurrentDistance < dfMinDistance)
+            {
+                dfMinDistance = dfCurrentDistance;
+                if (pCloserPart != NULL)
+                    delete pCloserPart;
+                pCloserPart = (OGRLineString*)pFeature->StealGeometry();
+                dfBeg = pFeature->GetFieldAsDouble(FIELD_START);
+                dfScale = pFeature->GetFieldAsDouble(FIELD_SCALE_FACTOR);
+            }
+        }
+        OGRFeature::DestroyFeature(pFeature);
+    }
+
+    //now we have closest part
+    //get real distance
+    double dfRealDist = pCloserPart->Project(&pt);
+    //compute reference distance
+    double dfRefDist = dfBeg + dfRealDist / dfScale;
+    if (bQuiet == TRUE)
+    {
+        fprintf(stdout, "%\n", dfRefDist);
+    }
+    else
+    {
+        fprintf(stdout, "The position for coordinates lat:%f, long:%f is %f\n", dfY, dfX, dfRefDist);
+    }
+
     return 0;
 }
 
