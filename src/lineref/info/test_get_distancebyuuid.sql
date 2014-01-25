@@ -1,0 +1,1 @@
+﻿SELECT ng_getlrdistbyuuid('thematic.parts', '4886ad28-7b11-9eba-5c9d-a4ecfd608099', 37.33, 55.79);
