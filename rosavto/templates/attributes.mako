@@ -12,7 +12,7 @@
 
 <%block name="inlineScripts">
     require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'rosavto/AttributeGetter', 'dojo/domReady!'], function (Map, LayersInfo, MapIdentify, AttributeGetter) {
-        var ngwUrl = 'http://demo.nextgis.ru:6566/',
+        var ngwUrl = 'http://demo.nextgis.ru/ngw_rosavto/',
             map = new Map('map', {
                 center: [55.529, 37.584],
                 zoom: 7,
@@ -20,13 +20,13 @@
                 legend: true
             }),
             layersInfoSettings = {
-                url: 'http://demo.nextgis.ru:6566/api/layer_group/0/tree',
+                url: ngwUrl + 'api/layer_group/0/tree',
                 proxy: application_root + '/proxy'
             },
             mapIdentifySettings = {
                 urlNgw: ngwUrl,
                 proxy: application_root + '/proxy',
-                fieldIdentify: 'guid'
+                fieldIdentify: 'uniq_uid'
             },
             attributeGetterSettings = {
                 domSelector: '#attributes',

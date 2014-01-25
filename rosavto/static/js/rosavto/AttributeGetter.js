@@ -33,15 +33,16 @@ define([
                 this.mapIdentify = new MapIdentify(map, this.layersInfo, mapIdentifysettings);
                 this.mapIdentify.on();
 
-                this._geoJsonGroupLayer = L.geoJson().addTo(this._map);
+                this._geoJsonGroupLayer = L.geoJson();
+                this._map._lmap.addLayer(this._geoJsonGroupLayer);
 
                 this.subscribe();
             },
 
             subscribe: function () {
-                topic.subscribe('attributes/get', lang.hitch(this, function (id) {
-                    var updateAttributesBlock = this.updateAttributes(id),
-                        updateGeometry = this.updateGeometry(id),
+                topic.subscribe('attributes/get', lang.hitch(this, function (layerId, featureId) {
+                    var updateAttributesBlock = this.updateAttributes(featureId),
+                        updateGeometry = this.updateGeometry(layerId, featureId),
                         dl = new DeferredList([updateAttributesBlock, updateGeometry]);
 
                     dl.then(function () {
@@ -60,9 +61,9 @@ define([
                 }));
             },
 
-            updateAttributes: function (id) {
+            updateAttributes: function (featureId) {
                 var deferred = new Deferred(),
-                    url = this.urlBuilder(id);
+                    url = this.urlBuilder(featureId);
 
                 xhr.get(url).then(lang.hitch(this, function (content) {
                     this._updateAttributesHtmlBlock(content);
@@ -77,9 +78,9 @@ define([
             },
 
             _geoJsonGroupLayer: null,
-            updateGeometry: function (id) {
+            updateGeometry: function (layerId, featureId) {
                 var deferred = new Deferred();
-
+                deferred.resolve();
                 return deferred;
             }
         });

@@ -7,7 +7,8 @@ define([
     'dojo/dom-attr',
     'dojo/request/xhr',
     'dojo/topic',
-    'mustache/mustache'
+    'mustache/mustache',
+    'dojo/NodeList-traverse'
 ],
     function (declare, array, lang, query, on, domAttr, xhr, topic, mustache) {
 
@@ -72,7 +73,7 @@ define([
                             alert('В этом месте объектов нет');
                             topic.publish('map/identityUi/unblock');
                         } else if (identifiedFeatures.count === 1) {
-                            topic.publish('attributes/get', identifiedFeatures.layers[0].features[0].id);
+                            topic.publish('attributes/get', identifiedFeatures.layers[0].id, identifiedFeatures.layers[0].features[0].id);
                         } else if (identifiedFeatures.count > 1) {
                             this._buildPopup(latlngClick, identifiedFeatures);
                         }
@@ -109,10 +110,14 @@ define([
 
                             for (i = 0; i < ngwLayerFeaturesCount; i += 1) {
                                 ngwFeature = ngwFeatures[layerId].features[i];
-                                identifiedLayer.features.push({
-                                    label: ngwFeature.label,
-                                    id: ngwFeature.fields[this.fieldIdentify]
-                                });
+                                if (!ngwFeature.fields[this.fieldIdentify]) {
+                                    console.log('MapIdentify: Identify field "' + this.fieldIdentify + '" was not found');
+                                } else {
+                                    identifiedLayer.features.push({
+                                        label: ngwFeature.label,
+                                        id: ngwFeature.fields[this.fieldIdentify]
+                                    });
+                                }
                             }
 
                             identifiedFeatures.layers.push(identifiedLayer);
@@ -137,16 +142,18 @@ define([
                     .openOn(map);
 
                 on(query('#' + popupId + ' li'), 'click', function () {
-                    that.identify(domAttr.get(this, 'data-id'));
+                    var layerId = domAttr.get(query(this).parent()[0], 'data-layer-id'),
+                        featureId = domAttr.get(this, 'data-id');
+                    that.identify(layerId, featureId);
                     map.closePopup(popup);
                 });
 
                 topic.publish('map/identityUi/unblock');
             },
 
-            identify: function (id) {
+            identify: function (layerId, id) {
                 topic.publish('map/identityUi/block');
-                topic.publish('attributes/get', id);
+                topic.publish('attributes/get', layerId, id);
             },
 
             getGeometryById: function (idFeature, idLayer) {
