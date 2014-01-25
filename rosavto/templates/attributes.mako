@@ -29,6 +29,13 @@
                 fieldIdentify: 'uniq_uid'
             },
             attributeGetterSettings = {
+                urlToNgw: ngwUrl,
+                proxy: application_root + '/proxy',
+                style: {
+                    fill: false,
+                    color: '#FF0000',
+                    weight: 2
+                },
                 domSelector: '#attributes',
                 urlBuilder: function (id) {
                     return application_root + '/attributes/html/' + id

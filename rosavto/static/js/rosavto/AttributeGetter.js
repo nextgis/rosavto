@@ -33,10 +33,24 @@ define([
                 this.mapIdentify = new MapIdentify(map, this.layersInfo, mapIdentifysettings);
                 this.mapIdentify.on();
 
-                this._geoJsonGroupLayer = L.geoJson();
+                this._geoJsonGroupLayer = L.geoJson(null, {style: lang.hitch(this, function (feature) {
+                    return this._getStyle();
+                })});
                 this._map._lmap.addLayer(this._geoJsonGroupLayer);
 
                 this.subscribe();
+            },
+
+            _getStyle: function () {
+                if (this.style) {
+                    return this.style;
+                } else {
+                    return {
+                        fill: false,
+                        color: '#FF0000',
+                        weight: 2
+                    };
+                }
             },
 
             subscribe: function () {
@@ -79,8 +93,19 @@ define([
 
             _geoJsonGroupLayer: null,
             updateGeometry: function (layerId, featureId) {
-                var deferred = new Deferred();
-                deferred.resolve();
+                var deferred = new Deferred(),
+                    url = this.urlToNgw + 'layer/' + layerId + '/store_api/rosavto/?srs=4326&guid=' + featureId,
+                    xhrGeometryGetter;
+
+                xhrGeometryGetter = this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url}}) :
+                    xhr(url, {handleAs: 'json', method: 'POST', data: postParams, headers: {'X-Requested-With': 'XMLHttpRequest'}});
+
+                xhrGeometryGetter.then(lang.hitch(this, function (feature) {
+                    this._geoJsonGroupLayer.clearLayers();
+                    this._map._lmap.fitBounds(this._geoJsonGroupLayer.addData(feature).getBounds());
+                    deferred.resolve();
+                }));
+
                 return deferred;
             }
         });
