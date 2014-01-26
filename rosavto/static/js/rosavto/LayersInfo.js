@@ -11,8 +11,12 @@ define([
     function (declare, array, lang, Memory, Observable, ObjectStoreModel, xhr, Deferred) {
         return declare('rosavto.LayersInfo', null, {
 
-            constructor: function (settings) {
-                lang.mixin(this, settings);
+            constructor: function (ngwServiceFacade) {
+                if (ngwServiceFacade) {
+                    this._ngwServiceFacade = ngwServiceFacade;
+                } else {
+                    throw 'ngwServiceFacade parameter is not defined';
+                }
 
                 this.store = new Observable(new Memory({
                     data: [
@@ -30,9 +34,8 @@ define([
             },
 
             fillLayersInfo: function () {
-                var that = this,
-                    xhrGetLayersInfo = this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: this.url}}) : xhr(this.url, {handleAs: 'json'});
-                return xhrGetLayersInfo.then(
+                var that = this;
+                return this._ngwServiceFacade.getLayersInfo().then(
                     function (data) {
                         function traverse(item, parent_id) {
                             var xid = item.type + '-' + item.id;

@@ -8,18 +8,19 @@ define([
     'dojo/request/xhr',
     'dojo/topic',
     'mustache/mustache',
+    'rosavto/ParametersVerification',
     'dojo/NodeList-traverse'
 ],
-    function (declare, array, lang, query, on, domAttr, xhr, topic, mustache) {
+    function (declare, array, lang, query, on, domAttr, xhr, topic, mustache, ParametersVerification) {
 
-        return declare('rosavto.MapIdentify', [], {
+        return declare('rosavto.MapIdentify', [ParametersVerification], {
             template: '<div id="{{id}}" class="layers-selector">{{#layers}}<p>{{name}}</p><ul data-layer-id="{{id}}">{{#features}}<li data-id="{{id}}"><a href="javascript:void(0)">{{label}}</a></li>{{/features}}</ul>{{/layers}}</div>',
 
-            constructor: function (map, layersInfo, settings) {
-                mustache.parse(this.template);
-                this._map = map;
-                this._layersInfo = layersInfo;
+            constructor: function (settings) {
+                this.verificateRequiredParameters(settings, ['map', 'ngwServiceFacade', 'layersInfo', 'fieldIdentify']);
                 lang.mixin(this, settings);
+
+                mustache.parse(this.template);
             },
 
             _stringRepl: function (tmpl) {
@@ -29,25 +30,23 @@ define([
             on: function () {
                 var that = this;
 
-                this._map._lmap.on('click', function (e) {
+                this.map._lmap.on('click', function (e) {
                     topic.publish('map/identityUi/block');
                     that.getIdsByClick(e);
                 });
             },
 
             getIdsByClick: function (e) {
-                var map = this._map._lmap,
+                var map = this.map._lmap,
                     latlngClick = e.latlng;
 
-                return this._layersInfo.getLayersIdByStyles(this._map._ngwTileLayers).then(lang.hitch(this, function (layersId) {
+                return this.layersInfo.getLayersIdByStyles(this.map._ngwTileLayers).then(lang.hitch(this, function (layersId) {
                     var url = this.urlNgw + 'feature_layer/identify',
                         zoom = map.getZoom(),
                         point = map.project([e.latlng.lat, e.latlng.lng], zoom),
                         pointTopLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), zoom)),
                         pointBottomRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom)),
-                        wktBounds,
-                        postParams,
-                        xhrIdentity;
+                        wktBounds;
 
                     wktBounds = 'POLYGON((' + pointTopLeft.x + ' ' + pointTopLeft.y + ', ' +
                         pointBottomRight.x + ' ' + pointTopLeft.y + ', ' +
@@ -55,16 +54,7 @@ define([
                         pointTopLeft.x + ' ' + pointBottomRight.y + ', ' +
                         pointTopLeft.x + ' ' + pointTopLeft.y + '))';
 
-                    postParams = {
-                        srs: 3857,
-                        geom: wktBounds,
-                        layers: layersId
-                    };
-
-                    xhrIdentity = this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url, params: JSON.stringify(postParams)}}) :
-                        xhr(url, {handleAs: 'json', method: 'POST', data: postParams, headers: {'X-Requested-With': 'XMLHttpRequest'}});
-
-                    xhrIdentity.then(lang.hitch(this, function (ngwFeatures) {
+                    this.ngwServiceFacade.identifyFeaturesByLayers(layersId, wktBounds, 3857).then(lang.hitch(this, function (ngwFeatures) {
                         var identifiedFeatures;
 
                         identifiedFeatures = this._parseNgwFeatures(ngwFeatures);
@@ -100,7 +90,7 @@ define([
                         if (ngwLayerFeaturesCount > 0) {
 
                             identifiedFeatures.count += ngwLayerFeaturesCount;
-                            layerName = this._layersInfo.getLayerNameByLayerId(parseInt(layerId, 10));
+                            layerName = this.layersInfo.getLayerNameByLayerId(parseInt(layerId, 10));
 
                             identifiedLayer = {
                                 id: layerId,
@@ -130,7 +120,7 @@ define([
 
             _buildPopup: function (latlngClick, identifiedFeatures) {
                 var that = this,
-                    map = this._map._lmap,
+                    map = this.map._lmap,
                     popupId = map._container.id + '-MapIdentify',
                     popup;
 
@@ -154,10 +144,6 @@ define([
             identify: function (layerId, id) {
                 topic.publish('map/identityUi/block');
                 topic.publish('attributes/get', layerId, id);
-            },
-
-            getGeometryById: function (idFeature, idLayer) {
-
             }
         });
     });

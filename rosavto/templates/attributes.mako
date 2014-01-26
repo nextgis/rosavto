@@ -11,26 +11,40 @@
 <div id="attributes">Здесь будут атрибуты выбранного обекта</div>
 
 <%block name="inlineScripts">
-    require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'rosavto/AttributeGetter', 'dojo/domReady!'], function (Map, LayersInfo, MapIdentify, AttributeGetter) {
-        var ngwUrl = 'http://demo.nextgis.ru/ngw_rosavto/',
+    require([
+        'rosavto/Map',
+        'rosavto/LayersInfo',
+        'rosavto/MapIdentify',
+        'rosavto/AttributeGetter',
+        'rosavto/AttributesServiceFacade',
+        'rosavto/NgwServiceFacade',
+        'dojo/domReady!'],
+
+    function (Map, LayersInfo, MapIdentify, AttributeGetter, AttributesServiceFacade, NgwServiceFacade) {
+        var ngwUrlBase = 'http://demo.nextgis.ru/ngw_rosavto/',
+            proxyUrl = application_root + '/proxy',
+            ngwServiceFacade = new NgwServiceFacade(ngwUrlBase, {proxy: proxyUrl}),
+            attributesBaseUrl = 'http://zulu.centre-it.com:7040/',
+            attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl, {proxy: proxyUrl}),
             map = new Map('map', {
                 center: [55.529, 37.584],
                 zoom: 7,
                 zoomControl: true,
                 legend: true
             }),
+            layersInfo,
+            mapIdentify,
+            attributeGetter,
             layersInfoSettings = {
-                url: ngwUrl + 'api/layer_group/0/tree',
-                proxy: application_root + '/proxy'
+                ngwServiceFacade: ngwServiceFacade
             },
             mapIdentifySettings = {
-                urlNgw: ngwUrl,
-                proxy: application_root + '/proxy',
+                ngwServiceFacade: ngwServiceFacade,
                 fieldIdentify: 'uniq_uid'
             },
             attributeGetterSettings = {
-                urlToNgw: ngwUrl,
-                proxy: application_root + '/proxy',
+                ngwServiceFacade: ngwServiceFacade,
+                attributesServiceFacade: attributesServiceFacade,
                 style: {
                     fill: false,
                     color: '#FF0000',
@@ -38,15 +52,40 @@
                 },
                 domSelector: '#attributes',
                 urlBuilder: function (id) {
-                    return application_root + '/attributes/html/' + id
+                    return {
+                        url: application_root + '/proxy',
+                        settings: {
+                            handleAs: 'json',
+                            method: 'POST',
+                            data: {
+                                url: 'http://zulu.centre-it.com:7040/monitoring-web/gis/card?guid=' + id
+                            }
+                        }
+                    }
                 }
             };
 
-        map.addNgwTileLayer('Тестовые дороги', ngwUrl, 8);
-        map.addNgwTileLayer('Регионы', ngwUrl, 7);
-        map.addNgwTileLayer('Нормативные участки дорог', ngwUrl, 10);
-        map.addNgwTileLayer('Участки подрядных организаций', ngwUrl, 9);
+        map.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
+        map.addNgwTileLayer('Регионы', ngwUrlBase, 7);
+        map.addNgwTileLayer('Нормативные участки дорог', ngwUrlBase, 10);
+        map.addNgwTileLayer('Участки подрядных организаций', ngwUrlBase, 9);
 
-        var attributeGetter = new AttributeGetter(map, layersInfoSettings, mapIdentifySettings, attributeGetterSettings);
+        layersInfo = new LayersInfo(ngwServiceFacade);
+
+        mapIdentify = new MapIdentify({
+            map: map,
+            ngwServiceFacade: ngwServiceFacade,
+            layersInfo: layersInfo,
+            fieldIdentify: 'uniq_uid'
+        });
+        mapIdentify.on();
+
+        attributeGetter = new AttributeGetter({
+            map: map,
+            ngwServiceFacade: ngwServiceFacade,
+            attributesServiceFacade: attributesServiceFacade,
+            domSelector: '#attributes',
+            mapIdentify: mapIdentify
+        });
     });
 </%block>
