@@ -32,36 +32,7 @@
             }),
             layersInfo,
             mapIdentify,
-            attributeGetter,
-            layersInfoSettings = {
-                ngwServiceFacade: ngwServiceFacade
-            },
-            mapIdentifySettings = {
-                ngwServiceFacade: ngwServiceFacade,
-                fieldIdentify: 'uniq_uid'
-            },
-            attributeGetterSettings = {
-                ngwServiceFacade: ngwServiceFacade,
-                attributesServiceFacade: attributesServiceFacade,
-                style: {
-                    fill: false,
-                    color: '#FF0000',
-                    weight: 2
-                },
-                domSelector: '#attributes',
-                urlBuilder: function (id) {
-                    return {
-                        url: application_root + '/proxy',
-                        settings: {
-                            handleAs: 'json',
-                            method: 'POST',
-                            data: {
-                                url: 'http://zulu.centre-it.com:7040/monitoring-web/gis/card?guid=' + id
-                            }
-                        }
-                    }
-                }
-            };
+            attributeGetter;
 
         map.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
         map.addNgwTileLayer('Регионы', ngwUrlBase, 7);
@@ -82,8 +53,13 @@
             map: map,
             ngwServiceFacade: ngwServiceFacade,
             attributesServiceFacade: attributesServiceFacade,
+            mapIdentify: mapIdentify,
             domSelector: '#attributes',
-            mapIdentify: mapIdentify
+            style: {
+                fill: false,
+                color: '#FF0000',
+                weight: 2
+            }
         });
     });
 </%block>

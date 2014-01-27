@@ -74,51 +74,69 @@
 <div id="attributesCode">
     <h4>Атрибуты</h4>
 
-
     <pre>
         Код для инициализации механизма получения атрибутивных данные по клику карты:
         <code class="javascript">
-            // Загружаем модуль необходимые модули после готовности DOM дерева
-            require(['rosavto/Map', 'rosavto/LayersInfo', 'rosavto/MapIdentify', 'rosavto/AttributeGetter', 'dojo/domReady!'],
-                function (Map, LayersInfo, MapIdentify, AttributeGetter) {
-                    var map = new Map('map', {
-                            center: [55.7501, 37.6687], // Задаем центр
-                            zoom: 10 // Указываем начальный зум
-                            zoomControl: true, // Показываем элемент управления зумом
-                            legend: true // Показываем легенду карты
-                        }),
-                        layersInfoSettings = { // Настройки модуль для получения информации о слоях на сервере
-                            // Путь к NextGIS Web сервису с информацией о слоях
-                            url: 'http://demo.nextgis.ru/ngw_rosavto/api/layer_group/0/tree',
-                            proxy: application_root + '/proxy' // Простой прокси для кроссдоменных запросов
-                        },
-                        mapIdentifySettings = { // Настройки модуля идентификации объектов-геометрий
-                            // Путь к NextGIS Web сервису идентификации сущностей
-                            url: 'http://demo.nextgis.ru/ngw_rosavto/feature_layer/identify',
-                            proxy: application_root + '/proxy', // Простой прокси для кроссдоменных запросов
-                            fieldIdentify: 'guid' // название поля, содержащего ID объекта
-                        },
-                        attributeGetterSettings = { // Настройки модуля получения атрибутов
-                            // CSS селектор HTML элемента, который будет содаржать таблицу аттрибутов
-                            domSelector: '#attributes',
-                            // Функция обратного вызова для построения URL адреса оконечной точки сервиса,
-                            // возвращающего аттрибутивные данные о сущности по ее ID
-                            urlBuilder: function (id) {
-                                return application_root + '/attributes/html/' + id
-                            }
-                        };
+        require([ // Загружаем модуль необходимые модули после готовности DOM дерева
+        'rosavto/Map',
+        'rosavto/LayersInfo',
+        'rosavto/MapIdentify',
+        'rosavto/AttributeGetter',
+        'rosavto/AttributesServiceFacade',
+        'rosavto/NgwServiceFacade',
+        'dojo/domReady!'],
 
-                    // Добавление слоев NextGIS Web, которые будут использоваться для идентификации
-                    // Синтаксис: (name, url, styleId)
-                    // name - имя слоя в легенде
-                    // url - url к NextGIS Web
-                    // styleId - ID стиля слоя
-                    map.addNgwTileLayer('Регионы', 'http://demo.nextgis.ru/ngw_rosavto', 7);
-                    map.addNgwTileLayer('Дороги', 'http://demo.nextgis.ru/ngw_rosavto', 8);
+        function (Map, LayersInfo, MapIdentify, AttributeGetter, AttributesServiceFacade, NgwServiceFacade) {
+            // ngwServiceFacade - фасад к оконечным точкам сервера NextGIS Web
+            var ngwServiceFacade = new NgwServiceFacade(ngwUrlBase, {proxy: proxyUrl}),
+                attributesBaseUrl = 'http://zulu.centre-it.com:7040/',
+                // attributesServiceFacade - фасад к оконечным точкам сервисов атрибутов
+                attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl, {proxy: proxyUrl}),
+                map = new Map('map', {
+                    center: [55.529, 37.584],
+                    zoom: 7,
+                    zoomControl: true,
+                    legend: true
+                }),
+                layersInfo,
+                mapIdentify,
+                attributeGetter;
 
-                    // Инициализация модулей
-                    var attributeGetter = new AttributeGetter(map, layersInfoSettings, mapIdentifySettings, attributeGetterSettings);
-                });
+            // Добавляем слои с NextGIS Web сервера
+            map.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
+            map.addNgwTileLayer('Регионы', ngwUrlBase, 7);
+            map.addNgwTileLayer('Нормативные участки дорог', ngwUrlBase, 10);
+            map.addNgwTileLayer('Участки подрядных организаций', ngwUrlBase, 9);
+
+            // Создаем экземпляр объекта класса для получения информации о слоях
+            layersInfo = new LayersInfo(ngwServiceFacade);
+
+            // Создаем экземляр класса для идентификации объектов по клику
+            mapIdentify = new MapIdentify({
+                map: map,
+                ngwServiceFacade: ngwServiceFacade,
+                layersInfo: layersInfo,
+                fieldIdentify: 'uniq_uid' // Название параметра для обращения к NextGIS Web
+            });
+
+            // Включаем перехват событий клика по карте для идентификации
+            mapIdentify.on();
+
+            // Создаем экземпляр объекта класса для получения атрибутов
+            attributeGetter = new AttributeGetter({
+                map: map,
+                ngwServiceFacade: ngwServiceFacade,
+                attributesServiceFacade: attributesServiceFacade,
+                mapIdentify: mapIdentify,
+                domSelector: '#attributes', // Элемент для рендеринга атрибутов
+                style: { // Стиль подсветки выбранного объекта на карте
+                    fill: false,
+                    color: '#FF0000',
+                    weight: 2
+                }
+            });
+        });
         </code>
     </pre>
+
 </div>
