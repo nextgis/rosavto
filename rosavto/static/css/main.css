@@ -59,19 +59,6 @@ div.leaflet-marker-icon.jam {
     background-image: url('images/jam.png');
 }
 
-div.leaflet-popup-content div.layers-selector p {
-    margin: 0;
-}
-
-div.leaflet-popup-content div.layers-selector ul li {
-    list-style: none;
-}
-
-div.leaflet-popup-content {
-    width: auto !important;
-    min-width: 250px
-}
-
 #attributes {
     width: 99%;
     margin: 4px 3px 10px 3px;

@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css"/>
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/kube.min.css')}"/>
+    <link rel="stylesheet" href="${request.static_url('rosavto:static/css/widget.css')}"/>
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/main.css')}"/>
 
     <script>
