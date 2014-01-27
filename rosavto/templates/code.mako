@@ -12,6 +12,9 @@
         <li>
             <a href="#attributesCode">Атрибуты</a>
         </li>
+        <li>
+            <a href="#incidentCode">Происшествия</a>
+        </li>
     </ol>
 </div>
 
@@ -133,6 +136,92 @@
                     fill: false,
                     color: '#FF0000',
                     weight: 2
+                }
+            });
+        });
+        </code>
+    </pre>
+
+</div>
+
+<div id="incidentCode">
+    <h4>Атрибуты</h4>
+
+    <pre>
+        Код для инициализации механизма получения атрибутивных данные по клику карты:
+        <code class="javascript">
+        // Подключаем необходимые модули
+        require([
+            'dojo/DeferredList',
+            'rosavto/Map', // Модуль, инкапсулирующий карту
+            'rosavto/NgwServiceFacade', // Фасад к сервисам NextGIS Web
+            'dojo/domReady!'],
+
+        function (DeferredList, Map, NgwServiceFacade) {
+            var ngwServiceFacade = new NgwServiceFacade(ngwUrlBase, {proxy: proxyUrl}),
+                map = new Map('map', {
+                    center: [56.0369, 35.8788],
+                    zoom: 16,
+                    zoomControl: true,
+                    legend: true
+                }),
+                styles,
+                getIncident1, getIncident2, getIncident3;
+
+            // Добавляем слой дорог из NextGIS Web
+            map.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
+
+            // Описываем стили для точек
+            styles = {
+                'accident': {
+                    Point: {className: 'accident'}
+                },
+                'jam' : {
+                    Point: {className: 'jam'}
+                }
+            };
+
+            // Создаем стилизированный GeoJSON слой и указываем callback для события клика
+            map.createCustomizableGeoJsonLayer(styles, function () {
+                alert('Вызван callback для объекта типа ' + this.properties.type);
+            });
+
+            // Получаем сведения о геометриях происшествий из NextGIS Web
+            // по GUID происшествия
+            // и расстоянию
+            getIncident1 = ngwServiceFacade.getIncident([{
+                layer: 17,
+                guid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
+                distance: {km: 123, m: 300}
+            }]);
+
+            getIncident2 = ngwServiceFacade.getIncident([{
+                layer: 17,
+                guid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
+                distance: {km: 123, m: 400}
+            }]);
+
+            getIncident3 = ngwServiceFacade.getIncident([{
+                layer: 17,
+                guid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
+                distance: {km: 123, m: 500}
+            }]);
+
+            // Создаем DeferredList для запросов получения данных ajax запросов
+            var dl = new DeferredList([getIncident1, getIncident2, getIncident3]);
+
+            dl.then(function (incidents) {
+                var countIncidents = incidents.length,
+                    i;
+
+                for (var i = 0; i < countIncidents; i++) {
+
+                    // Добавляем информацию о типе объектов к геометрии
+                    incidents[i][1].properties.type = i % 2 == 0 ? 'accident' : 'jam';
+
+                    // Добавляем объект происшествия, содержащий геометрию и свойства типа
+                    // к слою стилизованных geoJson объектов карты
+                    map.addCustomizableGeoJsonData(incidents[i][1]);
                 }
             });
         });

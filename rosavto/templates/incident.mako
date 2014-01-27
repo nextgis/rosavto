@@ -3,7 +3,7 @@
 <%block name="title">Происшествия</%block>
 
 <div class="code-description">
-    <p>Код с комментариями <a href="${request.route_url('code') + '#incedintesCode'}">здесь</a></p>
+    <p>Код с комментариями <a href="${request.route_url('code') + '#incidentCode'}">здесь</a></p>
 </div>
 
 <div id="map"></div>
