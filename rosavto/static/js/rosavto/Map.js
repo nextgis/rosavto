@@ -193,6 +193,26 @@ define([
             if (this._lastSubscribedId) {
                 client.unsubscribe(this._lastSubscribedId);
             }
+        },
+
+        _customizableGeoJsonLayer: null,
+        createCustomizableGeoJsonLayer: function (name, styles) {
+            if (this._customizableGeoJsonLayer) return;
+            this._customizableGeoJsonLayer = new L.GeoJSON();
+
+            this._customizableGeoJsonLayer.on('featureparse', function (feature) {
+
+                if (feature.properties && feature.properties.icon) {
+                    feature.layer.setIcon(new L.Icon({
+                        iconUrl: feature.properties.icon,
+                        iconSize: new L.Point(feature.properties.icon_size[0], feature.properties.icon_size[1]),
+                        iconAnchor: new L.Point(feature.properties.icon_anchor[0], feature.properties.icon_anchor[1]),
+                    }));
+                }
+                if (feature.properties && feature.properties.title) {
+                    feature.layer.bindPopup(feature.properties.title);
+                }
+            });
         }
     });
 });
