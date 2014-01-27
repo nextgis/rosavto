@@ -47,6 +47,14 @@ div.leaflet-marker-icon.meteo {
     background-image: url('images/meteo.png');
 }
 
+div.leaflet-marker-icon.weighing {
+    background-image: url('images/weighing.png');
+}
+
+div.leaflet-marker-icon.traffic {
+    background-image: url('images/traffic.png');
+}
+
 div.leaflet-popup-content div.layers-selector p {
     margin: 0;
 }
