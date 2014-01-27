@@ -8,6 +8,7 @@
     ('wms', u'WMS'),
     ('realtime', u'Realtime'),
     ('attributes', u'Аттрибуты'),
+    ('incident', u'Происшествия'),
     ('code', u'Примеры кода')
 ]
 %>

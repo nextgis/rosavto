@@ -57,7 +57,7 @@ define([
             },
 
             getIncident: function (incidentPoints, srs) {
-                var countsPoints = points.length,
+                var countsPoints = incidentPoints.length,
                     url,
                     point,
                     distance,
@@ -71,7 +71,7 @@ define([
                 if (countsPoints === 1) {
                     point = incidentPoints[0];
 
-                    url = this._ngwUrlBase + 'layer/17/store_api/rosavto/?guid=' + point.guid +
+                    url = this._ngwUrlBase + 'layer/' + point.layer + '/store_api/rosavto/?guid=' + point.guid +
                         '&distance=' + this._calculateDistanceInMeters(point) +
                         '&srs=' + srs;
 
@@ -84,6 +84,7 @@ define([
                     for (i = 0; i < countsPoints; i += 1) {
                         pointsParams.push({
                             guid: incidentPoints[i].guid,
+                            layer: incidentPoints[i].layer,
                             distance: this._calculateDistanceInMeters(incidentPoints[i])
                         });
                     }

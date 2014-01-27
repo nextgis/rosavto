@@ -196,23 +196,37 @@ define([
         },
 
         _customizableGeoJsonLayer: null,
-        createCustomizableGeoJsonLayer: function (name, styles) {
+        createCustomizableGeoJsonLayer: function (styles, callback) {
             if (this._customizableGeoJsonLayer) return;
-            this._customizableGeoJsonLayer = new L.GeoJSON();
 
-            this._customizableGeoJsonLayer.on('featureparse', function (feature) {
+            var type,
+                style,
+                marker;
 
-                if (feature.properties && feature.properties.icon) {
-                    feature.layer.setIcon(new L.Icon({
-                        iconUrl: feature.properties.icon,
-                        iconSize: new L.Point(feature.properties.icon_size[0], feature.properties.icon_size[1]),
-                        iconAnchor: new L.Point(feature.properties.icon_anchor[0], feature.properties.icon_anchor[1]),
-                    }));
-                }
-                if (feature.properties && feature.properties.title) {
-                    feature.layer.bindPopup(feature.properties.title);
+            this._customizableGeoJsonLayer = new L.GeoJSON(null, {
+                pointToLayer: function (feature, latLng) {
+                    type = feature.properties.type;
+                    style = styles[type];
+
+                    if (style['Point'] && feature.geometry.type === 'Point') {
+                        marker = L.marker(latLng, {icon: L.divIcon(style['Point'])});
+                        return marker;
+                    }
+                },
+                onEachFeature: function (feature, layer) {
+                    layer.on('click', function (e) {
+                        callback.call(this.feature, e);
+                    });
                 }
             });
+
+            this._lmap.addLayer(this._customizableGeoJsonLayer);
+        },
+
+        addCustomizableGeoJsonData: function (data) {
+            if (!this._customizableGeoJsonLayer) return false;
+
+            this._customizableGeoJsonLayer.addData(data);
         }
     });
 });
