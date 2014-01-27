@@ -54,6 +54,61 @@ define([
 
                 return this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url}}) :
                     xhr(url, {handleAs: 'json', method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest'}});
+            },
+
+            getIncident: function (incidentPoints, srs) {
+                var countsPoints = points.length,
+                    url,
+                    point,
+                    distance,
+                    pointsParams,
+                    i;
+
+                if (!srs) {
+                    srs = 4326;
+                }
+
+                if (countsPoints === 1) {
+                    point = incidentPoints[0];
+
+                    url = this._ngwUrlBase + 'layer/17/store_api/rosavto/?guid=' + point.guid +
+                        '&distance=' + this._calculateDistanceInMeters(point) +
+                        '&srs=' + srs;
+
+                    return xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url}});
+                }
+
+                if (countsPoints > 1) {
+                    pointsParams = [];
+
+                    for (i = 0; i < countsPoints; i += 1) {
+                        pointsParams.push({
+                            guid: incidentPoints[i].guid,
+                            distance: this._calculateDistanceInMeters(incidentPoints[i])
+                        });
+                    }
+
+                    url = this._ngwUrlBase + 'layer/17/store_api/rosavto/?' + 'srs=' + srs;
+                    return xhr(this.proxy, {
+                        handleAs: 'json',
+                        method: 'POST',
+                        data: {
+                            url: url,
+                            params: JSON.stringify({points: pointsParams})
+                        }
+                    });
+                }
+            },
+
+            _calculateDistanceInMeters: function (point) {
+                var distance = 0;
+                if (point.distance['km']) {
+                    distance += point.distance['km'] * 1000;
+                }
+                if (point.distance['m']) {
+                    distance += point.distance['m'];
+                }
+                return distance;
             }
         });
     });
