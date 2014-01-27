@@ -4,7 +4,7 @@
 
 <div class="code-description">
     <p>Для получения сведений о атрибутах объекта кликните по объекту на карте. Если в области клика будет несколько объектов - выберите нужный.</p>
-    <p>Код с комментариями <a href="${request.route_url('code') + '#attributes'}">здесь</a></p>
+    <p>Код с комментариями <a href="${request.route_url('code') + '#attributesCode'}">здесь</a></p>
 </div>
 
 <div id="map"></div>
@@ -21,9 +21,7 @@
         'dojo/domReady!'],
 
     function (Map, LayersInfo, MapIdentify, AttributeGetter, AttributesServiceFacade, NgwServiceFacade) {
-        var ngwUrlBase = 'http://demo.nextgis.ru/ngw_rosavto/',
-            proxyUrl = application_root + '/proxy',
-            ngwServiceFacade = new NgwServiceFacade(ngwUrlBase, {proxy: proxyUrl}),
+        var ngwServiceFacade = new NgwServiceFacade(ngwUrlBase, {proxy: proxyUrl}),
             attributesBaseUrl = 'http://zulu.centre-it.com:7040/',
             attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl, {proxy: proxyUrl}),
             map = new Map('map', {

@@ -3,20 +3,23 @@
 <%
     tabs = [
     ('map', u'Карта'),
-    ('layer', u'Карта + слой'),
+    ('layer', u'Слой'),
     ('marker', u'Маркер'),
-    ('wms', u'Карта + WMS'),
+    ('wms', u'WMS'),
     ('realtime', u'Realtime'),
     ('attributes', u'Аттрибуты'),
     ('code', u'Примеры кода')
 ]
 %>
 
-<div id="tabs">
-    <ul class="nav nav-tabs">
+<nav class="nav-tabs">
+    <ul>
         % for tab in tabs:
-            <% class_name = 'active' if request.matched_route.name == tab[0] else '' %>
-            <li class="${class_name}"><a href="${request.route_url(tab[0])}">${tab[1]}</a></li>
+            % if request.matched_route.name == tab[0]:
+                <li><span>${tab[1]}</span></li>
+            % else:
+                <li><a href="${request.route_url(tab[0])}">${tab[1]}</a></li>
+            % endif
         % endfor
     </ul>
-</div>
+</nav>

@@ -1,8 +1,6 @@
 html {
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 100%;
 }
 
 body {
@@ -14,8 +12,9 @@ body {
     height: 500px;
 }
 
-pre {
-    margin: 10px 0;
+pre, code {
+    font-size: 100%;
+    line-height: normal;
 }
 
 div.code-description {
