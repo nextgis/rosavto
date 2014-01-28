@@ -1,8 +1,7 @@
-﻿CREATE OR REPLACE FUNCTION ng_getlrdistbyuuid(name, text, double precision, double precision) RETURNS TABLE(distance double precision, uniq_uid TEXT) AS 
+﻿CREATE OR REPLACE FUNCTION ng_getlrdistbyuuid(name, text, double precision, double precision) RETURNS double precision AS 
 $$
 DECLARE ret RECORD;
 DECLARE pt geometry := ST_SetSRID(ST_MakePoint($3, $4),4326);
-DECLARE part geometry;
 DECLARE dist double precision;
 BEGIN
 --get closer part and scale
@@ -10,10 +9,8 @@ BEGIN
 
 --get distance
   SELECT ret.beg + ST_Length(ret.wkb_geometry) * ST_Line_Locate_Point(ret.wkb_geometry, pt) / ret.scale INTO dist;  
---fill results  
-  distance := dist;
-  uniq_uid := $2;
-  RETURN NEXT;
+
+  RETURN dist;
 END;
 $$
 LANGUAGE plpgsql STABLE ;
