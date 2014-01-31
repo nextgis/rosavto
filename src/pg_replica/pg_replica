@@ -97,13 +97,13 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    config_name = os.path.join(os.path.dirname(__file__), 'pg_replica.conf.sample')
+    config_name = '/etc/pg_replica.conf'
     if not os.path.isfile(config_name):
         logger.critical('Configuration file "%s" not found.' % config_name)
         sys.exit(1)
 
     cfg = ConfigParser.SafeConfigParser(
-        {'log_file': os.path.join(os.path.dirname(__file__), 'pg_replica.log'),
+        {'log_file': '/var/log/pg_replica.log',
          'log_level': 'debug'})
 
     cfg.read(config_name)
@@ -141,6 +141,7 @@ if __name__ == '__main__':
     else:
         logger.critical('Changesets directory not found in config file.')
         sys.exit(1)
+
 
     if args.tableName:
         register_table(host, port, dbname, user, passwd, args.tableName)

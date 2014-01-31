@@ -254,6 +254,11 @@ class PgDB:
             schema = full_table_name.split('.')[0]
             table = full_table_name.split('.')[1]
 
+            ddl = self.dump_table(table)
+            if ddl == '':
+                self.logger.critical('Can not get DDL for table "%s".' % table)
+                return
+
             fields = self.get_table_fields(table, schema)
             plain_field_list = []
             select_field_list = []
@@ -332,6 +337,7 @@ class PgDB:
 
         self.clear_old_records(timestamp)
 
+
     def apply_changes(self, directory):
         file_list = sorted(glob.glob(os.path.join(directory, '*.sql')))
         self.logger.debug('Found %s changesets' % len(file_list))
@@ -343,6 +349,68 @@ class PgDB:
                 self._exec_sql_and_commit(sql)
             os.remove(file_name)
             self.logger.debug('File "%s" processed and removed' % file_name)
+
+    def dump_table(self, table_name):
+        c = self.con.cursor()
+
+        table_name = self._quote_str(table_name)
+
+        ddl = 'CREATE TABLE %s (' % table_name
+
+        sql = "SELECT oid FROM pg_class WHERE relname = '%s'" % table_name
+        self._exec_sql(c, sql)
+        table_oid = c.fetchone()[0]
+
+        if table_oid is None:
+            self.logger.critical('Can not resolve table name "%s" to OID.' %
+                                 table_name)
+            return ''
+
+        sql = '''SELECT a.attname as atname, a.attnotnull as notnull,
+                        a.atthasdef as hasdef,
+                        format_type(a.atttypid, a.atttypmod) as typedefn,
+                        ad.adsrc as deflt
+                 FROM pg_attribute a
+                 LEFT OUTER JOIN pg_type t ON a.atttypid = t.oid
+                 LEFT OUTER JOIN pg_attrdef ad ON (ad.adrelid=a.attrelid AND
+                                                   ad.adnum=a.attnum)
+                 WHERE a.attrelid = %s AND
+                       a.attnum > 0
+                 ORDER BY attnum
+              ''' % table_oid
+        self._exec_sql(c, sql)
+        fields = c.fetchall()
+        for field in fields:
+            ddl += '%s %s' % (field[0], field[3])
+            if field[1]:
+                ddl += ' NOT NULL'
+            if field[2]:
+                ddl += ' DEFAULT %s' % field[4]
+            ddl = ddl.strip() + ', '
+
+        sql = '''SELECT relname, oid
+                 FROM pg_class
+                 WHERE oid = (SELECT indexrelid
+                              FROM pg_index i
+                              WHERE i.indisprimary AND i.indrelid = %s)
+              ''' % table_oid
+        self._exec_sql(c, sql)
+        pkey = c.fetchone()
+        if pkey is not None:
+            ddl += 'CONSTRAINT %s PRIMARY KEY (' % pkey[0]
+            sql = '''SELECT attname
+                     FROM pg_attribute
+                     WHERE attrelid = %s
+                  ''' % pkey[1]
+            self._exec_sql(c, sql)
+            fields = c.fetchall()
+            for field in fields:
+                ddl += '%s, ' % field
+            ddl = ddl[:-2] + '))'
+
+        self.logger.debug('DDL for table "%s": %s' % (table_name, ddl))
+        return ddl
+
 
     def list_changes(self, timestamp):
         c = self.con.cursor()
