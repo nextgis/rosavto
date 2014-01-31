@@ -8,7 +8,8 @@ BEGIN
 --get uniq_uid list
   FOR uniq_uid IN EXECUTE 'SELECT uniq_uid FROM ' || $1 || ' GROUP BY "uniq_uid";'
   LOOP 
-    RETURN QUERY SELECT * FROM ng_getlrdistbyuuid($1, uniq_uid::TEXT, $2, $3);
+    SELECT * FROM ng_getlrdistbyuuid($1, uniq_uid::TEXT, $2, $3) INTO distance;
+    RETURN NEXT;
   END LOOP;
   RETURN;
 END;
