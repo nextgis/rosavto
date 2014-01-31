@@ -21,18 +21,18 @@ define([
             },
 
             getGeometryByGuid: function (layerId, featureGuid, srs) {
-                var url = this._ngwUrlBase + 'layer/' + layerId + '/store_api/rosavto/?guid=' + featureGuid;
+                var url = 'layer/' + layerId + '/store_api/rosavto/?guid=' + featureGuid;
 
                 if (srs) {
                     url += '&srs=' + srs;
                 }
 
-                return this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url}}) :
-                    xhr(url, {handleAs: 'json', method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest'}});
+                return this.proxy ? xhr(this.proxy + url, {handleAs: 'json', method: 'POST', data: {url: this._ngwUrlBase + url}}) :
+                    xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest'}});
             },
 
             identifyFeaturesByLayers: function (layersIds, wktBounds, srs) {
-                var url = this._ngwUrlBase + 'feature_layer/identify',
+                var url = 'feature_layer/identify',
                     params;
 
                 if (!srs) {
@@ -44,16 +44,17 @@ define([
                     srs: srs,
                     geom: wktBounds
                 };
+                console.log('params:' + JSON.stringify(params));
 
-                return this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url, params: JSON.stringify(params)}}) :
-                    xhr(url, {handleAs: 'json', method: 'POST', data: params, headers: {'X-Requested-With': 'XMLHttpRequest'}});
+                return this.proxy ? xhr(this.proxy + url, {handleAs: 'json', method: 'POST', data: {url: this._ngwUrlBase + url, params: JSON.stringify(params)}}) :
+                    xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'POST', data: params, headers: {'X-Requested-With': 'XMLHttpRequest'}});
             },
 
             getLayersInfo: function () {
-                var url = this._ngwUrlBase + 'api/layer_group/0/tree';
+                var url = 'api/layer_group/0/tree';
 
-                return this.proxy ? xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url}}) :
-                    xhr(url, {handleAs: 'json', method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest'}});
+                return this.proxy ? xhr(this.proxy + url, {handleAs: 'json', method: 'POST', data: {url: this._ngwUrlBase + url}}) :
+                    xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest'}});
             },
 
             getIncident: function (incidentPoints, srs) {
@@ -71,11 +72,11 @@ define([
                 if (countsPoints === 1) {
                     point = incidentPoints[0];
 
-                    url = this._ngwUrlBase + 'layer/' + point.layer + '/store_api/rosavto/?guid=' + point.guid +
+                    url = 'layer/' + point.layer + '/store_api/rosavto/?guid=' + point.guid +
                         '&distance=' + this._calculateDistanceInMeters(point) +
                         '&srs=' + srs;
 
-                    return xhr(this.proxy, {handleAs: 'json', method: 'POST', data: {url: url}});
+                    return xhr(this.proxy + url, {handleAs: 'json', method: 'POST', data: {url: this._ngwUrlBase + url}});
                 }
 
                 if (countsPoints > 1) {
@@ -89,12 +90,12 @@ define([
                         });
                     }
 
-                    url = this._ngwUrlBase + 'layer/17/store_api/rosavto/?' + 'srs=' + srs;
-                    return xhr(this.proxy, {
+                    url = 'layer/17/store_api/rosavto/?' + 'srs=' + srs;
+                    return xhr(this.proxy + url, {
                         handleAs: 'json',
                         method: 'POST',
                         data: {
-                            url: url,
+                            url: this._ngwUrlBase + url,
                             params: JSON.stringify({points: pointsParams})
                         }
                     });

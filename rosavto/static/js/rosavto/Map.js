@@ -3,8 +3,9 @@ define([
     'dojo/_base/lang',
     'dojo/request/xhr',
     'rosavto/Loader',
-    'http://cdn.leafletjs.com/leaflet-0.7.1/leaflet-src.js'
-], function (declare, lang, xhr, Loader) {
+    'http://cdn.leafletjs.com/leaflet-0.7.1/leaflet-src.js',
+    'StompClient'
+], function (declare, lang, xhr, Loader, leaflet, stomp) {
     return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
@@ -102,8 +103,6 @@ define([
         _subscribeUrl: {},
         addRealtimeLayer: function (layerName, settings) {
             var layer = L.layerGroup([]).addTo(this._lmap),
-                socket = new SockJS(settings.socketUrl),
-                client = Stomp.over(socket),
                 callback = lang.hitch(this, function (message) {
                     var body = JSON.parse(message.body);
                     if (body.latitude == undefined || body.longitude == undefined) {
@@ -121,17 +120,17 @@ define([
             };
 
             if (this._lmap.getZoom() >= settings.minVisibleZoom)
-                this._subscribeForRealtimeLayer(client, callback, this._realTimeLayers[layerName].settings.subscribeUrl);
+                this._subscribeForRealtimeLayer(callback, this._realTimeLayers[layerName].settings.subscribeUrl);
 
             this._lmap.on('dragend zoomend', lang.hitch(this, function () {
                 var realTimeLayer = this._realTimeLayers[layerName];
                 if (this._lmap.getZoom() < realTimeLayer.settings.minVisibleZoom) {
                     realTimeLayer.layer.clearLayers();
                     realTimeLayer.markers = {};
-                    this._unsubscribeForRealtimeLayer(client);
+                    this._unsubscribeForRealtimeLayer();
                     return;
                 }
-                this._subscribeForRealtimeLayer(client, callback,
+                this._subscribeForRealtimeLayer(callback,
                     realTimeLayer.settings.subscribeUrl);
             }));
         },
@@ -150,6 +149,10 @@ define([
                 });
                 realtimeLayer.layer.addLayer(marker);
                 realtimeLayer.markers[markerId] = L.stamp(marker);
+                marker.markerId = markerId;
+                marker.on('click', function(e) {
+                    MonitoringCard.showCard(e.target.markerId);
+                });
             }
         },
 
@@ -165,7 +168,7 @@ define([
 
         _lastMapBounds: null,
         _lastSubscribedId: null,
-        _subscribeForRealtimeLayer: function (client, callback, subscribeUrl) {
+        _subscribeForRealtimeLayer: function (callback, subscribeUrl) {
             var bounds = this._lmap.getBounds(),
                 boundsHeaders = {
                     'LatitudeFrom': bounds.getSouth(),
@@ -178,20 +181,23 @@ define([
 
             this._lastMapBounds = bounds;
 
-            if (client.connected) {
-                client.unsubscribe(this._lastSubscribedId);
-                this._lastSubscribedId = client.subscribe(subscribeUrl, callback, boundsHeaders).id;
-                return;
-            } else {
-                client.connect('spring', 'spring', lang.hitch(this, function () {
-                    this._lastSubscribedId = client.subscribe(subscribeUrl, callback, boundsHeaders).id;
-                }));
-            }
+            var me = this;
+            stomp.connect().then(function(client) {
+                if (me._lastSubscribedId) {
+                    client.unsubscribe(me._lastSubscribedId);
+                    me._lastSubscribedId = null;
+                }
+                me._lastSubscribedId = client.subscribe(subscribeUrl, callback, boundsHeaders).id;
+            });
         },
 
-        _unsubscribeForRealtimeLayer: function (client) {
+        _unsubscribeForRealtimeLayer: function () {
+            var me = this;
             if (this._lastSubscribedId) {
-                client.unsubscribe(this._lastSubscribedId);
+                stomp.connect().then(function(client) {
+                    client.unsubscribe(me._lastSubscribedId);
+                    me._lastSubscribedId = null;
+                });
             }
         },
 
