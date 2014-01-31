@@ -21,7 +21,9 @@
                 packages: [
                     { name: "rosavto", location: 'rosavto' },
                     { name: "proj4js", location: 'proj4js' },
-                    { name: "mustache", location: 'mustache' }
+                    { name: "mustache", location: 'mustache' },
+                    { name: "StompClient", location: 'centreit', main: 'StompClient' },
+                    { name: "when", location: 'centreit', main: 'when' }
                 ]
             };
     </script>
@@ -35,6 +37,7 @@
 
     <script src="${request.static_url('rosavto:static/js/socket/SockJS.js')}"></script>
     <script src="${request.static_url('rosavto:static/js/socket/Stomp.js')}"></script>
+    <script src="${request.static_url('rosavto:static/js/centreit/MonitoringCard.js')}"></script>
 
     <script>
         <%block name="inlineScripts"/>
