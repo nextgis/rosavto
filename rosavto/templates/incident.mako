@@ -13,6 +13,7 @@
         'dojo/DeferredList',
         'rosavto/Map',
         'rosavto/NgwServiceFacade',
+        'rosavto/Layers/StyledGeoJsonLayerMapExtension',
         'dojo/domReady!'],
 
     function (DeferredList, Map, NgwServiceFacade) {
@@ -24,7 +25,8 @@
                 legend: true
             }),
             styles,
-            getIncident1, getIncident2, getIncident3;
+            getIncident1, getIncident2, getIncident3,
+            layer;
 
         map.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
 
@@ -36,7 +38,7 @@
                 Point: {className: 'jam'}
             }
         };
-        map.createCustomizableGeoJsonLayer(styles, function () {
+        layer = map.createStyledGeoJsonLayer('incidents', styles, function () {
             alert('Вызван callback для объекта типа ' + this.properties.type);
         });
 
@@ -66,7 +68,7 @@
 
             for (var i = 0; i < countIncidents; i++) {
                 incidents[i][1].properties.type = i % 2 == 0 ? 'accident' : 'jam';
-                map.addCustomizableGeoJsonData(incidents[i][1]);
+                layer.addData(incidents[i][1]);
             }
         });
     });
