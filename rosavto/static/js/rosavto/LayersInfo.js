@@ -131,7 +131,7 @@ define([
                 var display_name,
                     res = this.store.query({id: idLayer});
                 if (res.length > 0) {
-                    display_name = res[0].display_name
+                    display_name = res[0].display_name;
                     return display_name;
                 }
             }
