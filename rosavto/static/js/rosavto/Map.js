@@ -161,7 +161,7 @@ define([
             if (!realtimeLayer) return;
 
             if (realtimeLayer.markers[markerId]) {
-                realtimeLayer.removeLayer(realtimeLayer.markers[markerId]);
+                realtimeLayer.layer.removeLayer(realtimeLayer.markers[markerId]);
                 delete realtimeLayer.markers[markerId];
             }
         },
