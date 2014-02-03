@@ -76,7 +76,7 @@ class Router():
         end_edge_id = self.get_nearest_edge_id(to_point)
         if not end_edge_id:
             raise Exception('End point is too far from road!')
-        position = 0.5  #T ODO: add proportion getter
+        position = 0.5  # TODO: add proportion getter
         #TODO: add barriers id getter
         pgr_trsp = select(['id2'], from_obj=func.pgr_trsp(self.get_net_query(), start_edge_id, position, end_edge_id, position, True, True)).alias('trsp')
         route = self._session.query(Way.gid, Way.name, Way.osm_id, Way.length, Way.the_geom.ST_AsGeoJSON()).select_from(pgr_trsp).join(Way, text('trsp.id2') == Way.gid).all()

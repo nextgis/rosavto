@@ -9,6 +9,7 @@
     ('realtime', u'Realtime'),
     ('attributes', u'Аттрибуты'),
     ('incident', u'Происшествия'),
+    ('routing_sample', u'Маршруты'),
     ('code', u'Примеры кода')
 ]
 %>
