@@ -22,14 +22,26 @@ def routing(request):
     except ValueError, err:
         return create_error_response('Required parameter can\'be parsed: ' + str(err))
 
-    st_pt = Point(from_x, from_y)  # 47.905, 54.586
-    end_pt = Point(to_x, to_y)  # 46.726	54.120
-    #TODO: add barriers parser
+    st_pt = Point(from_x, from_y)
+    end_pt = Point(to_x, to_y)
+
+    #parse barriers #TODO: add barriers parser (now only one barrier)
+    barriers = []
+    try:
+        bar_x = float(request.params['bar_x'])
+        bar_y = float(request.params['bar_y'])
+        bar_pt = Point(bar_x, bar_y)
+        barriers.append(bar_pt)
+    except KeyError, key:
+        pass
+    except ValueError, err:
+        return create_error_response('Parameter can\'be parsed: ' + str(err))
+
 
     #get route
     router = Router()
     try:
-        route = router.get_route(st_pt, end_pt)
+        route = router.get_route(st_pt, end_pt, barriers)
     except Exception, err:
         return create_error_response(err)
 
@@ -76,14 +88,33 @@ class Router():
         end_edge_id = self.get_nearest_edge_id(to_point)
         if not end_edge_id:
             raise Exception('End point is too far from road!')
+        #get barriers edges
+        barrier_edge_ids = []
+        for bar_point in barrier_points:
+            bar_edge_id = self.get_nearest_edge_id(bar_point)
+            barrier_edge_ids.append(bar_edge_id)
         position = 0.5  # TODO: add proportion getter
-        #TODO: add barriers id getter
-        pgr_trsp = select(['id2'], from_obj=func.pgr_trsp(self.get_net_query(), start_edge_id, position, end_edge_id, position, True, True)).alias('trsp')
+        #request
+        pgr_trsp = select(['id2'], from_obj=func.pgr_trsp(self.get_net_query(), start_edge_id, position,
+                                                          end_edge_id, position, True, True,
+                                                          self.get_restrict_query(barrier_edge_ids))).alias('trsp')
         route = self._session.query(Way.gid, Way.name, Way.osm_id, Way.length, Way.the_geom.ST_AsGeoJSON()).select_from(pgr_trsp).join(Way, text('trsp.id2') == Way.gid).all()
         return route
 
     def get_net_query(self):
         sel = select([Way.gid.label('id'), Way.source, Way.target, Way.length.label('cost'), Way.reverse_cost])
+        return str(sel)
+
+    def get_restrict_query(self, barrier_edge_ids=[]):
+        if len(barrier_edge_ids) < 1:
+            return ''
+        sel = None
+        for edge_id in barrier_edge_ids:
+            new_sel = select(['100000::float as to_cost', str(edge_id)+'::integer as target_id', '\'\'::text as via_path'])
+            if sel is None:
+                sel = new_sel
+            else:
+                sel.union(new_sel)
         return str(sel)
 
     def get_nearest_edge_id(self, point, max_distance=1):

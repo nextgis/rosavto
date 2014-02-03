@@ -33,16 +33,19 @@
         var endPoint = L.latLng(57.635199, 40.386479);
         var barrierPoint = L.latLng(56.969893, 39.203637);
 
+        //markers not working???
         //L.marker(startPoint).addTo(map)
         //.bindPopup('Start point').openPopup();
 
         //L.marker(endPoint).addTo(map)
         //.bindPopup('End point').openPopup();
 
+        //ugly! need more clear code
         var rUrl = '/routing?from_x='+startPoint.lng+'&from_y='+startPoint.lat+
                     '&to_x='+endPoint.lng+'&to_y='+endPoint.lat;
         map.addGeoJsonLayer('Маршрут', rUrl, {color:'#FF0000', opacity: 0.7 });
 
+        //---- map with restriction
         var map2 = new Map('map2', {
                 center: [57, 38],
                 zoom: 7,
@@ -56,9 +59,13 @@
         //L.marker(endPoint).addTo(map2)
         //.bindPopup('End point').openPopup();
 
+        //L.marker(barrierPoint).addTo(map2)
+        //.bindPopup('Restriction point').openPopup();
+
+        //ugly! need more clear code
         rUrl = '/routing?from_x=' + startPoint.lng + '&from_y=' + startPoint.lat +
                '&to_x=' + endPoint.lng + '&to_y=' + endPoint.lat +
                '&bar_x=' + barrierPoint.lng + '&bar_y=' + barrierPoint.lat;
-        map2.addGeoJsonLayer('Маршрут', rUrl, {color:'#FF0000', opacity: 0.7 });
+        map2.addGeoJsonLayer('Маршрут c ограничением', rUrl, {color:'#FF0000', opacity: 0.7 });
     });
 </%block>
