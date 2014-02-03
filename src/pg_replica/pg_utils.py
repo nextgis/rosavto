@@ -28,7 +28,9 @@ __revision__ = '$Format:%H$'
 import re
 import os
 import glob
+import base64
 import logging
+import ConfigParser
 
 import psycopg2
 import psycopg2.extensions
@@ -307,25 +309,24 @@ class PgDB:
                     values = self.populate_values(
                         fields, value_list, plain_field_list)
 
-                s = ''
                 if operation == 1:
                     self.logger.debug('Found DELETE operation.')
 
-                    s = "DELETE FROM %s WHERE uniq_uid='%s'" % (
+                    sql = "DELETE FROM %s WHERE uniq_uid='%s'" % (
                         full_table_name, uid)
                     self.logger.debug(
-                        'Replication SQL: %s' % ' '.join(s.split()))
+                        'Replication SQL: %s' % ' '.join(sql.split()))
                 elif operation == 2:
                     self.logger.debug('Found INSERT operation.')
 
-                    s = u'INSERT INTO %s(%s) VALUES(%s);' % (
+                    sql = 'INSERT INTO %s(%s) VALUES(%s);' % (
                         full_table_name, ', '.join(plain_field_list), values)
                     self.logger.debug(
-                        'Replication SQL: %s' % ' '.join(s.split()))
+                        'Replication SQL: %s' % ' '.join(sql.split()))
                 elif operation == 3:
                     self.logger.debug('Found UPDATE operation.')
 
-                    s = u'''UPDATE %s
+                    sql = '''UPDATE %s
                            SET (%s) = (%s)
                            WHERE uniq_uid='%s';
                         ''' % (full_table_name,
@@ -333,20 +334,55 @@ class PgDB:
                                values,
                                uid)
                     self.logger.debug(
-                        'Replication SQL: %s' % ' '.join(s.split()))
+                        'Replication SQL: %s' % ' '.join(sql.split()))
+
+                encoded_table = base64.urlsafe_b64encode(full_table_name)
+
+                ddl = ' '.join(ddl.split()).encode('utf-8')
+                encoded_ddl = base64.urlsafe_b64encode(ddl)
+
+                sql = ' '.join(sql.split()).encode('utf-8')
+                encoded_sql = base64.urlsafe_b64encode(sql)
+
+                payload = {
+                          'table': encoded_table,
+                          'ddl': encoded_ddl,
+                          'sql': encoded_sql
+                         }
+                r = requests.post(
+                    'http://nextgis.ru/share/pg_replica/test_server.php',
+                    params=payload)
+                self.logger.debug('Server responce: %s - %s' %
+                                  (r.status_code, r.text))
 
         self.clear_old_records(timestamp)
 
-
     def apply_changes(self, directory):
-        file_list = sorted(glob.glob(os.path.join(directory, '*.sql')))
-        self.logger.debug('Found %s changesets' % len(file_list))
+        file_list = sorted(glob.glob(os.path.join(directory, '*.changes')))
+        self.logger.debug('Found %s changesets.' % len(file_list))
+
+        cfg = ConfigParser.SafeConfigParser()
 
         for file_name in file_list:
-            self.logger.debug('Processing file: "%s"' % file_name)
-            with open(file_name) as f:
-                sql = f.readlines()
-                self._exec_sql_and_commit(sql)
+            print file_name
+            self.logger.debug('Processing file: "%s".' % file_name)
+            cfg.read(file_name)
+
+            full_table_name = base64.urlsafe_b64decode(
+                cfg.get('changeset', 'table'))
+            ddl = base64.urlsafe_b64decode(cfg.get('changeset', 'ddl'))
+            sql = base64.urlsafe_b64decode(cfg.get('changeset', 'sql'))
+
+            schema = full_table_name.split('.')[0]
+            table = full_table_name.split('.')[1]
+
+            if not self._table_exists(schema, table):
+                self.logger.debug('Table "%s" not found. Try to create it.' %
+                    table_name)
+                self._exec_sql_and_commit(ddl)
+
+            self._exec_sql_and_commit(sql)
+
             os.remove(file_name)
             self.logger.debug('File "%s" processed and removed' % file_name)
 
@@ -362,7 +398,7 @@ class PgDB:
         table_oid = c.fetchone()[0]
 
         if table_oid is None:
-            self.logger.critical('Can not resolve table name "%s" to OID.' %
+            self.logger.critical("Can not resolve table name '%s' to oid." %
                                  table_name)
             return ''
 
@@ -411,7 +447,6 @@ class PgDB:
         self.logger.debug('DDL for table "%s": %s' % (table_name, ddl))
         return ddl
 
-
     def list_changes(self, timestamp):
         c = self.con.cursor()
 
@@ -439,11 +474,9 @@ class PgDB:
         table = self.rep_table
         table_name = self._table_name(schema, table)
 
-        tables = self.list_geotables(schema)
-        table_exists = len([t for t in tables if t[0] == table]) > 0
-        if table_exists:
+        if self._table_exists(schema, table):
             self.logger.debug(
-                '"%s" table already exists. Skipping creation.' % table_name)
+                'Table "%s" already exists. Skipping creation.' % table_name)
             return True
 
         sql = '''CREATE TABLE %s (
@@ -508,6 +541,17 @@ class PgDB:
 
         out = out[:-2]
         return out
+
+    def _table_exists(self, schema, table):
+        table_name = self._table_name(schema, table)
+
+        tables = self.list_geotables(schema)
+        if len([t for t in tables if t[0] == table]) > 0:
+            self.logger.debug('Found "%s" table.' % table_name)
+            return True
+        else:
+            self.logger.debug('Table "%s" not found.' % table_name)
+            return False
 
     def _exec_sql(self, cursor, sql):
         try:

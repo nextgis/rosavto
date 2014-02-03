@@ -142,7 +142,6 @@ if __name__ == '__main__':
         logger.critical('Changesets directory not found in config file.')
         sys.exit(1)
 
-
     if args.tableName:
         register_table(host, port, dbname, user, passwd, args.tableName)
     elif args.createChangesets:

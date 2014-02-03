@@ -1,13 +1,13 @@
 [connection]
-host=gis-lab.info
+host=192.168.255.101
 port=5432
 database=rosavto
 user=luser
 password=secret
 
 [zones]
-table_name=some_table
-field_name=some_field
+table_name=thematic.borders_dept
+field_name=url
 
 [changes]
 dir_name=/path/to/changeset/files
