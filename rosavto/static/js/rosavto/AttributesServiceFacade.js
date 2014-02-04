@@ -21,15 +21,13 @@ define([
             },
 
             getAttributesByGuid: function (featureGuid, callback) {
-                //убрал monitoring-web/
                 var url = 'gis/card?guid=' + featureGuid;
 
                 if (callback) {
                     url += '&callback=' + callback;
                 }
-                //убрал параметр url, поменял post на get, дополнил proxy url
-                return this.proxy ? xhr(this.proxy + url, {handleAs: 'text', method: 'GET'}) :
-                    xhr(this._attributesServiceUrlBase + url, {handleAs: 'text', method: 'GET', headers: {'X-Requested-With': 'XMLHttpRequest'}});
+
+                return xhr(this._attributesServiceUrlBase + url, {handleAs: 'text', method: 'GET'});
             }
         });
     });

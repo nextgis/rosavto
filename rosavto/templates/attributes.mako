@@ -21,9 +21,9 @@
         'dojo/domReady!'],
 
     function (Map, LayersInfo, MapIdentify, AttributeGetter, AttributesServiceFacade, NgwServiceFacade) {
-        var ngwServiceFacade = new NgwServiceFacade(ngwUrlBase, {proxy: proxyUrl}),
-            attributesBaseUrl = 'http://zulu.centre-it.com:7040/',
-            attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl, {proxy: proxyUrl}),
+        var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrlBase),
+            attributesBaseUrl = application_root + '/cit/',
+            attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl),
             map = new Map('map', {
                 center: [55.529, 37.584],
                 zoom: 7,

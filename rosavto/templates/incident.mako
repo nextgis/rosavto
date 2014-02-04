@@ -17,7 +17,7 @@
         'dojo/domReady!'],
 
     function (DeferredList, Map, NgwServiceFacade) {
-        var ngwServiceFacade = new NgwServiceFacade(ngwUrlBase, {proxy: proxyUrl}),
+        var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrlBase),
             map = new Map('map', {
                 center: [56.0369, 35.8788],
                 zoom: 16,

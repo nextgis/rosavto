@@ -12,7 +12,7 @@
     <script>
         var application_root = '${request.application_url}',
             ngwUrlBase = 'http://demo.nextgis.ru/ngw_rosavto/',
-            proxyUrl = application_root + '/proxy',
+            ngwProxyUrlBase = application_root + '/ngw/',
 
             // Dojo's config
             dojoConfig = {

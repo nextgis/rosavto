@@ -27,8 +27,7 @@ define([
                     url += '&srs=' + srs;
                 }
 
-                return this.proxy ? xhr(this.proxy + url, {handleAs: 'json', method: 'POST', data: {url: this._ngwUrlBase + url}}) :
-                    xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest'}});
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET'});
             },
 
             identifyFeaturesByLayers: function (layersIds, wktBounds, srs) {
@@ -44,17 +43,18 @@ define([
                     srs: srs,
                     geom: wktBounds
                 };
-                console.log('params:' + JSON.stringify(params));
 
-                return this.proxy ? xhr(this.proxy + url, {handleAs: 'json', method: 'POST', data: {url: this._ngwUrlBase + url, params: JSON.stringify(params)}}) :
-                    xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'POST', data: params, headers: {'X-Requested-With': 'XMLHttpRequest'}});
+                return xhr(this._ngwUrlBase + url, {
+                    handleAs: 'json',
+                    method: 'POST',
+                    data: JSON.stringify(params)
+                });
             },
 
             getLayersInfo: function () {
                 var url = 'api/layer_group/0/tree';
 
-                return this.proxy ? xhr(this.proxy + url, {handleAs: 'json', method: 'POST', data: {url: this._ngwUrlBase + url}}) :
-                    xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest'}});
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET'});
             },
 
             getIncident: function (incidentPoints, srs) {
@@ -76,7 +76,7 @@ define([
                         '&distance=' + this._calculateDistanceInMeters(point) +
                         '&srs=' + srs;
 
-                    return xhr(this.proxy + url, {handleAs: 'json', method: 'POST', data: {url: this._ngwUrlBase + url}});
+                    return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
                 }
 
                 if (countsPoints > 1) {
