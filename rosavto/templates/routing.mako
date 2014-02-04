@@ -33,12 +33,10 @@
         var endPoint = L.latLng(57.635199, 40.386479);
         var barrierPoint = L.latLng(56.969893, 39.203637);
 
-        //markers not working???
-        //L.marker(startPoint).addTo(map)
-        //.bindPopup('Start point').openPopup();
 
-        //L.marker(endPoint).addTo(map)
-        //.bindPopup('End point').openPopup();
+        L.marker(startPoint).addTo(map.getLMap()).bindPopup('Start point').openPopup();
+
+        L.marker(endPoint).addTo(map.getLMap()).bindPopup('End point').openPopup();
 
         //ugly! need more clear code
         var rUrl = '/routing?from_x='+startPoint.lng+'&from_y='+startPoint.lat+
@@ -53,14 +51,11 @@
                 legend: true
             });
 
-        //L.marker(startPoint).addTo(map2)
-        //.bindPopup('Start point').openPopup();
+        L.marker(startPoint).addTo(map2.getLMap()).bindPopup('Start point').openPopup();
 
-        //L.marker(endPoint).addTo(map2)
-        //.bindPopup('End point').openPopup();
+        L.marker(endPoint).addTo(map2.getLMap()).bindPopup('End point').openPopup();
 
-        //L.marker(barrierPoint).addTo(map2)
-        //.bindPopup('Restriction point').openPopup();
+        L.marker(barrierPoint).addTo(map2.getLMap()).bindPopup('Restriction point').openPopup();
 
         //ugly! need more clear code
         rUrl = '/routing?from_x=' + startPoint.lng + '&from_y=' + startPoint.lat +
