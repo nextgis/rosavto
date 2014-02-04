@@ -82,6 +82,12 @@ define([
                 }));
         },
 
+        addGeoJsonLayer: function (name, geoJsonLayer) {
+            geoJsonLayer.addTo(this._lmap);
+            this._overlaylayers[name] = geoJsonLayer;
+            if (this._legend) this._legend.addOverlay(geoJsonLayer, name);
+        },
+
         showObjectAsMarker: function (url, id, isPopup) {
             xhr(application_root + url + id, {
                 handleAs: 'json'
@@ -150,7 +156,7 @@ define([
                 realtimeLayer.layer.addLayer(marker);
                 realtimeLayer.markers[markerId] = L.stamp(marker);
                 marker.markerId = markerId;
-                marker.on('click', function(e) {
+                marker.on('click', function (e) {
                     MonitoringCard.showCard(e.target.markerId);
                 });
             }
@@ -182,7 +188,7 @@ define([
             this._lastMapBounds = bounds;
 
             var me = this;
-            stomp.connect().then(function(client) {
+            stomp.connect().then(function (client) {
                 if (me._lastSubscribedId) {
                     client.unsubscribe(me._lastSubscribedId);
                     me._lastSubscribedId = null;
@@ -194,7 +200,7 @@ define([
         _unsubscribeForRealtimeLayer: function () {
             var me = this;
             if (this._lastSubscribedId) {
-                stomp.connect().then(function(client) {
+                stomp.connect().then(function (client) {
                     client.unsubscribe(me._lastSubscribedId);
                     me._lastSubscribedId = null;
                 });
