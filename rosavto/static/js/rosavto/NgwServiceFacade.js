@@ -51,11 +51,13 @@ define([
                 });
             },
 
+
             getLayersInfo: function () {
                 var url = 'api/layer_group/0/tree';
 
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET'});
             },
+
 
             getIncident: function (incidentPoints, srs) {
                 var countsPoints = incidentPoints.length,
@@ -102,6 +104,7 @@ define([
                 }
             },
 
+
             _calculateDistanceInMeters: function (point) {
                 var distance = 0;
                 if (point.distance['km']) {
@@ -111,6 +114,23 @@ define([
                     distance += point.distance['m'];
                 }
                 return distance;
+            },
+
+
+            getIncidentLine: function (guid, pointStart, pointFinish, srs) {
+                var url;
+
+                if (!srs) {
+                    srs = 4326;
+                }
+
+                url = 'layer/17/rosavto/getlrsublinebyuuid?guid=' + guid +
+                    '&first=' + this._calculateDistanceInMeters(pointStart) +
+                    '&last=' + this._calculateDistanceInMeters(pointFinish) +
+                    '&step=1000' +
+                    '&srs=' + srs;
+
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
             }
         });
     });
