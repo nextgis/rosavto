@@ -29,14 +29,12 @@
                 legend: true
             });
 
-        var startPoint = L.latLng(56.001548, 38.773279);
+        var startPoint = L.latLng(55.885548, 38.783279);
         var endPoint = L.latLng(57.635199, 40.386479);
         var barrierPoint = L.latLng(56.969893, 39.203637);
 
-
-        L.marker(startPoint).addTo(map.getLMap()).bindPopup('Start point').openPopup();
-
-        L.marker(endPoint).addTo(map.getLMap()).bindPopup('End point').openPopup();
+        L.marker(startPoint).addTo(map.getLMap()).bindPopup('Start point');
+        L.marker(endPoint).addTo(map.getLMap()).bindPopup('End point');
 
         //ugly! need more clear code
         var rUrl = '/routing?from_x='+startPoint.lng+'&from_y='+startPoint.lat+
@@ -51,10 +49,8 @@
                 legend: true
             });
 
-        L.marker(startPoint).addTo(map2.getLMap()).bindPopup('Start point').openPopup();
-
-        L.marker(endPoint).addTo(map2.getLMap()).bindPopup('End point').openPopup();
-
+        L.marker(startPoint).addTo(map2.getLMap()).bindPopup('Start point');
+        L.marker(endPoint).addTo(map2.getLMap()).bindPopup('End point');
         L.marker(barrierPoint).addTo(map2.getLMap()).bindPopup('Restriction point').openPopup();
 
         //ugly! need more clear code
