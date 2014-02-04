@@ -7,7 +7,7 @@ body {
     margin: 4px;
 }
 
-#map {
+#map, #map2 {
     margin: 3px 0;
     height: 500px;
 }
