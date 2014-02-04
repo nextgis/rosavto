@@ -39,13 +39,18 @@ def attributes(request):
     return {}
 
 
-@view_config(route_name='code', renderer='code.mako')
-def code(request):
+@view_config(route_name='incident', renderer='incident.mako')
+def incident(request):
     return {}
 
 
-@view_config(route_name='incident', renderer='incident.mako')
-def incident(request):
+@view_config(route_name='center', renderer='center.mako')
+def center(request):
+    return {}
+
+
+@view_config(route_name='code', renderer='code.mako')
+def code(request):
     return {}
 
 

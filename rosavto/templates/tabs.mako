@@ -8,6 +8,7 @@
     ('wms', u'WMS'),
     ('realtime', u'Realtime'),
     ('attributes', u'Аттрибуты'),
+    ('center', u'Центрирование'),
     ('incident', u'Происшествия'),
     ('code', u'Примеры кода')
 ]
