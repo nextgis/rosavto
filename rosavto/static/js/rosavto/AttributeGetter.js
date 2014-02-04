@@ -99,6 +99,11 @@ define([
                 }));
 
                 return deferred;
+            },
+
+            selectObject: function (layerId, featureId) {
+                topic.publish('map/identityUi/block');
+                topic.publish('attributes/get', layerId, featureId);
             }
         });
     });
