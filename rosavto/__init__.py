@@ -21,8 +21,12 @@ def main(global_config, **settings):
     config.add_route('realtime', '/realtime')
     config.add_route('attributes', '/attributes')
     config.add_route('attributes_html', '/attributes/html/{id}')
-    config.add_route('proxy', '/proxy')
     config.add_route('code', '/code')
     config.add_route('incident', '/incident')
+
+    # proxies url
+    config.add_route('proxy_ngw', '/ngw/*target_url')
+    config.add_route('proxy_cit', '/cit/*target_url')
+
     config.scan()
     return config.make_wsgi_app()

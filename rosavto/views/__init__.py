@@ -57,21 +57,41 @@ def get_html_attributes(request):
     return html
 
 
-@view_config(route_name='proxy', renderer='json')
-def proxy(request):
-    result = None
+@view_config(route_name='proxy_ngw', renderer='json')
+def proxy_ngw(request):
+    url = request.registry.settings['proxy_ngw'] + '/'.join(request.matchdict['target_url'])
+    return get_response_by_proxy(request, url)
 
-    if 'url' in request.POST:
-        url = request.POST['url']
-        params = None
-        if 'params' in request.POST:
-            params = ast.literal_eval(json.dumps(request.POST['params']))
-        res = urllib2.urlopen(url, data=params, timeout=10).read()
-        if 'handleAs' in request.POST:
-            handle_as = request.POST['handleAs']
-            if handle_as == 'text':
-                result = res
-        else:
-            result = json.loads(res)
 
-    return result
+@view_config(route_name='proxy_cit', renderer='json')
+def proxy_cit(request):
+    url = request.registry.settings['proxy_cit'] + '/'.join(request.matchdict['target_url'])
+    return get_response_by_proxy(request, url)
+
+
+def get_response_by_proxy(request, url):
+    data = urllib.urlencode(request.params)
+    if request.method == 'GET':
+        delimiter = ''
+        if request.path[-1] == '/':
+            delimiter = '/'
+        url = '{0}{1}?{2}'.format(url, delimiter, data)
+        req = urllib2.Request(url, None)
+    else:
+        if request.POST.keys()[0] and request.POST.values()[0] == '':
+            data = request.POST.keys()[0]
+        req = urllib2.Request(url, data)
+
+    f = urllib2.urlopen(req)
+    response = f.read()
+    f.close()
+
+    if f.headers['content-type']:
+        content_type_header = f.headers['content-type']
+        if 'application/json' in content_type_header:
+            response = json.loads(response)
+        elif 'text' in content_type_header:
+            response = response.decode('utf-8')
+            request.override_renderer = 'string'
+
+    return response
