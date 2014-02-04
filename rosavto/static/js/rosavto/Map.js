@@ -28,6 +28,10 @@ define([
             this.addOsmTileLayer();
         },
 
+        getLMap: function () {
+            return this._lmap;
+        },
+
         addWmsLayer: function (url, name, settings) {
             var wmsLayer = L.tileLayer.wms(url, settings);
 
