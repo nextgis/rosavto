@@ -62,7 +62,7 @@ define([
             this.addTileLayer('Openstreetmap', osmUrl, settingsOsmLayer);
         },
 
-        addGeoJsonLayer: function (name, url, style) {
+        createGeoJsonLayer: function (name, url, style) {
             xhr(application_root + url, {
                 handleAs: 'json'
             }).then(lang.hitch(this, function (geoJson) {

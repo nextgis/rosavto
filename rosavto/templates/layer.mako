@@ -17,10 +17,10 @@
                 });
 
             // Добавляем слой с заправками
-            map.addGeoJsonLayer('Заправки', '/gas_stations', {color:'#FF0000', opacity: 0.9 });
+            map.createGeoJsonLayer('Заправки', '/gas_stations', {color:'#FF0000', opacity: 0.9 });
 
             // Добавляем слой с мостами
-            map.addGeoJsonLayer('Мосты', '/bridges', {opacity:0.9, weight: 2});
+            map.createGeoJsonLayer('Мосты', '/bridges', {opacity:0.9, weight: 2});
         });
     </code>
 </pre>
@@ -33,7 +33,7 @@
                 zoomControl: true,
                 legend: true
             });
-        map.addGeoJsonLayer('Заправки', '/gas_stations', {color:'#FF0000', opacity: 0.9 });
-        map.addGeoJsonLayer('Мосты', '/bridges', {opacity:0.9, weight: 2});
+        map.createGeoJsonLayer('Заправки', '/gas_stations', {color:'#FF0000', opacity: 0.9 });
+        map.createGeoJsonLayer('Мосты', '/bridges', {opacity:0.9, weight: 2});
     });
 </%block>
