@@ -6,22 +6,33 @@
 <div id="map2"></div>
 
 <pre>
-    Код для добавления слоя с проложенным маршрутом:
-    <code data-language="javascript">
-        // Загружаем модуль <a href="${request.static_url('rosavto:static/js/rosavto/Map.js')}">rosavto/Map</a> после готовности DOM дерева
-        require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
-            var map = new Map('map', {
-                    center: [57.0, 38.0], // Задаем центр
-                    zoom: 7 // Указываем начальный зум
-                    zoomControl: true, // Показываем элемент управления зумом
-                    legend: true // Показываем легенду карты
-                });
-        });
-    </code>
+    <p>Код с комментариями <a href="${request.route_url('code') + '#routingCode'}">здесь</a></p>
 </pre>
 
 <%block name="inlineScripts">
     require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
+        //---- common
+        var startPoint = L.latLng(55.885548, 38.783279);
+        var endPoint = L.latLng(57.635199, 40.386479);
+        var barrierPoint = L.latLng(56.969893, 39.203637);
+
+        var startIcon = L.icon( {iconUrl:   "${request.static_url('rosavto:static/start-point.png')}",
+                                 iconSize:  [32, 37],
+                                 iconAnchor:[16, 36],
+                                 popupAnchor:  [0, -35]
+                                 });
+        var finishIcon = L.icon( {iconUrl: "${request.static_url('rosavto:static/finish-point.png')}",
+                                 iconSize:  [32, 37],
+                                 iconAnchor:[16, 36],
+                                 popupAnchor:  [0, -35]
+                                 });
+        var barIcon = L.icon( {iconUrl: "${request.static_url('rosavto:static/barrier-point.png')}",
+                                 iconSize:  [32, 37],
+                                 iconAnchor:[16, 36],
+                                 popupAnchor:  [0, -35]
+                                 });
+
+        //---- map without restriction
         var map = new Map('map', {
                 center: [57, 38],
                 zoom: 7,
@@ -29,12 +40,8 @@
                 legend: true
             });
 
-        var startPoint = L.latLng(55.885548, 38.783279);
-        var endPoint = L.latLng(57.635199, 40.386479);
-        var barrierPoint = L.latLng(56.969893, 39.203637);
-
-        L.marker(startPoint).addTo(map.getLMap()).bindPopup('Start point');
-        L.marker(endPoint).addTo(map.getLMap()).bindPopup('End point');
+        L.marker(startPoint, {icon: startIcon}).addTo(map.getLMap()).bindPopup('Start point');
+        L.marker(endPoint, {icon: finishIcon}).addTo(map.getLMap()).bindPopup('End point');
 
         //ugly! need more clear code
         var rUrl = '/routing?from_x='+startPoint.lng+'&from_y='+startPoint.lat+
@@ -49,9 +56,9 @@
                 legend: true
             });
 
-        L.marker(startPoint).addTo(map2.getLMap()).bindPopup('Start point');
-        L.marker(endPoint).addTo(map2.getLMap()).bindPopup('End point');
-        L.marker(barrierPoint).addTo(map2.getLMap()).bindPopup('Restriction point').openPopup();
+        L.marker(startPoint, {icon: startIcon}).addTo(map2.getLMap()).bindPopup('Start point');
+        L.marker(endPoint, {icon: finishIcon}).addTo(map2.getLMap()).bindPopup('End point');
+        L.marker(barrierPoint, {icon: barIcon}).addTo(map2.getLMap()).bindPopup('Restriction point').openPopup();
 
         //ugly! need more clear code
         rUrl = '/routing?from_x=' + startPoint.lng + '&from_y=' + startPoint.lat +
