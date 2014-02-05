@@ -188,7 +188,6 @@ class PgDB:
         attrs = c.fetchall()
         return attrs
 
-
     def register_table(self, schema, table):
         if not self.create_replog_table():
             return False
@@ -238,7 +237,7 @@ class PgDB:
         self._exec_sql_and_commit(sql)
         return True
 
-    def prepare_changes(self, timestamp):
+    def prepare_changes(self, timestamp, boundary, url_field):
         records = self.list_changes(timestamp)
 
         data = dict()
@@ -349,11 +348,23 @@ class PgDB:
                           'ddl': encoded_ddl,
                           'sql': encoded_sql
                          }
-                r = requests.post(
-                    'http://nextgis.ru/share/pg_replica/test_server.php',
-                    params=payload)
-                self.logger.debug('Server responce: %s - %s' %
-                                  (r.status_code, r.text))
+
+                sql = '''SELECT %s
+                         FROM %s
+                         WHERE ST_Intersects(wkb_geometry,
+                             (SELECT wkb_geometry
+                              FROM %s
+                              WHERE uniq_uid = '%s'))
+                      ''' % (url_field, boundary, full_table_name, uid)
+                self._exec_sql(c, sql)
+                urls = c.fetchall()
+
+                if urls is None or len(urls) == 0:
+                    self.logger.error('No intersections with zones found.')
+                    continue
+
+                for url in urls:
+                    r = requests.post(url, params=payload)
 
         self.clear_old_records(timestamp)
 
@@ -398,7 +409,7 @@ class PgDB:
         table_oid = c.fetchone()[0]
 
         if table_oid is None:
-            self.logger.critical("Can not resolve table name '%s' to oid." %
+            self.logger.critical("Can not resolve table name '%s' to OID." %
                                  table_name)
             return ''
 
@@ -444,7 +455,7 @@ class PgDB:
                 ddl += '%s, ' % field
             ddl = ddl[:-2] + '))'
 
-        self.logger.debug('DDL for table "%s": %s' % (table_name, ddl))
+        self.logger.debug('DDL for relation "%s": %s' % (table_name, ddl))
         return ddl
 
     def list_changes(self, timestamp):
@@ -476,7 +487,7 @@ class PgDB:
 
         if self._table_exists(schema, table):
             self.logger.debug(
-                'Table "%s" already exists. Skipping creation.' % table_name)
+                '"%s" table already exists. Skipping creation.' % table_name)
             return True
 
         sql = '''CREATE TABLE %s (

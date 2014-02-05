@@ -52,12 +52,12 @@ def register_table(host, port, dbname, user, passwd, full_table_name):
     logger.info('Table "%s" registered for replication.' % full_table_name)
 
 
-def create_changesets(host, port, dbname, user, passwd):
+def create_changesets(host, port, dbname, user, passwd, boundary, url_field):
     logger.debug('create_changesets entered.')
     timestamp = datetime.datetime.now().isoformat()
     logger.debug('Process records for %s.' % timestamp)
     db = pg_utils.PgDB(host, port, dbname, user, passwd)
-    db.prepare_changes(timestamp)
+    db.prepare_changes(timestamp, boundary, url_field)
 
 
 def apply_changesets(host, port, dbname, user, passwd, directory):
@@ -141,6 +141,7 @@ if __name__ == '__main__':
     else:
         logger.critical('Changesets directory not found in config file.')
         sys.exit(1)
+
 
     if args.tableName:
         register_table(host, port, dbname, user, passwd, args.tableName)
