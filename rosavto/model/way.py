@@ -12,9 +12,10 @@ from geoalchemy2 import Geometry
 
 Base = declarative_base()
 
+
 #osm2pgrouting 'ways' table
 class Way(Base, DictionaryMixin, GeoJsonMixin):
-    __tablename__ = 'pgr4_ways'  # temporary! ways
+    __tablename__ = 'ways'  # temporary! ways
 
     gid = Column(Integer, primary_key=True)
     class_id = Column(Integer)
