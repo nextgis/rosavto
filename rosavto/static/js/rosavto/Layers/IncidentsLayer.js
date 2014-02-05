@@ -13,15 +13,24 @@ define([
 
         showIncidentLine: function (guid, pointStart, pointFinish) {
             var xhr;
-
-            topic.publish('map/identityUi/block');
+            // для показа отрезка нам не надо блокировать карту
+            //отрезок показывается только точно для таких координат, как в примере, иначе ошибка 500 и все висит
+            //topic.publish('map/identityUi/block');
 
             xhr = this.options.ngwServiceFacade.getIncidentLine(guid, pointStart, pointFinish);
             xhr.then(lang.hitch(this, function (lineGeoJson) {
                 var geojson = this.addData(lineGeoJson);
-                this._map.fitBounds(geojson.getBounds());
-                topic.publish('map/identityUi/unblock');
+                //невозможно посмотреть realtime объекты
+                //this._map.fitBounds(geojson.getBounds());
+                //topic.publish('map/identityUi/unblock');
             }));
+        },
+
+        hideIncidentLine: function (guid, pointStart, pointFinish) {
+            console.log("hideIncidentLine " + guid);
+            //TODO
+
         }
+
     });
 });

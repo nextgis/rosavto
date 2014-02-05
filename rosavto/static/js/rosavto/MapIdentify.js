@@ -60,7 +60,7 @@ define([
                         identifiedFeatures = this._parseNgwFeatures(ngwFeatures);
 
                         if (identifiedFeatures.count === 0) {
-                            alert('В этом месте объектов нет');
+                            //alert('В этом месте объектов нет');
                             topic.publish('map/identityUi/unblock');
                         } else if (identifiedFeatures.count === 1) {
                             topic.publish('attributes/get', identifiedFeatures.layers[0].id, identifiedFeatures.layers[0].features[0].id);

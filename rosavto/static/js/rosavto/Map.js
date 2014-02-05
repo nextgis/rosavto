@@ -11,6 +11,7 @@ define([
         _baseLayers: {},
         _overlaylayers: {},
         _legend: null,
+        _incidentLayer: null,
 
         constructor: function (domNode, settings) {
             if (!settings.zoomControl) {
@@ -88,6 +89,11 @@ define([
             if (this._legend) this._legend.addOverlay(geoJsonLayer, name);
         },
 
+        setIncidentLayer: function (name, geoJsonLayer) {
+            this._incidentLayer = geoJsonLayer;
+            this.addGeoJsonLayer(name, geoJsonLayer);
+        },
+
         showObjectAsMarker: function (url, id, isPopup) {
             xhr(application_root + url + id, {
                 handleAs: 'json'
@@ -110,8 +116,21 @@ define([
         addRealtimeLayer: function (layerName, settings) {
             var layer = L.layerGroup([]).addTo(this._lmap),
                 callback = lang.hitch(this, function (message) {
+                    //console.log("message:" + message.body);
                     var body = JSON.parse(message.body);
-                    if (body.latitude == undefined || body.longitude == undefined) {
+                    if (body.roadMeter2 && this._incidentLayer) {
+                        if (body.latitude == undefined || body.longitude == undefined) {
+                            this._incidentLayer.hideIncidentLine(body.roadId,
+                                { distance: { km: body.roadMeter / 1000, m: body.roadMeter % 1000 } },
+                                { distance: { km: body.roadMeter2 / 1000, m: body.roadMeter2 % 1000 } }
+                            );
+                        } else {
+                            this._incidentLayer.showIncidentLine(body.roadId,
+                                { distance: { km: body.roadMeter / 1000, m: body.roadMeter % 1000 } },
+                                { distance: { km: body.roadMeter2 / 1000, m: body.roadMeter2 % 1000 } }
+                            );
+                        }
+                    } else if (body.latitude == undefined || body.longitude == undefined) {
                         this._deleteMarker(layerName, body[settings.id]);
                     } else {
                         this._renderMarker(layerName, body[settings.id], [body.latitude, body.longitude],
@@ -157,6 +176,13 @@ define([
                 realtimeLayer.markers[markerId] = L.stamp(marker);
                 marker.markerId = markerId;
                 marker.on('click', function (e) {
+                    require(["dojo/query", "dojo/NodeList-dom"], function (query) {
+                        var nl = query(".pressed").removeClass("pressed")
+                    });
+
+                    e.target.setIcon(L.divIcon({
+                        className: realtimeLayer.settings.styles[type].className + ' pressed'
+                    }));
                     MonitoringCard.showCard(e.target.markerId);
                 });
             }
