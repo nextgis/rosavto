@@ -18,23 +18,21 @@ define(['dojo/_base/declare', 'when'], function (declare, when) {
     return {
 
         debug: false, // заменить на true для включения отладочных сообщений Stomp.js и Sock.js
-
+        deferred: null,
         connect: function () {
             var me = this;
-            var deferred = when.defer();
-            if (this.client) {
-                deferred.resolve(this.client);
-            } else {
+            if (!this.deferred) {
+                this.deferred = when.defer();
                 // todo брать контекст с сервера
                 var client = Stomp.over(new SockJS('/monitoring-web/socket', null, {debug: this.debug}));
                 if (!this.debug) {
                     client.debug = null;
                 }
                 client.connect('spring', 'spring', function () {
-                    deferred.resolve(me.client = client);
+                    me.deferred.resolve(client);
                 });
             }
-            return deferred.promise;
+            return this.deferred.promise;
         }
 
     };

@@ -75,7 +75,7 @@ define([
             updateAttributes: function (featureId) {
                 var deferred = new Deferred();
 
-                this.attributesServiceFacade.getAttributesByGuid(featureId, 'cdfffff').then(lang.hitch(this, function (content) {
+                this.attributesServiceFacade.getAttributesByGuid(featureId, 'MonitoringCard.showCard').then(lang.hitch(this, function (content) {
                     this._updateAttributesHtmlBlock(content);
                     deferred.resolve();
                 }));
