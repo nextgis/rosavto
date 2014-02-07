@@ -11,9 +11,11 @@ define([
         _baseLayers: {},
         _overlaylayers: {},
         _legend: null,
-        _incidentLayer: null,
+        _ngwServiceFacade: null,
+        _markerZIndexOffset: 1000,
 
-        constructor: function (domNode, settings) {
+        constructor: function (domNode, settings, ngwServiceFacade) {
+            this._ngwServiceFacade = ngwServiceFacade;
             if (!settings.zoomControl) {
                 settings.zoomControl = false;
             }
@@ -89,11 +91,6 @@ define([
             if (this._legend) this._legend.addOverlay(geoJsonLayer, name);
         },
 
-        setIncidentLayer: function (name, geoJsonLayer) {
-            this._incidentLayer = geoJsonLayer;
-            this.addGeoJsonLayer(name, geoJsonLayer);
-        },
-
         showObjectAsMarker: function (url, id, isPopup) {
             xhr(application_root + url + id, {
                 handleAs: 'json'
@@ -118,17 +115,11 @@ define([
                 callback = lang.hitch(this, function (message) {
                     //console.log("message:" + message.body);
                     var body = JSON.parse(message.body);
-                    if (body.roadMeter2 && this._incidentLayer) {
+                    if (body.roadMeter2) {
                         if (body.latitude == undefined || body.longitude == undefined) {
-                            this._incidentLayer.hideIncidentLine(body.roadId,
-                                { distance: { km: body.roadMeter / 1000, m: body.roadMeter % 1000 } },
-                                { distance: { km: body.roadMeter2 / 1000, m: body.roadMeter2 % 1000 } }
-                            );
+                            this.hideLine(body, body[settings.id]);
                         } else {
-                            this._incidentLayer.showIncidentLine(body.roadId,
-                                { distance: { km: body.roadMeter / 1000, m: body.roadMeter % 1000 } },
-                                { distance: { km: body.roadMeter2 / 1000, m: body.roadMeter2 % 1000 } }
-                            );
+                            this.showLine(body, body[settings.id]);
                         }
                     } else if (body.latitude == undefined || body.longitude == undefined) {
                         this._deleteMarker(layerName, body[settings.id]);
@@ -170,7 +161,8 @@ define([
                 var marker = L.marker(latlng, {
                     icon: L.divIcon({
                         className: realtimeLayer.settings.styles[type].className
-                    })
+                    }),
+                    riseOnHover: true
                 });
                 realtimeLayer.layer.addLayer(marker);
                 realtimeLayer.markers[markerId] = L.stamp(marker);
@@ -183,8 +175,10 @@ define([
                     e.target.setIcon(L.divIcon({
                         className: realtimeLayer.settings.styles[type].className + ' pressed'
                     }));
+                    this._markerZIndexOffset++;
+                    e.target.setZIndexOffset(this._markerZIndexOffset);
                     MonitoringCard.showCard(e.target.markerId);
-                });
+                }, this);
             }
         },
 
@@ -265,6 +259,43 @@ define([
             if (!this._customizableGeoJsonLayer) return false;
 
             this._customizableGeoJsonLayer.addData(data);
+        },
+
+        _lineLayers: {},
+
+        showLine: function(body, guid) {
+            if (this._lineLayers[guid]) {
+                return;
+            }
+            var xhr = this._ngwServiceFacade.getIncidentLine(body.roadId,
+                { distance: { km: body.roadMeter / 1000, m: body.roadMeter % 1000 } },
+                { distance: { km: body.roadMeter2 / 1000, m: body.roadMeter2 % 1000 } }
+            );
+            xhr.then(lang.hitch(this, function (lineGeoJson) {
+                var jsonLayer = L.geoJson(lineGeoJson, {
+                    style: {
+                        color: '#FF0000',
+                        weight: 20,
+                        opacity: 0.5
+                    }
+                });
+                jsonLayer.on('click', function () {
+                    MonitoringCard.showCard(guid);
+                });
+                this._lmap.addLayer(jsonLayer);
+                this._lineLayers[guid] = jsonLayer;
+
+            }));
+        },
+
+        hideLine: function(body, guid) {
+            var jsonLayer = this._lineLayers[guid];
+            if (jsonLayer) {
+                this._lineLayers[guid] = null;
+                this._lmap.removeLayer(jsonLayer)
+            }
         }
+
+
     });
 });

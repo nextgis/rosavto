@@ -24,12 +24,6 @@ define([
                 //this._map.fitBounds(geojson.getBounds());
                 //topic.publish('map/identityUi/unblock');
             }));
-        },
-
-        hideIncidentLine: function (guid, pointStart, pointFinish) {
-            console.log("hideIncidentLine " + guid);
-            //TODO
-
         }
 
     });
