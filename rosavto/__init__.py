@@ -23,11 +23,15 @@ def main(global_config, **settings):
     config.add_route('attributes_html', '/attributes/html/{id}')
     config.add_route('incident', '/incident')
     config.add_route('center', '/center')
+    config.add_route('routing_sample', '/routing_sample')
     config.add_route('code', '/code')
 
     # proxies url
     config.add_route('proxy_ngw', '/ngw/*target_url')
     config.add_route('proxy_cit', '/cit/*target_url')
-
+    
+    # routing url 
+    config.add_route('routing', '/routing')
+    
     config.scan()
     return config.make_wsgi_app()
