@@ -14,17 +14,29 @@
 
 <div id="map"></div>
 
+<div><p><button id="getGeoJson">Получить геоданные из редактора</button>
+</div>
+
+<br/>
+
+<div>
+    Данные из callback функции редактора при изменении сведений о пикетаже
+    <div id="editorInfo"></div>
+</div>
+
 <%block name="inlineScripts">
     require([
         'dojo/DeferredList',
         'dojo/query',
+        'dojo/html',
         'rosavto/Map',
         'rosavto/NgwServiceFacade',
         'rosavto/Layers/StyledGeoJsonLayerMapExtension',
         'rosavto/Layers/IncidentsLayer',
+        'rosavto/controls/L.Control.IncidentEditor',
         'dojo/domReady!'],
 
-    function (DeferredList, query, Map, NgwServiceFacade, StyledGeoJsonLayerMapExtension, IncidentsLayer) {
+    function (DeferredList, query, html, Map, NgwServiceFacade, StyledGeoJsonLayerMapExtension, IncidentsLayer, IncidentEditor) {
         var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrlBase),
             map = new Map('map', {
                 center: [56.0369, 35.8788],
@@ -95,6 +107,26 @@
                                             {distance: {km: 123, m: 450}}
 
             );
+        });
+
+        var editorInfo = query('#editorInfo')[0];
+
+        var incidentEditor = new L.Control.IncidentEditor({
+            ngwServiceFacade: ngwServiceFacade,
+            map: map,
+            idLayer: 17,
+            roadGuid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
+            modes: ['point', 'line'],
+            activeMode: 'point',
+            callbackDistanceChange: function (distances) {
+                html.set(editorInfo, JSON.stringify(distances));
+            }
+        });
+
+        map.getLMap().addControl(incidentEditor);
+
+        query('#getGeoJson').on('click', function () {
+            alert(JSON.stringify(incidentEditor.getGeoJsonData()));
         });
     });
 </%block>

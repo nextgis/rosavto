@@ -131,6 +131,15 @@ define([
                     '&srs=' + srs;
 
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
+            },
+
+
+            getPointProjection: function (idLayer, guid, lat, lon) {
+                var url = 'layer/' + idLayer + '/rosavto/getlrdistbyuuid?guid=' + guid +
+                    '&lon=' + lon +
+                    '&lat=' + lat;
+
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
             }
         });
     });
