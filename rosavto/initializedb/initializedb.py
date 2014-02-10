@@ -10,6 +10,7 @@ from pyramid.paster import (
     )
 
 from rosavto.model import Base, DBSession, GasStation, Bridge
+from rosavto.model.route import Route
 
 
 def usage(argv):
@@ -29,6 +30,7 @@ def main(argv=sys.argv):
     DBSession.configure(bind=engine)
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
+    Route.metadata.create_all(engine)
     with transaction.manager:
         GasStation.import_from_geojson_file('rosavto/initializedb/data/fuel.geojson')
         Bridge.import_from_geojson_file('rosavto/initializedb/data/bridges.geojson')

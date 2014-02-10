@@ -32,6 +32,7 @@ def main(global_config, **settings):
     
     # routing url 
     config.add_route('routing', '/routing')
+    config.add_route('routes', '/routes')
     
     config.scan()
     return config.make_wsgi_app()

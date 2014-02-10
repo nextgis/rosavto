@@ -7,6 +7,7 @@ from shapely.geometry import Point
 
 from rosavto.model import DBSession
 from rosavto.model.way import Way
+from rosavto.views import create_error_response
 
 
 @view_config(route_name='routing', renderer='json')
@@ -60,14 +61,6 @@ def routing(request):
         }
         result['features'].append(feature)
 
-    return result
-
-
-def create_error_response(error_msg):
-    result = {
-        'type': 'ServiceException',
-        'description': str(error_msg)
-    }
     return result
 
 

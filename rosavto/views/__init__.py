@@ -105,3 +105,11 @@ def get_response_by_proxy(request, url):
             request.override_renderer = 'string'
 
     return response
+
+
+def create_error_response(error_msg):
+    result = {
+        'type': 'ServiceException',
+        'description': str(error_msg)
+    }
+    return result
