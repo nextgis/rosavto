@@ -47,6 +47,7 @@ import requests
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
+
 logger = logging.getLogger('pg_replica')
 
 
@@ -207,8 +208,8 @@ class PgDB:
         has_uuid = len(
             [f for f in fields if f[1] == 'uniq_uid' and f[2] == 'uuid']) > 0
         if not has_uuid:
-            self.logger.error('Can not register table "%s" because it has '
-                              'no "uniq_id" field of type "uuid".')
+            self.logger.error('Can not register table "%s" because it has no '
+                              '"uniq_id" field of type "uuid".' % table_name)
             return False
 
         proc_name = table + '_rep'
@@ -357,25 +358,28 @@ class PgDB:
                           'sql': encoded_sql
                          }
 
-                sql = '''SELECT %s
-                         FROM %s
-                         WHERE ST_Intersects(wkb_geometry,
-                             (SELECT wkb_geometry
-                              FROM %s
-                              WHERE uniq_uid = '%s'))
-                      ''' % (url_field, boundary, full_table_name, uid)
-                self._exec_sql(c, sql)
-                urls = c.fetchall()
-                print urls
+                #sql = '''SELECT %s
+                #         FROM %s
+                #         WHERE ST_Intersects(wkb_geometry,
+                #             (SELECT wkb_geometry
+                #              FROM %s
+                #              WHERE uniq_uid = '%s'))
+                #      ''' % (url_field, boundary, full_table_name, uid)
+                #self._exec_sql(c, sql)
+                #urls = c.fetchall()
 
-                if urls is None or len(urls) == 0:
-                    self.logger.error('No intersections with zones found.')
-                    continue
+                #if urls is None or len(urls) == 0:
+                #    self.logger.error('No intersections with zones found.')
+                #    continue
 
-                for url in urls:
-                    r = requests.post(url, params=payload)
-                    self.logger.debug('Server responce: %s - %s' %
-                                      (r.status_code, r.text))
+                #for url in urls:
+                #    r = requests.post(url, params=payload)
+
+                r = requests.post(
+                    'http://192.168.255.106:9000',
+                    data=payload)
+                self.logger.debug('Server responce: %s - %s' %
+                                  (r.status_code, r.text))
 
         self.clear_old_records(timestamp)
 
