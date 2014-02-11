@@ -2,6 +2,8 @@
 
 <%block name="title">Происшествия</%block>
 
+<button id="center">Центрировать по дороге {1437e736-974f-462a-86f8-85f0910089f0}  "Каспий" М-4</button>
+
 <div class="claro">
     <div style="width:49%; float:left;">
         <div id="map"></div>
@@ -136,6 +138,10 @@
                 layer.addObject(geoJson, getSelectedType(), guid);
                 incidentEditor.erase();
             }
+        });
+
+        query('#center').on('click', function () {
+            incidentEditor.centerByObject(23, '{1437e736-974f-462a-86f8-85f0910089f0}', 3000);
         });
     });
 </%block>

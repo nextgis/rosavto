@@ -11,6 +11,7 @@ define([
                 lineModeText: 'Создать отрезок происшествия',
                 eraseText: 'Стереть объект',
                 editorLayerStyle: {color: '#FF0000', weight: 10, opacity: 0.5 },
+                centeredLayerStyle: {opacity: 0.5, weight: 15, color: '#00FF00'},
                 callbackDistanceChange: function (data) {
                     console.log('IncidentEditor: ' + data);
                 },
@@ -274,6 +275,30 @@ define([
                 } else {
                     return null;
                 }
+            },
+
+            centerByObject: function (layerId, featureId, timeout) {
+                var layer, self;
+
+                this.options.ngwServiceFacade.getGeometryByGuid(layerId, featureId, 4326).then(lang.hitch(this, function (feature) {
+                    self = this;
+
+                    layer = this._editorLayer.addData(feature)
+
+                    layer.setStyle(function (feature) {
+                        return self.options.centeredLayerStyle;
+                    });
+
+                    this._map.fitBounds(layer.getBounds());
+
+                    if (timeout) {
+                        setTimeout(function () {
+                            self._map.removeLayer(layer);
+                        }, timeout);
+                    } else {
+                        self._map.removeLayer(layer);
+                    }
+                }));
             }
         });
     });
