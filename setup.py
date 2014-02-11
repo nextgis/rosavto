@@ -47,5 +47,6 @@ setup(name='rosavto',
       main = rosavto:main
       [console_scripts]
       initialize_rosavto_db = rosavto.initializedb.initializedb:main
+      ways_exporter = rosavto.initializedb.ways_exporter:main
       """,
 )
