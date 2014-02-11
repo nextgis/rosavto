@@ -50,6 +50,10 @@ define([
                 });
                 this._editorLayer.addTo(map);
 
+                this._centeredLayer = L.geoJson(null, {
+                    style: options.centeredLayerStyle
+                });
+                this._centeredLayer.addTo(map);
 
                 map.on('click', lang.hitch(this, function (e) {
                     this._clickHandler(e.latlng);
@@ -67,7 +71,7 @@ define([
 
             setRoadGuid: function (guid) {
                 this.options.roadGuid = guid;
-                this._clearGeo();
+                this._clearAll();
             },
 
             _createEraseButton: function (container) {
@@ -283,20 +287,16 @@ define([
                 this.options.ngwServiceFacade.getGeometryByGuid(layerId, featureId, 4326).then(lang.hitch(this, function (feature) {
                     self = this;
 
-                    layer = this._editorLayer.addData(feature)
+                    this._centeredLayer.addData(feature);
 
-                    layer.setStyle(function (feature) {
-                        return self.options.centeredLayerStyle;
-                    });
-
-                    this._map.fitBounds(layer.getBounds());
+                    this._map.fitBounds(this._centeredLayer.getBounds());
 
                     if (timeout) {
                         setTimeout(function () {
-                            self._map.removeLayer(layer);
+                            self._centeredLayer.clearLayers();
                         }, timeout);
                     } else {
-                        self._map.removeLayer(layer);
+                        this._centeredLayer.clearLayers();
                     }
                 }));
             }
