@@ -2,41 +2,62 @@
 
 <%block name="title">Происшествия</%block>
 
-<div class="code-description">
-    <p>Код с комментариями <a href="${request.route_url('code') + '#incidentCode'}">здесь</a></p>
+<div class="claro">
+    <div style="width:49%; float:left;">
+        <div id="map"></div>
+        <div style="margin: 5px 0;">
+            Тип создаваемого объекта:
+            <select id="typesSelector" name="select1" data-dojo-type="dijit/form/Select">
+                <option value="accident">ДТП</option>
+                <option value="snow">Снежный занос</option>
+            </select>
+
+            <button id="create" style="margin-left: 10px; background-color: gainsboro;">Создать новое происшествие
+            </button>
+        </div>
+        <div style="margin: 20px 0">
+            <div>
+                <button id="getGeoJson">Получить геоданные из редактора</button>
+            </div>
+            <div>
+                Данные из callback функции редактора при изменении сведений о пикетаже:
+                <div id="editorInfo"></div>
+            </div>
+        </div>
+    </div>
+    <div style="width:49%; float:right;">
+        <div id="map2"></div>
+        <div>
+##            Происшествия:
+            <br/>
+            <div id="incidentsList"></div>
+        </div>
+    </div>
 </div>
 
-<div>
-    <p><button id="buildLine">Построить линию</button> </br>
-        по GUID дороги = 4886ad28-7b11-9eba-5c9d-a4ecfd608099 </br>
-        с 64 км 321 м по 79 км 321 м</p>
-</div>
 
-<div id="map"></div>
 
-<div><p><button id="getGeoJson">Получить геоданные из редактора</button>
-</div>
-
-<br/>
-
-<div>
-    Данные из callback функции редактора при изменении сведений о пикетаже
-    <div id="editorInfo"></div>
-</div>
 
 <%block name="inlineScripts">
     require([
         'dojo/DeferredList',
         'dojo/query',
+        'dojo/_base/array',
         'dojo/html',
         'rosavto/Map',
         'rosavto/NgwServiceFacade',
+        'rosavto/Layers/StyledGeoJsonLayer',
         'rosavto/Layers/StyledGeoJsonLayerMapExtension',
         'rosavto/Layers/IncidentsLayer',
         'rosavto/controls/L.Control.IncidentEditor',
+        'dojo/parser',
+        'dijit/form/Select',
         'dojo/domReady!'],
 
-    function (DeferredList, query, html, Map, NgwServiceFacade, StyledGeoJsonLayerMapExtension, IncidentsLayer, IncidentEditor) {
+    function (DeferredList, query, array, html, Map, NgwServiceFacade, StyledGeoJsonLayer, StyledGeoJsonLayerMapExtension, IncidentsLayer, IncidentEditor,
+                parser, Select) {
+        parser.parse();
+
         var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrlBase),
             map = new Map('map', {
                 center: [56.0369, 35.8788],
@@ -44,70 +65,36 @@
                 zoomControl: true,
                 legend: true
             }),
+            map2 = new Map('map2', {
+                    center: [56.0369, 35.8788],
+                    zoom: 16,
+                    zoomControl: true,
+                    legend: true
+                }),
             styles,
             getIncident1, getIncident2, getIncident3,
             layer;
 
         map.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
+        map2.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
 
         styles = {
             'accident': {
-                Point: {className: 'accident'}
+                point: {className: 'accident'},
+                line: {opacity:0.5, weight: 15, color: '#FF0000'}
             },
-            'jam' : {
-                Point: {className: 'jam'}
+            'snow' : {
+                point: {className: 'snow'},
+                line: {opacity:0.5, weight: 15, color: '#1E00FF'}
             }
         };
-        layer = map.createStyledGeoJsonLayer('incidents', styles, function () {
-            alert('Вызван callback для объекта типа ' + this.properties.type);
+
+        layer = new StyledGeoJsonLayer(null, {
+            callbackClick: function () {},
+            styles: styles
         });
 
-        getIncident1 = ngwServiceFacade.getIncident([{
-            layer: 17,
-            guid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
-            distance: {km: 123, m: 300}
-        }]);
-
-        getIncident2 = ngwServiceFacade.getIncident([{
-            layer: 17,
-            guid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
-            distance: {km: 123, m: 400}
-        }]);
-
-        getIncident3 = ngwServiceFacade.getIncident([{
-            layer: 17,
-            guid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
-            distance: {km: 123, m: 500}
-        }]);
-
-        var dl = new DeferredList([getIncident1, getIncident2, getIncident3]);
-
-        dl.then(function (incidents) {
-            var countIncidents = incidents.length,
-                i;
-
-            for (var i = 0; i < countIncidents; i++) {
-                incidents[i][1].properties.type = i % 2 == 0 ? 'accident' : 'jam';
-                layer.addData(incidents[i][1]);
-            }
-        });
-
-        incidentsLayer = new IncidentsLayer(null, {
-            ngwServiceFacade: ngwServiceFacade,
-            color: '#FF0000',
-            weight: 20,
-            opacity: 0.5
-        });
-
-        map.addGeoJsonLayer('Происшествия', incidentsLayer);
-
-        query('#buildLine').on('click', function () {
-            incidentsLayer.showIncidentLine('4886ad28-7b11-9eba-5c9d-a4ecfd608099',
-                                            {distance: {km: 123, m: 200}},
-                                            {distance: {km: 123, m: 450}}
-
-            );
-        });
+        map2.addGeoJsonLayer('Происшествия', layer);
 
         var editorInfo = query('#editorInfo')[0];
 
@@ -127,6 +114,30 @@
 
         query('#getGeoJson').on('click', function () {
             alert(JSON.stringify(incidentEditor.getGeoJsonData()));
+        });
+
+        var getSelectedType = function () {
+            var selectedType;
+            array.forEach(dijit.byId("typesSelector").getOptions(), function(opt, i) {
+                if (opt.selected) {
+                    selectedType = opt.value;
+                }
+            });
+            return selectedType;
+        };
+
+        query('#create').on('click', function () {
+            var geoJson = incidentEditor.getGeoJsonData();
+
+            if (geoJson) {
+                var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                    return v.toString(16);
+                });
+
+                layer.addObject(geoJson, getSelectedType(), guid);
+                incidentEditor.erase();
+            }
         });
     });
 </%block>
