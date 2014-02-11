@@ -2,7 +2,10 @@
 
 <%block name="title">Происшествия</%block>
 
-<button id="center">Центрировать по дороге {1437e736-974f-462a-86f8-85f0910089f0}  "Каспий" М-4</button>
+<select id="roadsSelector" name="road1" data-dojo-type="dijit/form/Select">
+    <option value="{65de3f89-c234-44c5-867d-fd8961eb8644}">М-10 "Россия" Москва-Тверь-Великий Новгород-Санкт-Петербург</option>
+    <option value="{11b970fb-a9a8-474b-92cd-b0aa6a7f2d28}">А-147 Джубга-Сочи-граница с Республикой Абхазия</option>
+</select>
 
 <div class="claro">
     <div style="width:49%; float:left;">
@@ -116,9 +119,9 @@
             alert(JSON.stringify(incidentEditor.getGeoJsonData()));
         });
 
-        var getSelectedType = function () {
+        var getSelectedType = function (id) {
             var selectedType;
-            array.forEach(dijit.byId("typesSelector").getOptions(), function(opt, i) {
+            array.forEach(dijit.byId(id).getOptions(), function(opt, i) {
                 if (opt.selected) {
                     selectedType = opt.value;
                 }
@@ -135,13 +138,21 @@
                     return v.toString(16);
                 });
 
-                layer.addObject(geoJson, getSelectedType(), guid);
+                layer.addObject(geoJson, getSelectedType("typesSelector"), guid);
+                map2.getLMap().fitBounds(layer.getBounds());
                 incidentEditor.erase();
             }
         });
 
         query('#center').on('click', function () {
             incidentEditor.centerByObject(23, '{1437e736-974f-462a-86f8-85f0910089f0}', 3000);
+        });
+
+        var roadsSelector = dijit.byId('roadsSelector');
+
+        roadsSelector.on('change', function(roadGuid) {
+            incidentEditor.centerByObject(23, roadGuid, 3000);
+            incidentEditor.setRoadGuid(roadGuid);
         });
     });
 </%block>
