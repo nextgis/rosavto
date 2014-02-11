@@ -47,14 +47,12 @@
         'rosavto/Map',
         'rosavto/NgwServiceFacade',
         'rosavto/Layers/StyledGeoJsonLayer',
-        'rosavto/Layers/StyledGeoJsonLayerMapExtension',
-        'rosavto/Layers/IncidentsLayer',
         'rosavto/controls/L.Control.IncidentEditor',
         'dojo/parser',
         'dijit/form/Select',
         'dojo/domReady!'],
 
-    function (DeferredList, query, array, html, Map, NgwServiceFacade, StyledGeoJsonLayer, StyledGeoJsonLayerMapExtension, IncidentsLayer, IncidentEditor,
+    function (DeferredList, query, array, html, Map, NgwServiceFacade, StyledGeoJsonLayer, IncidentEditor,
                 parser, Select) {
         parser.parse();
 
