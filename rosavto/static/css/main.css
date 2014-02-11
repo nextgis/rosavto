@@ -59,6 +59,10 @@ div.leaflet-marker-icon.jam {
     background-image: url('images/jam.png');
 }
 
+div.leaflet-marker-icon.snow {
+    background-image: url('images/snow.png');
+}
+
 #attributes {
     width: 99%;
     margin: 4px 3px 10px 3px;
