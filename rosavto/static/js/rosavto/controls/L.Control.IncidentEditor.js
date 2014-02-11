@@ -73,6 +73,10 @@ define([
                 this._createButton(this.options.eraseText, 'erase', container, this._clearAll);
             },
 
+            erase: function () {
+                this._clearAll();
+            },
+
             _createButton: function (title, className, container, fn) {
                 var link = L.DomUtil.create('a', className, container);
                 link.href = '#';
