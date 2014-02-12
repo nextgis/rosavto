@@ -206,10 +206,12 @@ class PgDB:
 
         fields = self.get_table_fields(table, schema)
         has_uuid = len(
-            [f for f in fields if f[1] == 'uniq_uid' and f[2] == 'uuid']) > 0
+            [f for f in fields if f[1] == 'uniq_uid' and \
+                                  f[2] == 'varchar']) > 0
         if not has_uuid:
-            self.logger.error('Can not register table "%s" because it has no '
-                              '"uniq_id" field of type "uuid".' % table_name)
+            self.logger.error('Can not register table "%s" because it has '
+                              'no "uniq_id" field of type "varchar".'
+                              % table_name)
             return False
 
         proc_name = table + '_rep'
@@ -376,7 +378,7 @@ class PgDB:
                 #    r = requests.post(url, params=payload)
 
                 r = requests.post(
-                    'http://192.168.255.106:9000',
+                    'http://192.168.255.106:8000',
                     data=payload)
                 self.logger.debug('Server responce: %s - %s' %
                                   (r.status_code, r.text))
