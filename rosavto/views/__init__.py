@@ -39,6 +39,11 @@ def attributes(request):
     return {}
 
 
+@view_config(route_name='routing_sample', renderer='routing.mako')
+def routing_sample(request):
+    return {}
+
+
 @view_config(route_name='incident', renderer='incident.mako')
 def incident(request):
     return {}

@@ -7,7 +7,7 @@ body {
     margin: 4px;
 }
 
-#map {
+#map, #map2 {
     margin: 3px 0;
     height: 500px;
 }
@@ -28,6 +28,8 @@ div.code-description a {
 div.leaflet-marker-icon {
     width: 32px !important;
     height: 32px !important;
+    margin-left: -16px !important;
+    margin-top: -16px !important;
 }
 
 div.leaflet-marker-icon.machine {
@@ -57,6 +59,10 @@ div.leaflet-marker-icon.traffic {
 
 div.leaflet-marker-icon.jam {
     background-image: url('images/jam.png');
+}
+
+div.leaflet-marker-icon.snow {
+    background-image: url('images/snow.png');
 }
 
 #attributes {

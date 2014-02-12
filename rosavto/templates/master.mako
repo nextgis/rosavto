@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css"/>
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/kube.min.css')}"/>
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/widget.css')}"/>
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dijit/themes/claro/claro.css"/>
+
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/main.css')}"/>
 
     <script>
@@ -43,7 +46,7 @@
         <%block name="inlineScripts"/>
     </script>
 </head>
-<body >
+<body class="claro">
     <%include file='tabs.mako'/>
 
     ${self.body()}

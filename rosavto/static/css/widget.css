@@ -10,3 +10,32 @@ div.leaflet-popup-content {
     width: auto !important;
     min-width: 250px;
 }
+
+/*Incidents widget*/
+div.incident-editor {
+background-color: #ffffff;
+}
+
+div.incident-editor a.point-mode {
+    background: url('images/incident-editor.png') 0 0 ;
+}
+
+div.incident-editor a.point-mode:hover {
+    background: url('images/incident-editor.png') 0 -26px;
+}
+
+div.incident-editor a.line-mode {
+    background: url('images/incident-editor.png') -26px 0;
+}
+
+div.incident-editor a.line-mode:hover {
+    background: url('images/incident-editor.png') -26px -26px;
+}
+
+div.incident-editor a.erase {
+    background: url('images/incident-editor.png') -52px 0;
+}
+
+div.incident-editor a.erase:hover {
+    background: url('images/incident-editor.png') -52px -26px;
+}

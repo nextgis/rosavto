@@ -31,6 +31,10 @@ define([
             this.addOsmTileLayer();
         },
 
+        getLMap: function () {
+            return this._lmap;
+        },
+
         addWmsLayer: function (url, name, settings) {
             var wmsLayer = L.tileLayer.wms(url, settings);
 
@@ -113,23 +117,27 @@ define([
         addRealtimeLayer: function (layerName, settings) {
             var layer = L.layerGroup([]).addTo(this._lmap),
                 callback = lang.hitch(this, function (message) {
-                    //console.log("message:" + message.body);
                     var body = JSON.parse(message.body);
-                    if (body.roadMeter2) {
-                        if (body.latitude == undefined || body.longitude == undefined) {
-                            this.hideLine(body, body[settings.id]);
-                        } else {
-                            this.showLine(body, body[settings.id]);
-                        }
-                    } else if (body.latitude == undefined || body.longitude == undefined) {
-                        this._deleteMarker(layerName, body[settings.id]);
-                    } else {
+                    if (body.roadMeter && body.roadMeter2) {
+                        // если задан пикетаж, показываем отрезок
+                        this.showLine(body, body[settings.id]);
+                    } else if (body.latitude && body.longitude) {
+                        // если задана точка, рисуем маркер
                         this._renderMarker(layerName, body[settings.id], [body.latitude, body.longitude],
                             body[settings.styleField]);
+                    } else {
+                        // если нет ни точки, ни отрезка, значит нужно скрыть существующий маркер или отрезок
+                        if (this._lineLayers[body[settings.id]]) {
+                            // если есть отрезок с таким guid — скрываем его
+                            this.hideLine(body, body[settings.id]);
+                        } else {
+                            // иначе это событие по скрытию маркера — скрываем его
+                            this._deleteMarker(layerName, body[settings.id]);
+                        }
                     }
                 });
 
-            this._realTimeLayers[layerName] = {
+                this._realTimeLayers[layerName] = {
                 layer: layer,
                 settings: settings,
                 markers: {} // Map of markers: id of entity to id of map
@@ -272,10 +280,11 @@ define([
                 { distance: { km: body.roadMeter2 / 1000, m: body.roadMeter2 % 1000 } }
             );
             xhr.then(lang.hitch(this, function (lineGeoJson) {
+                var meteoLine = 'Meteo' === body.requestReason;
                 var jsonLayer = L.geoJson(lineGeoJson, {
                     style: {
-                        color: '#FF0000',
-                        weight: 20,
+                        color: meteoLine ? '#0000FF' : "#FF0000",
+                        weight: meteoLine ? 20 : 10,
                         opacity: 0.5
                     }
                 });
