@@ -489,7 +489,9 @@ class PgDB:
 
     def clear_old_records(self, timestamp):
         table_name = self._table_name(self.rep_schema, self.rep_table)
-        sql = 'DELETE FROM %s WHERE stamp < %s;' % (table_name, timestamp)
+        sql = '''DELETE FROM %s
+                 WHERE stamp < '%s'::timestamp with time zone;
+              ''' % (table_name, timestamp)
 
         self._exec_sql_and_commit(sql)
         self.logger.info('Old records removed.')
