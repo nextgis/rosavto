@@ -8,10 +8,11 @@ from sqlalchemy import (
     Text,
     Float
 )
-from geoalchemy2 import Geometry
+from geoalchemy2 import Geometry, shape
 from utilites import GeoJsonMixin, DictionaryMixin
 from rosavto.model import DBSession, Base
-
+import geojson
+from shapely.geometry import asShape
 
 #osm2pgrouting 'ways' table
 class Way(Base, DictionaryMixin, GeoJsonMixin):
@@ -36,29 +37,24 @@ class Way(Base, DictionaryMixin, GeoJsonMixin):
     source = Column(Integer, index=True)
     target = Column(Integer, index=True)
 
-    # @staticmethod
-    # def import_from_geojson_file(path_to_file):
-    #     with open(path_to_file, 'r') as gas_station_geojson_file:
-    #         dbsession = DBSession()
-    #
-    #         content = gas_station_geojson_file.read()
-    #         json_file = json.loads(content)
-    #         gas_stations_geojson = geojson.loads(json.dumps(json_file['features']))
-    #
-    #         for gas_station in gas_stations_geojson:
-    #             properties = gas_station['properties']
-    #             properties['geometry'] = shape.from_shape(asShape(gas_station['geometry']), 4326)
-    #             properties['id'] = long(gas_station['id'].split('/')[1])
-    #             if 'fuel:diesel' in properties: properties['fuel_diesel'] = True
-    #             if 'fuel:octane_92' in properties: properties['fuel_octane_92'] = True
-    #             if 'fuel:octane_95' in properties: properties['fuel_octane_95'] = True
-    #             if 'contact:website' in properties: properties['website'] = properties['contact:website']
-    #
-    #             gas_station = GasStation()
-    #             gas_station.set_fields_from_dict(properties)
-    #
-    #             dbsession.add(gas_station)
-    #             dbsession.flush()
+    @staticmethod
+    def import_from_geojson_file(path_to_file):
+        with open(path_to_file, 'r') as ways_geojson_file:
+            db_session = DBSession()
+
+            content = ways_geojson_file.read()
+            json_file = json.loads(content)
+            ways_geojson = geojson.loads(json.dumps(json_file['features']))
+
+            for way in ways_geojson:
+                properties = way['properties']
+                properties['the_geom'] = shape.from_shape(asShape(way['geometry']), 4326)
+
+                way_inst = Way()
+                way_inst.set_fields_from_dict(properties)
+
+                db_session.add(way_inst)
+                db_session.flush()
 
     @staticmethod
     def export_to_geojson_file(path_to_file):
@@ -86,7 +82,7 @@ class Way(Base, DictionaryMixin, GeoJsonMixin):
                 feature = {
                     'type': 'Feature',
                     'id': way[0].gid,
-                    'geometry': way[1],
+                    'geometry': json.loads(way[1]),
                     'properties': {}
                 }
                 #set attrs

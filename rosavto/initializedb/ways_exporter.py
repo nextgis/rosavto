@@ -13,7 +13,7 @@ from pyramid.paster import (
 def usage(argv):
     cmd = os.path.basename(argv[0])
     print('usage: %s <config_uri> <export_file_name>\n [-z]'
-          '(example: "%s development.ini export_file.geojson")' % (cmd, cmd))
+          '(example: "%s development.ini ways.geojson")' % (cmd, cmd))
     sys.exit(1)
 
 
