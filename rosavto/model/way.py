@@ -1,4 +1,5 @@
 import json
+from logging import log, INFO
 from datetime import datetime
 from sqlalchemy import (
     Column,
@@ -63,7 +64,12 @@ class Way(Base, DictionaryMixin, GeoJsonMixin):
     def export_to_geojson_file(path_to_file):
         with open(path_to_file, 'w') as ways_geojson_file:
             db_session = DBSession()
-            all_ways = db_session.query(Way, Way.the_geom.ST_AsGeoJSON()).limit(500)  # limit(500)  # test
+
+            count = db_session.query(Way).count()
+            log(INFO, 'Total ways: %s' % count)
+
+            log(INFO, 'Get data...')
+            all_ways = db_session.query(Way, Way.the_geom.ST_AsGeoJSON()).all()  # limit(500)  # test
 
             #create json
             output_content = {
@@ -74,17 +80,23 @@ class Way(Base, DictionaryMixin, GeoJsonMixin):
                 'features': []
             }
 
+            handled = 0
             for way in all_ways:
+                #create feat
                 feature = {
                     'type': 'Feature',
                     'id': way[0].gid,
                     'geometry': way[1],
-                    'properties': {
-                        'name': way[0].name,
-                        'osm_id': way[0].osm_id,
-                        'length': way[0].length
-                    }
+                    'properties': {}
                 }
+                #set attrs
+                for prop, val in way[0].as_properties().items():
+                    feature['properties'][prop] = val
+                #add to collection
                 output_content['features'].append(feature)
+                #log
+                handled += 1
+                if handled % 1000 == 0:
+                    log(INFO, 'Handled: %s' % handled)
 
-            json.dump(output_content, ways_geojson_file)
+            json.dump(output_content, ways_geojson_file, indent=4)
