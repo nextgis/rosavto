@@ -514,7 +514,7 @@ class PgDB:
                      operation smallint NOT NULL,
                      stamp timestamp with time zone NOT NULL DEFAULT
                          ('now'::text)::timestamp(2) with time zone,
-                     uid uuid NOT NULL)
+                     uid CHARACTER VARYING(50) NOT NULL)
               WITH (OIDS=FALSE);
               ALTER TABLE %s OWNER TO %s;
               COMMENT ON COLUMN %s.operation IS
