@@ -1,6 +1,7 @@
 import os
 import sys
 import transaction
+import zipfile
 
 from sqlalchemy import engine_from_config
 
@@ -10,6 +11,7 @@ from pyramid.paster import (
     )
 
 from rosavto.model import Base, DBSession, GasStation, Bridge
+from rosavto.model.way import Way
 
 
 def usage(argv):
@@ -32,3 +34,10 @@ def main(argv=sys.argv):
     with transaction.manager:
         GasStation.import_from_geojson_file('rosavto/initializedb/data/fuel.geojson')
         Bridge.import_from_geojson_file('rosavto/initializedb/data/bridges.geojson')
+        #load ways for routing
+        json_path = 'rosavto/initializedb/data/ways.geojson'
+        zf_path = 'rosavto/initializedb/data/ways.geojson.zip'
+        if os.path.isfile(zf_path):     # try open zip
+            zf = zipfile.ZipFile(zf_path)
+            zf.extractall(path='rosavto/initializedb/data/')
+        Way.import_from_geojson_file(json_path)
