@@ -21,13 +21,18 @@ define([
             },
 
             getAttributesByGuid: function (featureGuid, callback) {
-                var url = 'gis/card?guid=' + featureGuid;
+                var url = 'gis/description?guid=' + featureGuid;
 
                 if (callback) {
                     url += '&callback=' + callback;
                 }
 
-                return xhr(this._attributesServiceUrlBase + url, {handleAs: 'text', method: 'GET'});
+                return xhr(this._attributesServiceUrlBase + url, {
+                    handleAs: 'text',
+                    method: 'POST',
+                    data: {
+                        guids: featureGuid
+                    }});
             }
         });
     });
