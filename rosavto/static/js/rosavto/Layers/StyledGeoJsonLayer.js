@@ -4,6 +4,7 @@ define([
     'dojo/request/xhr'
 ], function (declare, lang, xhr) {
     return declare('rosavto.StyledGeoJsonLayer', [L.GeoJSON], {
+        _layersById: {},
 
         constructor: function () {
             var self = this;
@@ -19,8 +20,6 @@ define([
             if (!this.options.fieldStyleType) {
                 this.options.fieldStyleType = 'type';
             }
-
-            this._layersById = {};
         },
 
         addObject: function (geoJson, type, id) {

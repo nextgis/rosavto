@@ -9,13 +9,23 @@
 <div id="map"></div>
 
 <%block name="inlineScripts">
-    require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
+    require(['rosavto/Map', 'rosavto/Layers/RealtimeLayer', 'dojo/domReady!'], function (Map, RealtimeLayer) {
         var map = new Map('map', {
-                center: [56.7839, 35.9895],
+                center: [59.3441, 31.2633],
                 zoom: 13
             }),
             getGuid = function () {
                 return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
+            },
+            styles = {
+                'Accident': {
+                    point: {className: 'accident'},
+                    line: {opacity:0.5, weight: 15, color: '#FF0000'}
+                },
+                'snow' : {
+                    point: {className: 'snow'},
+                    line: {opacity:0.5, weight: 15, color: '#1E00FF'}
+                }
             },
             settings = {
                 socketUrl: 'http://zulu.centre-it.com:7040/monitoring-web/socket',
@@ -45,6 +55,13 @@
                 }
             };
 
-        map.addRealtimeLayer('roadsObjects', settings);
+            var realtimeLayer = new RealtimeLayer(null, {
+                callbackClick: function () {},
+                styles: styles
+            });
+
+            map.addGeoJsonLayer('Происшествия', realtimeLayer);
+            realtimeLayer.start('/app/subscribe/map/' + getGuid());
+            realtimeLayer._setDebug(true);
     });
 </%block>
