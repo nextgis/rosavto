@@ -266,7 +266,7 @@ class PgDB:
             schema = full_table_name.split('.')[0]
             table = full_table_name.split('.')[1]
 
-            ddl = self.dump_table(table)
+            ddl = self.dump_table(schema, table)
             if ddl == '':
                 self.logger.critical('Can not get DDL for table "%s".' % table)
                 return
@@ -414,14 +414,15 @@ class PgDB:
             os.remove(file_name)
             self.logger.debug('File "%s" processed and removed' % file_name)
 
-    def dump_table(self, table_name):
+    def dump_table(self, schema, table):
         c = self.con.cursor()
 
-        table_name = self._quote_str(table_name)
+        full_table_name = self._table_name(schema, table)
+        table_name = self._quote_str(table)
 
         ddl = ''
 
-        sql = "SELECT oid FROM pg_class WHERE relname = '%s'" % table_name
+        sql = "SELECT '%s'::regclass::oid" % full_table_name
         self._exec_sql(c, sql)
         table_oid = c.fetchone()[0]
 
@@ -449,9 +450,12 @@ class PgDB:
         self._exec_sql(c, sql)
         sequences = c.fetchall()
 
+        alter_stmt = ''
         if sequences is not None and len(sequences) != 0:
             for s in sequences:
-                ddl += self.dump_sequence(s) + '\n'
+                res = self.dump_sequence(s)
+                ddl += res[0] + '\n'
+                alter_stmt += res[1] + '\n'
 
         ddl += 'CREATE TABLE %s (' % table_name
 
@@ -495,7 +499,24 @@ class PgDB:
             fields = c.fetchall()
             for field in fields:
                 ddl += '%s, ' % field
-            ddl = ddl[:-2] + '))'
+            ddl = ddl[:-2] + '));\n'
+
+        ddl += alter_stmt
+
+        sql = '''SELECT pg_catalog.pg_get_indexdef(i.indexrelid, 0, true)
+                 FROM pg_catalog.pg_class c,
+                      pg_catalog.pg_class c2,
+                      pg_catalog.pg_index i
+                 WHERE c.oid = %s AND
+                       c.oid = i.indrelid AND
+                       i.indexrelid = c2.oid AND
+                       i.indisprimary = FALSE
+                 ORDER BY i.indisunique DESC, c2.relname
+              ''' % table_oid
+        self._exec_sql(c, sql)
+        indices = c.fetchall()
+        for idx in indices:
+            ddl += idx[0] + '\n'
 
         self.logger.debug('DDL for relation "%s": %s' % (table_name, ddl))
         return ddl
@@ -545,10 +566,10 @@ class PgDB:
                      cycle
                     )
 
-        ddl += '''ALTER SEQUENCE %s OWNED BY %s.%s;''' % (sequence[0],
+        ddl2 = '''ALTER SEQUENCE %s OWNED BY %s.%s;''' % (sequence[0],
             sequence[1], sequence[2])
 
-        return ' '.join(ddl.split())
+        return (' '.join(ddl.split()), ddl2)
 
     def list_changes(self, timestamp):
         c = self.con.cursor()
