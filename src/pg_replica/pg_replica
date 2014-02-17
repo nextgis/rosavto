@@ -33,6 +33,7 @@ import os
 import sys
 import glob
 import base64
+import codecs
 import datetime
 import argparse
 import logging
@@ -72,6 +73,7 @@ class PgDB:
         self.logger = logging.getLogger('pg_replica')
         self.re_ident_ok = re.compile(r"^\w+$")
         self.re_is_integer = re.compile('int[0-9]')
+        self.re_is_float = re.compile('float[0-9]')
 
         self.host = host
         self.port = port
@@ -304,7 +306,8 @@ class PgDB:
 
                 if operation != 1:
                     sql = "SELECT %s FROM %s WHERE uniq_uid='%s';" % (
-                        ', '.join(select_field_list), full_table_name, uid)
+                        ', '.join(self._quote_field_list(select_field_list)),
+                        full_table_name, uid)
                     self._exec_sql(c, sql)
                     values = c.fetchone()
 
@@ -330,7 +333,9 @@ class PgDB:
                     self.logger.debug('Found INSERT operation.')
 
                     sql = 'INSERT INTO %s(%s) VALUES(%s);' % (
-                        full_table_name, ', '.join(plain_field_list), values)
+                        full_table_name,
+                        ', '.join(self._quote_field_list(plain_field_list)),
+                        values)
                     self.logger.debug(
                         'Replication SQL: %s' % ' '.join(sql.split()))
                 elif operation == 3:
@@ -340,7 +345,7 @@ class PgDB:
                            SET (%s) = (%s)
                            WHERE uniq_uid='%s';
                         ''' % (full_table_name,
-                               ', '.join(plain_field_list),
+                               ', '.join(self._quote_field_list(plain_field_list)),
                                values,
                                uid)
                     self.logger.debug(
@@ -380,8 +385,7 @@ class PgDB:
                 r = requests.post(
                     'http://192.168.255.106:8000',
                     data=payload)
-                self.logger.debug('Server responce: %s - %s' %
-                                  (r.status_code, r.text))
+                self.logger.debug('Server responce: %s' % r.status_code)
 
         self.clear_old_records(timestamp)
 
@@ -392,14 +396,18 @@ class PgDB:
         cfg = ConfigParser.SafeConfigParser()
 
         for file_name in file_list:
-            print file_name
             self.logger.debug('Processing file: "%s".' % file_name)
-            cfg.read(file_name)
+            cfg.readfp(codecs.open(file_name, encoding='utf-8'))
 
             full_table_name = base64.urlsafe_b64decode(
-                cfg.get('changeset', 'table'))
-            ddl = base64.urlsafe_b64decode(cfg.get('changeset', 'ddl'))
-            sql = base64.urlsafe_b64decode(cfg.get('changeset', 'sql'))
+                cfg.get('changeset', 'table').encode('utf-8'))
+            self.logger.debug('Decoded table name: %s' % full_table_name)
+            ddl = base64.urlsafe_b64decode(
+                cfg.get('changeset', 'ddl').encode('utf-8'))
+            self.logger.debug('Decoded table DDL: %s' % ddl)
+            sql = base64.urlsafe_b64decode(
+                cfg.get('changeset', 'sql').encode('utf-8')).decode('utf-8')
+            self.logger.debug('Decoded table SQL: %s' % sql)
 
             schema = full_table_name.split('.')[0]
             table = full_table_name.split('.')[1]
@@ -474,7 +482,7 @@ class PgDB:
         self._exec_sql(c, sql)
         fields = c.fetchall()
         for field in fields:
-            ddl += '%s %s' % (field[0], field[3])
+            ddl += '"%s" %s' % (field[0], field[3])
             if field[1]:
                 ddl += ' NOT NULL'
             if field[2]:
@@ -630,7 +638,7 @@ class PgDB:
 
             if field_type in ['text', 'varchar']:
                 if value is not None:
-                    out += u"'%s', " % value
+                    out += u"'%s', " % self._quote_str(value)
                 else:
                     out += u'NULL, '
             elif field_type == 'bool':
@@ -643,7 +651,8 @@ class PgDB:
                     out += u"'%s', " % value
                 else:
                     out += u'NULL, '
-            elif self.re_is_integer.match(field_type) is not None:
+            elif self.re_is_integer.match(field_type) is not None or \
+                    self.re_is_float.match(field_type) is not None:
                 if value is not None:
                     out += '%s, ' % value
                 else:
@@ -707,6 +716,15 @@ class PgDB:
     def _quote_str(self, txt):
         txt = unicode(txt)
         return txt.replace("'", "''")
+
+    def _quote_field_list(self, field_list):
+        quoted_fields = []
+        for field in field_list:
+            if field.startswith('encode') or field.startswith('ST_GeomFrom'):
+                quoted_fields.append(field)
+                continue
+            quoted_fields.append('"%s"' % field)
+        return quoted_fields
 
     def _table_name(self, schema, table):
         if not schema:
