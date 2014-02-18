@@ -63,7 +63,8 @@ define([
                                     'type': 'layer',
                                     'id': l.id,
                                     'parent': xid,
-                                    'display_name': l.display_name
+                                    'display_name': l.display_name,
+                                    'geometry_type': l.source.geometry_type
                                 });
 
                                 // стили
@@ -133,6 +134,16 @@ define([
                 if (res.length > 0) {
                     display_name = res[0].display_name;
                     return display_name;
+                }
+            },
+
+            getLayerById: function (id) {
+                var result = this.store.query({id: id, type: 'layer'});
+
+                if (result.length === 0) {
+                    return null;
+                } else {
+                    return result[0];
                 }
             }
         });

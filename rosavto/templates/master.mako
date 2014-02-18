@@ -19,6 +19,7 @@
 
             // Dojo's config
             dojoConfig = {
+                isDebug: true,
                 async: true,
                 baseUrl: "${request.static_url('rosavto:static/js/')}",
                 packages: [

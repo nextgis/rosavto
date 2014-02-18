@@ -36,6 +36,8 @@
 
         map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 8);
         map.addNgwTileLayer('Регионы', ngwUrlForTiles, 7);
+        map.addNgwTileLayer('Объезды', ngwUrlForTiles, 7);
+        map.addNgwTileLayer('Датчики', ngwUrlForTiles, 15);
 
         layersInfo = new LayersInfo(ngwServiceFacade);
 
