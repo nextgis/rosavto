@@ -96,6 +96,7 @@ define([
                     layerId,
                     ngwLayerFeaturesCount,
                     ngwFeature,
+                    label,
                     i;
 
                 for (layerId in ngwFeatures) {
@@ -122,8 +123,16 @@ define([
                                     if (!ngwFeature.fields[this.fieldIdentify]) {
                                         console.log('MapIdentify: Identify field "' + this.fieldIdentify + '" was not found');
                                     } else {
+
+                                        // Temporary solution: rendering type name instead of label
+                                        if (ngwFeature.fields && ngwFeature.fields.type_name) {
+                                            label = ngwFeature.fields.type_name;
+                                        } else {
+                                            label = ngwFeature.label;
+                                        }
+
                                         identifiedLayer.features.push({
-                                            label: ngwFeature.label,
+                                            label: label,
                                             id: ngwFeature.fields[this.fieldIdentify]
                                         });
                                     }
