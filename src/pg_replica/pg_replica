@@ -32,6 +32,7 @@ import re
 import os
 import sys
 import glob
+import fcntl
 import base64
 import codecs
 import datetime
@@ -50,6 +51,7 @@ psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
 
 logger = logging.getLogger('pg_replica')
+pid_file = 'pg_replica.pid'
 
 
 class DbError(Exception):
@@ -761,6 +763,12 @@ def apply_changesets(host, port, dbname, user, passwd, directory):
 
 
 if __name__ == '__main__':
+    fp = open(os.path.join('/var/run', pid_file), 'w')
+    try:
+        fcntl.lockf(fp, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except IOError:
+        sys.exit(0)
+
     logger.setLevel(logging.DEBUG)
 
     ch = logging.StreamHandler()
