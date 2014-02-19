@@ -21,7 +21,7 @@ define([
             },
 
             getAttributesByGuid: function (featureGuid, callback) {
-                var url = 'gis/description?guid=' + featureGuid;
+                var url = 'gis/card?guid=' + featureGuid;
 
                 if (callback) {
                     url += '&callback=' + callback;
