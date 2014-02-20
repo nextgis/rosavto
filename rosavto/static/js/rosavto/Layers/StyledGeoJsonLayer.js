@@ -69,7 +69,7 @@ define([
 
             layer.on('click', function (e) {
                 if (self.options.callbackClick) {
-                    self.options.callbackClick.apply(this, e);
+                    self.options.callbackClick.call(this, feature.properties.__id, feature);
                 }
             });
 

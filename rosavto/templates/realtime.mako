@@ -56,7 +56,9 @@
             };
 
             var realtimeLayer = new RealtimeLayer(null, {
-                callbackClick: function () {},
+                callbackClick: function (feature) {
+                    alert(JSON.stringify(feature));
+                },
                 styles: styles
             });
 
