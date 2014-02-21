@@ -34,7 +34,8 @@
             mapIdentify,
             attributeGetter;
 
-        map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 18);
+        map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 18);
+        map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 8);
         map.addNgwTileLayer('Объезды', ngwUrlForTiles, 24);
         map.addNgwTileLayer('Датчики', ngwUrlForTiles, 15);
 
