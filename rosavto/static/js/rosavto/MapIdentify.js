@@ -40,7 +40,7 @@ define([
                 var map = this.map._lmap,
                     latlngClick = e.latlng;
 
-                return this.layersInfo.getLayersIdByStyles(this.map._ngwTileLayers).then(lang.hitch(this, function (layersId) {
+                return this.layersInfo.getLayersIdByStyles(this.map.getVisibleNgwLayers()).then(lang.hitch(this, function (layersId) {
                     var url = this.urlNgw + 'feature_layer/identify',
                         zoom = map.getZoom(),
                         point = map.project([e.latlng.lat, e.latlng.lng], zoom),
