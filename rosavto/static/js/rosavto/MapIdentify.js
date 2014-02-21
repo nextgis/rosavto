@@ -44,15 +44,15 @@ define([
                     var url = this.urlNgw + 'feature_layer/identify',
                         zoom = map.getZoom(),
                         point = map.project([e.latlng.lat, e.latlng.lng], zoom),
-                        pointTopLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), zoom)),
-                        pointBottomRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom)),
+                        pointBottomLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), zoom)),
+                        pointTopRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom)),
                         wktBounds;
 
-                    wktBounds = 'POLYGON((' + pointTopLeft.x + ' ' + pointTopLeft.y + ', ' +
-                        pointBottomRight.x + ' ' + pointTopLeft.y + ', ' +
-                        pointBottomRight.x + ' ' + pointBottomRight.y + ', ' +
-                        pointTopLeft.x + ' ' + pointBottomRight.y + ', ' +
-                        pointTopLeft.x + ' ' + pointTopLeft.y + '))';
+                    wktBounds = 'POLYGON((' + pointBottomLeft.x + ' ' + pointBottomLeft.y + ', ' +
+                        pointBottomLeft.x + ' ' + pointTopRight.y + ', ' +
+                        pointTopRight.x + ' ' + pointTopRight.y + ', ' +
+                        pointTopRight.x + ' ' + pointBottomLeft.y + ', ' +
+                        pointBottomLeft.x + ' ' + pointBottomLeft.y + '))';
 
                     this.ngwServiceFacade.identifyFeaturesByLayers(layersId, wktBounds, 3857).then(lang.hitch(this, function (ngwFeatures) {
                         var identifiedFeatures;
