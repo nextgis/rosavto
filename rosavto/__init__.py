@@ -1,8 +1,9 @@
 from pyramid.config import Configurator
+from pyramid.renderers import JSON
 from sqlalchemy import engine_from_config
 
 from rosavto.model import Base, DBSession
-
+from rosavto.model.uuid_type import UuidJsonEncoder
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
@@ -32,6 +33,10 @@ def main(global_config, **settings):
     
     # routing url 
     config.add_route('routing', '/routing')
-    
+    config.add_route('simple_routing', '/simple_routing')
+
+    #add custom renderer
+    config.add_renderer('uuid_json', JSON(serializer=UuidJsonEncoder))
+
     config.scan()
     return config.make_wsgi_app()
