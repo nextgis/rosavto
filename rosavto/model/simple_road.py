@@ -4,36 +4,37 @@ from datetime import datetime
 from sqlalchemy import (
     Column,
     Integer,
-    BigInteger,
     Text,
     Float
 )
 from geoalchemy2 import Geometry, shape
 from utilites import GeoJsonMixin, DictionaryMixin
 from rosavto.model import DBSession, Base
+from rosavto.model.uuid_type import GUID, UuidJsonEncoder
 import geojson
 from shapely.geometry import asShape
 
 # Simple routing table
 class SimpleRoad(Base, DictionaryMixin, GeoJsonMixin):
-    __tablename__ = 'routing.simple_road'
+    __tablename__ = 'simple_road'
+    __table_args__ = {'schema': 'routing'}
 
     id = Column(Integer, primary_key=True)
     length = Column(Float)
     name = Column(Text)
     name_short = Column(Text)
     road_no = Column(Text)
-    road_uid = Column(Text)  # uuid!!!
+    road_uid = Column(GUID)
     the_geom = Column(Geometry(spatial_index=True, srid=4326))
     source = Column(Integer, index=True)
     target = Column(Integer, index=True)
 
     @staticmethod
     def import_from_geojson_file(path_to_file):
-        with open(path_to_file, 'r') as ways_geojson_file:
+        with open(path_to_file, 'r') as geojson_file:
             db_session = DBSession()
 
-            content = ways_geojson_file.read()
+            content = geojson_file.read()
             json_file = json.loads(content)
             ways_geojson = geojson.loads(json.dumps(json_file['features']))
 
@@ -79,6 +80,8 @@ class SimpleRoad(Base, DictionaryMixin, GeoJsonMixin):
                 #set attrs
                 for prop, val in way[0].as_properties().items():
                     feature['properties'][prop] = val
+                #add id column explicit
+                feature['properties']['id'] = way[0].id
                 #add to collection
                 output_content['features'].append(feature)
                 #log
@@ -86,4 +89,4 @@ class SimpleRoad(Base, DictionaryMixin, GeoJsonMixin):
                 if handled % 1000 == 0:
                     log(INFO, 'Handled: %s' % handled)
 
-            json.dump(output_content, ways_geojson_file, indent=4)
+            json.dump(output_content, ways_geojson_file, indent=4, cls=UuidJsonEncoder)

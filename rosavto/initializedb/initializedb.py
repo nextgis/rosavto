@@ -12,7 +12,7 @@ from pyramid.paster import (
 
 from rosavto.model import Base, DBSession, GasStation, Bridge
 from rosavto.model.way import Way
-
+from rosavto.model.simple_road import SimpleRoad
 
 def usage(argv):
     cmd = os.path.basename(argv[0])
@@ -41,3 +41,6 @@ def main(argv=sys.argv):
             zf = zipfile.ZipFile(zf_path)
             zf.extractall(path='rosavto/initializedb/data/')
         Way.import_from_geojson_file(json_path)
+        #load simple_roads
+        json_path = 'rosavto/initializedb/data/simple_roads.geojson'
+        SimpleRoad.import_from_geojson_file(json_path)
