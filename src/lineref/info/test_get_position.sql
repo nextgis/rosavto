@@ -1,1 +1,1 @@
-﻿SELECT ST_AsText( ng_getlrposbyuuid('thematic.parts', '4886ad28-7b11-9eba-5c9d-a4ecfd608099', 20854.352067428));
+﻿SELECT ST_AsText( ng_getlrposbyuuid('thematic.parts', '{e13F9669-4158-43E1-8ad7-0Fcf00A6a540}', 365123));

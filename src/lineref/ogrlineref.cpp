@@ -515,7 +515,7 @@ int CreateSubline(OGRLayer* const poPkLayer, double dfPosBeg, double dfPosEnd, O
 
 int CreatePartsFromLineString(OGRLineString* pPathGeom, OGRLayer* const poPkLayer, int nMValField, double dfStep, OGRLayer* const poOutLayer, int bDisplayProgress, int bQuiet, const char* pszOutputSepFieldName = NULL, const char* pszOutputSepFieldValue = NULL)
 {
-    //check pickets and fill map with picket data
+    //check repers type
     OGRwkbGeometryType eGeomType = poPkLayer->GetGeomType();
     if (wkbFlatten(eGeomType) != wkbPoint)
     {
@@ -523,9 +523,11 @@ int CreatePartsFromLineString(OGRLineString* pPathGeom, OGRLayer* const poPkLaye
         return 1;
     }
 
+    //create sorted list of repers
     std::map<double, OGRPoint*> moRepers;
     poPkLayer->ResetReading();
     OGRFeature* pReperFeature = NULL;
+    double dfTestDistance = 0;
     while ((pReperFeature = poPkLayer->GetNextFeature()) != NULL)
     {
         double dfReperPos = pReperFeature->GetFieldAsDouble(nMValField);
@@ -541,7 +543,20 @@ int CreatePartsFromLineString(OGRLineString* pPathGeom, OGRLayer* const poPkLaye
                         "The distance %f is already present in repers file!", dfReperPos);
                 }
             }
-            moRepers[dfReperPos] = pPt;
+            //check if reper incide path
+            dfTestDistance = pPathGeom->Project(pPt);
+            if (dfTestDistance == 0 || dfTestDistance == pPathGeom->get_Length())
+            {
+                if (!bQuiet)
+                {
+                    CPLError(CE_Warning, CPLE_AppDefined,
+                        "The distance %f is out of path!", dfReperPos);
+                }
+            }
+            else
+            {
+                moRepers[dfReperPos] = pPt;
+            }           
         }
         OGRFeature::DestroyFeature(pReperFeature);
     }
@@ -761,8 +776,18 @@ int CreatePartsFromLineString(OGRLineString* pPathGeom, OGRLayer* const poPkLaye
         fprintf(stdout, "\nCreate pickets\n");
     }
 
-    long nBegin = ceil(dfBeginPosition / dfStep) * dfStep;
+    long nBegin = 0;
+    
+    if (pPtBeg != NULL)
+        nBegin = ceil(dfPtBegPosition / dfStep) * dfStep;
+    else
+        nBegin = ceil(dfBeginPosition / dfStep) * dfStep;
+
     double dfRoundBeg = nBegin;
+
+    if (pPtEnd != NULL)
+        dfEndPosition = dfPtEndPosition;
+
     dfFactor = dfStep / (dfEndPosition - dfRoundBeg);
     nCount = 0;
     moRepers.clear();
@@ -772,7 +797,7 @@ int CreatePartsFromLineString(OGRLineString* pPathGeom, OGRLayer* const poPkLaye
     if (pPtEnd != NULL)
         moRepers[dfPtEndPosition] = pPtEnd;
 
-    for (double dfDist = dfRoundBeg; dfDist < dfEndPosition; dfDist += dfStep)
+    for (double dfDist = dfRoundBeg; dfDist <= dfEndPosition; dfDist += dfStep)
     {
         if (bDisplayProgress)
         {
