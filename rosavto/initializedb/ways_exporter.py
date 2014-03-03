@@ -1,43 +1,62 @@
+import argparse
 import os
-import sys
 from sqlalchemy import engine_from_config
 from rosavto.model import DBSession
 from rosavto.model.way import Way
+from rosavto.model.simple_road import SimpleRoad
 from logging import log, INFO, ERROR, getLogger
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
 )
 
+def argparser_prepare():
+    class PrettyFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
+        max_help_position = 35
 
-def usage(argv):
-    cmd = os.path.basename(argv[0])
-    print('usage: %s <config_uri> <export_file_name>\n [-z]'
-          '(example: "%s development.ini ways.geojson")' % (cmd, cmd))
-    sys.exit(1)
+    parser = argparse.ArgumentParser(description='Export ways or simple roads (federal ways) tables from dev db',
+                                     formatter_class=PrettyFormatter)
+    parser.add_argument('config_uri', type=str,
+                        help='config file path')
+    parser.add_argument('output_path', type=str,
+                        help='export file path')
+    parser.add_argument('-z', '--zip', action='store_true',
+                        help='zip exported file')
+    parser.add_argument('-s', '--simple-roads', action='store_true',
+                        help='export simple roads (federal ways)')
+    parser.epilog = '''Samples:
+                 %(prog)s development.ini ways.geojson
+                 %(prog)s development.ini ways.geojson -z
+                 %(prog)s development.ini simple_roads.geojson -s
+                 ''' % {'prog': parser.prog}
+    return parser
 
 
-def main(argv=sys.argv):
-    if len(argv) < 3:
-        usage(argv)
-    config_uri = argv[1]
-    out_path = argv[2]
-    setup_logging(config_uri)
+def main():
+    #parse args
+    parser = argparser_prepare()
+    args = parser.parse_args()
+
+
+    setup_logging(args.config_uri)
     getLogger('sqlalchemy.engine').setLevel(ERROR)
-    settings = get_appsettings(config_uri)
+    settings = get_appsettings(args.config_uri)
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
 
     log(INFO, "Export started...")
-    Way.export_to_geojson_file(out_path)
+    if args.simple_roads:
+        SimpleRoad.export_to_geojson_file(args.output_path)
+    else:
+        Way.export_to_geojson_file(args.output_path)
 
-    if '-z' in argv:
+    if args.zip:
         log(INFO, "Zip file...")
         import zipfile
-        zf = zipfile.ZipFile(out_path+'.zip', 'w',  zipfile.ZIP_DEFLATED, allowZip64=True)
-        zf.write(out_path)
+        zf = zipfile.ZipFile(args.output_path+'.zip', 'w',  zipfile.ZIP_DEFLATED, allowZip64=True)
+        zf.write(args.output_path)
         zf.close()
-        os.remove(out_path)
+        os.remove(args.output_path)
 
     log(INFO, "Export successful!")
 
