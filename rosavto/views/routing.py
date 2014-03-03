@@ -110,7 +110,7 @@ class Router():
         return route
 
     def get_net_query(self):
-        sel = select([Way.gid.label('id'), Way.source, Way.target, Way.length.label('cost'), Way.reverse_cost])
+        sel = select([Way.gid.label('id'), Way.source, Way.target, Way.to_cost.label('cost'), Way.reverse_cost])
         return str(sel)
 
     def get_restrict_query(self, barrier_edge_ids=[]):
