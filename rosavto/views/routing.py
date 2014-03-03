@@ -1,5 +1,6 @@
 import json
 from sqlalchemy.sql import select, text
+from sqlalchemy.exc import InternalError
 from sqlalchemy import func
 from geoalchemy2.elements import WKTElement
 from pyramid.view import view_config
@@ -98,7 +99,14 @@ class Router():
         pgr_trsp = select(['id2'], from_obj=func.pgr_trsp(self.get_net_query(), start_edge_id, position,
                                                           end_edge_id, position, True, True,
                                                           self.get_restrict_query(barrier_edge_ids))).alias('trsp')
-        route = self._session.query(Way.gid, Way.name, Way.osm_id, Way.length, Way.the_geom.ST_AsGeoJSON()).select_from(pgr_trsp).join(Way, text('trsp.id2') == Way.gid).all()
+        try:
+            route = self._session.query(Way.gid, Way.name, Way.osm_id, Way.length, Way.the_geom.ST_AsGeoJSON()).select_from(pgr_trsp).join(Way, text('trsp.id2') == Way.gid).all()
+        except InternalError, err:
+            exc_desc = str(err)
+            if 'Path Not Found' in exc_desc:
+                raise Exception('Path Not Found')
+            else:
+                raise
         return route
 
     def get_net_query(self):
