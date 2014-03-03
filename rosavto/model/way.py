@@ -16,7 +16,8 @@ from shapely.geometry import asShape
 
 #osm2pgrouting 'ways' table
 class Way(Base, DictionaryMixin, GeoJsonMixin):
-    __tablename__ = 'ways'  # temporary! ways
+    __tablename__ = 'ways'
+    __table_args__ = {'schema': 'routing'}
 
     gid = Column(Integer, primary_key=True)
     class_id = Column(Integer)
