@@ -1,5 +1,6 @@
 import json
 from sqlalchemy.sql import select, text
+from sqlalchemy.exc import InternalError
 from sqlalchemy import func
 from geoalchemy2.elements import WKTElement
 from pyramid.view import view_config
@@ -9,7 +10,7 @@ from rosavto.model import DBSession
 from rosavto.model.simple_road import SimpleRoad
 
 
-@view_config(route_name='simple_routing', renderer='uuid_json')
+@view_config(route_name='simple_routing', renderer='json')
 def simple_routing(request):
     #parse args (coord)
     try:
@@ -74,7 +75,15 @@ class SimpleRouter():
         #request
         pgr_trsp = select(['id2'], from_obj=func.pgr_trsp(self.get_net_query(), start_edge_id, position,
                                                           end_edge_id, position, False, False)).alias('trsp')
-        route = self._session.query(SimpleRoad.id, SimpleRoad.name, SimpleRoad.name_short, SimpleRoad.road_no, SimpleRoad.road_uid, SimpleRoad.the_geom.ST_AsGeoJSON()).select_from(pgr_trsp).join(SimpleRoad, text('trsp.id2') == SimpleRoad.id).all()
+
+        try:
+            route = self._session.query(SimpleRoad.id, SimpleRoad.name, SimpleRoad.name_short, SimpleRoad.road_no, SimpleRoad.road_uid, SimpleRoad.the_geom.ST_AsGeoJSON()).select_from(pgr_trsp).join(SimpleRoad, text('trsp.id2') == SimpleRoad.id).all()
+        except InternalError, err:
+            exc_desc = str(err)
+            if 'Path Not Found' in exc_desc:
+                raise Exception('Path Not Found')
+            else:
+                raise
         return route
 
     def get_net_query(self):

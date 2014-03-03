@@ -5,14 +5,15 @@ from sqlalchemy import (
     Column,
     Integer,
     Text,
-    Float
+    Float,
+    String
 )
 from geoalchemy2 import Geometry, shape
 from utilites import GeoJsonMixin, DictionaryMixin
 from rosavto.model import DBSession, Base
-from rosavto.model.uuid_type import GUID, UuidJsonEncoder
 import geojson
 from shapely.geometry import asShape
+
 
 # Simple routing table
 class SimpleRoad(Base, DictionaryMixin, GeoJsonMixin):
@@ -24,7 +25,7 @@ class SimpleRoad(Base, DictionaryMixin, GeoJsonMixin):
     name = Column(Text)
     name_short = Column(Text)
     road_no = Column(Text)
-    road_uid = Column(GUID)
+    road_uid = Column(String(length=38))
     the_geom = Column(Geometry(spatial_index=True, srid=4326))
     source = Column(Integer, index=True)
     target = Column(Integer, index=True)
@@ -62,8 +63,8 @@ class SimpleRoad(Base, DictionaryMixin, GeoJsonMixin):
             #create json
             output_content = {
                 'type': 'FeatureCollection',
-                'generator': "rosavto-data",
-                'copyright': "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+                'generator': 'rosavto-data',
+                'copyright': 'The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.',
                 'timestamp': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S'),
                 'features': []
             }
@@ -89,4 +90,4 @@ class SimpleRoad(Base, DictionaryMixin, GeoJsonMixin):
                 if handled % 1000 == 0:
                     log(INFO, 'Handled: %s' % handled)
 
-            json.dump(output_content, ways_geojson_file, indent=4, cls=UuidJsonEncoder)
+            json.dump(output_content, ways_geojson_file, indent=4)
