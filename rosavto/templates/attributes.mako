@@ -21,7 +21,7 @@
         'dojo/domReady!'],
 
     function (Map, LayersInfo, MapIdentify, AttributeGetter, AttributesServiceFacade, NgwServiceFacade) {
-        var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrlBase),
+        var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
             attributesBaseUrl = application_root + '/cit/',
             attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl),
             map = new Map('map', {
@@ -34,10 +34,11 @@
             mapIdentify,
             attributeGetter;
 
-        map.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
-        map.addNgwTileLayer('Регионы', ngwUrlBase, 7);
-        map.addNgwTileLayer('Нормативные участки дорог', ngwUrlBase, 10);
-        map.addNgwTileLayer('Участки подрядных организаций', ngwUrlBase, 9);
+        map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 18);
+        map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 8);
+        map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 19);
+        map.addNgwTileLayer('Объезды', ngwUrlForTiles, 24);
+        map.addNgwTileLayer('Датчики', ngwUrlForTiles, 15);
 
         layersInfo = new LayersInfo(ngwServiceFacade);
 

@@ -32,7 +32,9 @@ import re
 import os
 import sys
 import glob
+import fcntl
 import base64
+import codecs
 import datetime
 import argparse
 import logging
@@ -49,6 +51,7 @@ psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
 
 logger = logging.getLogger('pg_replica')
+pid_file = 'pg_replica.pid'
 
 
 class DbError(Exception):
@@ -72,6 +75,7 @@ class PgDB:
         self.logger = logging.getLogger('pg_replica')
         self.re_ident_ok = re.compile(r"^\w+$")
         self.re_is_integer = re.compile('int[0-9]')
+        self.re_is_float = re.compile('float[0-9]')
 
         self.host = host
         self.port = port
@@ -206,10 +210,12 @@ class PgDB:
 
         fields = self.get_table_fields(table, schema)
         has_uuid = len(
-            [f for f in fields if f[1] == 'uniq_uid' and f[2] == 'uuid']) > 0
+            [f for f in fields if f[1] == 'uniq_uid' and \
+                                  f[2] == 'varchar']) > 0
         if not has_uuid:
-            self.logger.error('Can not register table "%s" because it has no '
-                              '"uniq_id" field of type "uuid".' % table_name)
+            self.logger.error('Can not register table "%s" because it has '
+                              'no "uniq_id" field of type "varchar".'
+                              % table_name)
             return False
 
         proc_name = table + '_rep'
@@ -264,7 +270,7 @@ class PgDB:
             schema = full_table_name.split('.')[0]
             table = full_table_name.split('.')[1]
 
-            ddl = self.dump_table(table)
+            ddl = self.dump_table(schema, table)
             if ddl == '':
                 self.logger.critical('Can not get DDL for table "%s".' % table)
                 return
@@ -302,7 +308,8 @@ class PgDB:
 
                 if operation != 1:
                     sql = "SELECT %s FROM %s WHERE uniq_uid='%s';" % (
-                        ', '.join(select_field_list), full_table_name, uid)
+                        ', '.join(self._quote_field_list(select_field_list)),
+                        full_table_name, uid)
                     self._exec_sql(c, sql)
                     values = c.fetchone()
 
@@ -328,7 +335,9 @@ class PgDB:
                     self.logger.debug('Found INSERT operation.')
 
                     sql = 'INSERT INTO %s(%s) VALUES(%s);' % (
-                        full_table_name, ', '.join(plain_field_list), values)
+                        full_table_name,
+                        ', '.join(self._quote_field_list(plain_field_list)),
+                        values)
                     self.logger.debug(
                         'Replication SQL: %s' % ' '.join(sql.split()))
                 elif operation == 3:
@@ -338,7 +347,7 @@ class PgDB:
                            SET (%s) = (%s)
                            WHERE uniq_uid='%s';
                         ''' % (full_table_name,
-                               ', '.join(plain_field_list),
+                               ', '.join(self._quote_field_list(plain_field_list)),
                                values,
                                uid)
                     self.logger.debug(
@@ -376,10 +385,9 @@ class PgDB:
                 #    r = requests.post(url, params=payload)
 
                 r = requests.post(
-                    'http://192.168.255.106:9000',
+                    'http://192.168.255.106:8000',
                     data=payload)
-                self.logger.debug('Server responce: %s - %s' %
-                                  (r.status_code, r.text))
+                self.logger.debug('Server responce: %s' % r.status_code)
 
         self.clear_old_records(timestamp)
 
@@ -390,14 +398,18 @@ class PgDB:
         cfg = ConfigParser.SafeConfigParser()
 
         for file_name in file_list:
-            print file_name
             self.logger.debug('Processing file: "%s".' % file_name)
-            cfg.read(file_name)
+            cfg.readfp(codecs.open(file_name, encoding='utf-8'))
 
             full_table_name = base64.urlsafe_b64decode(
-                cfg.get('changeset', 'table'))
-            ddl = base64.urlsafe_b64decode(cfg.get('changeset', 'ddl'))
-            sql = base64.urlsafe_b64decode(cfg.get('changeset', 'sql'))
+                cfg.get('changeset', 'table').encode('utf-8'))
+            self.logger.debug('Decoded table name: %s' % full_table_name)
+            ddl = base64.urlsafe_b64decode(
+                cfg.get('changeset', 'ddl').encode('utf-8'))
+            self.logger.debug('Decoded table DDL: %s' % ddl)
+            sql = base64.urlsafe_b64decode(
+                cfg.get('changeset', 'sql').encode('utf-8')).decode('utf-8')
+            self.logger.debug('Decoded table SQL: %s' % sql)
 
             schema = full_table_name.split('.')[0]
             table = full_table_name.split('.')[1]
@@ -412,14 +424,15 @@ class PgDB:
             os.remove(file_name)
             self.logger.debug('File "%s" processed and removed' % file_name)
 
-    def dump_table(self, table_name):
+    def dump_table(self, schema, table):
         c = self.con.cursor()
 
-        table_name = self._quote_str(table_name)
+        full_table_name = self._table_name(schema, table)
+        table_name = self._quote_str(table)
 
-        ddl = 'CREATE TABLE %s (' % table_name
+        ddl = ''
 
-        sql = "SELECT oid FROM pg_class WHERE relname = '%s'" % table_name
+        sql = "SELECT '%s'::regclass::oid" % full_table_name
         self._exec_sql(c, sql)
         table_oid = c.fetchone()[0]
 
@@ -427,6 +440,34 @@ class PgDB:
             self.logger.critical("Can not resolve table name '%s' to OID." %
                                  table_name)
             return ''
+
+        sql = '''SELECT c.relname AS seq,
+                        t.relname AS tab,
+                        a.attname AS col
+                 FROM pg_class c
+                   JOIN pg_depend d on d.objid = c.oid AND
+                        d.classid='pg_class'::regclass AND
+                        d.refclassid='pg_class'::regclass
+                   JOIN pg_class t on t.oid = d.refobjid
+                   JOIN pg_namespace n on n.oid = t.relnamespace
+                   JOIN pg_attribute a on a.attrelid = t.oid AND
+                        a.attnum=d.refobjsubid
+                   WHERE c.relkind='S' AND
+                         d.deptype='a' AND
+                         t.oid = %s
+              ''' % table_oid
+
+        self._exec_sql(c, sql)
+        sequences = c.fetchall()
+
+        alter_stmt = ''
+        if sequences is not None and len(sequences) != 0:
+            for s in sequences:
+                res = self.dump_sequence(s)
+                ddl += res[0] + '\n'
+                alter_stmt += res[1] + '\n'
+
+        ddl += 'CREATE TABLE %s (' % table_name
 
         sql = '''SELECT a.attname as atname, a.attnotnull as notnull,
                         a.atthasdef as hasdef,
@@ -443,7 +484,7 @@ class PgDB:
         self._exec_sql(c, sql)
         fields = c.fetchall()
         for field in fields:
-            ddl += '%s %s' % (field[0], field[3])
+            ddl += '"%s" %s' % (field[0], field[3])
             if field[1]:
                 ddl += ' NOT NULL'
             if field[2]:
@@ -468,10 +509,77 @@ class PgDB:
             fields = c.fetchall()
             for field in fields:
                 ddl += '%s, ' % field
-            ddl = ddl[:-2] + '))'
+            ddl = ddl[:-2] + '));\n'
+
+        ddl += alter_stmt
+
+        sql = '''SELECT pg_catalog.pg_get_indexdef(i.indexrelid, 0, true)
+                 FROM pg_catalog.pg_class c,
+                      pg_catalog.pg_class c2,
+                      pg_catalog.pg_index i
+                 WHERE c.oid = %s AND
+                       c.oid = i.indrelid AND
+                       i.indexrelid = c2.oid AND
+                       i.indisprimary = FALSE
+                 ORDER BY i.indisunique DESC, c2.relname
+              ''' % table_oid
+        self._exec_sql(c, sql)
+        indices = c.fetchall()
+        for idx in indices:
+            ddl += idx[0] + '\n'
 
         self.logger.debug('DDL for relation "%s": %s' % (table_name, ddl))
         return ddl
+
+    def dump_sequence(self, sequence):
+        seqMax = sys.maxint
+        seqMin = -seqMax - 1
+
+        c = self.con.cursor()
+
+        sql = '''SELECT sequence_name,
+                        0 AS start_value,
+                        increment_by,
+                        CASE WHEN increment_by > 0 AND max_value = %s THEN NULL
+                             WHEN increment_by < 0 AND max_value = -1 THEN NULL
+                             ELSE max_value
+                        END AS max_value,
+                        CASE WHEN increment_by > 0 AND min_value = 1 THEN NULL
+                             WHEN increment_by < 0 AND min_value = %s THEN NULL
+                             ELSE min_value
+                        END AS min_value,
+                        cache_value,
+                        is_cycled
+                 FROM %s
+              ''' % (seqMax, seqMin, sequence[0])
+
+        self._exec_sql(c, sql)
+        seq = c.fetchone()
+
+        maxValue = 'NO MAXVALUE' if seq[3] is None else 'MAXVALUE %s' % seq[3]
+        minValue = 'NO MINVALUE' if seq[3] is None else 'MINVALUE %s' % seq[4]
+        cycle = '' if not seq[6] else 'CYCLE'
+
+        ddl = '''CREATE SEQUENCE %s
+                 START WITH %s
+                 INCREMENT BY %s
+                 %s
+                 %s
+                 CACHE %s
+                 %s;\n
+              ''' % (seq[0],
+                     seq[1],
+                     seq[2],
+                     minValue,
+                     maxValue,
+                     seq[5],
+                     cycle
+                    )
+
+        ddl2 = '''ALTER SEQUENCE %s OWNED BY %s.%s;''' % (sequence[0],
+            sequence[1], sequence[2])
+
+        return (' '.join(ddl.split()), ddl2)
 
     def list_changes(self, timestamp):
         c = self.con.cursor()
@@ -489,7 +597,9 @@ class PgDB:
 
     def clear_old_records(self, timestamp):
         table_name = self._table_name(self.rep_schema, self.rep_table)
-        sql = 'DELETE FROM %s WHERE stamp < %s;' % (table_name, timestamp)
+        sql = '''DELETE FROM %s
+                 WHERE stamp < '%s'::timestamp with time zone;
+              ''' % (table_name, timestamp)
 
         self._exec_sql_and_commit(sql)
         self.logger.info('Old records removed.')
@@ -510,7 +620,7 @@ class PgDB:
                      operation smallint NOT NULL,
                      stamp timestamp with time zone NOT NULL DEFAULT
                          ('now'::text)::timestamp(2) with time zone,
-                     uid uuid NOT NULL)
+                     uid CHARACTER VARYING(50) NOT NULL)
               WITH (OIDS=FALSE);
               ALTER TABLE %s OWNER TO %s;
               COMMENT ON COLUMN %s.operation IS
@@ -530,7 +640,7 @@ class PgDB:
 
             if field_type in ['text', 'varchar']:
                 if value is not None:
-                    out += u"'%s', " % value
+                    out += u"'%s', " % self._quote_str(value)
                 else:
                     out += u'NULL, '
             elif field_type == 'bool':
@@ -543,7 +653,8 @@ class PgDB:
                     out += u"'%s', " % value
                 else:
                     out += u'NULL, '
-            elif self.re_is_integer.match(field_type) is not None:
+            elif self.re_is_integer.match(field_type) is not None or \
+                    self.re_is_float.match(field_type) is not None:
                 if value is not None:
                     out += '%s, ' % value
                 else:
@@ -608,6 +719,15 @@ class PgDB:
         txt = unicode(txt)
         return txt.replace("'", "''")
 
+    def _quote_field_list(self, field_list):
+        quoted_fields = []
+        for field in field_list:
+            if field.startswith('encode') or field.startswith('ST_GeomFrom'):
+                quoted_fields.append(field)
+                continue
+            quoted_fields.append('"%s"' % field)
+        return quoted_fields
+
     def _table_name(self, schema, table):
         if not schema:
             return self._quote(table)
@@ -643,6 +763,12 @@ def apply_changesets(host, port, dbname, user, passwd, directory):
 
 
 if __name__ == '__main__':
+    fp = open(os.path.join('/var/run', pid_file), 'w')
+    try:
+        fcntl.lockf(fp, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except IOError:
+        sys.exit(0)
+
     logger.setLevel(logging.DEBUG)
 
     ch = logging.StreamHandler()

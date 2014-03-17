@@ -1,7 +1,8 @@
 define([
-    'dojo/_base/lang'
+    'dojo/_base/lang',
+    'dojo/Deferred'
 ],
-    function (lang) {
+    function (lang, Deferred) {
         L.Control.IncidentEditor = L.Control.extend({
             options: {
                 position: 'topleft',
@@ -13,7 +14,7 @@ define([
                 editorLayerStyle: {color: '#FF0000', weight: 10, opacity: 0.5 },
                 centeredLayerStyle: {opacity: 0.5, weight: 15, color: '#00FF00'},
                 callbackDistanceChange: function (data) {
-                    console.log('IncidentEditor: ' + data);
+                    console.log('IncidentEditor: ' + JSON.stringify(data));
                 },
                 ngwServiceFacade: null,
                 map: null,
@@ -64,9 +65,13 @@ define([
                     options.activeMode = options.modes[0];
                 }
                 this._setMode(options.activeMode);
-                this._clearAll();
+                this._clearAll(true);
 
                 return container;
+            },
+
+            setMode: function (modeName) {
+                this['_' + modeName + 'ModeTurnOn']();
             },
 
             setRoadGuid: function (guid) {
@@ -101,7 +106,9 @@ define([
                 }
             },
 
-            _clearAll: function () {
+            _clearAll: function (ignoreCallback) {
+                this._clearGeo();
+
                 switch (this.options.activeMode) {
                     case 'point':
                         this._distances = this._getEmptyDistancePoint();
@@ -115,28 +122,36 @@ define([
                         break;
 
                     default:
-                        console.log('L.Control.IncidentEditor: "' + mode + '" is not supported.');
+                        console.log('L.Control.IncidentEditor: "' + this.options.activeMode + '" is not supported.');
                 }
 
                 var distance = this._getDistance();
-                this.options.callbackDistanceChange.apply(this, [distance]);
-
-                this._clearGeo();
+                if (!ignoreCallback) {
+                    this.options.callbackDistanceChange.apply(this, [distance]);
+                }
             },
 
             _getEmptyDistancePoint: function () {
                 return {
                     guid: null,
                     km: null,
-                    m: null
+                    m: null,
+                    lat: null,
+                    lng: null
                 };
+            },
+
+            _setDistance: function (distance, point) {
+                distance.km = point.km;
+                distance.m = point.m;
             },
 
             _getDistance: function () {
                 return {
                     mode: this.options.activeMode,
-                    distances: this._distances
-                }
+                    distances: this._distances,
+                    geometry: this.getGeoJsonData()
+                };
             },
 
             _pointModeTurnOn: function () {
@@ -185,6 +200,27 @@ define([
                 }
             },
 
+            _createMarker: function (latlng, distance) {
+                var self = this,
+                    marker = new L.Marker(latlng, {
+                        draggable: true
+                    });
+
+                this._map.addLayer(marker);
+                this._markers.push(marker);
+                marker.distance = distance;
+
+                marker.distance.guid = this.options.roadGuid;
+                marker.distance.lat = marker._latlng.lat;
+                marker.distance.lng = marker._latlng.lng;
+
+                marker.on('dragend', function (e) {
+                    self.snapMarker(this);
+                });
+
+                return marker;
+            },
+
             snapMarker: function (marker) {
                 var self = this,
                     options = this.options,
@@ -201,9 +237,10 @@ define([
                         marker.distance.guid = options.roadGuid;
                         marker.distance.km = Math.floor(data.distance / 1000);
                         marker.distance.m = data.distance - marker.distance.km * 1000;
-                        options.callbackDistanceChange(self._getDistance());
+                        marker.distance.lat = marker._latlng.lat;
+                        marker.distance.lng = marker._latlng.lng;
 
-                        xhrLatLngByDistance = self.options.ngwServiceFacade.getIncident([
+                        xhrLatLngByDistance = options.ngwServiceFacade.getIncident([
                             {
                                 layer: options.idLayer,
                                 guid: options.roadGuid,
@@ -214,41 +251,121 @@ define([
                         xhrLatLngByDistance.then(function (data) {
                             marker.setLatLng([data.geometry.coordinates[1], data.geometry.coordinates[0]]);
 
-                            self._rebuildPoint();
-                            self._rebuildLine();
+                            if (self.options.activeMode === 'point') {
+                                self._rebuildPoint();
+                                self.options.callbackDistanceChange(self._getDistance());
+                            } else if (self.options.activeMode === 'line') {
+                                self._rebuildLine().then(function () {
+                                    self.options.callbackDistanceChange(self._getDistance());
+                                });
+                            }
                         });
                     }
                 });
             },
 
-            _createMarker: function (latlng, distance) {
+            createMarkersByDistance: function (points) { // points like as [{km: 0, m: 0}]
                 var self = this,
-                    marker = new L.Marker(latlng, {
-                        draggable: true
+                    pointsCount = points.length,
+                    options = this.options,
+                    point,
+                    marker,
+                    xhrLatLngByDistance;
+
+                this._clearAll(true);
+
+                if (pointsCount === 1) {
+                    this._createMarkerByDistance(points[0]).then(function (marker) {
+                        self._map.setView(marker._latlng, 15);
+                        self.options.callbackDistanceChange(self._getDistance());
                     });
+                }
 
-                this._map.addLayer(marker);
-                this._markers.push(marker);
-                marker.distance = distance;
+                if (options.activeMode === 'line' && pointsCount === 2) {
+                    xhrLatLngByDistance = this.options.ngwServiceFacade.getIncidentLine(
+                        this.options.roadGuid,
+                        {distance: points[0]},
+                        {distance: points[1]}
+                    );
 
-                marker.on('dragend', function (e) {
-                    self.snapMarker(this);
+                    xhrLatLngByDistance.then(function (data) {
+                        self._editorLayer.addData(data);
+
+                        if (data.geometry && data.geometry.coordinates) {
+                            var latlng,
+                                markerBegin,
+                                markerEnd,
+                                lastCoordinatesIndex = data.geometry.coordinates.length - 1;
+
+                            self._setDistance(self._distances.begin, points[0]);
+                            self._setDistance(self._distances.end, points[1]);
+
+                            latlng = [data.geometry.coordinates[0][1], data.geometry.coordinates[0][0]];
+                            markerBegin = self._createMarker(latlng, self._distances.begin);
+                            self._editorLayer.addData(markerBegin.toGeoJSON());
+
+
+                            latlng = [data.geometry.coordinates[lastCoordinatesIndex][1], data.geometry.coordinates[lastCoordinatesIndex][0]];
+                            markerEnd = self._createMarker(latlng, self._distances.end);
+                            self._editorLayer.addData(markerEnd.toGeoJSON());
+                            self._map.fitBounds(self._editorLayer.getBounds());
+
+                            self.options.callbackDistanceChange(self._getDistance());
+                        }
+                    });
+                }
+            },
+
+            _createMarkerByDistance: function (distance) {
+                var deferred = new Deferred(),
+                    self = this,
+                    marker;
+
+                this._latlngByDistance(distance).then(function (latlng) {
+                    marker = self._createMarker(latlng, self._distances);
+                    self._editorLayer.addData(marker.toGeoJSON());
+
+                    marker.distance.km = distance.km;
+                    marker.distance.m = distance.m;
+                    marker.distance.guid = self.options.roadGuid;
+                    marker.distance.lat = marker._latlng.lat;
+                    marker.distance.lng = marker._latlng.lng;
+
+                    deferred.resolve(marker);
                 });
 
-                return marker;
+                return deferred;
+            },
+
+            _latlngByDistance: function (distance) {
+                var options = this.options,
+                    deferred = new Deferred(),
+                    xhrLatLngByDistance;
+
+                xhrLatLngByDistance = options.ngwServiceFacade.getIncident([
+                    {
+                        layer: options.idLayer,
+                        guid: options.roadGuid,
+                        distance: {km: distance.km, m: distance.m}
+                    }
+                ]);
+
+                xhrLatLngByDistance.then(function (data) {
+                    deferred.resolve([data.geometry.coordinates[1], data.geometry.coordinates[0]]);
+                });
+
+                return deferred;
             },
 
             _rebuildLine: function () {
-                if (this.options.activeMode !== 'line') {
-                    return;
-                }
-
                 var self = this,
                     markersCount = this._markers.length,
-                    xhrGetIncidentLine;
+                    xhrGetIncidentLine,
+                    deferred = new Deferred();
 
                 if (markersCount < 2) {
-                    return;
+                    deferred.resolve();
+                    return deferred;
                 }
 
                 this._editorLayer.clearLayers();
@@ -261,14 +378,13 @@ define([
 
                 xhrGetIncidentLine.then(function (data) {
                     self._editorLayer.addData(data);
+                    deferred.resolve();
                 });
+
+                return deferred;
             },
 
             _rebuildPoint: function () {
-                if (this.options.activeMode !== 'point') {
-                    return;
-                }
-
                 this._editorLayer.clearLayers();
                 this._editorLayer.addData(this._markers[0].toGeoJSON());
             },

@@ -6,6 +6,10 @@
     <option value="{65de3f89-c234-44c5-867d-fd8961eb8644}">М-10 "Россия" Москва-Тверь-Великий Новгород-Санкт-Петербург</option>
     <option value="{11b970fb-a9a8-474b-92cd-b0aa6a7f2d28}">А-147 Джубга-Сочи-граница с Республикой Абхазия</option>
 </select>
+</br>
+<button id="test1" style="margin: 3px; background-color: gainsboro;">Создать: ДТП М-10 «Россия» 614 + 870</button>
+</br>
+<button id="test2" style="margin: 3px; background-color: gainsboro;">Создать: Занос А-147 77+376 - 80+570</button>
 
 <div class="claro">
     <div style="width:49%; float:left;">
@@ -61,7 +65,7 @@
                 parser, Select) {
         parser.parse();
 
-        var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrlBase),
+        var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
             map = new Map('map', {
                 center: [56.0369, 35.8788],
                 zoom: 16,
@@ -78,8 +82,8 @@
             getIncident1, getIncident2, getIncident3,
             layer;
 
-        map.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
-        map2.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
+        map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 8);
+        map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 8);
 
         styles = {
             'accident': {
@@ -151,8 +155,19 @@
         var roadsSelector = dijit.byId('roadsSelector');
 
         roadsSelector.on('change', function(roadGuid) {
-            incidentEditor.centerByObject(23, roadGuid, 3000);
+            incidentEditor.centerByObject(14, roadGuid, 3000);
             incidentEditor.setRoadGuid(roadGuid);
+        });
+
+        query('#test1').on('click', function () {
+            incidentEditor.setRoadGuid('{65de3f89-c234-44c5-867d-fd8961eb8644}');
+            incidentEditor.createMarkersByDistance([{km: 614, m: 870}]);
+        });
+
+        query('#test2').on('click', function () {
+            incidentEditor.setMode('line');
+            incidentEditor.setRoadGuid('{11b970fb-a9a8-474b-92cd-b0aa6a7f2d28}');
+            incidentEditor.createMarkersByDistance([{km: 77, m: 376}, {km: 80, m: 570}]);
         });
     });
 </%block>

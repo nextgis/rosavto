@@ -27,7 +27,12 @@ define([
                     url += '&callback=' + callback;
                 }
 
-                return xhr(this._attributesServiceUrlBase + url, {handleAs: 'text', method: 'GET'});
+                return xhr(this._attributesServiceUrlBase + url, {
+                    handleAs: 'text',
+                    method: 'POST',
+                    data: {
+                        guids: featureGuid
+                    }});
             }
         });
     });

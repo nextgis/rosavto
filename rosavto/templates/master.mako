@@ -14,11 +14,12 @@
 
     <script>
         var application_root = '${request.application_url}',
-            ngwUrlBase = 'http://demo.nextgis.ru/ngw_rosavto/',
-            ngwProxyUrlBase = application_root + '/ngw/',
+            ngwUrlForTiles = '${request.registry.settings['proxy_ngw']}',
+            ngwProxyUrl = application_root + '/ngw/',
 
             // Dojo's config
             dojoConfig = {
+                isDebug: true,
                 async: true,
                 baseUrl: "${request.static_url('rosavto:static/js/')}",
                 packages: [

@@ -1,11 +1,12 @@
 define([
+    'dojo/query',
     'dojo/_base/declare',
     'dojo/_base/lang',
     'dojo/request/xhr',
     'rosavto/Loader',
     'http://cdn.leafletjs.com/leaflet-0.7.1/leaflet-src.js',
     'StompClient'
-], function (declare, lang, xhr, Loader, leaflet, stomp) {
+], function (query, declare, lang, xhr, Loader, leaflet, stomp) {
     return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
@@ -24,11 +25,44 @@ define([
 
             if (settings.legend) {
                 this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
+                this._legendBindEvents();
             }
+
+            Legend = this._legend;
 
             this.buildLoader(domNode);
 
             this.addOsmTileLayer();
+        },
+
+        _legendBindEvents: function () {
+            query(this._legend._overlaysList).on('click', lang.hitch(this, function () {
+                this._updateActiveNgwLayers();
+            }));
+        },
+
+        _visibleNgwLayers: [],
+        _updateActiveNgwLayers: function () {
+            var layerLeafletId,
+                layer;
+
+            this._visibleNgwLayers = [];
+
+            for (layerLeafletId in this._legend._layers) {
+                if (this._legend._layers.hasOwnProperty(layerLeafletId)) {
+                    layer = this._legend._layers[layerLeafletId].layer;
+
+                    if (layer._ngwStyleId) {
+                        if (this._lmap.hasLayer(layer)) {
+                            this._visibleNgwLayers.push(layer._ngwStyleId);
+                        }
+                    }
+                }
+            }
+        },
+
+        getVisibleNgwLayers: function () {
+            return this._visibleNgwLayers;
         },
 
         getLMap: function () {
@@ -50,14 +84,16 @@ define([
             if (this._legend) this._legend.addBaseLayer(tileLayer, name);
         },
 
-        _ngwTileLayers: [],
         addNgwTileLayer: function (name, ngwUrl, idStyle, settings) {
             var ngwTilesUrl = ngwUrl + 'style/' + idStyle + '/tms?z={z}&x={x}&y={y}',
                 ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
-            this._ngwTileLayers.push(idStyle);
+            ngwTileLayer._ngwStyleId = idStyle;
             this._lmap.addLayer(ngwTileLayer);
             this._overlaylayers[name] = ngwTileLayer;
-            if (this._legend) this._legend.addOverlay(ngwTileLayer, name);
+            if (this._legend) {
+                this._legend.addOverlay(ngwTileLayer, name);
+            }
+            this._visibleNgwLayers.push(ngwTileLayer._ngwStyleId);
         },
 
         addOsmTileLayer: function () {

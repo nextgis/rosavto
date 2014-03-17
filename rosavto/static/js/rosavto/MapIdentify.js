@@ -40,19 +40,30 @@ define([
                 var map = this.map._lmap,
                     latlngClick = e.latlng;
 
-                return this.layersInfo.getLayersIdByStyles(this.map._ngwTileLayers).then(lang.hitch(this, function (layersId) {
+                return this.layersInfo.getLayersIdByStyles(this.map.getVisibleNgwLayers()).then(lang.hitch(this, function (layersId) {
                     var url = this.urlNgw + 'feature_layer/identify',
                         zoom = map.getZoom(),
                         point = map.project([e.latlng.lat, e.latlng.lng], zoom),
-                        pointTopLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), zoom)),
-                        pointBottomRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom)),
+                        pointBottomLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), zoom)),
+                        pointTopRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom)),
                         wktBounds;
 
-                    wktBounds = 'POLYGON((' + pointTopLeft.x + ' ' + pointTopLeft.y + ', ' +
-                        pointBottomRight.x + ' ' + pointTopLeft.y + ', ' +
-                        pointBottomRight.x + ' ' + pointBottomRight.y + ', ' +
-                        pointTopLeft.x + ' ' + pointBottomRight.y + ', ' +
-                        pointTopLeft.x + ' ' + pointTopLeft.y + '))';
+                    var debugBottomLeft = L.CRS.EPSG4326.project(map.unproject(new L.Point(point.x - 10, point.y - 10), zoom)),
+                        debugTopRight = L.CRS.EPSG4326.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom));
+
+                    L.polygon([
+                        [debugBottomLeft.y, debugBottomLeft.x],
+                        [debugBottomLeft.y, debugTopRight.x],
+                        [debugTopRight.y, debugTopRight.x],
+                        [debugTopRight.y, debugBottomLeft.x],
+                        [debugBottomLeft.y, debugBottomLeft.x]
+                    ], {opacity: 0.5, fillColor: '#FF0000', color: '#FF0000'}).addTo(map);
+
+                    wktBounds = 'POLYGON((' + pointBottomLeft.x + ' ' + pointBottomLeft.y + ', ' +
+                        pointBottomLeft.x + ' ' + pointTopRight.y + ', ' +
+                        pointTopRight.x + ' ' + pointTopRight.y + ', ' +
+                        pointTopRight.x + ' ' + pointBottomLeft.y + ', ' +
+                        pointBottomLeft.x + ' ' + pointBottomLeft.y + '))';
 
                     this.ngwServiceFacade.identifyFeaturesByLayers(layersId, wktBounds, 3857).then(lang.hitch(this, function (ngwFeatures) {
                         var identifiedFeatures;
@@ -63,8 +74,9 @@ define([
                             //alert('В этом месте объектов нет');
                             topic.publish('map/identityUi/unblock');
                         } else if (identifiedFeatures.count === 1) {
-                            topic.publish('attributes/get', identifiedFeatures.layers[0].id, identifiedFeatures.layers[0].features[0].id);
-                        } else if (identifiedFeatures.count > 1) {
+                            topic.publish('attributes/get', identifiedFeatures.layers[0].layerId, identifiedFeatures.layers[0].featureId);
+                        }
+                        else if (identifiedFeatures.count > 1) {
                             this._buildPopup(latlngClick, identifiedFeatures);
                         }
                     }));
@@ -72,14 +84,30 @@ define([
             },
 
             _parseNgwFeatures: function (ngwFeatures) {
-                var identifiedFeatures = {
+                var layersByType = {
+                        point: null,
+                        line: null,
+                        polygon: null
+                    },
+                    layer,
+                    layerName,
+                    geometryType,
+                    addGeometryToLayers = function (type, geometry) {
+                        if (!layersByType[type]) {
+                            layersByType[type] = [];
+                        }
+                        layersByType[type] = geometry;
+                    },
+                    identifiedFeatures = {
                         count: 0,
                         layers: []
                     },
+                    nonPointObjects = [],
                     identifiedLayer,
                     layerId,
                     ngwLayerFeaturesCount,
                     ngwFeature,
+                    label,
                     i;
 
                 for (layerId in ngwFeatures) {
@@ -89,30 +117,67 @@ define([
 
                         if (ngwLayerFeaturesCount > 0) {
 
-                            identifiedFeatures.count += ngwLayerFeaturesCount;
-                            layerName = this.layersInfo.getLayerNameByLayerId(parseInt(layerId, 10));
+                            layer = this.layersInfo.getLayerById(parseInt(layerId, 10));
+                            layerName = layer.display_name;
+                            geometryType = layer.geometry_type;
 
-                            identifiedLayer = {
-                                id: layerId,
-                                name: layerName,
-                                features: []
-                            };
+                            if (geometryType === 'POINT' || geometryType === 'MULTIPOINT') {
+                                identifiedFeatures.count += ngwLayerFeaturesCount;
+                                identifiedLayer = {
+                                    id: layerId,
+                                    name: layerName,
+                                    features: []
+                                };
 
-                            for (i = 0; i < ngwLayerFeaturesCount; i += 1) {
-                                ngwFeature = ngwFeatures[layerId].features[i];
-                                if (!ngwFeature.fields[this.fieldIdentify]) {
-                                    console.log('MapIdentify: Identify field "' + this.fieldIdentify + '" was not found');
-                                } else {
-                                    identifiedLayer.features.push({
-                                        label: ngwFeature.label,
-                                        id: ngwFeature.fields[this.fieldIdentify]
-                                    });
+                                for (i = 0; i < ngwLayerFeaturesCount; i += 1) {
+                                    ngwFeature = ngwFeatures[layerId].features[i];
+                                    if (!ngwFeature.fields[this.fieldIdentify]) {
+                                        console.log('MapIdentify: Identify field "' + this.fieldIdentify + '" was not found');
+                                    } else {
+
+                                        // Temporary solution: rendering type name instead of label
+                                        if (ngwFeature.fields && ngwFeature.fields.type_name) {
+                                            label = ngwFeature.fields.type_name;
+                                        } else {
+                                            label = ngwFeature.label;
+                                        }
+
+                                        identifiedLayer.features.push({
+                                            label: label,
+                                            id: ngwFeature.fields[this.fieldIdentify]
+                                        });
+                                    }
+                                }
+                                identifiedFeatures.layers.push(identifiedLayer);
+                            } else if (geometryType === 'LINESTRING' || geometryType === 'MULTILINESTRING') {
+                                for (i = 0; i < ngwLayerFeaturesCount; i += 1) {
+                                    ngwFeature = ngwFeatures[layerId].features[i];
+                                    if (!ngwFeature.fields[this.fieldIdentify]) {
+                                        console.log('MapIdentify: Identify field "' + this.fieldIdentify + '" was not found');
+                                    } else {
+                                        nonPointObjects.unshift([layerId, ngwFeature.fields[this.fieldIdentify]]);
+                                    }
+                                }
+                            } else if (geometryType === 'POLYGON' || geometryType === 'MULTIPOLYGON') {
+                                for (i = 0; i < ngwLayerFeaturesCount; i += 1) {
+                                    ngwFeature = ngwFeatures[layerId].features[i];
+                                    if (!ngwFeature.fields[this.fieldIdentify]) {
+                                        console.log('MapIdentify: Identify field "' + this.fieldIdentify + '" was not found');
+                                    } else {
+                                        nonPointObjects.push([layerId, ngwFeature.fields[this.fieldIdentify]]);
+                                    }
                                 }
                             }
-
-                            identifiedFeatures.layers.push(identifiedLayer);
                         }
                     }
+                }
+
+                if (identifiedFeatures.count === 0 && nonPointObjects.length > 0) {
+                    identifiedFeatures.count = 1;
+                    identifiedFeatures.layers.push({
+                        layerId: nonPointObjects[0][0],
+                        featureId: nonPointObjects[0][1]
+                    });
                 }
 
                 return identifiedFeatures;
