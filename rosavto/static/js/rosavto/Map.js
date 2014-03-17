@@ -4,16 +4,16 @@ define([
     'dojo/_base/lang',
     'dojo/request/xhr',
     'rosavto/Loader',
-    'http://cdn.leafletjs.com/leaflet-0.7.1/leaflet-src.js',
-    'StompClient'
-], function (query, declare, lang, xhr, Loader, leaflet, stomp) {
-    return declare('rosavto.Map', [Loader], {
+    'dojo/store/Memory',
+    'leaflet'
+], function(query, declare, lang, xhr, Loader, Memory) {
+    return declare('rosavto.Map', [Loader, Memory], {
         _lmap: {},
         _baseLayers: {},
         _overlaylayers: {},
         _legend: null,
+        _incidentLayer: null,
         _ngwServiceFacade: null,
-        _markerZIndexOffset: 1000,
 
         constructor: function (domNode, settings, ngwServiceFacade) {
             this._ngwServiceFacade = ngwServiceFacade;
@@ -22,13 +22,13 @@ define([
             }
 
             this._lmap = new L.Map(domNode, settings);
+            this._lmap.on('layeradd', this.onMapLayerAdded);
+            this._lmap.on('layerremove', this.onMapLayerRemoved);
 
             if (settings.legend) {
                 this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
                 this._legendBindEvents();
             }
-
-            Legend = this._legend;
 
             this.buildLoader(domNode);
 
@@ -88,7 +88,9 @@ define([
             var ngwTilesUrl = ngwUrl + 'style/' + idStyle + '/tms?z={z}&x={x}&y={y}',
                 ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
             ngwTileLayer._ngwStyleId = idStyle;
-            this._lmap.addLayer(ngwTileLayer);
+            if (this.isLayerOnByDefault(ngwTileLayer)) {
+                this._lmap.addLayer(ngwTileLayer);
+            }
             this._overlaylayers[name] = ngwTileLayer;
             if (this._legend) {
                 this._legend.addOverlay(ngwTileLayer, name);
@@ -130,6 +132,19 @@ define([
             this._overlaylayers[name] = geoJsonLayer;
             if (this._legend) this._legend.addOverlay(geoJsonLayer, name);
         },
+        onMapLayerAdded: function(layer) {
+            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, true, function(status, keyName){
+                console.log('mapLayerVisibility-' + layer.layer._ngwStyleId);
+            });
+        },
+        onMapLayerRemoved: function(layer) {
+            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, false, function(status, keyName){
+                console.log('mapLayerVisibility-' + layer.layer._ngwStyleId);
+            });    
+        },
+        isLayerOnByDefault: function(layer) {
+            return storageProvider.get('mapLayerVisibility-' + layer._ngwStyleId) === true;
+        },
 
         showObjectAsMarker: function (url, id, isPopup) {
             xhr(application_root + url + id, {
@@ -146,129 +161,6 @@ define([
                         this._lmap.addLayer(layer);
                     }
                 }));
-        },
-
-        _realTimeLayers: {},
-        _subscribeUrl: {},
-        addRealtimeLayer: function (layerName, settings) {
-            var layer = L.layerGroup([]).addTo(this._lmap),
-                callback = lang.hitch(this, function (message) {
-                    var body = JSON.parse(message.body);
-                    if (body.roadMeter && body.roadMeter2) {
-                        // если задан пикетаж, показываем отрезок
-                        this.showLine(body, body[settings.id]);
-                    } else if (body.latitude && body.longitude) {
-                        // если задана точка, рисуем маркер
-                        this._renderMarker(layerName, body[settings.id], [body.latitude, body.longitude],
-                            body[settings.styleField]);
-                    } else {
-                        // если нет ни точки, ни отрезка, значит нужно скрыть существующий маркер или отрезок
-                        if (this._lineLayers[body[settings.id]]) {
-                            // если есть отрезок с таким guid — скрываем его
-                            this.hideLine(body, body[settings.id]);
-                        } else {
-                            // иначе это событие по скрытию маркера — скрываем его
-                            this._deleteMarker(layerName, body[settings.id]);
-                        }
-                    }
-                });
-
-                this._realTimeLayers[layerName] = {
-                layer: layer,
-                settings: settings,
-                markers: {} // Map of markers: id of entity to id of map
-            };
-
-            if (this._lmap.getZoom() >= settings.minVisibleZoom)
-                this._subscribeForRealtimeLayer(callback, this._realTimeLayers[layerName].settings.subscribeUrl);
-
-            this._lmap.on('dragend zoomend', lang.hitch(this, function () {
-                var realTimeLayer = this._realTimeLayers[layerName];
-                if (this._lmap.getZoom() < realTimeLayer.settings.minVisibleZoom) {
-                    realTimeLayer.layer.clearLayers();
-                    realTimeLayer.markers = {};
-                    this._unsubscribeForRealtimeLayer();
-                    return;
-                }
-                this._subscribeForRealtimeLayer(callback,
-                    realTimeLayer.settings.subscribeUrl);
-            }));
-        },
-
-        _renderMarker: function (layerName, markerId, latlng, type) {
-            var realtimeLayer = this._realTimeLayers[layerName];
-            if (!realtimeLayer) return;
-
-            if (realtimeLayer.markers[markerId]) {
-                realtimeLayer.layer.getLayer(realtimeLayer.markers[markerId]).setLatLng(latlng);
-            } else {
-                var marker = L.marker(latlng, {
-                    icon: L.divIcon({
-                        className: realtimeLayer.settings.styles[type].className
-                    }),
-                    riseOnHover: true
-                });
-                realtimeLayer.layer.addLayer(marker);
-                realtimeLayer.markers[markerId] = L.stamp(marker);
-                marker.markerId = markerId;
-                marker.on('click', function (e) {
-                    require(["dojo/query", "dojo/NodeList-dom"], function (query) {
-                        var nl = query(".pressed").removeClass("pressed")
-                    });
-
-                    e.target.setIcon(L.divIcon({
-                        className: realtimeLayer.settings.styles[type].className + ' pressed'
-                    }));
-                    this._markerZIndexOffset++;
-                    e.target.setZIndexOffset(this._markerZIndexOffset);
-                    MonitoringCard.showCard(e.target.markerId);
-                }, this);
-            }
-        },
-
-        _deleteMarker: function (layerName, markerId) {
-            var realtimeLayer = this._realTimeLayers[layerName];
-            if (!realtimeLayer) return;
-
-            if (realtimeLayer.markers[markerId]) {
-                realtimeLayer.layer.removeLayer(realtimeLayer.markers[markerId]);
-                delete realtimeLayer.markers[markerId];
-            }
-        },
-
-        _lastMapBounds: null,
-        _lastSubscribedId: null,
-        _subscribeForRealtimeLayer: function (callback, subscribeUrl) {
-            var bounds = this._lmap.getBounds(),
-                boundsHeaders = {
-                    'LatitudeFrom': bounds.getSouth(),
-                    'LatitudeTo': bounds.getNorth(),
-                    'LongitudeFrom': bounds.getWest(),
-                    'LongitudeTo': bounds.getEast()
-                };
-
-            if (bounds.equals(this._lastMapBounds)) return;
-
-            this._lastMapBounds = bounds;
-
-            var me = this;
-            stomp.connect().then(function (client) {
-                if (me._lastSubscribedId) {
-                    client.unsubscribe(me._lastSubscribedId);
-                    me._lastSubscribedId = null;
-                }
-                me._lastSubscribedId = client.subscribe(subscribeUrl, callback, boundsHeaders).id;
-            });
-        },
-
-        _unsubscribeForRealtimeLayer: function () {
-            var me = this;
-            if (this._lastSubscribedId) {
-                stomp.connect().then(function (client) {
-                    client.unsubscribe(me._lastSubscribedId);
-                    me._lastSubscribedId = null;
-                });
-            }
         },
 
         _customizableGeoJsonLayer: null,
@@ -303,42 +195,6 @@ define([
             if (!this._customizableGeoJsonLayer) return false;
 
             this._customizableGeoJsonLayer.addData(data);
-        },
-
-        _lineLayers: {},
-
-        showLine: function(body, guid) {
-            if (this._lineLayers[guid]) {
-                return;
-            }
-            var xhr = this._ngwServiceFacade.getIncidentLine(body.roadId,
-                { distance: { km: body.roadMeter / 1000, m: body.roadMeter % 1000 } },
-                { distance: { km: body.roadMeter2 / 1000, m: body.roadMeter2 % 1000 } }
-            );
-            xhr.then(lang.hitch(this, function (lineGeoJson) {
-                var meteoLine = 'Meteo' === body.requestReason;
-                var jsonLayer = L.geoJson(lineGeoJson, {
-                    style: {
-                        color: meteoLine ? '#0000FF' : "#FF0000",
-                        weight: meteoLine ? 20 : 10,
-                        opacity: 0.5
-                    }
-                });
-                jsonLayer.on('click', function () {
-                    MonitoringCard.showCard(guid);
-                });
-                this._lmap.addLayer(jsonLayer);
-                this._lineLayers[guid] = jsonLayer;
-
-            }));
-        },
-
-        hideLine: function(body, guid) {
-            var jsonLayer = this._lineLayers[guid];
-            if (jsonLayer) {
-                this._lineLayers[guid] = null;
-                this._lmap.removeLayer(jsonLayer)
-            }
         }
 
 

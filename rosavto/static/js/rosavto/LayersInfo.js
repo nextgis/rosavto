@@ -4,11 +4,10 @@ define([
     'dojo/_base/lang',
     'dojo/store/Memory',
     'dojo/store/Observable',
-    'dijit/tree/ObjectStoreModel',
     'dojo/request/xhr',
     'dojo/Deferred'
 ],
-    function (declare, array, lang, Memory, Observable, ObjectStoreModel, xhr, Deferred) {
+    function (declare, array, lang, Memory, Observable, xhr, Deferred) {
         return declare('rosavto.LayersInfo', null, {
 
             constructor: function (ngwServiceFacade) {

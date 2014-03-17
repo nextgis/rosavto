@@ -1,18 +1,9 @@
 define([
     'dojo/_base/declare',
-    'dojo/_base/array',
     'dojo/_base/lang',
-    'dojo/query',
-    'dojo/html',
-    'dojo/topic',
-    'dojo/request/xhr',
-    'dojo/Deferred',
-    'dojo/DeferredList',
-    'rosavto/LayersInfo',
-    'rosavto/MapIdentify',
-    'rosavto/Loader'
+    'dojo/request/xhr'
 ],
-    function (declare, array, lang, query, html, topic, xhr, Deferred, DeferredList, LayersInfo, MapIdentify, Loader) {
+    function (declare, lang, xhr) {
         return declare('rosavto.NgwServiceFacade', null, {
             constructor: function (ngwUrlBase, settings) {
                 this._ngwUrlBase = ngwUrlBase;
@@ -124,8 +115,8 @@ define([
                     srs = 4326;
                 }
 
-                url = 'layer/17/rosavto/getlrsublinebyuuid?guid=' + guid +
-                    '&first=' + this._calculateDistanceInMeters(pointStart) +
+                url = 'layer/17/rosavto/getlrsublinebyuuid?guid={' + guid +
+                    '}&first=' + this._calculateDistanceInMeters(pointStart) +
                     '&last=' + this._calculateDistanceInMeters(pointFinish) +
                     '&step=1000' +
                     '&srs=' + srs;
