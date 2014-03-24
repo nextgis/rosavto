@@ -12,14 +12,21 @@ define([
     'rosavto/NgwServiceFacade',
     'rosavto/ParametersVerification',
     'rosavto/Loader',
-    'leaflet'
+    'leaflet/leaflet'
 ],
     function (declare, array, lang, dojo, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade, ParametersVerification, Loader, L) {
         return declare('rosavto.AttributeGetter', [Loader, ParametersVerification], {
             _cardInner: null,
 
             constructor: function (settings) {
-                this.verificateRequiredParameters(settings, ['map', 'ngwServiceFacade', 'attributesServiceFacade', 'cardInnerId', 'cardBodyId', 'mapIdentify']);
+                this.verificateRequiredParameters(settings, [
+                    'map',
+                    'ngwServiceFacade',
+                    'attributesServiceFacade',
+                    'cardInnerId',
+                    'cardBodyId',
+                    'mapIdentify'
+                ]);
                 lang.mixin(this, settings);
 
                 this._cardInner = dojo.byId(this.cardInnerId);
@@ -27,10 +34,10 @@ define([
 
                 this.buildLoader(this._cardInner);
 
-                this._geoJsonGroupLayer = L.geoJson(null, {style: lang.hitch(this, function (feature) {
+                this._styledGeoJsonLayer = L.geoJson(null, {style: lang.hitch(this, function (feature) {
                     return this._getStyle();
                 })});
-                this.map._lmap.addLayer(this._geoJsonGroupLayer);
+                this.map._lmap.addLayer(this._styledGeoJsonLayer);
 
                 this.subscribe();
             },
@@ -85,14 +92,14 @@ define([
                 html.set(this._cardInner, content);
             },
 
-            _geoJsonGroupLayer: null,
+            _styledGeoJsonLayer: null,
             updateGeometry: function (layerId, featureId) {
                 var deferred = new Deferred();
 
 
                 this.ngwServiceFacade.getGeometryByGuid(layerId, featureId, 4326).then(lang.hitch(this, function (feature) {
-                    this._geoJsonGroupLayer.clearLayers();
-                    this.map._lmap.fitBounds(this._geoJsonGroupLayer.addData(feature).getBounds());
+                    this._styledGeoJsonLayer.clearLayers();
+                    this.map._lmap.fitBounds(this._styledGeoJsonLayer.addData(feature).getBounds());
                     deferred.resolve();
                 }));
 
