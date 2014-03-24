@@ -12,9 +12,10 @@ define([
     'rosavto/NgwServiceFacade',
     'rosavto/ParametersVerification',
     'rosavto/Loader',
+    'rosavto/Layers/StyledGeoJsonLayer',
     'leaflet/leaflet'
 ],
-    function (declare, array, lang, dojo, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade, ParametersVerification, Loader, L) {
+    function (declare, array, lang, dojo, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade, ParametersVerification, Loader, StyledGeoJsonLayer, L) {
         return declare('rosavto.AttributeGetter', [Loader, ParametersVerification], {
             _cardInner: null,
 
@@ -25,7 +26,8 @@ define([
                     'attributesServiceFacade',
                     'cardInnerId',
                     'cardBodyId',
-                    'mapIdentify'
+                    'mapIdentify',
+                    'styles'
                 ]);
                 lang.mixin(this, settings);
 
@@ -34,24 +36,13 @@ define([
 
                 this.buildLoader(this._cardInner);
 
-                this._styledGeoJsonLayer = L.geoJson(null, {style: lang.hitch(this, function (feature) {
-                    return this._getStyle();
-                })});
+                this._styledGeoJsonLayer = new StyledGeoJsonLayer(null, {
+                    styles: this.styles
+                });
+
                 this.map._lmap.addLayer(this._styledGeoJsonLayer);
 
                 this.subscribe();
-            },
-
-            _getStyle: function () {
-                if (this.style) {
-                    return this.style;
-                } else {
-                    return {
-                        fill: false,
-                        color: '#FF0000',
-                        weight: 2
-                    };
-                }
             },
 
             subscribe: function () {
