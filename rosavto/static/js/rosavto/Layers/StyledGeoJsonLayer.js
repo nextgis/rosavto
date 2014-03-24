@@ -1,13 +1,13 @@
 define([
     'dojo/_base/declare',
-    'dojo/_base/lang',
-    'dojo/request/xhr'
-], function (declare, lang, xhr) {
+    'leaflet'
+], function (declare, L) {
     return declare('rosavto.StyledGeoJsonLayer', [L.GeoJSON], {
-        _layersById: {},
 
         constructor: function () {
             var self = this;
+
+            this.layersById = {};
 
             this.options.pointToLayer = function (feature, latlng) {
                 return self.pointToLayer(feature, latlng);
@@ -29,9 +29,9 @@ define([
         },
 
         removeObject: function (id) {
-            if (this._layersById[id]) {
-                this.removeLayer(this._layersById[id]);
-                delete this._layersById[id];
+            if (this.layersById[id]) {
+                this.removeLayer(this.layersById[id]);
+                delete this.layersById[id];
             }
         },
 
@@ -67,7 +67,7 @@ define([
                 type,
                 id;
 
-            layer.on('click', function (e) {
+            layer.on('click', function () {
                 if (self.options.callbackClick) {
                     self.options.callbackClick.call(this, feature.properties.__id, feature);
                 }
@@ -83,13 +83,8 @@ define([
 
             if (feature.properties.__id) {
                 id = feature.properties.__id;
-                if (this._layersById[id]) {
-                    this.removeLayer(this._layersById[id]);
-                    delete this._layersById[id];
-                    this._layersById[id] = layer;
-                } else {
-                    this._layersById[id] = layer;
-                }
+                this.removeObject(id);
+                this.layersById[id] = layer;
             }
         }
     });

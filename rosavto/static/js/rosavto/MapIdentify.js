@@ -9,9 +9,11 @@ define([
     'dojo/topic',
     'mustache/mustache',
     'rosavto/ParametersVerification',
-    'dojo/NodeList-traverse'
+    'leaflet',
+    'dojo/NodeList-traverse',
+    'DragAndDrop'
 ],
-    function (declare, array, lang, query, on, domAttr, xhr, topic, mustache, ParametersVerification) {
+    function (declare, array, lang, query, on, domAttr, xhr, topic, mustache, ParametersVerification, L, DnD) {
 
         return declare('rosavto.MapIdentify', [ParametersVerification], {
             template: '<div id="{{id}}" class="layers-selector">{{#layers}}<p>{{name}}</p><ul data-layer-id="{{id}}">{{#features}}<li data-id="{{id}}"><a href="javascript:void(0)">{{label}}</a></li>{{/features}}</ul>{{/layers}}</div>',
@@ -31,8 +33,10 @@ define([
                 var that = this;
 
                 this.map._lmap.on('click', function (e) {
-                    topic.publish('map/identityUi/block');
-                    that.getIdsByClick(e);
+                    if (DnD.dragStart === false) {
+                        topic.publish('map/identityUi/block');
+                        that.getIdsByClick(e);
+                    }
                 });
             },
 

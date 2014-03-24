@@ -1,18 +1,9 @@
 define([
     'dojo/_base/declare',
-    'dojo/_base/array',
     'dojo/_base/lang',
-    'dojo/query',
-    'dojo/html',
-    'dojo/topic',
-    'dojo/request/xhr',
-    'dojo/Deferred',
-    'dojo/DeferredList',
-    'rosavto/LayersInfo',
-    'rosavto/MapIdentify',
-    'rosavto/Loader'
+    'dojo/request/xhr'
 ],
-    function (declare, array, lang, query, html, topic, xhr, Deferred, DeferredList, LayersInfo, MapIdentify, Loader) {
+    function (declare, lang, xhr) {
         return declare('rosavto.NgwServiceFacade', null, {
             constructor: function (attributesServiceUrlBase, settings) {
                 this._attributesServiceUrlBase = attributesServiceUrlBase;
@@ -27,12 +18,7 @@ define([
                     url += '&callback=' + callback;
                 }
 
-                return xhr(this._attributesServiceUrlBase + url, {
-                    handleAs: 'text',
-                    method: 'POST',
-                    data: {
-                        guids: featureGuid
-                    }});
+                return xhr(this._attributesServiceUrlBase + url, {handleAs: 'text', method: 'GET'});
             }
         });
     });

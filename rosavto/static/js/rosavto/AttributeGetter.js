@@ -2,7 +2,7 @@ define([
     'dojo/_base/declare',
     'dojo/_base/array',
     'dojo/_base/lang',
-    'dojo/query',
+    'dojo',
     'dojo/html',
     'dojo/topic',
     'dojo/request/xhr',
@@ -11,24 +11,21 @@ define([
     'rosavto/MapIdentify',
     'rosavto/NgwServiceFacade',
     'rosavto/ParametersVerification',
-    'rosavto/Loader'
+    'rosavto/Loader',
+    'leaflet'
 ],
-    function (declare, array, lang, query, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade, ParametersVerification, Loader) {
+    function (declare, array, lang, dojo, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade, ParametersVerification, Loader, L) {
         return declare('rosavto.AttributeGetter', [Loader, ParametersVerification], {
-            _container: null,
+            _cardInner: null,
 
             constructor: function (settings) {
-                this.verificateRequiredParameters(settings, ['map', 'ngwServiceFacade', 'attributesServiceFacade', 'domSelector', 'mapIdentify']);
+                this.verificateRequiredParameters(settings, ['map', 'ngwServiceFacade', 'attributesServiceFacade', 'cardInnerId', 'cardBodyId', 'mapIdentify']);
                 lang.mixin(this, settings);
 
-                var container = query(this.domSelector);
-                if (container.length === 1) {
-                    this._container = container[0];
-                } else {
-                    throw 'There is multiple attributes elements or element was not found';
-                }
+                this._cardInner = dojo.byId(this.cardInnerId);
+                this._cardBody = dojo.byId(this.cardBodyId);
 
-                this.buildLoader(this._container);
+                this.buildLoader(this._cardInner);
 
                 this._geoJsonGroupLayer = L.geoJson(null, {style: lang.hitch(this, function (feature) {
                     return this._getStyle();
@@ -75,7 +72,7 @@ define([
             updateAttributes: function (featureId) {
                 var deferred = new Deferred();
 
-                this.attributesServiceFacade.getAttributesByGuid(featureId, 'MonitoringCard.showCard').then(lang.hitch(this, function (content) {
+                this.attributesServiceFacade.getAttributesByGuid(featureId, 'Monitoring.fireMapObjectSelected').then(lang.hitch(this, function (content) {
                     this._updateAttributesHtmlBlock(content);
                     deferred.resolve();
                 }));
@@ -84,7 +81,8 @@ define([
             },
 
             _updateAttributesHtmlBlock: function (content) {
-                html.set(this._container, content);
+                this._cardBody.scrollTop = 0;
+                html.set(this._cardInner, content);
             },
 
             _geoJsonGroupLayer: null,
