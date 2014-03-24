@@ -1,6 +1,6 @@
 define([
     'dojo/_base/declare',
-    'leaflet'
+    'leaflet/leaflet'
 ], function (declare, L) {
     return declare('rosavto.StyledGeoJsonLayer', [L.GeoJSON], {
 
@@ -67,11 +67,11 @@ define([
                 type,
                 id;
 
-            layer.on('click', function () {
-                if (self.options.callbackClick) {
+            if (this.options.callbackClick) {
+                layer.on('click', function () {
                     self.options.callbackClick.call(this, feature.properties.__id, feature);
-                }
-            });
+                });
+            }
 
             if (feature.geometry.type !== 'Point' && feature.properties.__type) {
                 type = feature.properties.__type;
