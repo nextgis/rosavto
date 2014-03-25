@@ -27,7 +27,7 @@ define([
                     'cardInnerId',
                     'cardBodyId',
                     'mapIdentify',
-                    'styles'
+                    'stylesSettings'
                 ]);
                 lang.mixin(this, settings);
 
@@ -36,9 +36,7 @@ define([
 
                 this.buildLoader(this._cardInner);
 
-                this._styledGeoJsonLayer = new StyledGeoJsonLayer(null, {
-                    styles: this.styles
-                });
+                this._styledGeoJsonLayer = new StyledGeoJsonLayer(null, this.stylesSettings);
 
                 this.map._lmap.addLayer(this._styledGeoJsonLayer);
 
@@ -90,7 +88,7 @@ define([
 
                 this.ngwServiceFacade.getGeometryByGuid(layerId, featureId, 4326).then(lang.hitch(this, function (feature) {
                     this._styledGeoJsonLayer.clearLayers();
-                    this.map._lmap.fitBounds(this._styledGeoJsonLayer.addData(feature).getBounds());
+                    this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObjectByDefaultProperties(feature).getBounds());
                     deferred.resolve();
                 }));
 
