@@ -25,7 +25,7 @@ define([
         addObject: function (geoJson, type, id) {
             geoJson.properties.__type = type;
             geoJson.properties.__id = id;
-            this.addData(geoJson);
+            return this.addData(geoJson);
         },
 
         removeObject: function (id) {
