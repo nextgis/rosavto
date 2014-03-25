@@ -64,11 +64,11 @@
                 },
                 styles: {
                     'Метео': {
-                        point: {className: 'accident'},
+                        point: {className: 'meteo-a'},
                         line: {opacity:0.5, weight: 15, color: '#FF0000'}
                     },
                     'Видео' : {
-                        point: {className: 'snow'},
+                        point: {className: 'camera-a'},
                         line: {opacity:0.5, weight: 15, color: '#1E00FF'}
                     }
                 }
