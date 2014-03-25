@@ -23,9 +23,16 @@ define([
         },
 
         addObject: function (geoJson, type, id) {
+            var layer;
+
             geoJson.properties.__type = type;
             geoJson.properties.__id = id;
-            return this.addData(geoJson);
+
+            layer = this.addData(geoJson);
+
+            this.setPosition(layer, this.options.styles[type]['position']);
+
+            return layer;
         },
 
         addObjectByProperties: function (geoJson, typeField, idField) {
@@ -39,8 +46,7 @@ define([
         addObjectByDefaultProperties: function (geoJson) {
             var options = this.options;
 
-            if (!options.fields || !options.fields['type'] || !options.fields['id'] ||
-                !geoJson.properties[options.fields.id]) {
+            if (!options.fields || !options.fields['type'] || !options.fields['id'] || !geoJson.properties[options.fields.id]) {
                 return false;
             }
 
@@ -104,6 +110,24 @@ define([
                 id = feature.properties.__id;
                 this.removeObject(id);
                 this.layersById[id] = layer;
+            }
+        },
+
+        setPosition: function (layer, position) {
+            if (position) {
+
+                if (!this._map._panes.overlayPane.firstChild) {
+                    return;
+                }
+
+                switch (position) {
+                    case 'front':
+                        return layer.bringToFront();
+                        break;
+                    case 'back':
+                        return layer.bringToBack();
+                        break;
+                }
             }
         }
     });
