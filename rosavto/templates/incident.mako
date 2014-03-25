@@ -86,18 +86,22 @@
         map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 8);
 
         styles = {
-            'accident': {
+            accident: {
+                position: 'front',
                 point: {className: 'accident'},
-                line: {opacity:0.5, weight: 15, color: '#FF0000'}
+                line: {opacity:0.8, weight: 5, color: '#FF0000'}
             },
-            'snow' : {
+            snow: {
+                position: 'back',
                 point: {className: 'snow'},
-                line: {opacity:0.5, weight: 15, color: '#1E00FF'}
+                line: {opacity:0.5, weight: 15, color: '#0040FF'}
             }
         };
 
         layer = new StyledGeoJsonLayer(null, {
-            callbackClick: function () {},
+            callbackClick: function (id, feature) {
+                alert(feature.properties.__type);
+            },
             styles: styles
         });
 
