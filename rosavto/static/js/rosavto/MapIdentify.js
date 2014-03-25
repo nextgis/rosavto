@@ -52,17 +52,6 @@ define([
                         pointTopRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom)),
                         wktBounds;
 
-                    var debugBottomLeft = L.CRS.EPSG4326.project(map.unproject(new L.Point(point.x - 10, point.y - 10), zoom)),
-                        debugTopRight = L.CRS.EPSG4326.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom));
-
-                    L.polygon([
-                        [debugBottomLeft.y, debugBottomLeft.x],
-                        [debugBottomLeft.y, debugTopRight.x],
-                        [debugTopRight.y, debugTopRight.x],
-                        [debugTopRight.y, debugBottomLeft.x],
-                        [debugBottomLeft.y, debugBottomLeft.x]
-                    ], {opacity: 0.5, fillColor: '#FF0000', color: '#FF0000'}).addTo(map);
-
                     wktBounds = 'POLYGON((' + pointBottomLeft.x + ' ' + pointBottomLeft.y + ', ' +
                         pointBottomLeft.x + ' ' + pointTopRight.y + ', ' +
                         pointTopRight.x + ' ' + pointTopRight.y + ', ' +
@@ -75,7 +64,6 @@ define([
                         identifiedFeatures = this._parseNgwFeatures(ngwFeatures);
 
                         if (identifiedFeatures.count === 0) {
-                            //alert('В этом месте объектов нет');
                             topic.publish('map/identityUi/unblock');
                         } else if (identifiedFeatures.count === 1) {
                             topic.publish('attributes/get', identifiedFeatures.layers[0].layerId, identifiedFeatures.layers[0].featureId);
