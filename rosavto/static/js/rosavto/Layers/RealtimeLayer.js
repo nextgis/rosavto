@@ -124,13 +124,8 @@ define([
             if (marker && marker._icon) {
                 on(marker._icon, 'mousedown', function(e) {                    
                     if (e.which === 1) {
-                        DnD.startDragTime = new Date().getTime();
-                        DnD.dragReady = true;
-                        DnD.dragStart = false;
-                        DnD.dragElement = lang.clone(e.target);   
+                        DnD.onDragStart(e.target, marker.markerId, type);
                         e.stopPropagation();
-                        DnD.dragElement.markerId = marker.markerId;
-                        DnD.dragElement.type = type;
                     }
                 });
                 on(marker._icon, 'mouseup', function(e) {
@@ -138,7 +133,9 @@ define([
                         if (DnD.dragStart === false) {
                             me.selectMarker(marker, type);
                         } else {
-                            DnD.dragElement.remove();
+                            if (DnD.dragElement) {
+                                DnD.dragElement.remove();
+                            }
                         }
                     }
                 });                
@@ -205,7 +202,7 @@ define([
         drawLine: function(body) {
             var component = this;
             var indent = 2;
-            var xhr = this.options._ngwServiceFacade.getIncidentLine(body.roadId,
+            var xhr = this.options._ngwServiceFacade.getIncidentLine('{' + body.roadId + '}',
                     {distance: {km: (body.roadMeter / 1000) - indent, m: body.roadMeter % 1000}},
             {distance: {km: (body.roadMeter / 1000) + indent, m: body.roadMeter % 1000}}
             );

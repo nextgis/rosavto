@@ -5,7 +5,7 @@
  *
  * Пример использования:
  *
- * require(['StompClient'], function(stomp) {
+ * require(['centreit/StompClient'], function(stomp) {
  *     stomp.connect().then(function (client) {
  *          client.subscribe(...);
  *     });
@@ -16,9 +16,9 @@
  */
 define([
     'dojo/topic', 'dojo/_base/declare',
-    'centreit/when', 'dojo/_base/lang', 'dojox/lang/functional/object',
-    'socket/Stomp', 'socket/SockJS'],
-    function (topic, declare, when, lang, object) {
+    'dojo/Deferred', 'dojo/_base/lang', 'dojox/lang/functional/object',
+    'stomp/stomp', 'sockjs/sockjs'],
+    function (topic, declare, Deferred, lang, object) {
         return {
             topic: topic,
             reconnectDelay: 1000,
@@ -27,10 +27,10 @@ define([
             client: null,
             connect: function () {
                 if (!this.deferred) {
-                    this.deferred = when.defer();
+                    this.deferred = new Deferred();
                     this.reconnect();
                 }
-                return this.deferred.promise;
+                return this.deferred;
             },
 
             reconnect: function () {
