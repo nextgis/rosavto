@@ -16,6 +16,7 @@
         var application_root = '${request.application_url}',
             ngwUrlForTiles = '${request.registry.settings['proxy_ngw']}',
             ngwProxyUrl = application_root + '/ngw/',
+            Monitoring = { contextPath: '/monitoring-web/' },
 
             // Dojo's config
             dojoConfig = {
@@ -26,11 +27,10 @@
                     { name: "rosavto", location: 'rosavto' },
                     { name: "proj4js", location: 'proj4js' },
                     { name: "mustache", location: 'mustache' },
-##                  { name: "StompClient", location: 'centreit', main: 'StompClient' },
-##                  { name: "when", location: 'centreit', main: 'when' },
                     { name: 'leaflet', location: 'leaflet' },
                     { name: 'centreit', location: 'centreit' },
-                    { name: 'socket', location: 'socket' }
+                    { name: 'stomp', location: 'stomp' },
+                    { name: 'sockjs', location: 'sockjs' }
                 ]
             };
     </script>

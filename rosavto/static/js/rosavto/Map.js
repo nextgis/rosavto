@@ -4,26 +4,26 @@ define([
     'dojo/_base/lang',
     'dojo/request/xhr',
     'rosavto/Loader',
-    'dojo/store/Memory',
-    'leaflet/leaflet'
-], function(query, declare, lang, xhr, Loader, Memory) {
-    return declare('rosavto.Map', [Loader, Memory], {
+    'leaflet/leaflet',
+    'centreit/StorageProvider'
+], function(query, declare, lang, xhr, Loader, L, storage) {
+    return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
         _overlaylayers: {},
         _legend: null,
         _incidentLayer: null,
         _ngwServiceFacade: null,
-
-        constructor: function (domNode, settings, ngwServiceFacade) {
+        constructor: function(domNode, settings, ngwServiceFacade) {
             this._ngwServiceFacade = ngwServiceFacade;
             if (!settings.zoomControl) {
                 settings.zoomControl = false;
             }
 
             this._lmap = new L.Map(domNode, settings);
-//            this._lmap.on('layeradd', this.onMapLayerAdded);
-//            this._lmap.on('layerremove', this.onMapLayerRemoved);
+            this._lmap.on('layeradd', this.onMapLayerAdded);
+            this._lmap.on('layerremove', this.onMapLayerRemoved);
+            this._lmap.on('moveend', this.onMapMoveEnd);
 
             if (settings.legend) {
                 this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
@@ -33,18 +33,24 @@ define([
             this.buildLoader(domNode);
 
             this.addOsmTileLayer();
-        },
 
-        _legendBindEvents: function () {
-            query(this._legend._overlaysList).on('click', lang.hitch(this, function () {
+            storage.then(lang.hitch(this, function(provider) {
+                var zoom = provider.get('zoom'), center = provider.get('center');
+                if (center) {
+                    this._lmap.setView(center, zoom, {reset: true});
+                }
+            }));
+
+        },
+        _legendBindEvents: function() {
+            query(this._legend._overlaysList).on('click', lang.hitch(this, function() {
                 this._updateActiveNgwLayers();
             }));
         },
-
         _visibleNgwLayers: [],
-        _updateActiveNgwLayers: function () {
+        _updateActiveNgwLayers: function() {
             var layerLeafletId,
-                layer;
+                    layer;
 
             this._visibleNgwLayers = [];
 
@@ -60,119 +66,129 @@ define([
                 }
             }
         },
-
-        getVisibleNgwLayers: function () {
+        getVisibleNgwLayers: function() {
             return this._visibleNgwLayers;
         },
-
-        getLMap: function () {
+        getLMap: function() {
             return this._lmap;
         },
-
-        addWmsLayer: function (url, name, settings) {
+        addWmsLayer: function(url, name, settings) {
             var wmsLayer = L.tileLayer.wms(url, settings);
 
             this._lmap.addLayer(wmsLayer);
             this._baseLayers[name] = wmsLayer;
-            if (this._legend) this._legend.addBaseLayer(wmsLayer, name);
+            if (this._legend)
+                this._legend.addBaseLayer(wmsLayer, name);
         },
-
-        addTileLayer: function (name, url, settings) {
+        addTileLayer: function(name, url, settings) {
             var tileLayer = new L.TileLayer(url, settings);
             this._lmap.addLayer(tileLayer);
             this._baseLayers[name] = tileLayer;
-            if (this._legend) this._legend.addBaseLayer(tileLayer, name);
+            if (this._legend)
+                this._legend.addBaseLayer(tileLayer, name);
         },
-
-        addNgwTileLayer: function (name, ngwUrl, idStyle, settings) {
+        addNgwTileLayer: function(name, ngwUrl, idStyle, settings) {
             var ngwTilesUrl = ngwUrl + 'style/' + idStyle + '/tms?z={z}&x={x}&y={y}',
-                ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
+                    ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
             ngwTileLayer._ngwStyleId = idStyle;
-//            if (this.isLayerOnByDefault(ngwTileLayer)) {
-                this._lmap.addLayer(ngwTileLayer);
-//            }
+
+            storage.then(lang.hitch(this, function(provider){
+                if (provider.get('mapLayerVisibility-' + ngwTileLayer._ngwStyleId) === true) {
+                    this._lmap.addLayer(ngwTileLayer);
+                }
+            }));
+
             this._overlaylayers[name] = ngwTileLayer;
             if (this._legend) {
                 this._legend.addOverlay(ngwTileLayer, name);
             }
             this._visibleNgwLayers.push(ngwTileLayer._ngwStyleId);
         },
-
-        addOsmTileLayer: function () {
+        addOsmTileLayer: function() {
             var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                settingsOsmLayer = {
-                    attribution: 'Map data © OpenStreetMap contributors'
-                };
+                    settingsOsmLayer = {
+                attribution: 'Map data © OpenStreetMap contributors'
+            };
 
             this.addTileLayer('Openstreetmap', osmUrl, settingsOsmLayer);
         },
-
-        createGeoJsonLayer: function (name, url, style) {
+        createGeoJsonLayer: function(name, url, style) {
             xhr(application_root + url, {
                 handleAs: 'json'
-            }).then(lang.hitch(this, function (geoJson) {
-                    if (geoJson.features) {
-                        var layer = L.geoJson(geoJson.features, {
-                            style: style,
-                            pointToLayer: function (feature, latlng) {
-                                return L.circle(latlng, 25, style);
-                            }
-                        });
+            }).then(lang.hitch(this, function(geoJson) {
+                if (geoJson.features) {
+                    var layer = L.geoJson(geoJson.features, {
+                        style: style,
+                        pointToLayer: function(feature, latlng) {
+                            return L.circle(latlng, 25, style);
+                        }
+                    });
 
-                        layer.addTo(this._lmap);
+                    layer.addTo(this._lmap);
 
-                        this._overlaylayers[name] = layer;
-                        if (this._legend) this._legend.addOverlay(layer, name);
-                    }
-                }));
+                    this._overlaylayers[name] = layer;
+                    if (this._legend)
+                        this._legend.addOverlay(layer, name);
+                }
+            }));
         },
-
-        addGeoJsonLayer: function (name, geoJsonLayer) {
+        addGeoJsonLayer: function(name, geoJsonLayer) {
             geoJsonLayer.addTo(this._lmap);
             this._overlaylayers[name] = geoJsonLayer;
-            if (this._legend) this._legend.addOverlay(geoJsonLayer, name);
+            if (this._legend)
+                this._legend.addOverlay(geoJsonLayer, name);
         },
-//        onMapLayerAdded: function (layer) {
-//            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, true, function (status, keyName) {
-//                console.log('mapLayerVisibility-' + layer.layer._ngwStyleId);
-//            });
-//        },
-//        onMapLayerRemoved: function(layer) {
-//            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, false, function(status, keyName){
-//                console.log('mapLayerVisibility-' + layer.layer._ngwStyleId);
-//            });
-//        },
-//        isLayerOnByDefault: function(layer) {
-//            return storageProvider.get('mapLayerVisibility-' + layer._ngwStyleId) === true;
-//        },
+        onMapLayerAdded: function(layer) {
+            storage.then(function(provider) {
+                provider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, true);
+            });
+        },
+        onMapLayerRemoved: function(layer) {
+            storage.then(function(provider) {
+                provider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, false);
+            });
+        },
+        onMapMoveEnd: function(obj) {
+            if (obj && obj.target) {
+                storage.then(function(provider) {
+                    var zoom = obj.target.getZoom(), center = obj.target.getCenter();
+                    if (zoom) {
+                        provider.put('zoom', zoom);
+                    }
+                    if (center) {
+                        provider.put('center', [center.lat, center.lng]);
+                    }
+                });
+            }
+        },
 
-        showObjectAsMarker: function (url, id, isPopup) {
+        showObjectAsMarker: function(url, id, isPopup) {
             xhr(application_root + url + id, {
                 handleAs: 'json'
-            }).then(lang.hitch(this, function (geoJson) {
-                    if (geoJson.features) {
-                        var layer = new L.geoJson(geoJson.features, {
-                            onEachFeature: function (feature, layer) {
-                                if (isPopup) {
-                                    layer.bindPopup('id: ' + feature.id);
-                                }
+            }).then(lang.hitch(this, function(geoJson) {
+                if (geoJson.features) {
+                    var layer = new L.geoJson(geoJson.features, {
+                        onEachFeature: function(feature, layer) {
+                            if (isPopup) {
+                                layer.bindPopup('id: ' + feature.id);
                             }
-                        });
-                        this._lmap.addLayer(layer);
-                    }
-                }));
+                        }
+                    });
+                    this._lmap.addLayer(layer);
+                }
+            }));
         },
-
         _customizableGeoJsonLayer: null,
-        createCustomizableGeoJsonLayer: function (styles, callback) {
-            if (this._customizableGeoJsonLayer) return;
+        createCustomizableGeoJsonLayer: function(styles, callback) {
+            if (this._customizableGeoJsonLayer)
+                return;
 
             var type,
-                style,
-                marker;
+                    style,
+                    marker;
 
             this._customizableGeoJsonLayer = new L.GeoJSON(null, {
-                pointToLayer: function (feature, latLng) {
+                pointToLayer: function(feature, latLng) {
                     type = feature.properties.type;
                     style = styles[type];
 
@@ -181,8 +197,8 @@ define([
                         return marker;
                     }
                 },
-                onEachFeature: function (feature, layer) {
-                    layer.on('click', function (e) {
+                onEachFeature: function(feature, layer) {
+                    layer.on('click', function(e) {
                         callback.call(this.feature, e);
                     });
                 }
@@ -190,9 +206,9 @@ define([
 
             this._lmap.addLayer(this._customizableGeoJsonLayer);
         },
-
-        addCustomizableGeoJsonData: function (data) {
-            if (!this._customizableGeoJsonLayer) return false;
+        addCustomizableGeoJsonData: function(data) {
+            if (!this._customizableGeoJsonLayer)
+                return false;
 
             this._customizableGeoJsonLayer.addData(data);
         }
