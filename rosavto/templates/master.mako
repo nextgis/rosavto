@@ -26,8 +26,11 @@
                     { name: "rosavto", location: 'rosavto' },
                     { name: "proj4js", location: 'proj4js' },
                     { name: "mustache", location: 'mustache' },
-                    { name: "StompClient", location: 'centreit', main: 'StompClient' },
-                    { name: "when", location: 'centreit', main: 'when' }
+##                  { name: "StompClient", location: 'centreit', main: 'StompClient' },
+##                  { name: "when", location: 'centreit', main: 'when' },
+                    { name: 'leaflet', location: 'leaflet' },
+                    { name: 'centreit', location: 'centreit' },
+                    { name: 'socket', location: 'socket' }
                 ]
             };
     </script>

@@ -5,7 +5,7 @@ define([
     'dojo/request/xhr',
     'rosavto/Loader',
     'dojo/store/Memory',
-    'leaflet'
+    'leaflet/leaflet'
 ], function(query, declare, lang, xhr, Loader, Memory) {
     return declare('rosavto.Map', [Loader, Memory], {
         _lmap: {},
@@ -132,8 +132,8 @@ define([
             this._overlaylayers[name] = geoJsonLayer;
             if (this._legend) this._legend.addOverlay(geoJsonLayer, name);
         },
-        onMapLayerAdded: function(layer) {
-            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, true, function(status, keyName){
+        onMapLayerAdded: function (layer) {
+            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, true, function (status, keyName) {
                 console.log('mapLayerVisibility-' + layer.layer._ngwStyleId);
             });
         },

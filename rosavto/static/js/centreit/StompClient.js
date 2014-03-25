@@ -15,9 +15,9 @@
  *
  */
 define([
-    'dojo/topic', 'dojo/_base/declare', 'when',
-    'dojo/_base/lang', 'dojox/lang/functional/object',
-    'Stomp', 'SockJS'],
+    'dojo/topic', 'dojo/_base/declare',
+    'centreit/when', 'dojo/_base/lang', 'dojox/lang/functional/object',
+    'socket/Stomp', 'socket/SockJS'],
     function (topic, declare, when, lang, object) {
         return {
             topic: topic,

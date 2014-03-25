@@ -3,14 +3,14 @@ define([
     'dojo/_base/lang',
     "dojo/on",
     'rosavto/Layers/StyledGeoJsonLayer',
-    'StompClient',
-    'DragAndDrop',
+    'centreit/StompClient',
+    'centreit/DragAndDrop',
     'dojox/lang/functional/object',
     'dojox/uuid/_base',
     'dojox/uuid/generateRandomUuid',
     'dojo/query',
     'dojo/_base/array',
-    'leaflet'
+    'leaflet/leaflet'
 ], function(declare, lang, on, StyledGeoJsonLayer, StompClient, DnD, object, uuid, generateRandomUuid, query, array, L) {
     return declare('rosavto.RealtimeLayer', [StyledGeoJsonLayer], {
         _debug: false,

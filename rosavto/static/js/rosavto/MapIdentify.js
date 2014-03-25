@@ -9,9 +9,9 @@ define([
     'dojo/topic',
     'mustache/mustache',
     'rosavto/ParametersVerification',
-    'leaflet',
+    'leaflet/leaflet',
     'dojo/NodeList-traverse',
-    'DragAndDrop'
+    'centreit/DragAndDrop'
 ],
     function (declare, array, lang, query, on, domAttr, xhr, topic, mustache, ParametersVerification, L, DnD) {
 
