@@ -28,6 +28,25 @@ define([
             return this.addData(geoJson);
         },
 
+        addObjectByProperties: function (geoJson, typeField, idField) {
+            if (!geoJson.properties[typeField] || !geoJson.properties[idField]) {
+                return false;
+            }
+
+            return this.addObject(geoJson, geoJson.properties[typeField], geoJson.properties[idField]);
+        },
+
+        addObjectByDefaultProperties: function (geoJson) {
+            var options = this.options;
+
+            if (!options.fields || !options.fields['type'] || !options.fields['id'] ||
+                !geoJson.properties[options.fields.id]) {
+                return false;
+            }
+
+            return this.addObject(geoJson, geoJson.properties[options.fields.type], geoJson.properties[options.fields.id]);
+        },
+
         removeObject: function (id) {
             if (this.layersById[id]) {
                 this.removeLayer(this.layersById[id]);
