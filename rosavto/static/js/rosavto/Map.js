@@ -22,8 +22,8 @@ define([
             }
 
             this._lmap = new L.Map(domNode, settings);
-            this._lmap.on('layeradd', this.onMapLayerAdded);
-            this._lmap.on('layerremove', this.onMapLayerRemoved);
+//            this._lmap.on('layeradd', this.onMapLayerAdded);
+//            this._lmap.on('layerremove', this.onMapLayerRemoved);
 
             if (settings.legend) {
                 this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
@@ -88,9 +88,9 @@ define([
             var ngwTilesUrl = ngwUrl + 'style/' + idStyle + '/tms?z={z}&x={x}&y={y}',
                 ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
             ngwTileLayer._ngwStyleId = idStyle;
-            if (this.isLayerOnByDefault(ngwTileLayer)) {
+//            if (this.isLayerOnByDefault(ngwTileLayer)) {
                 this._lmap.addLayer(ngwTileLayer);
-            }
+//            }
             this._overlaylayers[name] = ngwTileLayer;
             if (this._legend) {
                 this._legend.addOverlay(ngwTileLayer, name);
@@ -132,19 +132,19 @@ define([
             this._overlaylayers[name] = geoJsonLayer;
             if (this._legend) this._legend.addOverlay(geoJsonLayer, name);
         },
-        onMapLayerAdded: function (layer) {
-            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, true, function (status, keyName) {
-                console.log('mapLayerVisibility-' + layer.layer._ngwStyleId);
-            });
-        },
-        onMapLayerRemoved: function(layer) {
-            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, false, function(status, keyName){
-                console.log('mapLayerVisibility-' + layer.layer._ngwStyleId);
-            });    
-        },
-        isLayerOnByDefault: function(layer) {
-            return storageProvider.get('mapLayerVisibility-' + layer._ngwStyleId) === true;
-        },
+//        onMapLayerAdded: function (layer) {
+//            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, true, function (status, keyName) {
+//                console.log('mapLayerVisibility-' + layer.layer._ngwStyleId);
+//            });
+//        },
+//        onMapLayerRemoved: function(layer) {
+//            storageProvider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, false, function(status, keyName){
+//                console.log('mapLayerVisibility-' + layer.layer._ngwStyleId);
+//            });
+//        },
+//        isLayerOnByDefault: function(layer) {
+//            return storageProvider.get('mapLayerVisibility-' + layer._ngwStyleId) === true;
+//        },
 
         showObjectAsMarker: function (url, id, isPopup) {
             xhr(application_root + url + id, {

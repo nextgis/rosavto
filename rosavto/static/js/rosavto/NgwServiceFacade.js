@@ -115,8 +115,8 @@ define([
                     srs = 4326;
                 }
 
-                url = 'layer/17/rosavto/getlrsublinebyuuid?guid={' + guid +
-                    '}&first=' + this._calculateDistanceInMeters(pointStart) +
+                url = 'layer/17/rosavto/getlrsublinebyuuid?guid=' + guid +
+                    '&first=' + this._calculateDistanceInMeters(pointStart) +
                     '&last=' + this._calculateDistanceInMeters(pointFinish) +
                     '&step=1000' +
                     '&srs=' + srs;
