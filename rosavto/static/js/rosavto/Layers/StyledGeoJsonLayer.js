@@ -30,7 +30,9 @@ define([
 
             layer = this.addData(geoJson);
 
-            this.setPosition(layer, this.options.styles[type]['position']);
+            if (this.options.styles[type]) {
+                this.setPosition(layer, this.options.styles[type]['position']);
+            }
 
             return layer;
         },
