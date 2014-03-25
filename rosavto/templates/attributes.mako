@@ -55,11 +55,23 @@
             ngwServiceFacade: ngwServiceFacade,
             attributesServiceFacade: attributesServiceFacade,
             mapIdentify: mapIdentify,
-            domSelector: '#attributes',
-            style: {
-                fill: false,
-                color: '#FF0000',
-                weight: 2
+            cardInnerId: 'attributes',
+            cardBodyId: 'attributes',
+            stylesSettings: {
+                fields: {
+                    id: 'uniq_uid',
+                    type: 'type_name'
+                },
+                styles: {
+                    'Метео': {
+                        point: {className: 'accident'},
+                        line: {opacity:0.5, weight: 15, color: '#FF0000'}
+                    },
+                    'Видео' : {
+                        point: {className: 'snow'},
+                        line: {opacity:0.5, weight: 15, color: '#1E00FF'}
+                    }
+                }
             }
         });
     });
