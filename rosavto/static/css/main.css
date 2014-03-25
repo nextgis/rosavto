@@ -40,7 +40,6 @@ div.leaflet-marker-icon.accident {
     background-image: url('images/accident.png');
 }
 
-
 div.leaflet-marker-icon.video {
     background-image: url('images/video.png');
 }
@@ -63,6 +62,22 @@ div.leaflet-marker-icon.jam {
 
 div.leaflet-marker-icon.snow {
     background-image: url('images/snow.png');
+}
+
+div.leaflet-marker-icon.meteo-a {
+    background-image: url('images/meteo-a.png');
+    width: 40px !important;
+    height: 40px !important;
+    margin-left: -20px !important;
+    margin-top: -19px !important;
+}
+
+div.leaflet-marker-icon.camera-a {
+    background-image: url('images/camera-a.png');
+    width: 40px !important;
+    height: 40px !important;
+    margin-left: -20px !important;
+    margin-top: -19px !important;
 }
 
 #attributes {

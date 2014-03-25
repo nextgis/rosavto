@@ -33,10 +33,10 @@ define([
                 var that = this;
 
                 this.map._lmap.on('click', function (e) {
-                    if (DnD.dragStart === false) {
+//                    if (DnD.dragStart === false) {
                         topic.publish('map/identityUi/block');
                         that.getIdsByClick(e);
-                    }
+//                    }
                 });
             },
 
