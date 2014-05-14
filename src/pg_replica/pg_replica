@@ -33,6 +33,7 @@ import os
 import sys
 import glob
 import fcntl
+import uuid
 import base64
 import codecs
 import datetime
@@ -361,11 +362,14 @@ class PgDB:
                 sql = ' '.join(sql.split()).encode('utf-8')
                 encoded_sql = base64.urlsafe_b64encode(sql)
 
-                payload = {
-                          'table': encoded_table,
-                          'ddl': encoded_ddl,
-                          'sql': encoded_sql
-                         }
+                #payload = {
+                #          'table': encoded_table,
+                #          'ddl': encoded_ddl,
+                #          'sql': encoded_sql
+                #         }
+                xml = self._create_message(encoded_table, encoded_ddl, encoded_sql)
+                headers = {'accept': 'text/xml'}
+                payload = {'data': xml}
 
                 #sql = '''SELECT %s
                 #         FROM %s
@@ -384,10 +388,16 @@ class PgDB:
                 #for url in urls:
                 #    r = requests.post(url, params=payload)
 
+                #r = requests.post(
+                #    'http://192.168.255.106:8000',
+                #    data=payload)
                 r = requests.post(
-                    'http://192.168.255.106:8000',
-                    data=payload)
-                self.logger.debug('Server responce: %s' % r.status_code)
+                    'http://10.20.88.210', data=payload, headers=headers)
+                if r.status_code == 202:
+                    self.logger.debug('Server responce: %s' % r.status_code)
+                else:
+                    self.logger.error('Server responce: %s' % r.status_code)
+                    self.logger.error('Error message: %s' % r.text)
 
         self.clear_old_records(timestamp)
 
@@ -733,6 +743,23 @@ class PgDB:
             return self._quote(table)
         else:
             return u'%s.%s' % (self._quote(schema), self._quote(table))
+
+    def _create_message(self, table, ddl, sql):
+        msg = '<?xml version="1.0" encoding="UTF-8"?>\n'
+        msg += '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"\n'
+        msg += 'xmlns:wsa="http://www.w3.org/2005/08/addressing"\n'
+        msg += 'xmlns:sv="urn:sm:interaction:v0.2">\n'
+        msg += '<soap:Header>\n'
+        msg += '<wsa:To>urn:sm:fk@sitcentr.ru</wsa:To>\n'
+        msg += '<wsa:From><wsa:Address>urn:sm:AdminD@sitcentr.ru</wsa:Address></wsa:From>\n'
+        msg += '<wsa:MessageID>urn:uuid:%s</wsa:MessageID>\n' % uuid.uuid4()
+        msg += '<wsa:Action>ISTC://SP.202.0001</wsa:Action>\n'
+        msg += '</soap:Header><soap:Body>\n'
+        msg += '<d1>%s</d2>\n' % table
+        msg += '<d2>%s</d2>\n' % ddl
+        msg += '<d2>%s</d2>\n' % sql
+        msg += '</soap:Body></soap:Envelope>'
+        return msg
 
 
 def register_table(host, port, dbname, user, passwd, full_table_name):
