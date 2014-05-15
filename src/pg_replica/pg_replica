@@ -2,32 +2,6 @@
 
 # -*- coding: utf-8 -*-
 
-"""
-***************************************************************************
-    pg_replica.py
-    ---------------------
-    Date                 : January 2014
-    Copyright            : (C) 2014 by NextGIS
-    Email                : info at nextgis dot org
-***************************************************************************
-*                                                                         *
-*   This program is free software; you can redistribute it and/or modify  *
-*   it under the terms of the GNU General Public License as published by  *
-*   the Free Software Foundation; either version 2 of the License, or     *
-*   (at your option) any later version.                                   *
-*                                                                         *
-***************************************************************************
-"""
-
-__author__ = 'NextGIS'
-__date__ = 'January 2014'
-__copyright__ = '(C) 2014, NextGIS'
-
-# This will get replaced with a git SHA1 when you do a git archive
-
-__revision__ = '$Format:%H$'
-
-
 import re
 import os
 import sys
@@ -368,7 +342,7 @@ class PgDB:
                 #          'sql': encoded_sql
                 #         }
                 xml = self._create_message(encoded_table, encoded_ddl, encoded_sql)
-                headers = {'accept': 'text/xml'}
+                headers = {'Accept': 'text/xml'}
                 payload = {'data': xml}
 
                 #sql = '''SELECT %s
@@ -755,9 +729,9 @@ class PgDB:
         msg += '<wsa:MessageID>urn:uuid:%s</wsa:MessageID>\n' % uuid.uuid4()
         msg += '<wsa:Action>ISTC://SP.202.0001</wsa:Action>\n'
         msg += '</soap:Header><soap:Body>\n'
-        msg += '<d1>%s</d2>\n' % table
+        msg += '<d1>%s</d1>\n' % table
         msg += '<d2>%s</d2>\n' % ddl
-        msg += '<d2>%s</d2>\n' % sql
+        msg += '<d3>%s</d3>\n' % sql
         msg += '</soap:Body></soap:Envelope>'
         return msg
 
