@@ -4,6 +4,7 @@ port=5432
 database=rosavto
 user=luser
 password=secret
+bus=10.20.88.210
 
 [zones]
 table_name=thematic.borders_dept

@@ -227,7 +227,7 @@ class PgDB:
         self._exec_sql_and_commit(sql)
         return True
 
-    def prepare_changes(self, timestamp, boundary, url_field):
+    def prepare_changes(self, timestamp, boundary, url_field, bus):
         records = self.list_changes(timestamp)
 
         data = dict()
@@ -366,7 +366,7 @@ class PgDB:
                 #    'http://192.168.255.106:8000',
                 #    data=payload)
                 r = requests.post(
-                    'http://10.20.88.210', data=payload, headers=headers)
+                    'http://%s' % bus, data=payload, headers=headers)
                 if r.status_code == 202:
                     self.logger.debug('Server responce: %s' % r.status_code)
                 else:
@@ -747,12 +747,12 @@ def register_table(host, port, dbname, user, passwd, full_table_name):
     logger.info('Table "%s" registered for replication.' % full_table_name)
 
 
-def create_changesets(host, port, dbname, user, passwd, boundary, url_field):
+def create_changesets(host, port, dbname, user, passwd, bus, boundary, url_field):
     logger.debug('create_changesets entered.')
     timestamp = datetime.datetime.now().isoformat()
     logger.debug('Process records for %s.' % timestamp)
     db = PgDB(host, port, dbname, user, passwd)
-    db.prepare_changes(timestamp, boundary, url_field)
+    db.prepare_changes(timestamp, boundary, url_field, bus)
 
 
 def apply_changesets(host, port, dbname, user, passwd, directory):
@@ -826,6 +826,7 @@ if __name__ == '__main__':
         dbname = cfg.get('connection', 'database')
         user = cfg.get('connection', 'user')
         passwd = cfg.get('connection', 'password')
+        bus = cfg.get('connection', 'bus')
     else:
         logger.critical('Connection settings not found in config file.')
         sys.exit(1)
@@ -847,7 +848,7 @@ if __name__ == '__main__':
     if args.tableName:
         register_table(host, port, dbname, user, passwd, args.tableName)
     elif args.createChangesets:
-        create_changesets(host, port, dbname, user, passwd,
+        create_changesets(host, port, dbname, user, passwd, bus
                           table_name, field_name)
     elif args.syncChangesets:
         apply_changesets(host, port, dbname, user, passwd, directory)
