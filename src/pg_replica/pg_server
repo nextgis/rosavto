@@ -31,6 +31,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         tbl = b.find('tbl').text
         ddl = b.find('ddl').text
         sql = b.find('sql').text
+        src = b.find('src').text
         dst = b.find('dst').text
         err = b.find('err').text
 
@@ -39,10 +40,11 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         cfg.set('changeset', 'table', tbl)
         cfg.set('changeset', 'ddl', ddl)
         cfg.set('changeset', 'sql', sql)
+        sfg.set('changeset', 'src', src)
+        sfg.set('changeset', 'dst', dst)
         if err != '':
             cfg.add_section('misc')
             cfg.set('misc', 'error', err)
-            sfg.set('dst', 'dst', dst)
 
         timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S-%f')
         if err != '':

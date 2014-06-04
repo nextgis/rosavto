@@ -366,7 +366,9 @@ class PgDB:
 
         self.clear_old_records(timestamp)
 
-    def apply_changes(self, directory, bus, local_addr):
+    def apply_changes(self, directory, bus):
+        headers = {'Accept': 'text/xml'}
+
         file_list = sorted(glob.glob(os.path.join(directory, '*.changes')))
         self.logger.debug('Found %s changesets.' % len(file_list))
 
@@ -376,14 +378,17 @@ class PgDB:
             self.logger.debug('Processing file: "%s".' % file_name)
             cfg.readfp(codecs.open(file_name, encoding='utf-8'))
 
-            full_table_name = base64.urlsafe_b64decode(
-                cfg.get('changeset', 'table').encode('utf-8'))
+            table = cfg.get('changeset', 'table')
+            ddl = cfg.get('changeset', 'ddl')
+            sql = cfg.get('changeset', 'sql')
+            src = cfg.get('changeset', 'src')
+            dst = cfg.get('changeset', 'dst')
+
+            full_table_name = base64.urlsafe_b64decode(table.encode('utf-8'))
             self.logger.debug('Decoded table name: %s' % full_table_name)
-            ddl = base64.urlsafe_b64decode(
-                cfg.get('changeset', 'ddl').encode('utf-8'))
+            ddl = base64.urlsafe_b64decode(ddl.encode('utf-8'))
             self.logger.debug('Decoded table DDL: %s' % ddl)
-            sql = base64.urlsafe_b64decode(
-                cfg.get('changeset', 'sql').encode('utf-8')).decode('utf-8')
+            sql = base64.urlsafe_b64decode(sql.encode('utf-8')).decode('utf-8')
             self.logger.debug('Decoded table SQL: %s' % sql)
 
             schema = full_table_name.split('.')[0]
@@ -392,9 +397,35 @@ class PgDB:
             if not self._table_exists(schema, table):
                 self.logger.debug('Table "%s" not found. Try to create it.' %
                     table_name)
-                self._exec_sql_and_commit(ddl)
+                try:
+                    self._exec_sql_and_commit(ddl)
+                except DbError, e:
+                    err = base64.urlsafe_b64encode(sys.exc_info()[0])
+                    xml = self._create_message(table, ddl, sql, dst, src, err)
+                    payload = {'data': xml}
 
-            self._exec_sql_and_commit(sql)
+                    r = requests.post(
+                        'http://%s' % bus, data=payload, headers=headers)
+                    if r.status_code == 202:
+                        self.logger.debug('Server responce: %s' % r.status_code)
+                    else:
+                        self.logger.error('Server responce: %s' % r.status_code)
+                        self.logger.error('Error message: %s' % r.text)
+
+            try:
+                self._exec_sql_and_commit(sql)
+            except DbError, e:
+                err = base64.urlsafe_b64encode(sys.exc_info()[0])
+                xml = self._create_message(table, ddl, sql, dst, src, err)
+                payload = {'data': xml}
+
+                r = requests.post(
+                    'http://%s' % bus, data=payload, headers=headers)
+                if r.status_code == 202:
+                    self.logger.debug('Server responce: %s' % r.status_code)
+                else:
+                    self.logger.error('Server responce: %s' % r.status_code)
+                    self.logger.error('Error message: %s' % r.text)
 
             os.remove(file_name)
             self.logger.debug('File "%s" processed and removed' % file_name)
@@ -412,8 +443,9 @@ class PgDB:
                     cfg.get('misc', 'error').encode('utf-8'))
                 self.logger.debug('Error message: %s' % err)
                 dst = base64.urlsafe_b64decode(
-                    cfg.get('misc', 'dst').encode('utf-8'))
+                    cfg.get('changeset', 'dst').encode('utf-8'))
                 self.logger.debug('Node address: %s' % dst)
+                self.logger.waring('REMOTE ERROR: %s - %s. File %s', % (dst, err, file_name))
 
                 try:
                     os.rename(file_name, file_name + '.old')
@@ -731,7 +763,7 @@ class PgDB:
         else:
             return u'%s.%s' % (self._quote(schema), self._quote(table))
 
-    def _create_message(self, table, ddl, sql, local_addr, url):
+    def _create_message(self, table, ddl, sql, local_addr, url, error=None):
         msg = '<?xml version="1.0" encoding="UTF-8"?>\n'
         msg += '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"\n'
         msg += 'xmlns:wsa="http://www.w3.org/2005/08/addressing"\n'
@@ -745,8 +777,12 @@ class PgDB:
         msg += '<tbl>%s</tbl>\n' % table
         msg += '<ddl>%s</ddl>\n' % ddl
         msg += '<sql>%s</sql>\n' % sql
+        msg += '<src>%s</src>\n' % local_addr
         msg += '<dst>%s</dst>\n' % url
-        msg += '<err></err>\n'
+        if error is None:
+            msg += '<err></err>\n'
+        else:
+            msg += '<err>%s</err>\n' % error
         msg += '</soap:Body></soap:Envelope>'
         return msg
 
@@ -770,12 +806,12 @@ def create_changesets(host, port, dbname, user, passwd, bus, local_addr, boundar
     db.prepare_changes(timestamp, boundary, url_field, bus, local_addr)
 
 
-def apply_changesets(host, port, dbname, user, passwd, directory, bus, local_addr):
+def apply_changesets(host, port, dbname, user, passwd, directory, bus):
     logger.debug('apply_changesets entered.')
     timestamp = datetime.datetime.now().isoformat()
     logger.debug('Process files for %s.' % timestamp)
     db = PgDB(host, port, dbname, user, passwd)
-    db.apply_changes(directory, bus, local_addr)
+    db.apply_changes(directory, bus)
 
 
 if __name__ == '__main__':
@@ -867,7 +903,7 @@ if __name__ == '__main__':
         create_changesets(host, port, dbname, user, passwd, bus, local_addr
                           table_name, field_name)
     elif args.syncChangesets:
-        apply_changesets(host, port, dbname, user, passwd, directory, bus, local_addr)
+        apply_changesets(host, port, dbname, user, passwd, directory, bus)
 
     logger.info('Stop logging.')
     logging.shutdown()
