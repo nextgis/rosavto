@@ -399,6 +399,28 @@ class PgDB:
             os.remove(file_name)
             self.logger.debug('File "%s" processed and removed' % file_name)
 
+        directory = os.path.join(directory, 'failed')
+        if os.path.exists(directory) and os.path.isdir(directory):
+            file_list = sorted(glob.glob(os.path.join(directory, '*.changes')))
+            self.logger.debug('Found %s failed changesets.' % len(file_list))
+
+            for file_name in file_list:
+                self.logger.debug('Processing file: "%s".' % file_name)
+                cfg.readfp(codecs.open(file_name, encoding='utf-8'))
+
+                err = base64.urlsafe_b64decode(
+                    cfg.get('misc', 'error').encode('utf-8'))
+                self.logger.debug('Error message: %s' % err)
+                dst = base64.urlsafe_b64decode(
+                    cfg.get('misc', 'dst').encode('utf-8'))
+                self.logger.debug('Node address: %s' % dst)
+
+                try:
+                    os.rename(file_name, file_name + '.old')
+                except Exception, e:
+                    self.logger.error('Failed to rename file: %s' % sys.exc_info()[0])
+
+
     def dump_table(self, schema, table):
         c = self.con.cursor()
 
@@ -720,9 +742,11 @@ class PgDB:
         msg += '<wsa:MessageID>urn:uuid:%s</wsa:MessageID>\n' % uuid.uuid4()
         msg += '<wsa:Action>ISTC://SP.202.0001</wsa:Action>\n'
         msg += '</soap:Header><soap:Body>\n'
-        msg += '<d1>%s</d1>\n' % table
-        msg += '<d2>%s</d2>\n' % ddl
-        msg += '<d3>%s</d3>\n' % sql
+        msg += '<tbl>%s</tbl>\n' % table
+        msg += '<ddl>%s</ddl>\n' % ddl
+        msg += '<sql>%s</sql>\n' % sql
+        msg += '<dst>%s</dst>\n' % url
+        msg += '<err></err>\n'
         msg += '</soap:Body></soap:Envelope>'
         return msg
 

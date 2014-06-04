@@ -3,6 +3,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 import time
 import urlparse
 import datetime
@@ -27,17 +28,34 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
         root = et.fromstring(xml)
         b = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Body')
-        t = b.find('d1').text
-        d = b.find('d2').text
-        s = b.find('d3').text
+        tbl = b.find('tbl').text
+        ddl = b.find('ddl').text
+        sql = b.find('sql').text
+        dst = b.find('dst').text
+        err = b.find('err').text
 
         cfg = ConfigParser.SafeConfigParser()
         cfg.add_section('changeset')
-        cfg.set('changeset', 'table', t)
-        cfg.set('changeset', 'ddl', d)
-        cfg.set('changeset', 'sql', s)
+        cfg.set('changeset', 'table', tbl)
+        cfg.set('changeset', 'ddl', ddl)
+        cfg.set('changeset', 'sql', sql)
+        if err != '':
+            cfg.add_section('misc')
+            cfg.set('misc', 'error', err)
+            sfg.set('dst', 'dst', dst)
 
         timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S-%f')
+        if err != '':
+            directory = os.path.join(directory, 'failed')
+            if not os.path.exists(directory):
+                try:
+                    os.makedirs(directory)
+                except OSError, e:
+                    if os.path.isdir(directory):
+                        pass
+                    else:
+                        logger.critical('Can not create changesets directory: %s.' % sys.exc_info()[0])
+                        sys.exit(1)
         with codecs.open(os.path.join(directory, timestamp + '.changes'),
                 'wb', 'utf-8') as changesetFile:
             cfg.write(changesetFile)
@@ -71,6 +89,15 @@ if __name__ == '__main__':
     if cfg.has_section('changes'):
         global directory
         directory = cfg.get('changes', 'dir_name')
+        if not os.path.exists(directory):
+            try:
+                os.makedirs(directory)
+            except OSError, e:
+                if os.path.isdir(directory):
+                    pass
+                else:
+                    logger.critical('Can not create changesets directory: %s.' % sys.exc_info()[0])
+                    sys.exit(1)
     else:
         logger.critical('Changesets directory not found in config file.')
         sys.exit(1)
