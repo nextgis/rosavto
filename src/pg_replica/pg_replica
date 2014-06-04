@@ -336,42 +336,33 @@ class PgDB:
                 sql = ' '.join(sql.split()).encode('utf-8')
                 encoded_sql = base64.urlsafe_b64encode(sql)
 
-                #payload = {
-                #          'table': encoded_table,
-                #          'ddl': encoded_ddl,
-                #          'sql': encoded_sql
-                #         }
-                xml = self._create_message(encoded_table, encoded_ddl, encoded_sql, local_addr)
                 headers = {'Accept': 'text/xml'}
-                payload = {'data': xml}
 
-                #sql = '''SELECT %s
-                #         FROM %s
-                #         WHERE ST_Intersects(wkb_geometry,
-                #             (SELECT wkb_geometry
-                #              FROM %s
-                #              WHERE uniq_uid = '%s'))
-                #      ''' % (url_field, boundary, full_table_name, uid)
-                #self._exec_sql(c, sql)
-                #urls = c.fetchall()
+                sql = '''SELECT %s
+                         FROM %s
+                         WHERE ST_Intersects(wkb_geometry,
+                             (SELECT wkb_geometry
+                              FROM %s
+                              WHERE uniq_uid = '%s'))
+                      ''' % (url_field, boundary, full_table_name, uid)
+                self._exec_sql(c, sql)
+                urls = c.fetchall()
 
-                #if urls is None or len(urls) == 0:
-                #    self.logger.error('No intersections with zones found.')
-                #    continue
+                if urls is None or len(urls) == 0:
+                    self.logger.error('No intersections with zones found.')
+                    continue
 
-                #for url in urls:
-                #    r = requests.post(url, params=payload)
+                for url in urls:
+                    xml = self._create_message(encoded_table, encoded_ddl, encoded_sql, local_addr, url)
+                    payload = {'data': xml}
 
-                #r = requests.post(
-                #    'http://192.168.255.106:8000',
-                #    data=payload)
-                r = requests.post(
-                    'http://%s' % bus, data=payload, headers=headers)
-                if r.status_code == 202:
-                    self.logger.debug('Server responce: %s' % r.status_code)
-                else:
-                    self.logger.error('Server responce: %s' % r.status_code)
-                    self.logger.error('Error message: %s' % r.text)
+                    r = requests.post(
+                        'http://%s' % bus, data=payload, headers=headers)
+                    if r.status_code == 202:
+                        self.logger.debug('Server responce: %s' % r.status_code)
+                    else:
+                        self.logger.error('Server responce: %s' % r.status_code)
+                        self.logger.error('Error message: %s' % r.text)
 
         self.clear_old_records(timestamp)
 
