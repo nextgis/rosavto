@@ -227,7 +227,7 @@ class PgDB:
         self._exec_sql_and_commit(sql)
         return True
 
-    def prepare_changes(self, timestamp, boundary, url_field, bus):
+    def prepare_changes(self, timestamp, boundary, url_field, bus, local_addr):
         records = self.list_changes(timestamp)
 
         data = dict()
@@ -341,7 +341,7 @@ class PgDB:
                 #          'ddl': encoded_ddl,
                 #          'sql': encoded_sql
                 #         }
-                xml = self._create_message(encoded_table, encoded_ddl, encoded_sql)
+                xml = self._create_message(encoded_table, encoded_ddl, encoded_sql, local_addr)
                 headers = {'Accept': 'text/xml'}
                 payload = {'data': xml}
 
@@ -375,7 +375,7 @@ class PgDB:
 
         self.clear_old_records(timestamp)
 
-    def apply_changes(self, directory):
+    def apply_changes(self, directory, bus, local_addr):
         file_list = sorted(glob.glob(os.path.join(directory, '*.changes')))
         self.logger.debug('Found %s changesets.' % len(file_list))
 
@@ -718,14 +718,14 @@ class PgDB:
         else:
             return u'%s.%s' % (self._quote(schema), self._quote(table))
 
-    def _create_message(self, table, ddl, sql):
+    def _create_message(self, table, ddl, sql, local_addr, url):
         msg = '<?xml version="1.0" encoding="UTF-8"?>\n'
         msg += '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"\n'
         msg += 'xmlns:wsa="http://www.w3.org/2005/08/addressing"\n'
         msg += 'xmlns:sv="urn:sm:interaction:v0.2">\n'
         msg += '<soap:Header>\n'
-        msg += '<wsa:To>urn:sm:fk@sitcentr.ru</wsa:To>\n'
-        msg += '<wsa:From><wsa:Address>urn:sm:AdminD@sitcentr.ru</wsa:Address></wsa:From>\n'
+        msg += '<wsa:To>%s</wsa:To>\n' % url
+        msg += '<wsa:From><wsa:Address>%s</wsa:Address></wsa:From>\n' % local_addr
         msg += '<wsa:MessageID>urn:uuid:%s</wsa:MessageID>\n' % uuid.uuid4()
         msg += '<wsa:Action>ISTC://SP.202.0001</wsa:Action>\n'
         msg += '</soap:Header><soap:Body>\n'
@@ -747,20 +747,20 @@ def register_table(host, port, dbname, user, passwd, full_table_name):
     logger.info('Table "%s" registered for replication.' % full_table_name)
 
 
-def create_changesets(host, port, dbname, user, passwd, bus, boundary, url_field):
+def create_changesets(host, port, dbname, user, passwd, bus, local_addr, boundary, url_field):
     logger.debug('create_changesets entered.')
     timestamp = datetime.datetime.now().isoformat()
     logger.debug('Process records for %s.' % timestamp)
     db = PgDB(host, port, dbname, user, passwd)
-    db.prepare_changes(timestamp, boundary, url_field, bus)
+    db.prepare_changes(timestamp, boundary, url_field, bus, local_addr)
 
 
-def apply_changesets(host, port, dbname, user, passwd, directory):
+def apply_changesets(host, port, dbname, user, passwd, directory, bus, local_addr):
     logger.debug('apply_changesets entered.')
     timestamp = datetime.datetime.now().isoformat()
     logger.debug('Process files for %s.' % timestamp)
     db = PgDB(host, port, dbname, user, passwd)
-    db.apply_changes(directory)
+    db.apply_changes(directory, bus, local_addr)
 
 
 if __name__ == '__main__':
@@ -826,7 +826,8 @@ if __name__ == '__main__':
         dbname = cfg.get('connection', 'database')
         user = cfg.get('connection', 'user')
         passwd = cfg.get('connection', 'password')
-        bus = cfg.get('connection', 'bus')
+        bus = cfg.get('connection', 'bus_address')
+        local_addr = cfg.get('connection', 'local_address')
     else:
         logger.critical('Connection settings not found in config file.')
         sys.exit(1)
@@ -848,10 +849,10 @@ if __name__ == '__main__':
     if args.tableName:
         register_table(host, port, dbname, user, passwd, args.tableName)
     elif args.createChangesets:
-        create_changesets(host, port, dbname, user, passwd, bus
+        create_changesets(host, port, dbname, user, passwd, bus, local_addr
                           table_name, field_name)
     elif args.syncChangesets:
-        apply_changesets(host, port, dbname, user, passwd, directory)
+        apply_changesets(host, port, dbname, user, passwd, directory, bus, local_addr)
 
     logger.info('Stop logging.')
     logging.shutdown()

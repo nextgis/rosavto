@@ -4,7 +4,9 @@ port=5432
 database=rosavto
 user=luser
 password=secret
-bus=10.20.88.210
+bus_address=10.20.88.210
+local_address=urn:sm:gis@rosavtodor
+;or urn:sm:gis@uprdor-rus
 
 [zones]
 table_name=thematic.borders_dept
