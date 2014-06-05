@@ -227,7 +227,8 @@ class PgDB:
         self._exec_sql_and_commit(sql)
         return True
 
-    def prepare_changes(self, timestamp, boundary, url_field, bus, local_addr):
+    def prepare_changes(self, timestamp, boundary, url_field, bus, bus_user,
+                        bus_passwd, local_addr):
         records = self.list_changes(timestamp)
 
         data = dict()
@@ -337,6 +338,7 @@ class PgDB:
                 encoded_sql = base64.urlsafe_b64encode(sql)
 
                 headers = {'Accept': 'text/xml'}
+                auth = (bus_user, bus_passwd)
 
                 sql = '''SELECT %s
                          FROM %s
@@ -356,8 +358,7 @@ class PgDB:
                     xml = self._create_message(encoded_table, encoded_ddl, encoded_sql, local_addr, url)
                     payload = {'data': xml}
 
-                    r = requests.post(
-                        'http://%s' % bus, data=payload, headers=headers)
+                    r = requests.post(bus, data=payload, headers=headers, auth=auth)
                     if r.status_code == 202:
                         self.logger.debug('Server responce: %s' % r.status_code)
                     else:
@@ -366,8 +367,9 @@ class PgDB:
 
         self.clear_old_records(timestamp)
 
-    def apply_changes(self, directory, bus):
+    def apply_changes(self, directory, bus, bus_user, bus_passwd):
         headers = {'Accept': 'text/xml'}
+        auth = (bus_user, bus_passwd)
 
         file_list = sorted(glob.glob(os.path.join(directory, '*.changes')))
         self.logger.debug('Found %s changesets.' % len(file_list))
@@ -404,8 +406,7 @@ class PgDB:
                     xml = self._create_message(table, ddl, sql, dst, src, err)
                     payload = {'data': xml}
 
-                    r = requests.post(
-                        'http://%s' % bus, data=payload, headers=headers)
+                    r = requests.post(bus, data=payload, headers=headers, auth=auth)
                     if r.status_code == 202:
                         self.logger.debug('Server responce: %s' % r.status_code)
                     else:
@@ -419,8 +420,7 @@ class PgDB:
                 xml = self._create_message(table, ddl, sql, dst, src, err)
                 payload = {'data': xml}
 
-                r = requests.post(
-                    'http://%s' % bus, data=payload, headers=headers)
+                r = requests.post(bus, data=payload, headers=headers, auth=auth)
                 if r.status_code == 202:
                     self.logger.debug('Server responce: %s' % r.status_code)
                 else:
@@ -798,20 +798,23 @@ def register_table(host, port, dbname, user, passwd, full_table_name):
     logger.info('Table "%s" registered for replication.' % full_table_name)
 
 
-def create_changesets(host, port, dbname, user, passwd, bus, local_addr, boundary, url_field):
+def create_changesets(host, port, dbname, user, passwd, bus, bus_user,
+                      bus_passwd, local_addr, boundary, url_field):
     logger.debug('create_changesets entered.')
     timestamp = datetime.datetime.now().isoformat()
     logger.debug('Process records for %s.' % timestamp)
     db = PgDB(host, port, dbname, user, passwd)
-    db.prepare_changes(timestamp, boundary, url_field, bus, local_addr)
+    db.prepare_changes(timestamp, boundary, url_field, bus, bus_user,
+                       bus_passwd, local_addr)
 
 
-def apply_changesets(host, port, dbname, user, passwd, directory, bus):
+def apply_changesets(host, port, dbname, user, passwd, directory, bus, bus_user,
+                     bus_passwd):
     logger.debug('apply_changesets entered.')
     timestamp = datetime.datetime.now().isoformat()
     logger.debug('Process files for %s.' % timestamp)
     db = PgDB(host, port, dbname, user, passwd)
-    db.apply_changes(directory, bus)
+    db.apply_changes(directory, bus, bus_user, bus_passwd)
 
 
 if __name__ == '__main__':
@@ -877,8 +880,15 @@ if __name__ == '__main__':
         dbname = cfg.get('connection', 'database')
         user = cfg.get('connection', 'user')
         passwd = cfg.get('connection', 'password')
-        bus = cfg.get('connection', 'bus_address')
-        local_addr = cfg.get('connection', 'local_address')
+    else:
+        logger.critical('Connection settings not found in config file.')
+        sys.exit(1)
+
+    if cfg.has_section('bus'):
+        bus = cfg.get('bus', 'bus_address')
+        bus_user = cfg.get('bus', 'user')
+        bus_passwd = cfg.get('bus', 'password')
+        local_addr = cfg.get('bus', 'local_address')
     else:
         logger.critical('Connection settings not found in config file.')
         sys.exit(1)
@@ -900,10 +910,11 @@ if __name__ == '__main__':
     if args.tableName:
         register_table(host, port, dbname, user, passwd, args.tableName)
     elif args.createChangesets:
-        create_changesets(host, port, dbname, user, passwd, bus, local_addr
-                          table_name, field_name)
+        create_changesets(host, port, dbname, user, passwd, bus, bus_user,
+                          bus_passwd, local_addr, table_name, field_name)
     elif args.syncChangesets:
-        apply_changesets(host, port, dbname, user, passwd, directory, bus)
+        apply_changesets(host, port, dbname, user, passwd, directory, bus,
+                         bus_user, bus_passwd)
 
     logger.info('Stop logging.')
     logging.shutdown()
