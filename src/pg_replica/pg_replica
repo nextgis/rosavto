@@ -356,9 +356,8 @@ class PgDB:
 
                 for url in urls:
                     xml = self._create_message(encoded_table, encoded_ddl, encoded_sql, local_addr, url)
-                    payload = {'data': xml}
 
-                    r = requests.post(bus, data=payload, headers=headers, auth=auth)
+                    r = requests.post(bus, data=xml, headers=headers, auth=auth)
                     if r.status_code == 202:
                         self.logger.debug('Server responce: %s' % r.status_code)
                     else:
@@ -404,9 +403,8 @@ class PgDB:
                 except DbError, e:
                     err = base64.urlsafe_b64encode(sys.exc_info()[0])
                     xml = self._create_message(table, ddl, sql, dst, src, err)
-                    payload = {'data': xml}
 
-                    r = requests.post(bus, data=payload, headers=headers, auth=auth)
+                    r = requests.post(bus, data=xml, headers=headers, auth=auth)
                     if r.status_code == 202:
                         self.logger.debug('Server responce: %s' % r.status_code)
                     else:
@@ -418,9 +416,8 @@ class PgDB:
             except DbError, e:
                 err = base64.urlsafe_b64encode(sys.exc_info()[0])
                 xml = self._create_message(table, ddl, sql, dst, src, err)
-                payload = {'data': xml}
 
-                r = requests.post(bus, data=payload, headers=headers, auth=auth)
+                r = requests.post(bus, data=xml, headers=headers, auth=auth)
                 if r.status_code == 202:
                     self.logger.debug('Server responce: %s' % r.status_code)
                 else:
