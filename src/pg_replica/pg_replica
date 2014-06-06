@@ -492,7 +492,7 @@ class PgDB:
         alter_stmt = ''
         if sequences is not None and len(sequences) != 0:
             for s in sequences:
-                res = self.dump_sequence(s)
+                res = self.dump_sequence(schema, s)
                 ddl += res[0] + '\n'
                 alter_stmt += res[1] + '\n'
 
@@ -560,9 +560,11 @@ class PgDB:
         self.logger.debug('DDL for relation "%s": %s' % (table_name, ddl))
         return ddl
 
-    def dump_sequence(self, sequence):
+    def dump_sequence(self, schema, sequence):
         seqMax = sys.maxint
         seqMin = -seqMax - 1
+
+        full_sequence_name = '%s.%s' % (schema, sequence[0])
 
         c = self.con.cursor()
 
@@ -580,7 +582,7 @@ class PgDB:
                         cache_value,
                         is_cycled
                  FROM %s
-              ''' % (seqMax, seqMin, sequence[0])
+              ''' % (seqMax, seqMin, full_sequence_name)
 
         self._exec_sql(c, sql)
         seq = c.fetchone()
