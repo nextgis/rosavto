@@ -337,7 +337,7 @@ class PgDB:
                 sql = ' '.join(sql.split()).encode('utf-8')
                 encoded_sql = base64.urlsafe_b64encode(sql)
 
-                headers = {'Accept': 'text/xml'}
+                headers = {'content-type': 'text/xml', 'Accept': 'text/xml'}
                 auth = (bus_user, bus_passwd)
 
                 sql = '''SELECT %s
@@ -368,7 +368,7 @@ class PgDB:
         self.clear_old_records(timestamp)
 
     def apply_changes(self, directory, bus, bus_user, bus_passwd):
-        headers = {'Accept': 'text/xml'}
+        headers = {'content-type': 'text/xml', 'Accept': 'text/xml'}
         auth = (bus_user, bus_passwd)
 
         file_list = sorted(glob.glob(os.path.join(directory, '*.changes')))
