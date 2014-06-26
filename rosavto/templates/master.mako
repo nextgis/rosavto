@@ -42,8 +42,8 @@
     <script>hljs.initHighlightingOnLoad();</script>
 
 
-    <script src="${request.static_url('rosavto:static/js/socket/SockJS.js')}"></script>
-    <script src="${request.static_url('rosavto:static/js/socket/Stomp.js')}"></script>
+    <script src="${request.static_url('rosavto:static/js/sockjs/sockjs.js')}"></script>
+    <script src="${request.static_url('rosavto:static/js/stomp/stomp.js')}"></script>
     <script src="${request.static_url('rosavto:static/js/centreit/MonitoringCard.js')}"></script>
 
     <script>
