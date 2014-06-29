@@ -771,7 +771,7 @@ class PgDB:
         msg += '<wsa:To>%s</wsa:To>\n' % url
         msg += '<wsa:From><wsa:Address>%s</wsa:Address></wsa:From>\n' % local_addr
         msg += '<wsa:MessageID>urn:uuid:%s</wsa:MessageID>\n' % uuid.uuid4()
-        msg += '<wsa:Action>ISTC://SP.202.0001</wsa:Action>\n'
+        msg += '<wsa:Action>sm://messages/application/gis/geochanges</wsa:Action>\n'
         msg += '</soap:Header><soap:Body>\n'
         msg += '<tbl>%s</tbl>\n' % table
         msg += '<ddl>%s</ddl>\n' % ddl
