@@ -227,7 +227,7 @@ class PgDB:
         self._exec_sql_and_commit(sql)
         return True
 
-    def prepare_changes(self, timestamp, boundary, url_field, bus, bus_user,
+    def prepare_changes(self, timestamp, addresses, bus, bus_user,
                         bus_passwd, local_addr):
         records = self.list_changes(timestamp)
 
@@ -340,21 +340,7 @@ class PgDB:
                 headers = {'content-type': 'text/xml', 'Accept': 'text/xml'}
                 auth = (bus_user, bus_passwd)
 
-                sql = '''SELECT %s
-                         FROM %s
-                         WHERE ST_Intersects(wkb_geometry,
-                             (SELECT wkb_geometry
-                              FROM %s
-                              WHERE uniq_uid = '%s'))
-                      ''' % (url_field, boundary, full_table_name, uid)
-                self._exec_sql(c, sql)
-                urls = c.fetchall()
-
-                if urls is None or len(urls) == 0:
-                    self.logger.error('No intersections with zones found.')
-                    continue
-
-                for url in urls:
+                for url in addresses:
                     xml = self._create_message(encoded_table, encoded_ddl, encoded_sql, local_addr, url)
 
                     r = requests.post(bus, data=xml, headers=headers, auth=auth)
@@ -798,13 +784,13 @@ def register_table(host, port, dbname, user, passwd, full_table_name):
 
 
 def create_changesets(host, port, dbname, user, passwd, bus, bus_user,
-                      bus_passwd, local_addr, boundary, url_field):
+                      bus_passwd, local_addr, addresses):
     logger.debug('create_changesets entered.')
     timestamp = datetime.datetime.now().isoformat()
     logger.debug('Process records for %s.' % timestamp)
     db = PgDB(host, port, dbname, user, passwd)
-    db.prepare_changes(timestamp, boundary, url_field, bus, bus_user,
-                       bus_passwd, local_addr)
+    db.prepare_changes(timestamp, addresses, bus, bus_user, bus_passwd,
+                       local_addr)
 
 
 def apply_changesets(host, port, dbname, user, passwd, directory, bus, bus_user,
@@ -893,10 +879,9 @@ if __name__ == '__main__':
         sys.exit(1)
 
     if cfg.has_section('zones'):
-        table_name = cfg.get('zones', 'table_name')
-        field_name = cfg.get('zones', 'field_name')
+        addresses = cfg.get('zones', 'addresses').split(',')
     else:
-        logger.critical('Helper table settings not found in config file.')
+        logger.critical('Recepient addresses not found in config file.')
         sys.exit(1)
 
     if cfg.has_section('changes'):
@@ -910,7 +895,7 @@ if __name__ == '__main__':
         register_table(host, port, dbname, user, passwd, args.tableName)
     elif args.createChangesets:
         create_changesets(host, port, dbname, user, passwd, bus, bus_user,
-                          bus_passwd, local_addr, table_name, field_name)
+                          bus_passwd, local_addr, addresses)
     elif args.syncChangesets:
         apply_changesets(host, port, dbname, user, passwd, directory, bus,
                          bus_user, bus_passwd)
