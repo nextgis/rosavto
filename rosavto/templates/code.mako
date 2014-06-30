@@ -16,6 +16,9 @@
             <a href="#incidentCode">Происшествия</a>
         </li>
         <li>
+            <a href="#clusters">Кластеризация</a>
+        </li>
+        <li>
             <a href="#routingCode">Маршрутизация</a>
         </li>
     </ol>
@@ -233,6 +236,73 @@
 
 </div>
 
+<div id="clusters">
+    <h4>Кластеризация</h4>
+
+    <pre>
+        Код для построения слоя кластеров с учетом состояния отдельных объектов:
+        <code class="javascript">
+        require([
+            'rosavto/Map', // Модуль карты
+            'rosavto/Layers/MarkersStateClusterLayer', // Слой кластеров
+            'dojo/domReady!'],
+                function (Map, MarkersStateClusterLayer) {
+                            // Создаем карту
+                    var map = new Map('map', {
+                                center: [55.7501, 37.6687],
+                                zoom: 7,
+                                zoomControl: true
+                            }),
+
+                            // Описываем возможные значения состояний
+                            states = {
+                                clusters: ['normal', 'tolerable', 'critical']
+                            },
+
+                            // Создаем кластерный слой, передавая ему в качестве параметра
+                            //  перечень возможных состояний
+                            clustersLayer = new MarkersStateClusterLayer(states),
+
+                            // Расчитываем количество заправок (для демо)
+                            stationsCount = stations.features.length;
+
+                    // Перебираем заправки из geojson файла
+                    for (var i = 0; i < stationsCount; i++) {
+                        var feature = stations.features[i],
+
+                                // Если есть имя - выбираем его для попапа
+                                title = feature.properties.name ? feature.properties.name : null,
+
+                                // Строим иконку маркера, определяя стиль по названию состояния
+                                // стили для демо описаны в inline блоке
+                                icon = L.icon({
+                                    iconUrl: '/static/css/images/states/marker-icon-' + feature.properties.state + '.png'
+                                }),
+
+                                // Создаем маркер
+                                marker = L.marker(new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), {
+                                    title: title,
+                                    icon: icon
+                                });
+
+                        // Маркеру присваиваем состояние из значения свойства geojson объекта
+                        // это понадобится слою для определния цвета кластера
+                        marker.state = feature.properties.state;
+
+                        // Связываем попам с маркером (для демо)
+                        marker.bindPopup(title);
+
+                        // Добавляем маркер к кластерному слою
+                        clustersLayer.addMarker(marker);
+                    }
+
+                    // Кластерный слой добавляем к карте
+                    map.addVectorLayer(clustersLayer);
+                });
+        </code>
+    </pre>
+
+</div>
 
 <div id="routingCode">
     <h4>Маршрутизация</h4>
