@@ -24,6 +24,7 @@ def main(global_config, **settings):
     config.add_route('center', '/center')
     config.add_route('routing_sample', '/routing_sample')
     config.add_route('code', '/code')
+    config.add_route('clusters', '/clusters')
 
     # proxies url
     config.add_route('proxy_ngw', '/ngw/*target_url')

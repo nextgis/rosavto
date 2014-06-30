@@ -58,6 +58,10 @@ def center(request):
 def code(request):
     return {}
 
+@view_config(route_name='clusters', renderer='clusters.mako')
+def clusters(request):
+    return {}
+
 
 @view_config(route_name='attributes_html', renderer='string')
 def get_html_attributes(request):
