@@ -30,18 +30,20 @@
 </div>
 
 <%block name="inlineScripts">
-    require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
-        var map = new Map('map', {
+    <script>
+        require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
+            var map = new Map('map', {
                 center: [59.9175, 30.1410],
                 zoom: 10
             });
 
-        map.addWmsLayer('http://nextgis.ru/cgi-bin/wms?', 'NextGIS Demo WMS', {
-            layers: 'sattelite_image',
-            format: 'image/png',
-            tileSize: 256,
-            transparent: true,
-            attribution: "NextGIS Demo WMS"
+            map.addWmsLayer('http://nextgis.ru/cgi-bin/wms?', 'NextGIS Demo WMS', {
+                layers: 'sattelite_image',
+                format: 'image/png',
+                tileSize: 256,
+                transparent: true,
+                attribution: "NextGIS Demo WMS"
+            });
         });
-    });
+    </script>
 </%block>

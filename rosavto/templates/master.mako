@@ -46,9 +46,7 @@
     <script src="${request.static_url('rosavto:static/js/stomp/stomp.js')}"></script>
     <script src="${request.static_url('rosavto:static/js/centreit/MonitoringCard.js')}"></script>
 
-    <script>
-        <%block name="inlineScripts"/>
-    </script>
+    <%block name="inlineScripts"/>
 </head>
 <body class="claro">
     <%include file='tabs.mako'/>

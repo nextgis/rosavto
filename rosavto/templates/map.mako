@@ -18,10 +18,12 @@
 </pre>
 
 <%block name="inlineScripts">
-    require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
-        var map = new Map('map', {
+    <script>
+        require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
+            var map = new Map('map', {
                 center: [55.7501, 37.6687],
                 zoom: 10
             });
-    });
+        });
+    </script>
 </%block>

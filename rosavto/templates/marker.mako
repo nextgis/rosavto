@@ -25,13 +25,15 @@
 </pre>
 
 <%block name="inlineScripts">
-    require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
-        var map = new Map('map', {
+    <script>
+        require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
+            var map = new Map('map', {
                 center: [55.7501, 37.6687],
                 zoom: 10,
                 zoomControl: true
             });
-        map.showObjectAsMarker('/gas_stations/', 544601086, true);
-        map.showObjectAsMarker('/gas_stations/', 40889936, false);
-    });
+            map.showObjectAsMarker('/gas_stations/', 544601086, true);
+            map.showObjectAsMarker('/gas_stations/', 40889936, false);
+        });
+    </script>
 </%block>

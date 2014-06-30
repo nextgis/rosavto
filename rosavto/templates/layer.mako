@@ -26,14 +26,16 @@
 </pre>
 
 <%block name="inlineScripts">
-    require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
-        var map = new Map('map', {
+    <script>
+        require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
+            var map = new Map('map', {
                 center: [55.7501, 37.6687],
                 zoom: 10,
                 zoomControl: true,
                 legend: true
             });
-        map.createGeoJsonLayer('Заправки', '/gas_stations', {color:'#FF0000', opacity: 0.9 });
-        map.createGeoJsonLayer('Мосты', '/bridges', {opacity:0.9, weight: 2});
-    });
+            map.createGeoJsonLayer('Заправки', '/gas_stations', {color: '#FF0000', opacity: 0.9 });
+            map.createGeoJsonLayer('Мосты', '/bridges', {opacity: 0.9, weight: 2});
+        });
+    </script>
 </%block>

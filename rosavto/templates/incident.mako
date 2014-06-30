@@ -48,130 +48,136 @@
 
 
 <%block name="inlineScripts">
-    require([
-        'dojo/DeferredList',
-        'dojo/query',
-        'dojo/_base/array',
-        'dojo/html',
-        'rosavto/Map',
-        'rosavto/NgwServiceFacade',
-        'rosavto/Layers/StyledGeoJsonLayer',
-        'rosavto/controls/L.Control.IncidentEditor',
-        'dojo/parser',
-        'dijit/form/Select',
-        'dojo/domReady!'],
+    <script>
+        require([
+            'dojo/DeferredList',
+            'dojo/query',
+            'dojo/_base/array',
+            'dojo/html',
+            'rosavto/Map',
+            'rosavto/NgwServiceFacade',
+            'rosavto/Layers/StyledGeoJsonLayer',
+            'rosavto/controls/L.Control.IncidentEditor',
+            'dojo/parser',
+            'dijit/form/Select',
+            'dojo/domReady!'],
 
-    function (DeferredList, query, array, html, Map, NgwServiceFacade, StyledGeoJsonLayer, IncidentEditor,
-                parser, Select) {
-        parser.parse();
+                function (DeferredList, query, array, html, Map, NgwServiceFacade, StyledGeoJsonLayer, IncidentEditor, parser, Select) {
+                    parser.parse();
 
-        var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
-            map = new Map('map', {
-                center: [56.0369, 35.8788],
-                zoom: 16,
-                zoomControl: true,
-                legend: true
-            }),
-            map2 = new Map('map2', {
-                    center: [56.0369, 35.8788],
-                    zoom: 16,
-                    zoomControl: true,
-                    legend: true
-                }),
-            styles,
-            getIncident1, getIncident2, getIncident3,
-            layer;
+                    var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
+                            map = new Map('map', {
+                                center: [56.0369, 35.8788],
+                                zoom: 16,
+                                zoomControl: true,
+                                legend: true
+                            }),
+                            map2 = new Map('map2', {
+                                center: [56.0369, 35.8788],
+                                zoom: 16,
+                                zoomControl: true,
+                                legend: true
+                            }),
+                            styles,
+                            getIncident1, getIncident2, getIncident3,
+                            layer;
 
-        map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 8);
-        map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 8);
+                    map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 8);
+                    map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 8);
 
-        styles = {
-            accident: {
-                position: 'front',
-                point: {className: 'accident'},
-                line: {opacity:0.8, weight: 5, color: '#FF0000'}
-            },
-            snow: {
-                position: 'back',
-                point: {className: 'snow'},
-                line: {opacity:0.5, weight: 15, color: '#0040FF'}
-            }
-        };
+                    styles = {
+                        accident: {
+                            position: 'front',
+                            point: {className: 'accident'},
+                            line: {opacity: 0.8, weight: 5, color: '#FF0000'}
+                        },
+                        snow: {
+                            position: 'back',
+                            point: {className: 'snow'},
+                            line: {opacity: 0.5, weight: 15, color: '#0040FF'}
+                        }
+                    };
 
-        layer = new StyledGeoJsonLayer(null, {
-            callbackClick: function (id, feature) {
-                alert(feature.properties.__type);
-            },
-            styles: styles
-        });
+                    layer = new StyledGeoJsonLayer(null, {
+                        callbackClick: function (id, feature) {
+                            alert(feature.properties.__type);
+                        },
+                        styles: styles
+                    });
 
-        map2.addGeoJsonLayer('Происшествия', layer);
+                    map2.addGeoJsonLayer('Происшествия', layer);
 
-        var editorInfo = query('#editorInfo')[0];
+                    var editorInfo = query('#editorInfo')[0];
 
-        var incidentEditor = new L.Control.IncidentEditor({
-            ngwServiceFacade: ngwServiceFacade,
-            map: map,
-            idLayer: 17,
-            roadGuid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
-            modes: ['point', 'line'],
-            activeMode: 'point',
-            callbackDistanceChange: function (distances) {
-                html.set(editorInfo, JSON.stringify(distances));
-            }
-        });
+                    var incidentEditor = new L.Control.IncidentEditor({
+                        ngwServiceFacade: ngwServiceFacade,
+                        map: map,
+                        idLayer: 17,
+                        roadGuid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
+                        modes: ['point', 'line'],
+                        activeMode: 'point',
+                        callbackDistanceChange: function (distances) {
+                            html.set(editorInfo, JSON.stringify(distances));
+                        }
+                    });
 
-        map.getLMap().addControl(incidentEditor);
+                    map.getLMap().addControl(incidentEditor);
 
-        query('#getGeoJson').on('click', function () {
-            alert(JSON.stringify(incidentEditor.getGeoJsonData()));
-        });
+                    query('#getGeoJson').on('click', function () {
+                        alert(JSON.stringify(incidentEditor.getGeoJsonData()));
+                    });
 
-        var getSelectedType = function (id) {
-            var selectedType;
-            array.forEach(dijit.byId(id).getOptions(), function(opt, i) {
-                if (opt.selected) {
-                    selectedType = opt.value;
-                }
-            });
-            return selectedType;
-        };
+                    var getSelectedType = function (id) {
+                        var selectedType;
+                        array.forEach(dijit.byId(id).getOptions(), function (opt, i) {
+                            if (opt.selected) {
+                                selectedType = opt.value;
+                            }
+                        });
+                        return selectedType;
+                    };
 
-        query('#create').on('click', function () {
-            var geoJson = incidentEditor.getGeoJsonData();
+                    query('#create').on('click', function () {
+                        var geoJson = incidentEditor.getGeoJsonData();
 
-            if (geoJson) {
-                var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-                    return v.toString(16);
+                        if (geoJson) {
+                            var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                                return v.toString(16);
+                            });
+
+                            layer.addObject(geoJson, getSelectedType("typesSelector"), guid);
+                            map2.getLMap().fitBounds(layer.getBounds());
+                            incidentEditor.erase();
+                        }
+                    });
+
+                    query('#center').on('click', function () {
+                        incidentEditor.centerByObject(23, '{1437e736-974f-462a-86f8-85f0910089f0}', 3000);
+                    });
+
+                    var roadsSelector = dijit.byId('roadsSelector');
+
+                    roadsSelector.on('change', function (roadGuid) {
+                        incidentEditor.centerByObject(14, roadGuid, 3000);
+                        incidentEditor.setRoadGuid(roadGuid);
+                    });
+
+                    query('#test1').on('click', function () {
+                        incidentEditor.setRoadGuid('{65de3f89-c234-44c5-867d-fd8961eb8644}');
+                        incidentEditor.createMarkersByDistance([
+                            {km: 614, m: 870}
+                        ]);
+                    });
+
+                    query('#test2').on('click', function () {
+                        incidentEditor.setMode('line');
+                        incidentEditor.setRoadGuid('{11b970fb-a9a8-474b-92cd-b0aa6a7f2d28}');
+                        incidentEditor.createMarkersByDistance([
+                            {km: 77, m: 376},
+                            {km: 80, m: 570}
+                        ]);
+                    });
                 });
-
-                layer.addObject(geoJson, getSelectedType("typesSelector"), guid);
-                map2.getLMap().fitBounds(layer.getBounds());
-                incidentEditor.erase();
-            }
-        });
-
-        query('#center').on('click', function () {
-            incidentEditor.centerByObject(23, '{1437e736-974f-462a-86f8-85f0910089f0}', 3000);
-        });
-
-        var roadsSelector = dijit.byId('roadsSelector');
-
-        roadsSelector.on('change', function(roadGuid) {
-            incidentEditor.centerByObject(14, roadGuid, 3000);
-            incidentEditor.setRoadGuid(roadGuid);
-        });
-
-        query('#test1').on('click', function () {
-            incidentEditor.setRoadGuid('{65de3f89-c234-44c5-867d-fd8961eb8644}');
-            incidentEditor.createMarkersByDistance([{km: 614, m: 870}]);
-        });
-
-        query('#test2').on('click', function () {
-            incidentEditor.setMode('line');
-            incidentEditor.setRoadGuid('{11b970fb-a9a8-474b-92cd-b0aa6a7f2d28}');
-            incidentEditor.createMarkersByDistance([{km: 77, m: 376}, {km: 80, m: 570}]);
-        });
-    });
+    </script>
 </%block>
