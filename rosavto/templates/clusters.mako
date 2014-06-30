@@ -28,7 +28,7 @@
                 function (Map, MarkersStateClusterLayer) {
                     var map = new Map('map', {
                                 center: [55.7501, 37.6687],
-                                zoom: 10,
+                                zoom: 7,
                                 zoomControl: true
                             }),
                             states = {
