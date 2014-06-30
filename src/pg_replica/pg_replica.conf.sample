@@ -13,8 +13,8 @@ password=!QAZxsw2
 local_address=urn:sm:gis@rosavtodor
 
 [zones]
-table_name=thematic.borders_dept
-field_name=url
+forward=True
+addresses=urn:sm:gis@uprdor-rus
 
 [changes]
 dir_name=/path/to/changeset/files
