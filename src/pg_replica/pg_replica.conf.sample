@@ -13,6 +13,7 @@ password=!QAZxsw2
 local_address=urn:sm:gis@rosavtodor
 
 [zones]
+forward=True
 addresses=urn:sm:gis@uprdor-rus
 
 [changes]
