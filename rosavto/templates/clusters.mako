@@ -12,16 +12,20 @@
     <script src="${request.static_url('rosavto:static/json/stations.js')}"></script>
 
     <style>
-        .marker-cluster-critical {
+        .marker-cluster-alarm {
             background-color: rgba(240, 12, 12, 0.6);
         }
 
         .marker-cluster-normal {
-            background-color: rgba(12, 240, 58, 0.6);
+            background-color: rgba(255, 255, 255, 0.60);
         }
 
-        .marker-cluster-tolerable {
+        .marker-cluster-warning {
             background-color: rgba(222, 240, 12, 0.6);
+        }
+
+        .marker-cluster-inaccessible {
+            background-color: rgba(152, 152, 152, 0.60);
         }
     </style>
 
@@ -40,7 +44,7 @@
 
                             // Описываем возможные значения состояний
                             states = {
-                                clusters: ['normal', 'tolerable', 'critical']
+                                clusters: ['normal', 'inaccessible', 'warning', 'alarm']
                             },
 
                             // Создаем кластерный слой, передавая ему в качестве параметра

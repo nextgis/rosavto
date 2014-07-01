@@ -11799,7 +11799,7 @@ var stations = {
             "id": "node/530061111",
             "properties": {
                 "@id": "node/530061111",
-                "state": "normal",
+                "state": "inaccessible",
                 "name": "IP"
             },
             "geometry": {
@@ -24350,7 +24350,7 @@ var stations = {
             "id": "node/1199954973",
             "properties": {
                 "@id": "node/1199954973",
-                "state": "tolerable",
+                "state": "warning",
                 "name": "Малахит"
             },
             "geometry": {
@@ -30458,7 +30458,7 @@ var stations = {
             "id": "node/1668997769",
             "properties": {
                 "@id": "node/1668997769",
-                "state": "critical",
+                "state": "alarm",
                 "fuel:HGV_diesel": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -34739,7 +34739,7 @@ var stations = {
             "id": "node/2324109839",
             "properties": {
                 "@id": "node/2324109839",
-                "state": "tolerable",
+                "state": "warning",
                 "brand": "Интоп",
                 "name": "Интоп",
                 "operator": "Интоп"
@@ -36311,7 +36311,7 @@ var stations = {
             "id": "node/2554211064",
             "properties": {
                 "@id": "node/2554211064",
-                "state": "critical",
+                "state": "alarm",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_92": "yes",
