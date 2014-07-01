@@ -58,7 +58,6 @@
                                 title = feature.properties.name ? feature.properties.name : null,
 
                                 // Строим иконку маркера, определяя стиль по названию состояния
-                                // стили для демо описаны в inline блоке
                                 icon = L.icon({
                                     iconUrl: application_root + '/static/css/images/states/marker-icon-' + feature.properties.state + '.png'
                                 }),
