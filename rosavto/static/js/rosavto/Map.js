@@ -105,7 +105,7 @@ define([
         },
 
         addNgwTileLayer: function (name, ngwUrl, idStyle, settings) {
-            var ngwTilesUrl = ngwUrl + 'style/' + idStyle + '/tms?z={z}&x={x}&y={y}',
+            var ngwTilesUrl = ngwUrl + 'resource/' + idStyle + '/tms?z={z}&x={x}&y={y}',
                 ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
             ngwTileLayer._ngwStyleId = idStyle;
 
