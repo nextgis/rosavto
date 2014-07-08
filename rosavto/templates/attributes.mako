@@ -37,11 +37,11 @@
                             mapIdentify,
                             attributeGetter;
 
-                    map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 18);
-                    map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 8);
-                    map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 19);
-                    map.addNgwTileLayer('Объезды', ngwUrlForTiles, 24);
-                    map.addNgwTileLayer('Датчики', ngwUrlForTiles, 15);
+                    map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4);
+                    map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 51);
+                    map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50);
+                    map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43);
+                    map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53);
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
@@ -77,6 +77,9 @@
                             }
                         }
                     });
+
+                    layersInfo.fillLayersInfo();
+                    layersInfo.getLayerNameByStyleId(51);
                 });
     </script>
 </%block>
