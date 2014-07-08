@@ -44,7 +44,7 @@ define([
 
 
             getLayersInfo: function () {
-                var url = 'api/layer_group/0/tree';
+                var url = 'resource/0/child/';
 
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET'});
             },
