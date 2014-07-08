@@ -43,8 +43,8 @@ define([
             },
 
 
-            getLayersInfo: function () {
-                var url = 'resource/0/child/';
+            getResourceInfo: function (idResource) {
+                var url = 'resource/' + idResource + '/child/';
 
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET'});
             },
