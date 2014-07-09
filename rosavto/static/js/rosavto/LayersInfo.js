@@ -46,9 +46,7 @@ define([
             },
 
             _processResourceInfoItem: function (resourceInfoItem) {
-                var that = this,
-                    deferred,
-                    resourceType;
+                var resourceType;
 
                 if (resourceInfoItem.resource) {
                     if (!resourceInfoItem.resource.cls) {
