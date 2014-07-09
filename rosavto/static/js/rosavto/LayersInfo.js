@@ -5,9 +5,10 @@ define([
     'dojo/store/Memory',
     'dojo/store/Observable',
     'dojo/request/xhr',
-    'dojo/Deferred'
+    'dojo/Deferred',
+    'dojo/DeferredList'
 ],
-    function (declare, array, lang, Memory, Observable, xhr, Deferred) {
+    function (declare, array, lang, Memory, Observable, xhr, Deferred, DeferredList) {
         return declare('rosavto.LayersInfo', null, {
 
             constructor: function (ngwServiceFacade) {
@@ -17,77 +18,125 @@ define([
                     throw 'ngwServiceFacade parameter is not defined';
                 }
 
-                this.store = new Observable(new Memory({
-                    data: [
-                        {
-                            'xid': 'layer_group-0',
-                            'type': 'layer_group',
-                            'id': 0
-                        }
-                    ],
-                    idProperty: 'xid'
-                }));
-                this.store.getChildren = function (object) {
-                    return this.query({parent: object.xid});
-                };
+                this.store = new Observable(new Memory());
             },
 
+            _deferredStore: null,
+            _deferredLayersInfoFiller: null,
             fillLayersInfo: function () {
+                this._deferredStore = new Memory();
+                this._deferredLayersInfoFiller = new Deferred();
+                this.store = new Observable(new Memory());
+
+                this._getResource(0);
+
+                return this._deferredLayersInfoFiller.promise;
+            },
+
+            _processResourceInfo: function (resourceInfo) {
                 var that = this;
-                return this._ngwServiceFacade.getLayersInfo().then(
-                    function (data) {
-                        function traverse(item, parent_id) {
-                            var xid = item.type + '-' + item.id;
 
-                            // корень добавляется при создании дерева
-                            if (parent_id) {
-                                that.store.add({
-                                    'xid': xid,
-                                    'type': 'layer_group',
-                                    'id': item.id,
-                                    'parent': parent_id,
-                                    'display_name': item.display_name
-                                });
-                            }
+                array.forEach(resourceInfo, function (resourceInfoItem, index) {
+                    that._processResourceInfoItem(resourceInfoItem);
+                });
 
-                            // подгруппы
-                            array.forEach(item.children, function (i) {
-                                traverse(i, xid);
-                            });
+                if (this._deferredStore.query({}, {count: 1}).length < 1) {
+                    this._deferredLayersInfoFiller.resolve(this.store);
+                }
+            },
 
-                            // слои
-                            array.forEach(item.layers, function (l) {
-                                that.store.add({
-                                    'xid': l.type + '-' + l.id,
-                                    'type': 'layer',
-                                    'id': l.id,
-                                    'parent': xid,
-                                    'display_name': l.display_name,
-                                    'geometry_type': l.source.geometry_type
-                                });
+            _processResourceInfoItem: function (resourceInfoItem) {
+                var that = this,
+                    deferred,
+                    resourceType;
 
-                                // стили
-                                array.forEach(l.styles, function (s) {
-                                    that.store.add({
-                                        'xid': s.type + '-' + s.id,
-                                        'type': 'style',
-                                        'id': s.id,
-                                        'parent': l.type + '-' + l.id,
-                                        'display_name': s.display_name,
-                                        'layer_display_name': s.layer_display_name
-                                    });
-                                });
-                            });
-                        }
-
-                        traverse(data);
-
-                        that._filled = true;
-                    },
-                    function (err) {
-                        console.log(err);
+                if (resourceInfoItem.resource) {
+                    if (!resourceInfoItem.resource.cls) {
+                        return false;
                     }
-                );
+
+                    resourceType = resourceInfoItem.resource.cls;
+
+                    switch (resourceType) {
+                        case 'resource_group':
+                            this._getResource(resourceInfoItem.resource.id);
+                            break;
+                        case 'postgis_layer':
+                            this._getResource(resourceInfoItem.resource.id);
+                            break;
+                        case 'mapserver_style':
+                            break;
+                        default:
+                            return false;
+                    }
+
+                    this._saveResourceToStore(resourceInfoItem.resource, resourceType);
+                }
+            },
+
+            _getResource: function (resourceId) {
+                var deferred = this._ngwServiceFacade.getResourceInfo(resourceId);
+
+                this._deferredStore.put({
+                    id: resourceId,
+                    def: deferred
+                });
+
+                deferred.then(lang.hitch(this, function (resourceInfo) {
+                    this._deferredStore.remove(resourceId);
+                    this._processResourceInfo(resourceInfo);
+                }));
+            },
+
+            _saveResourceToStore: function (resource, resourceType) {
+                var parent,
+                    resourceSaved;
+
+                if (resource.parent && resource.parent.id) {
+                    parent = this.store.query({id: resource.parent.id})[0];
+                }
+
+                if (!parent) {
+                    this.store.put({id: resource.id, res: resource, type: resourceType});
+                    return true;
+                }
+
+                switch (resourceType) {
+                    case 'resource_group':
+                        if (parent.type === 'resource_group') {
+                            this._validateParentResourceGroup(parent);
+                        }
+                        resourceSaved = parent.groups[parent.groups.push({id: resource.id, res: resource, type: resourceType}) - 1];
+                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
+                        break;
+                    case 'postgis_layer':
+                        if (parent.type === 'resource_group') {
+                            this._validateParentResourceGroup(parent);
+                        }
+                        resourceSaved = parent.layers[parent.groups.push({id: resource.id, res: resource, type: resourceType}) - 1];
+                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
+                        break;
+                    case 'mapserver_style':
+                        this._validateParentLayer(parent);
+                        resourceSaved = parent.styles[parent.styles.push({id: resource.id, res: resource, type: resourceType}) - 1];
+                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
+                        break;
+                    default:
+                        return false;
+                }
+            },
+
+            _validateParentResourceGroup: function (parentResourceGroup) {
+                if (!parentResourceGroup.groups || !parentResourceGroup.layers) {
+                    parentResourceGroup.groups = [];
+                    parentResourceGroup.layers = [];
+                }
+            },
+
+            _validateParentLayer: function (parentLayer) {
+                if (!parentLayer.styles) {
+                    parentLayer.styles = [];
+                }
             },
 
             getLayersIdByStyles: function (idStyles) {
