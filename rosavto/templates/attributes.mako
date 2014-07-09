@@ -78,8 +78,10 @@
                         }
                     });
 
-                    layersInfo.fillLayersInfo();
-                    layersInfo.getLayerNameByStyleId(51);
+                    layersInfo.fillLayersInfo().then(function (store) {
+                        console.log(layersInfo.getListLayers());
+                        console.log(layersInfo.getLayerById(5));
+                    });
                 });
     </script>
 </%block>
