@@ -92,6 +92,9 @@ define([
 
                 if (resource.parent && resource.parent.id) {
                     parent = this.store.query({id: resource.parent.id})[0];
+                    if (parent.link) {
+                        parent = parent.object;
+                    }
                 }
 
                 if (!parent) {
@@ -111,7 +114,7 @@ define([
                         if (parent.type === 'resource_group') {
                             this._validateParentResourceGroup(parent);
                         }
-                        resourceSaved = parent.layers[parent.groups.push({id: resource.id, res: resource, type: resourceType}) - 1];
+                        resourceSaved = parent.layers[parent.layers.push({id: resource.id, res: resource, type: resourceType}) - 1];
                         this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
                         break;
                     case 'mapserver_style':
@@ -191,6 +194,25 @@ define([
                 } else {
                     return result[0];
                 }
+            },
+
+            getListLayers: function () {
+                var resourceLayers = this.store.query({type: 'postgis_layer'}),
+                    listLayers = [];
+
+                array.forEach(resourceLayers, function (resourceLayer, index) {
+                    if (resourceLayer.link) {
+                        resourceLayer = resourceLayer.object;
+                    }
+                    listLayers.push({
+                        layer_id: resourceLayer.id,
+                        display_name: resourceLayer.res.display_name || null,
+                        keyname: resourceLayer.res.keyname || null,
+                        style_id: resourceLayer.styles ? resourceLayer.styles[0].id : null
+                    });
+                });
+
+                return listLayers;
             }
         });
     });
