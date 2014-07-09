@@ -10,7 +10,7 @@ define([
 ],
     function (declare, array, lang, Memory, Observable, xhr, Deferred, DeferredList) {
         return declare('rosavto.LayersInfo', null, {
-
+            _filled: false,
             constructor: function (ngwServiceFacade) {
                 if (ngwServiceFacade) {
                     this._ngwServiceFacade = ngwServiceFacade;
@@ -42,6 +42,7 @@ define([
 
                 if (this._deferredStore.query({}, {count: 1}).length < 1) {
                     this._deferredLayersInfoFiller.resolve(this.store);
+                    this._filled = true;
                 }
             },
 
