@@ -170,30 +170,26 @@ define([
                 return ids;
             },
 
-            getLayerNameByStyleId: function (idStyle) {
-                var res = this.store.query({xid: 'style-' + idStyle});
-                if (res.length > 0) {
-                    return res[0].layer_display_name;
-                }
-            },
-
             getLayerNameByLayerId: function (idLayer) {
                 var display_name,
                     res = this.store.query({id: idLayer});
+
                 if (res.length > 0) {
                     display_name = res[0].display_name;
                     return display_name;
                 }
+
+                return null;
             },
 
             getLayerById: function (id) {
-                var result = this.store.query({id: id, type: 'layer'});
+                var result = this.store.query({id: id});
 
-                if (result.length === 0) {
-                    return null;
-                } else {
-                    return result[0];
+                if (result.length > 0) {
+                    return result[0].res;
                 }
+
+                return null;
             },
 
             getListLayers: function () {
