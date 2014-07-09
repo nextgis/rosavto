@@ -161,9 +161,12 @@ define([
 
                 if (lang.isArray(idStyles)) {
                     array.forEach(idStyles, lang.hitch(this, function (idStyle) {
-                        var res = this.store.query({xid: 'style-' + idStyle});
-                        if (res.length > 0) {
-                            ids.push(res[0].parent.split('-')[1]);
+                        var resourceStyle = this.store.query({id: idStyle});
+                        if (resourceStyle.length > 0) {
+                            if (resourceStyle[0].link) {
+                                resourceStyle[0] = resourceStyle[0].object;
+                            }
+                            ids.push(resourceStyle[0].res.parent.id);
                         }
                     }));
                 }
