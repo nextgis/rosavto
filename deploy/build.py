@@ -32,14 +32,14 @@ if path.islink(link_to_rosavto):
     path_to_rosavto = path.realpath(link_to_rosavto)
     current_release_version = re.findall(release_version_regex, path_to_rosavto)
     if len(current_release_version) == 1:
-        if release_version_regex[1:] == args['release']:
+        if current_release_version[0][1:] == args['release']:
             print 'release {0} already assembled'.format(args['release'])
         else:
             print 'building release {0} started...'.format(release_number)
-            new_path = '/home/projects/gis/V{0}/widgets/'.format(release_number)
+            new_path = '/home/cloud/projects/gis/V{0}/widgets/'.format(release_number)
             print 'install rosavto V{0}...'.format(release_number)
-            subprocess.call('cd {0}; /home/projects/env/bin/python setup.py develop;'.format(new_path), shell=True)
-            print 'replace symlink...'.format(release_number)
+            subprocess.call('cd {0}; /home/cloud/projects/env/bin/python setup.py develop;'.format(new_path), shell=True)
+            print 'replace symlink...'
             old_link = os.readlink(link_to_rosavto)
             os.unlink(link_to_rosavto)
             os.symlink(new_path, link_to_rosavto)
