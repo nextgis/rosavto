@@ -1,21 +1,15 @@
 define([
     'dojo/_base/declare',
-    'dojo/_base/array',
     'dojo/_base/lang',
     'dojo',
-    'dojo/html',
     'dojo/topic',
-    'dojo/request/xhr',
     'dojo/Deferred',
     'dojo/DeferredList',
-    'rosavto/MapIdentify',
-    'rosavto/NgwServiceFacade',
     'rosavto/ParametersVerification',
     'rosavto/Loader',
-    'rosavto/Layers/StyledGeoJsonLayer',
-    'leaflet/leaflet'
+    'rosavto/Layers/StyledGeoJsonLayer'
 ],
-    function (declare, array, lang, dojo, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade, ParametersVerification, Loader, StyledGeoJsonLayer, L) {
+    function (declare, lang, dojo, topic, Deferred, DeferredList, ParametersVerification, Loader, StyledGeoJsonLayer) {
         return declare('rosavto.AttributeGetter', [Loader, ParametersVerification], {
             _cardInner: null,
 
@@ -67,18 +61,8 @@ define([
 
             updateAttributes: function (featureId) {
                 var deferred = new Deferred();
-
-                this.attributesServiceFacade.getAttributesByGuid(featureId, 'Monitoring.fireMapObjectSelected').then(lang.hitch(this, function (content) {
-                    this._updateAttributesHtmlBlock(content);
-                    deferred.resolve();
-                }));
-
+                topic.publish('map/objectSelected', featureId);
                 return deferred;
-            },
-
-            _updateAttributesHtmlBlock: function (content) {
-                this._cardBody.scrollTop = 0;
-                html.set(this._cardInner, content);
             },
 
             _styledGeoJsonLayer: null,

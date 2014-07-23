@@ -214,7 +214,7 @@ define([
                 marker.distance.lat = marker._latlng.lat;
                 marker.distance.lng = marker._latlng.lng;
 
-                marker.on('dragend', function (e) {
+                marker.on('dragend', function () {
                     self.snapMarker(this);
                 });
 
@@ -268,8 +268,6 @@ define([
                 var self = this,
                     pointsCount = points.length,
                     options = this.options,
-                    point,
-                    marker,
                     xhrLatLngByDistance;
 
                 this._clearAll(true);
@@ -398,7 +396,7 @@ define([
             },
 
             centerByObject: function (layerId, featureId, timeout) {
-                var layer, self;
+                var self;
 
                 this.options.ngwServiceFacade.getGeometryByGuid(layerId, featureId, 4326).then(lang.hitch(this, function (feature) {
                     self = this;

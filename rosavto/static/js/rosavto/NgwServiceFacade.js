@@ -43,8 +43,8 @@ define([
             },
 
 
-            getLayersInfo: function () {
-                var url = 'api/layer_group/0/tree';
+            getResourceInfo: function (idResource) {
+                var url = 'resource/' + idResource + '/child/';
 
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET'});
             },
@@ -65,7 +65,7 @@ define([
                 if (countsPoints === 1) {
                     point = incidentPoints[0];
 
-                    url = 'layer/' + point.layer + '/store_api/rosavto/?guid=' + point.guid +
+                    url = 'layer/' + point.layer + '/rosavto/getlrposbyuuid?guid=' + point.guid +
                         '&distance=' + this._calculateDistanceInMeters(point) +
                         '&srs=' + srs;
 
@@ -83,7 +83,7 @@ define([
                         });
                     }
 
-                    url = 'layer/17/store_api/rosavto/?' + 'srs=' + srs;
+                    url = 'layer/' + point.layer + '/rosavto/getlrposbyuuid?srs=' + srs;
                     return xhr(this.proxy + url, {
                         handleAs: 'json',
                         method: 'POST',

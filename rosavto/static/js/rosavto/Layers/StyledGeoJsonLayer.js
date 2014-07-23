@@ -30,6 +30,22 @@ define([
 
             layer = this.addData(geoJson);
 
+            if (layer.layersById[id]._icon) {
+                layer.layersById[id]._setPos = function(pos) {
+                    L.DomUtil.setPosition(this._icon, pos);
+
+                    if (this._shadow) {
+                        L.DomUtil.setPosition(this._shadow, pos);
+                    }
+
+                    this._zIndex = this.options.zIndexOffset;
+
+                    this._resetZIndex();
+                };
+                layer.layersById[id]._zIndex = layer.layersById[id].options.zIndexOffset;
+                layer.layersById[id]._resetZIndex();
+            }
+
             if (this.options.styles[type]) {
                 this.setPosition(layer, this.options.styles[type]['position']);
             }
@@ -83,6 +99,10 @@ define([
                 marker = L.marker(latlng, {
                     icon: L.divIcon(style.point)
                 });
+                if (this.options.zIndex) {
+                    marker.setZIndexOffset(this.options.zIndex);
+                    marker._zIndex = marker.options.zIndexOffset;
+                }
                 return marker;
             } else {
                 return new L.Marker(latlng);
@@ -114,7 +134,7 @@ define([
                 this.layersById[id] = layer;
             }
         },
-
+        
         setPosition: function (layer, position) {
             if (position) {
 
@@ -125,10 +145,8 @@ define([
                 switch (position) {
                     case 'front':
                         return layer.bringToFront();
-                        break;
                     case 'back':
                         return layer.bringToBack();
-                        break;
                 }
             }
         }

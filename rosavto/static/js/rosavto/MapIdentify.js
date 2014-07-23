@@ -1,11 +1,9 @@
 define([
     'dojo/_base/declare',
-    'dojo/_base/array',
     'dojo/_base/lang',
     'dojo/query',
     'dojo/on',
     'dojo/dom-attr',
-    'dojo/request/xhr',
     'dojo/topic',
     'mustache/mustache',
     'rosavto/ParametersVerification',
@@ -13,7 +11,7 @@ define([
     'dojo/NodeList-traverse',
     'centreit/DragAndDrop'
 ],
-    function (declare, array, lang, query, on, domAttr, xhr, topic, mustache, ParametersVerification, L, DnD) {
+    function (declare, lang, query, on, domAttr, topic, mustache, ParametersVerification, L, DnD) {
 
         return declare('rosavto.MapIdentify', [ParametersVerification], {
             template: '<div id="{{id}}" class="layers-selector">{{#layers}}<p>{{name}}</p><ul data-layer-id="{{id}}">{{#features}}<li data-id="{{id}}"><a href="javascript:void(0)">{{label}}</a></li>{{/features}}</ul>{{/layers}}</div>',
@@ -45,8 +43,7 @@ define([
                     latlngClick = e.latlng;
 
                 return this.layersInfo.getLayersIdByStyles(this.map.getVisibleNgwLayers()).then(lang.hitch(this, function (layersId) {
-                    var url = this.urlNgw + 'feature_layer/identify',
-                        zoom = map.getZoom(),
+                    var zoom = map.getZoom(),
                         point = map.project([e.latlng.lat, e.latlng.lng], zoom),
                         pointBottomLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), zoom)),
                         pointTopRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom)),
@@ -84,12 +81,6 @@ define([
                     layer,
                     layerName,
                     geometryType,
-                    addGeometryToLayers = function (type, geometry) {
-                        if (!layersByType[type]) {
-                            layersByType[type] = [];
-                        }
-                        layersByType[type] = geometry;
-                    },
                     identifiedFeatures = {
                         count: 0,
                         layers: []

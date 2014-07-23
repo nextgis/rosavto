@@ -5,11 +5,12 @@ define([
     'dojo/store/Memory',
     'dojo/store/Observable',
     'dojo/request/xhr',
-    'dojo/Deferred'
+    'dojo/Deferred',
+    'dojo/DeferredList'
 ],
-    function (declare, array, lang, Memory, Observable, xhr, Deferred) {
+    function (declare, array, lang, Memory, Observable, xhr, Deferred, DeferredList) {
         return declare('rosavto.LayersInfo', null, {
-
+            _filled: false,
             constructor: function (ngwServiceFacade) {
                 if (ngwServiceFacade) {
                     this._ngwServiceFacade = ngwServiceFacade;
@@ -17,77 +18,127 @@ define([
                     throw 'ngwServiceFacade parameter is not defined';
                 }
 
-                this.store = new Observable(new Memory({
-                    data: [
-                        {
-                            'xid': 'layer_group-0',
-                            'type': 'layer_group',
-                            'id': 0
-                        }
-                    ],
-                    idProperty: 'xid'
-                }));
-                this.store.getChildren = function (object) {
-                    return this.query({parent: object.xid});
-                };
+                this.store = new Observable(new Memory());
             },
 
+            _deferredStore: null,
+            _deferredLayersInfoFiller: null,
             fillLayersInfo: function () {
+                this._deferredStore = new Memory();
+                this._deferredLayersInfoFiller = new Deferred();
+                this.store = new Observable(new Memory());
+
+                this._getResource(0);
+
+                return this._deferredLayersInfoFiller.promise;
+            },
+
+            _processResourceInfo: function (resourceInfo) {
                 var that = this;
-                return this._ngwServiceFacade.getLayersInfo().then(
-                    function (data) {
-                        function traverse(item, parent_id) {
-                            var xid = item.type + '-' + item.id;
 
-                            // корень добавляется при создании дерева
-                            if (parent_id) {
-                                that.store.add({
-                                    'xid': xid,
-                                    'type': 'layer_group',
-                                    'id': item.id,
-                                    'parent': parent_id,
-                                    'display_name': item.display_name
-                                });
-                            }
+                array.forEach(resourceInfo, function (resourceInfoItem, index) {
+                    that._processResourceInfoItem(resourceInfoItem);
+                });
 
-                            // подгруппы
-                            array.forEach(item.children, function (i) {
-                                traverse(i, xid);
-                            });
+                if (this._deferredStore.query({}, {count: 1}).length < 1) {
+                    this._deferredLayersInfoFiller.resolve(this.store);
+                    this._filled = true;
+                }
+            },
 
-                            // слои
-                            array.forEach(item.layers, function (l) {
-                                that.store.add({
-                                    'xid': l.type + '-' + l.id,
-                                    'type': 'layer',
-                                    'id': l.id,
-                                    'parent': xid,
-                                    'display_name': l.display_name,
-                                    'geometry_type': l.source.geometry_type
-                                });
+            _processResourceInfoItem: function (resourceInfoItem) {
+                var resourceType;
 
-                                // стили
-                                array.forEach(l.styles, function (s) {
-                                    that.store.add({
-                                        'xid': s.type + '-' + s.id,
-                                        'type': 'style',
-                                        'id': s.id,
-                                        'parent': l.type + '-' + l.id,
-                                        'display_name': s.display_name,
-                                        'layer_display_name': s.layer_display_name
-                                    });
-                                });
-                            });
-                        }
-
-                        traverse(data);
-
-                        that._filled = true;
-                    },
-                    function (err) {
-                        console.log(err);
+                if (resourceInfoItem.resource) {
+                    if (!resourceInfoItem.resource.cls) {
+                        return false;
                     }
-                );
+
+                    resourceType = resourceInfoItem.resource.cls;
+
+                    switch (resourceType) {
+                        case 'resource_group':
+                            this._getResource(resourceInfoItem.resource.id);
+                            break;
+                        case 'postgis_layer':
+                            this._getResource(resourceInfoItem.resource.id);
+                            break;
+                        case 'mapserver_style':
+                            break;
+                        default:
+                            return false;
+                    }
+
+                    this._saveResourceToStore(resourceInfoItem.resource, resourceType);
+                }
+            },
+
+            _getResource: function (resourceId) {
+                var deferred = this._ngwServiceFacade.getResourceInfo(resourceId);
+
+                this._deferredStore.put({
+                    id: resourceId,
+                    def: deferred
+                });
+
+                deferred.then(lang.hitch(this, function (resourceInfo) {
+                    this._deferredStore.remove(resourceId);
+                    this._processResourceInfo(resourceInfo);
+                }));
+            },
+
+            _saveResourceToStore: function (resource, resourceType) {
+                var parent,
+                    resourceSaved;
+
+                if (resource.parent && resource.parent.id) {
+                    parent = this.store.query({id: resource.parent.id})[0];
+                    if (parent.link) {
+                        parent = parent.object;
+                    }
+                }
+
+                if (!parent) {
+                    this.store.put({id: resource.id, res: resource, type: resourceType});
+                    return true;
+                }
+
+                switch (resourceType) {
+                    case 'resource_group':
+                        if (parent.type === 'resource_group') {
+                            this._validateParentResourceGroup(parent);
+                        }
+                        resourceSaved = parent.groups[parent.groups.push({id: resource.id, res: resource, type: resourceType}) - 1];
+                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
+                        break;
+                    case 'postgis_layer':
+                        if (parent.type === 'resource_group') {
+                            this._validateParentResourceGroup(parent);
+                        }
+                        resourceSaved = parent.layers[parent.layers.push({id: resource.id, res: resource, type: resourceType}) - 1];
+                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
+                        break;
+                    case 'mapserver_style':
+                        this._validateParentLayer(parent);
+                        resourceSaved = parent.styles[parent.styles.push({id: resource.id, res: resource, type: resourceType}) - 1];
+                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
+                        break;
+                    default:
+                        return false;
+                }
+            },
+
+            _validateParentResourceGroup: function (parentResourceGroup) {
+                if (!parentResourceGroup.groups || !parentResourceGroup.layers) {
+                    parentResourceGroup.groups = [];
+                    parentResourceGroup.layers = [];
+                }
+            },
+
+            _validateParentLayer: function (parentLayer) {
+                if (!parentLayer.styles) {
+                    parentLayer.styles = [];
+                }
             },
 
             getLayersIdByStyles: function (idStyles) {
@@ -110,9 +161,12 @@ define([
 
                 if (lang.isArray(idStyles)) {
                     array.forEach(idStyles, lang.hitch(this, function (idStyle) {
-                        var res = this.store.query({xid: 'style-' + idStyle});
-                        if (res.length > 0) {
-                            ids.push(res[0].parent.split('-')[1]);
+                        var resourceStyle = this.store.query({id: idStyle});
+                        if (resourceStyle.length > 0) {
+                            if (resourceStyle[0].link) {
+                                resourceStyle[0] = resourceStyle[0].object;
+                            }
+                            ids.push(resourceStyle[0].res.parent.id);
                         }
                     }));
                 }
@@ -120,30 +174,45 @@ define([
                 return ids;
             },
 
-            getLayerNameByStyleId: function (idStyle) {
-                var res = this.store.query({xid: 'style-' + idStyle});
-                if (res.length > 0) {
-                    return res[0].layer_display_name;
-                }
-            },
-
             getLayerNameByLayerId: function (idLayer) {
                 var display_name,
                     res = this.store.query({id: idLayer});
+
                 if (res.length > 0) {
                     display_name = res[0].display_name;
                     return display_name;
                 }
+
+                return null;
             },
 
             getLayerById: function (id) {
-                var result = this.store.query({id: id, type: 'layer'});
+                var result = this.store.query({id: id});
 
-                if (result.length === 0) {
-                    return null;
-                } else {
-                    return result[0];
+                if (result.length > 0) {
+                    return result[0].res;
                 }
+
+                return null;
+            },
+
+            getListLayers: function () {
+                var resourceLayers = this.store.query({type: 'postgis_layer'}),
+                    listLayers = [];
+
+                array.forEach(resourceLayers, function (resourceLayer, index) {
+                    if (resourceLayer.link) {
+                        resourceLayer = resourceLayer.object;
+                    }
+                    listLayers.push({
+                        layer_id: resourceLayer.id,
+                        display_name: resourceLayer.res.display_name || null,
+                        keyname: resourceLayer.res.keyname || null,
+                        style_id: resourceLayer.styles ? resourceLayer.styles[0].id : null
+                    });
+                });
+
+                return listLayers;
             }
         });
     });
