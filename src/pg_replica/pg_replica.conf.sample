@@ -1,25 +1,28 @@
-[connection]
-host=192.168.255.101
-port=5432
-database=rosavto
-user=luser
-password=secret
+[general]
+name=uniq_name
+
+[database]
+host=host
+port=port
+database=database
+user=user
+password=password
+rep_table=table
+rep_schema=schema
+com_table=table
+com_schema=schema
 
 [bus]
-bus_address=http://10.20.88.210:8080/interaction
-user=gis
-password=!QAZxsw2
-;urn:sm:gis@rosavtodor or urn:sm:gis@uprdor-rus
-local_address=urn:sm:gis@rosavtodor
+uri=uri
+password=password
+address=address
+peers=peers
 
-[zones]
-forward=True
-addresses=urn:sm:gis@uprdor-rus
-
-[changes]
-dir_name=/path/to/changeset/files
+[paths]
+changesets=/path/to/directory
+commits=/path/to/directory
+dump=/path/to/directory
 
 [logging]
-log_file=/path/to/log/pg_replica.log
-;available log levels: critical, error, warning, info, debug, notset
+log_file=/path/to/log/file
 log_level=debug
