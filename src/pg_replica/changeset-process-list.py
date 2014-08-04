@@ -1,11 +1,22 @@
 #!/usr/bin/env python
 
+import re
 import os
 import sys
+import fcntl
+import glob
+from stat import S_ISREG, ST_CTIME, ST_MODE
+import time
 import uuid
+import base64
+import argparse
+import datetime
 import logging
 import ConfigParser
+from crontab import CronTab
 import xml.etree.ElementTree as et
+
+from pgdb import *
 
 logger = logging.getLogger('changeset-query')
 
@@ -49,12 +60,6 @@ if __name__ == '__main__':
 
     if cfg.has_section('general'):
         uniq_name = cfg.get('general', 'uniq_name')
-    else:
-        logger.critical('Invalid config file.')
-        sys.exit(1)
-
-    if cfg.has_section('path'):
-        directory = cfg.get('path', 'changesets')
     else:
         logger.critical('Invalid config file.')
         sys.exit(1)

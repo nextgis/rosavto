@@ -4,9 +4,17 @@ import re
 import os
 import sys
 import fcntl
+import glob
+from stat import S_ISREG, ST_CTIME, ST_MODE
+import time
+import uuid
+import base64
+import argparse
 import datetime
 import logging
 import ConfigParser
+from crontab import CronTab
+import xml.etree.ElementTree as et
 
 from pgdb import *
 
@@ -113,6 +121,9 @@ if __name__ == '__main__':
             select_field_list.append(field_name)
 
         geom_index = plain_field_list.index(geom_name)
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
         for uid in uids:
             sql = "SELECT * FROM %s WHERE uid='%s' ORDER BY stamp DESC LIMIT 1;" % (repl_table, uid)
