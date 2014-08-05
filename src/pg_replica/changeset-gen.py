@@ -149,7 +149,7 @@ if __name__ == '__main__':
 
             if operation == 1:
                 self.logger.debug('Found DELETE operation.')
-                sql = "DELETE FROM %s WHERE uniq_uid='%s'" % (full_table_name, uid)
+                sql = "DELETE FROM %s WHERE uniq_uid='%s';" % (full_table_name, uid)
                 self.logger.debug('Replication SQL: %s' % ' '.join(sql.split()))
             elif operation == 2:
                 self.logger.debug('Found INSERT operation.')

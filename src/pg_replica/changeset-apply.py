@@ -102,8 +102,12 @@ if __name__ == '__main__':
         schema = full_table_name.split('.')[0]
         table = full_table_name.split('.')[1]
 
+        qry = "ALTER TABLE %s DISABLE TRIGGER %s_rep;" % (full_table_name, table)
+        qry += sql
+        qry += "ALTER TABLE %s ENABLE TRIGGER %s_rep;" % (full_table_name, table)
+
         try:
-            db._exec_sql_and_commit(sql)
+            db._exec_sql_and_commit(qry)
         except DbError, e:
             logger.error('Error when processing file "%s".' % file_name)
             break

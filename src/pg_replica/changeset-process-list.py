@@ -131,6 +131,8 @@ if __name__ == '__main__':
         if r.status_code != 202:
             logger.error('Request failed: %s - %s' % (r.status_code, r.text))
 
+    os.remove(changes_list)
+
     logger.debug('Stop changesets list processing.')
     logger.info('Stop logging.')
     logging.shutdown()

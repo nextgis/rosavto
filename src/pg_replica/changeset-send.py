@@ -111,6 +111,8 @@ if __name__ == '__main__':
     if r.status_code != 202:
         logger.error('Request failed: %s - %s' % (r.status_code, r.text))
 
+    os.remove(change_file)
+
     logger.debug('Stop changesets submission.')
     logger.info('Stop logging.')
     logging.shutdown()

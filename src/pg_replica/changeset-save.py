@@ -82,6 +82,8 @@ if __name__ == '__main__':
     with codecs.open(os.path.join(directory, timestamp + '.changeset'), 'wb', 'utf-8') as f:
         cfg.write(f)
 
+    os.remove(changeset_file)
+
     logger.debug('Stop changesets saving.')
     logger.info('Stop logging.')
     logging.shutdown()
