@@ -32,11 +32,9 @@ if __name__ == '__main__':
     logger.addHandler(ch)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('change_file', help='changeset request file')
-    parser.add_argument('level', help='operation level')
+    parser.add_argument('query', help='query file')
     args = parser.parse_args()
-    change_file = args.change_file
-    level = args.level
+    query_file = args.query
 
     config_name = '/etc/pg_replica.conf'
     if not os.path.isfile(config_name):
@@ -75,11 +73,12 @@ if __name__ == '__main__':
 
     logger.debug('Start changeset submission.')
 
-    tree = et.parse(change_file)
+    tree = et.parse(query_file)
     root = tree.getroot()
     header = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Header')
     sender = header.find('{http://www.w3.org/2005/08/addressing}From')
     peer = header.find('{http://www.w3.org/2005/08/addressing}Address').text
+    action = root.find('{http://www.w3.org/2005/08/addressing}Action').text
     body = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Body')
     ch_name = body.find('changeset').text
 
@@ -90,8 +89,6 @@ if __name__ == '__main__':
 
     headers = {'content-type': 'text/xml', 'Accept': 'text/xml'}
     auth = (user, passwd)
-
-    action = 'sm://messages/application/gis/geochanges_reg_to_fda' if level == 'fda' else 'sm://messages/application/gis/geochanges_fda_to_reg'
 
     msg = '<?xml version="1.0" encoding="UTF-8"?>\n'
     msg += '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"\n'
@@ -111,7 +108,7 @@ if __name__ == '__main__':
     if r.status_code != 202:
         logger.error('Request failed: %s - %s' % (r.status_code, r.text))
 
-    os.remove(change_file)
+    os.remove(query_file)
 
     logger.debug('Stop changesets submission.')
     logger.info('Stop logging.')

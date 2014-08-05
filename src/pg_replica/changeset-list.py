@@ -31,11 +31,9 @@ if __name__ == '__main__':
     logger.addHandler(ch)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('dst', help='destination url')
-    parser.add_argument('level', help='operation level')
+    parser.add_argument('query', help='query file')
     args = parser.parse_args()
-    dst = args.dst
-    level = args.level
+    query_file = args.query
 
     config_name = '/etc/pg_replica.conf'
     if not os.path.isfile(config_name):
@@ -74,18 +72,23 @@ if __name__ == '__main__':
 
     logger.debug('Start changesets listing.')
 
+    tree = et.parse(query_file)
+    root = tree.getroot()
+    header = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Header')
+    sender = header.find('{http://www.w3.org/2005/08/addressing}From')
+    peer = header.find('{http://www.w3.org/2005/08/addressing}Address').text
+    action = root.find('{http://www.w3.org/2005/08/addressing}Action').text
+
     entries = (os.path.join(directory, fn) for fn in os.listdir(directory))
     entries = ((os.stat(path), path) for path in entries)
     entries = ((stat[ST_CTIME], path) for stat, path in entries if S_ISREG(stat[ST_MODE]))
-
-    action = 'sm://messages/application/gis/geochanges_reg_to_fda' if level == 'fda' else 'sm://messages/application/gis/geochanges_fda_to_reg'
 
     msg = '<?xml version="1.0" encoding="UTF-8"?>\n'
     msg += '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"\n'
     msg += 'xmlns:wsa="http://www.w3.org/2005/08/addressing"\n'
     msg += 'xmlns:sv="urn:sm:interaction:v0.2">\n'
     msg += '<soap:Header>\n'
-    msg += '<wsa:To>%s</wsa:To>\n' % dst
+    msg += '<wsa:To>%s</wsa:To>\n' % peer
     msg += '<wsa:From><wsa:Address>%s</wsa:Address></wsa:From>\n' % addr
     msg += '<wsa:MessageID>urn:uuid:%s</wsa:MessageID>\n' % uuid.uuid4()
     msg += '<wsa:Action>%s</wsa:Action>\n' % action
@@ -100,6 +103,8 @@ if __name__ == '__main__':
     r = requests.post(uri, data=msg, headers=headers, auth=auth)
     if r.status_code != 202:
         logger.error('Request failed: %s - %s' % (r.status_code, r.text))
+
+    os.remove(query_file)
 
     logger.debug('Stop changesets listing.')
     logger.info('Stop logging.')

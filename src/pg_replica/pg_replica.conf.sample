@@ -1,5 +1,6 @@
 [general]
 name=uniq_name
+level=operation_level
 
 [database]
 host=host

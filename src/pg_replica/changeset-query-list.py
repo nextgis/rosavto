@@ -31,11 +31,6 @@ if __name__ == '__main__':
 
     logger.addHandler(ch)
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('level', help='operation level')
-    args = parser.parse_args()
-    level = args.level
-
     config_name = '/etc/pg_replica.conf'
     if not os.path.isfile(config_name):
         logger.critical('Configuration file "%s" not found.' % config_name)
@@ -55,6 +50,12 @@ if __name__ == '__main__':
     fh.setFormatter(formatter)
     logger.addHandler(fh)
     logger.info('Start logging.')
+
+    if cfg.has_section('general'):
+        level = cfg.get('general', 'level')
+    else:
+        logger.critical('Invalid config file.')
+        sys.exit(1)
 
     if cfg.has_section('bus'):
         uri = cfg.get('bus', 'uri')

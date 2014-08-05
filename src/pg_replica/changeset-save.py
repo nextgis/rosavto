@@ -32,9 +32,9 @@ if __name__ == '__main__':
     logger.addHandler(ch)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('changeset_file', help='changeset responce file')
+    parser.add_argument('changeset', help='changeset responce file')
     args = parser.parse_args()
-    changeset_file = args.changeset_file
+    changeset_file = args.changeset
 
     config_name = '/etc/pg_replica.conf'
     if not os.path.isfile(config_name):
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    tree = et.parse(changeset_file)
+    tree = et.parse(changeset)
     root = tree.getroot()
     body = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Body')
     tbl = b.find('tbl').text
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     with codecs.open(os.path.join(directory, timestamp + '.changeset'), 'wb', 'utf-8') as f:
         cfg.write(f)
 
-    os.remove(changeset_file)
+    os.remove(changeset)
 
     logger.debug('Stop changesets saving.')
     logger.info('Stop logging.')

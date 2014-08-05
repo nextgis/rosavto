@@ -89,9 +89,9 @@ if __name__ == '__main__':
     file_list = sorted(glob.glob(os.path.join(directory, '*.changeset')))
     logger.debug('Found %s changesets.' % len(file_list))
     cfg = ConfigParser.SafeConfigParser()
-    for file_name in file_list:
-        logger.debug('Processing file: "%s".' % file_name)
-        cfg.readfp(codecs.open(file_name, encoding='utf-8'))
+    for f in file_list:
+        logger.debug('Processing file: "%s".' % f)
+        cfg.readfp(codecs.open(f, encoding='utf-8'))
 
         tbl = cfg.get('changeset', 'tbl')
         sql = cfg.get('changeset', 'sql')
@@ -109,11 +109,11 @@ if __name__ == '__main__':
         try:
             db._exec_sql_and_commit(qry)
         except DbError, e:
-            logger.error('Error when processing file "%s".' % file_name)
+            logger.error('Error when processing file "%s".' % f)
             break
 
-        os.remove(file_name)
-        logger.debug('File "%s" processed and removed.' % file_name)
+        os.remove(f)
+        logger.debug('File "%s" processed and removed.' % f)
 
     logger.debug('Stop changesets applying.')
     logger.info('Stop logging.')
