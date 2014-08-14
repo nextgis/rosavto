@@ -86,6 +86,11 @@ if __name__ == '__main__':
     repl_table = db._table_name(rep_schema, rep_table)
     comm_table = db._table_name(com_schema, com_table)
 
+    cron = CronTab()
+    job = cron.find_command('changeset-gen')
+    job.enable(False)
+    cron.write()
+
     file_list = sorted(glob.glob(os.path.join(directory, '*.changeset')))
     logger.debug('Found %s changesets.' % len(file_list))
     cfg = ConfigParser.SafeConfigParser()
@@ -114,6 +119,9 @@ if __name__ == '__main__':
 
         os.remove(f)
         logger.debug('File "%s" processed and removed.' % f)
+
+    job.enable()
+    cron.write()
 
     logger.debug('Stop changesets applying.')
     logger.info('Stop logging.')
