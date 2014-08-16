@@ -15,11 +15,12 @@ com_schema=schema
 
 [bus]
 uri=uri
+user=user
 password=password
 address=address
 peers=peers
 
-[paths]
+[path]
 changesets=/path/to/directory
 commits=/path/to/directory
 dump=/path/to/directory
