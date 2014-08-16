@@ -12,6 +12,7 @@ import base64
 import argparse
 import datetime
 import logging
+import requests
 import ConfigParser
 from crontab import CronTab
 import xml.etree.ElementTree as et
@@ -88,8 +89,8 @@ if __name__ == '__main__':
               COMMENT ON COLUMN %s.operation IS
                   '1 - DELETE, 2 - INSERT, 3 - UPDATE';''' % (tname, tname, user, tname)
 
-        self._exec_sql_and_commit(sql)
-        self.logger.info('Created table "%s".' % tname)
+        db._exec_sql_and_commit(sql)
+        logger.info('Created table "%s".' % tname)
 
     schema = table_name.split('.')[0]
     table = table_name.split('.')[1]
@@ -100,8 +101,8 @@ if __name__ == '__main__':
     fields = db.get_table_fields(table, schema)
     has_uuid = len([f for f in fields if f[1] == 'uniq_uid' and f[2] == 'varchar']) > 0
     if not has_uuid:
-        self.logger.error('Can not register table "%s" because it has no "uniq_uid" field of type "varchar".' % table_name)
-        return
+        logger.error('Can not register table "%s" because it has no "uniq_uid" field of type "varchar".' % table_name)
+        sys.exit(1)
 
     proc_name = table + '_rep'
 
@@ -128,7 +129,7 @@ if __name__ == '__main__':
              CREATE TRIGGER %s AFTER INSERT OR UPDATE OR DELETE
                  ON %s FOR EACH ROW EXECUTE PROCEDURE %s();
           ''' % (proc_name, proc_name, repl_table, table_name, repl_table, table_name, repl_table, table_name, proc_name, proc_name, table_name, proc_name)
-    self._exec_sql_and_commit(sql)
+    db._exec_sql_and_commit(sql)
 
     logger.debug('Stop table registration.')
     logger.info('Stop logging.')

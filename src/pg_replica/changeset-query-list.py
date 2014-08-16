@@ -12,6 +12,7 @@ import base64
 import argparse
 import datetime
 import logging
+import requests
 import ConfigParser
 from crontab import CronTab
 import xml.etree.ElementTree as et

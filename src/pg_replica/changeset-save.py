@@ -12,6 +12,7 @@ import base64
 import argparse
 import datetime
 import logging
+import requests
 import ConfigParser
 from crontab import CronTab
 import xml.etree.ElementTree as et
@@ -67,11 +68,11 @@ if __name__ == '__main__':
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    tree = et.parse(changeset)
+    tree = et.parse(changeset_file)
     root = tree.getroot()
     body = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Body')
-    tbl = b.find('tbl').text
-    sql = b.find('sql').text
+    tbl = body.find('tbl').text
+    sql = body.find('sql').text
 
     cfg = ConfigParser.SafeConfigParser()
     cfg.add_section('changeset')
@@ -82,7 +83,7 @@ if __name__ == '__main__':
     with codecs.open(os.path.join(directory, timestamp + '.changeset'), 'wb', 'utf-8') as f:
         cfg.write(f)
 
-    os.remove(changeset)
+    os.remove(changeset_file)
 
     logger.debug('Stop changesets saving.')
     logger.info('Stop logging.')

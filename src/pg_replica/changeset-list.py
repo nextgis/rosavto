@@ -11,6 +11,7 @@ import base64
 import argparse
 import datetime
 import logging
+import requests
 import ConfigParser
 from crontab import CronTab
 import xml.etree.ElementTree as et
@@ -76,8 +77,8 @@ if __name__ == '__main__':
     root = tree.getroot()
     header = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Header')
     sender = header.find('{http://www.w3.org/2005/08/addressing}From')
-    peer = header.find('{http://www.w3.org/2005/08/addressing}Address').text
-    action = root.find('{http://www.w3.org/2005/08/addressing}Action').text
+    peer = sender.find('{http://www.w3.org/2005/08/addressing}Address').text
+    action = header.find('{http://www.w3.org/2005/08/addressing}Action').text
 
     entries = (os.path.join(directory, fn) for fn in os.listdir(directory))
     entries = ((os.stat(path), path) for path in entries)

@@ -12,6 +12,7 @@ import base64
 import argparse
 import datetime
 import logging
+import requests
 import ConfigParser
 from crontab import CronTab
 import xml.etree.ElementTree as et
@@ -101,7 +102,7 @@ if __name__ == '__main__':
         tbl = cfg.get('changeset', 'tbl')
         sql = cfg.get('changeset', 'sql')
 
-        full_table_name = base64.urlsafe_b64decode(table.encode('utf-8'))
+        full_table_name = base64.urlsafe_b64decode(tbl.encode('utf-8'))
         sql = base64.urlsafe_b64decode(sql.encode('utf-8')).decode('utf-8')
 
         schema = full_table_name.split('.')[0]
