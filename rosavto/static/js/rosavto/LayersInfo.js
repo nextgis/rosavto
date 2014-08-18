@@ -226,6 +226,26 @@ define([
                 });
 
                 return listLayers;
+            },
+
+            getListStyles: function () {
+                var resourceLayers = this.store.query({type: 'mapserver_style'}),
+                    listLayers = [];
+
+                array.forEach(resourceLayers, function (resourceLayer, index) {
+                    if (resourceLayer.link) {
+                        resourceLayer = resourceLayer.object;
+                    }
+                    listLayers.push({
+                        layer_id: resourceLayer.id,
+                        display_name: resourceLayer.res.display_name || null,
+                        keyname: resourceLayer.res.keyname || null,
+                        style_id: resourceLayer.styles ? resourceLayer.styles[0].id : null,
+                        xml_style: resourceLayer.xml
+                    });
+                });
+
+                return listLayers;
             }
         });
     });
