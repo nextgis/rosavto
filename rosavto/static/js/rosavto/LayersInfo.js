@@ -101,7 +101,7 @@ define([
                 }
 
                 if (!parent) {
-                    this.store.put({id: resource.id, res: resource, type: resourceType});
+                    this.store.put({id: resource.id, res: resource, type: resourceType, keyname: resource.keyname});
                     return true;
                 }
 
@@ -246,6 +246,34 @@ define([
                 });
 
                 return listLayers;
+            },
+
+            getStylesByLayersKeynames: function (listKeynames) {
+                var layersResources,
+                    style,
+                    stylesDict = {};
+
+                layersResources = this.store.query(function (res) {
+                    if (!res.keyname) {
+                        return false;
+                    }
+                    return array.indexOf(listKeynames, res.keyname) !== -1;
+                });
+
+                array.forEach(layersResources, function (layerResource) {
+                    if (layerResource.link && layerResource.object && layerResource.object.styles &&
+                        lang.isArray(layerResource.object.styles) && layerResource.object.styles.length > 0) {
+                        style = layerResource.object.styles[0];
+                    } else if (layerResource.styles && lang.isArray(layerResource.styles) &&
+                        layerResource.styles.length > 0) {
+                        style = layerResource.styles[0];
+                    } else {
+                        style = null;
+                    }
+                    stylesDict[layerResource.keyname] = style;
+                });
+
+                return stylesDict;
             }
         });
     });
