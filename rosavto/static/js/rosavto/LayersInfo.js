@@ -228,7 +228,7 @@ define([
                 return listLayers;
             },
 
-            getListStyles: function () {
+            getStyles: function () {
                 var resourceLayers = this.store.query({type: 'mapserver_style'}),
                     listLayers = [];
 
