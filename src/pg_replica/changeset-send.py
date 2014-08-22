@@ -101,6 +101,7 @@ if __name__ == '__main__':
     msg += '<wsa:MessageID>urn:uuid:%s</wsa:MessageID>\n' % uuid.uuid4()
     msg += '<wsa:Action>%s</wsa:Action>\n' % action
     msg += '</soap:Header><soap:Body>\n'
+    msg += '<chn>%s</chn>\n' % ch_name
     msg += '<tbl>%s</tbl>\n' % tbl
     msg += '<sql>%s</sql>\n' % sql
     msg += '</soap:Body></soap:Envelope>'
