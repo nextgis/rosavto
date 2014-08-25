@@ -9,7 +9,7 @@ from stat import S_ISREG, ST_CTIME, ST_MODE
 import time
 import uuid
 import base64
-import argparse
+import optparse
 import datetime
 import logging
 import requests
@@ -32,10 +32,9 @@ if __name__ == '__main__':
 
     logger.addHandler(ch)
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('changes_list', help='changeset list')
-    args = parser.parse_args()
-    changes_list = args.changes_list
+    parser = optparse.OptionParser()
+    opts, args = parser.parse_args()
+    changes_list = args[0]
 
     config_name = '/etc/pg_replica.conf'
     if not os.path.isfile(config_name):
