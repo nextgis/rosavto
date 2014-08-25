@@ -1,14 +1,15 @@
 define([
-    'dojo/_base/declare',
-    'dojo/_base/array',
-    'dojo/_base/lang',
-    'dojo/store/Memory',
-    'dojo/store/Observable',
-    'dojo/request/xhr',
-    'dojo/Deferred',
-    'dojo/DeferredList'
-],
-    function (declare, array, lang, Memory, Observable, xhr, Deferred, DeferredList) {
+        'dojo/_base/declare',
+        'dojo/_base/array',
+        'dojo/_base/lang',
+        'dojo/store/Memory',
+        'dojo/store/Observable',
+        'dojo/request/xhr',
+        'dojo/Deferred',
+        'dojo/DeferredList',
+        'dojox/xml/parser'
+    ],
+    function (declare, array, lang, Memory, Observable, xhr, Deferred, DeferredList, xmlParser) {
         return declare('rosavto.LayersInfo', null, {
             _filled: false,
             constructor: function (ngwServiceFacade) {
@@ -69,7 +70,7 @@ define([
                             return false;
                     }
 
-                    this._saveResourceToStore(resourceInfoItem.resource, resourceType);
+                    this._saveResourceToStore(resourceInfoItem, resourceType);
                 }
             },
 
@@ -87,8 +88,9 @@ define([
                 }));
             },
 
-            _saveResourceToStore: function (resource, resourceType) {
-                var parent,
+            _saveResourceToStore: function (resourceInfoItem, resourceType) {
+                var resource = resourceInfoItem.resource,
+                    parent,
                     resourceSaved;
 
                 if (resource.parent && resource.parent.id) {
@@ -99,7 +101,7 @@ define([
                 }
 
                 if (!parent) {
-                    this.store.put({id: resource.id, res: resource, type: resourceType});
+                    this.store.put({id: resource.id, res: resource, type: resourceType, keyname: resource.keyname});
                     return true;
                 }
 
@@ -115,13 +117,24 @@ define([
                         if (parent.type === 'resource_group') {
                             this._validateParentResourceGroup(parent);
                         }
-                        resourceSaved = parent.layers[parent.layers.push({id: resource.id, res: resource, type: resourceType}) - 1];
-                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
+                        resourceSaved = parent.layers[parent.layers.push({id: resource.id, res: resource, type: resourceType, keyname: resource.keyname}) - 1];
+                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, keyname: resource.keyname, link: 'yes'});
                         break;
                     case 'mapserver_style':
                         this._validateParentLayer(parent);
-                        resourceSaved = parent.styles[parent.styles.push({id: resource.id, res: resource, type: resourceType}) - 1];
-                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
+                        xml_style = xmlParser.parse(resourceInfoItem.mapserver_style.xml);
+                        resourceSaved = parent.styles[parent.styles.push({
+                            id: resource.id,
+                            res: resource,
+                            type: resourceType,
+                            xml: xml_style}) - 1];
+                        this.store.put({
+                            id: resource.id,
+                            object: resourceSaved,
+                            type: resourceType,
+                            link: 'yes',
+                            xml: xml_style
+                        });
                         break;
                     default:
                         return false;
@@ -213,6 +226,54 @@ define([
                 });
 
                 return listLayers;
+            },
+
+            getStyles: function () {
+                var resourceLayers = this.store.query({type: 'mapserver_style'}),
+                    listLayers = [];
+
+                array.forEach(resourceLayers, function (resourceLayer, index) {
+                    if (resourceLayer.link) {
+                        resourceLayer = resourceLayer.object;
+                    }
+                    listLayers.push({
+                        layer_id: resourceLayer.id,
+                        display_name: resourceLayer.res.display_name || null,
+                        keyname: resourceLayer.res.keyname || null,
+                        style_id: resourceLayer.styles ? resourceLayer.styles[0].id : null,
+                        xml_style: resourceLayer.xml
+                    });
+                });
+
+                return listLayers;
+            },
+
+            getStylesByLayersKeynames: function (listKeynames) {
+                var layersResources,
+                    style,
+                    stylesDict = {};
+
+                layersResources = this.store.query(function (res) {
+                    if (!res.keyname) {
+                        return false;
+                    }
+                    return array.indexOf(listKeynames, res.keyname) !== -1;
+                });
+
+                array.forEach(layersResources, function (layerResource) {
+                    if (layerResource.link && layerResource.object && layerResource.object.styles &&
+                        lang.isArray(layerResource.object.styles) && layerResource.object.styles.length > 0) {
+                        style = layerResource.object.styles[0];
+                    } else if (layerResource.styles && lang.isArray(layerResource.styles) &&
+                        layerResource.styles.length > 0) {
+                        style = layerResource.styles[0];
+                    } else {
+                        style = null;
+                    }
+                    stylesDict[layerResource.keyname] = style;
+                });
+
+                return stylesDict;
             }
         });
     });

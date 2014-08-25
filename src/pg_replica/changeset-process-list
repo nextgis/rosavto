@@ -12,13 +12,14 @@ import base64
 import argparse
 import datetime
 import logging
+import requests
 import ConfigParser
 from crontab import CronTab
 import xml.etree.ElementTree as et
 
 from pgdb import *
 
-logger = logging.getLogger('changeset-query')
+logger = logging.getLogger('changeset-process-list')
 
 if __name__ == '__main__':
     logger.setLevel(logging.DEBUG)
@@ -33,6 +34,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('changes_list', help='changeset list')
+    args = parser.parse_args()
     changes_list = args.changes_list
 
     config_name = '/etc/pg_replica.conf'
@@ -56,7 +58,7 @@ if __name__ == '__main__':
     logger.info('Start logging.')
 
     if cfg.has_section('general'):
-        uniq_name = cfg.get('general', 'uniq_name')
+        uniq_name = cfg.get('general', 'name')
     else:
         logger.critical('Invalid config file.')
         sys.exit(1)
@@ -84,25 +86,25 @@ if __name__ == '__main__':
 
     logger.debug('Start changesets list processing.')
 
-    db = PgDB(host, port, dbname, user, passwd)
+    db = PgDB(host, port, dbname, db_user, db_passwd)
     c = db.con.cursor()
     com_table = db._table_name(com_schema, com_table)
 
     headers = {'content-type': 'text/xml', 'Accept': 'text/xml'}
-    auth = (user, passwd)
+    auth = (bus_user, bus_passwd)
 
     tree = et.parse(changes_list)
     root = tree.getroot()
     header = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Header')
     sender = header.find('{http://www.w3.org/2005/08/addressing}From')
-    peer = header.find('{http://www.w3.org/2005/08/addressing}Address').text
-    action = root.find('{http://www.w3.org/2005/08/addressing}Action').text
+    peer = sender.find('{http://www.w3.org/2005/08/addressing}Address').text
+    action = header.find('{http://www.w3.org/2005/08/addressing}Action').text
     body = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Body')
     for ch in body.findall('changeset'):
         if ch.text.startswith(uniq_name):
             continue
 
-        sql = 'SELECT count(*) FROM %s WHERE changest = "%s"' % (com_table, ch.text)
+        sql = "SELECT count(*) FROM %s WHERE changest = '%s';" % (com_table, ch.text)
         db._exec_sql(c, sql)
         res = c.fetchone()
 
@@ -119,7 +121,7 @@ if __name__ == '__main__':
         msg += '<wsa:MessageID>urn:uuid:%s</wsa:MessageID>\n' % uuid.uuid4()
         msg += '<wsa:Action>%s</wsa:Action>\n' % action
         msg += '</soap:Header><soap:Body>\n'
-        msg += '<request>getChangeset</request>'
+        msg += '<request>getChangeset</request>\n'
         msg += '<changeset>%s</changeset>' % ch.text
         msg += '</soap:Body></soap:Envelope>'
 

@@ -12,6 +12,7 @@ import base64
 import argparse
 import datetime
 import logging
+import requests
 import ConfigParser
 from crontab import CronTab
 import xml.etree.ElementTree as et
@@ -73,7 +74,8 @@ if __name__ == '__main__':
         sys.exit(1)
 
     if cfg.has_section('path'):
-        directory = cfg.get('path', 'changesets')
+        dirChanges = cfg.get('path', 'changesets')
+        dirCommits = cfg.get('path', 'commits')
     else:
         logger.critical('Invalid config file.')
         sys.exit(1)
@@ -86,7 +88,12 @@ if __name__ == '__main__':
     repl_table = db._table_name(rep_schema, rep_table)
     comm_table = db._table_name(com_schema, com_table)
 
-    file_list = sorted(glob.glob(os.path.join(directory, '*.changeset')))
+    cron = CronTab()
+    job = cron.find_command('changeset-gen')
+    job.enable(False)
+    cron.write()
+
+    file_list = sorted(glob.glob(os.path.join(dirChanges, '*.changeset')))
     logger.debug('Found %s changesets.' % len(file_list))
     cfg = ConfigParser.SafeConfigParser()
     for f in file_list:
@@ -96,7 +103,7 @@ if __name__ == '__main__':
         tbl = cfg.get('changeset', 'tbl')
         sql = cfg.get('changeset', 'sql')
 
-        full_table_name = base64.urlsafe_b64decode(table.encode('utf-8'))
+        full_table_name = base64.urlsafe_b64decode(tbl.encode('utf-8'))
         sql = base64.urlsafe_b64decode(sql.encode('utf-8')).decode('utf-8')
 
         schema = full_table_name.split('.')[0]
@@ -108,12 +115,18 @@ if __name__ == '__main__':
 
         try:
             db._exec_sql_and_commit(qry)
+            fName = os.path.splitext(f)[0]
+            sql = '''INSERT INTO %s("changest") VALUES('%s')''' % (comm_table, fName)
+            db._exec_sql_and_commit(sql)
         except DbError, e:
             logger.error('Error when processing file "%s".' % f)
             break
 
-        os.remove(f)
+        os.rename(f, os.path.join(dirCommits, f))
         logger.debug('File "%s" processed and removed.' % f)
+
+    job.enable()
+    cron.write()
 
     logger.debug('Stop changesets applying.')
     logger.info('Stop logging.')

@@ -12,6 +12,7 @@ import base64
 import argparse
 import datetime
 import logging
+import requests
 import ConfigParser
 from crontab import CronTab
 import xml.etree.ElementTree as et
@@ -59,7 +60,7 @@ if __name__ == '__main__':
     logger.info('Start logging.')
 
     if cfg.has_section('general'):
-        uniq_name = cfg.get('general', 'uniq_name')
+        uniq_name = cfg.get('general', 'name')
     else:
         logger.critical('Invalid config file.')
         sys.exit(1)
@@ -144,8 +145,7 @@ if __name__ == '__main__':
                         continue
                     value_list.append(value)
 
-                values = db.populate_values(
-                    fields, value_list, plain_field_list)
+                values = db._populate_values(fields, value_list, plain_field_list)
 
             if operation == 1:
                 self.logger.debug('Found DELETE operation.')

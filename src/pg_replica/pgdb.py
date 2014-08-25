@@ -178,6 +178,54 @@ class PgDB:
             self.logger.debug('Table "%s" not found.' % table_name)
             return False
 
+    def _populate_values(self, fields, values, field_list):
+        out = u''
+        for count, field_name in enumerate(field_list):
+            field_defn = [f for f in fields if f[1] == field_name][0]
+            field_type = field_defn[2]
+            value = values[count]
+
+            if field_type in ['text', 'varchar']:
+                if value is not None:
+                    out += u"'%s', " % self._quote_str(value)
+                else:
+                    out += u'NULL, '
+            elif field_type == 'bool':
+                if value is not None:
+                    out += u'%s, ' % value
+                else:
+                    out += u'NULL, '
+            elif field_type == 'uuid':
+                if value is not None:
+                    out += u"'%s', " % value
+                else:
+                    out += u'NULL, '
+            elif self.re_is_integer.match(field_type) is not None or \
+                    self.re_is_float.match(field_type) is not None:
+                if value is not None:
+                    out += '%s, ' % value
+                else:
+                    out += 'NULL, '
+            elif field_type in ['numeric']:
+                if value is not None:
+                    out += u'%s, ' % value
+                else:
+                    out += u'NULL, '
+            elif field_type in ['timestamp', 'timestamptz', 'date', 'time',
+                                'interval']:
+                if value is not None:
+                    out += u"'%s', " % value
+                else:
+                    out += u'NULL, '
+            elif field_type in ['geometry']:
+                if value is not None:
+                    out += u'%s, ' % value
+                else:
+                    out += u'NULL, '
+
+        out = out[:-2]
+        return out
+
     def _exec_sql(self, cursor, sql):
         try:
             self.logger.debug('Execute query: "%s"' % ' '.join(sql.split()))

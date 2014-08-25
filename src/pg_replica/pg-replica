@@ -12,13 +12,15 @@ import base64
 import argparse
 import datetime
 import logging
+import requests
+import subprocess
 import ConfigParser
 from crontab import CronTab
 import xml.etree.ElementTree as et
 
 from pgdb import *
 
-logger = logging.getLogger('changeset-save')
+logger = logging.getLogger('pg-replica')
 
 if __name__ == '__main__':
     logger.setLevel(logging.DEBUG)
@@ -32,11 +34,12 @@ if __name__ == '__main__':
     logger.addHandler(ch)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('changeset', help='changeset responce file')
+    parser.add_argument('query_file', help='query file')
     args = parser.parse_args()
-    changeset_file = args.changeset
+    query_file = args.query_file
 
-    config_name = '/etc/pg_replica.conf'
+    #config_name = '/etc/pg_replica.conf'
+    config_name = 'pg_replica.conf'
     if not os.path.isfile(config_name):
         logger.critical('Configuration file "%s" not found.' % config_name)
         sys.exit(1)
@@ -56,34 +59,27 @@ if __name__ == '__main__':
     logger.addHandler(fh)
     logger.info('Start logging.')
 
-    if cfg.has_section('path'):
-        directory = cfg.get('path', 'changesets')
-    else:
-        logger.critical('Invalid config file.')
-        sys.exit(1)
-
-    logger.debug('Start changeset saving.')
-
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-    tree = et.parse(changeset)
+    tree = et.parse(query_file)
     root = tree.getroot()
+    header = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Header')
+    sender = header.find('{http://www.w3.org/2005/08/addressing}From')
+    peer = sender.find('{http://www.w3.org/2005/08/addressing}Address').text
+    action = header.find('{http://www.w3.org/2005/08/addressing}Action').text
     body = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Body')
-    tbl = b.find('tbl').text
-    sql = b.find('sql').text
+    req = body.find('request')
+    if req is not None:
+        if req.text == 'listChangesets':
+            cmd = 'changeset-list'
+        elif req.text == 'getChangeset':
+            cmd = 'changeset-send'
+        elif req.text == 'listing':
+            cmd = 'changeset-process-list'
+    else:
+        if body.find('chn') is not None:
+            cmd = 'changeset-save'
 
-    cfg = ConfigParser.SafeConfigParser()
-    cfg.add_section('changeset')
-    cfg.set('changeset', 'tbl', tbl)
-    cfg.set('changeset', 'sql', sql)
+    cmd += ' ' + query_file
+    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=False).stdout
 
-    timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S-%f')
-    with codecs.open(os.path.join(directory, timestamp + '.changeset'), 'wb', 'utf-8') as f:
-        cfg.write(f)
-
-    os.remove(changeset)
-
-    logger.debug('Stop changesets saving.')
     logger.info('Stop logging.')
     logging.shutdown()
