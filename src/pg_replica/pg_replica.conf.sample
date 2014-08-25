@@ -13,6 +13,19 @@ rep_schema=schema
 com_table=table
 com_schema=schema
 
+[fulldump]
+copy_to_host=host
+copy_to_port=port
+copy_to_database=database
+tables_for_dump=table1,table2,...,tableNb
+
+# Maximum size of dump file parts (in bytes, e.g chapter_size=9437184 is 9Mb)
+chapter_size=size
+
+# How long the dump files are steel valid. The interval is measured in hours
+outdate_interval=interval
+
+
 [bus]
 uri=uri
 password=password
