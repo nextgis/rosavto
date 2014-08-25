@@ -74,7 +74,8 @@ if __name__ == '__main__':
         sys.exit(1)
 
     if cfg.has_section('path'):
-        directory = cfg.get('path', 'changesets')
+        dirChanges = cfg.get('path', 'changesets')
+        dirCommits = cfg.get('path', 'commits')
     else:
         logger.critical('Invalid config file.')
         sys.exit(1)
@@ -92,7 +93,7 @@ if __name__ == '__main__':
     job.enable(False)
     cron.write()
 
-    file_list = sorted(glob.glob(os.path.join(directory, '*.changeset')))
+    file_list = sorted(glob.glob(os.path.join(dirChanges, '*.changeset')))
     logger.debug('Found %s changesets.' % len(file_list))
     cfg = ConfigParser.SafeConfigParser()
     for f in file_list:
@@ -114,11 +115,14 @@ if __name__ == '__main__':
 
         try:
             db._exec_sql_and_commit(qry)
+            fName = os.path.splitext(f)[0]
+            sql = '''INSERT INTO %s("changest") VALUES('%s')''' % (comm_table, fName)
+            db._exec_sql_and_commit(sql)
         except DbError, e:
             logger.error('Error when processing file "%s".' % f)
             break
 
-        os.remove(f)
+        os.rename(f, os.path.join(dirCommits, f))
         logger.debug('File "%s" processed and removed.' % f)
 
     job.enable()

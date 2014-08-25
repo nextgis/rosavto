@@ -94,6 +94,7 @@ if __name__ == '__main__':
     msg += '<wsa:MessageID>urn:uuid:%s</wsa:MessageID>\n' % uuid.uuid4()
     msg += '<wsa:Action>%s</wsa:Action>\n' % action
     msg += '</soap:Header><soap:Body>\n'
+    msg += '<request>listing</request>\n'
 
     for cdate, p in sorted(entries):
         msg += '<changeset>%s</changeset>\n' % os.path.split(p)[1]
