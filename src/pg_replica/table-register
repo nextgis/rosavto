@@ -19,7 +19,7 @@ import xml.etree.ElementTree as et
 
 from pgdb import *
 
-logger = logging.getLogger('changeset-apply')
+logger = logging.getLogger('table-register')
 pid_file = 'changeset-apply.pid'
 
 if __name__ == '__main__':

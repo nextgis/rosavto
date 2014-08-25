@@ -19,7 +19,7 @@ import xml.etree.ElementTree as et
 
 from pgdb import *
 
-logger = logging.getLogger('changeset-query')
+logger = logging.getLogger('changeset-process-list')
 
 if __name__ == '__main__':
     logger.setLevel(logging.DEBUG)

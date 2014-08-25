@@ -69,14 +69,14 @@ if __name__ == '__main__':
     req = body.find('request')
     if req is not None:
         if req.text == 'listChangesets':
-            cmd = 'changeset-list.py'
+            cmd = 'changeset-list'
         elif req.text == 'getChangeset':
-            cmd = 'changeset-send.py'
+            cmd = 'changeset-send'
         elif req.text == 'listing':
-            cmd = 'changeset-process-list.py'
+            cmd = 'changeset-process-list'
     else:
         if body.find('chn') is not None:
-            cmd = 'changeset-save.py'
+            cmd = 'changeset-save'
 
     cmd += ' ' + query_file
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=False).stdout
