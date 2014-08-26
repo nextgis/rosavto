@@ -119,6 +119,9 @@ define([
                         if (parent.type === 'resource_group') {
                             this._validateParentResourceGroup(parent);
                         }
+                        resource.geometry_type = resourceInfoItem.postgis_layer && resourceInfoItem.postgis_layer.geometry_type ?
+                            resourceInfoItem.postgis_layer.geometry_type :
+                            null;
                         resourceSaved = parent.layers[parent.layers.push({id: resource.id, res: resource, type: resourceType, keyname: resource.keyname}) - 1];
                         this.store.put({id: resource.id, object: resourceSaved, type: resourceType, keyname: resource.keyname, link: 'yes'});
                         break;
@@ -287,6 +290,32 @@ define([
                 }));
 
                 return stylesDict;
+            },
+
+            getStyleByLayerId: function (layerId) {
+                var layerResource,
+                    style,
+                    stylesDict = {};
+
+                layerResource = this.store.query({id: layerId});
+
+                if (layerResource.length > 0) {
+                    layerResource = layerResource[0];
+                } else {
+                    return null;
+                }
+
+                if (layerResource.link && layerResource.object && layerResource.object.styles &&
+                    lang.isArray(layerResource.object.styles) && layerResource.object.styles.length > 0) {
+                    style = layerResource.object.styles[0];
+                } else if (layerResource.styles && lang.isArray(layerResource.styles) &&
+                    layerResource.styles.length > 0) {
+                    style = layerResource.styles[0];
+                } else {
+                    style = null;
+                }
+
+                return style && style.json ? style.json : null;
             },
 
             _parseXmlStyle: function (xmlStyle) {
