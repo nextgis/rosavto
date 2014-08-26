@@ -82,8 +82,8 @@
                             getIncident1, getIncident2, getIncident3,
                             layer;
 
-                    map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 8);
-                    map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 8);
+                    map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
+                    map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
 
                     styles = {
                         accident: {

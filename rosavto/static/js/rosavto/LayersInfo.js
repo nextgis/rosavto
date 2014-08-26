@@ -2,6 +2,8 @@ define([
         'dojo/_base/declare',
         'dojo/_base/array',
         'dojo/_base/lang',
+        'dojo/query',
+        'dojo/dom-attr',
         'dojo/store/Memory',
         'dojo/store/Observable',
         'dojo/request/xhr',
@@ -9,7 +11,7 @@ define([
         'dojo/DeferredList',
         'dojox/xml/parser'
     ],
-    function (declare, array, lang, Memory, Observable, xhr, Deferred, DeferredList, xmlParser) {
+    function (declare, array, lang, query, attr, Memory, Observable, xhr, Deferred, DeferredList, xmlParser) {
         return declare('rosavto.LayersInfo', null, {
             _filled: false,
             constructor: function (ngwServiceFacade) {
@@ -117,23 +119,29 @@ define([
                         if (parent.type === 'resource_group') {
                             this._validateParentResourceGroup(parent);
                         }
+                        resource.geometry_type = resourceInfoItem.postgis_layer && resourceInfoItem.postgis_layer.geometry_type ?
+                            resourceInfoItem.postgis_layer.geometry_type :
+                            null;
                         resourceSaved = parent.layers[parent.layers.push({id: resource.id, res: resource, type: resourceType, keyname: resource.keyname}) - 1];
                         this.store.put({id: resource.id, object: resourceSaved, type: resourceType, keyname: resource.keyname, link: 'yes'});
                         break;
                     case 'mapserver_style':
                         this._validateParentLayer(parent);
                         xml_style = xmlParser.parse(resourceInfoItem.mapserver_style.xml);
+                        json_style = this._parseXmlStyle(xml_style);
                         resourceSaved = parent.styles[parent.styles.push({
                             id: resource.id,
                             res: resource,
                             type: resourceType,
-                            xml: xml_style}) - 1];
+                            xml: xml_style,
+                            json: json_style}) - 1];
                         this.store.put({
                             id: resource.id,
                             object: resourceSaved,
                             type: resourceType,
                             link: 'yes',
-                            xml: xml_style
+                            xml: xml_style,
+                            json: json_style
                         });
                         break;
                     default:
@@ -200,10 +208,17 @@ define([
             },
 
             getLayerById: function (id) {
-                var result = this.store.query({id: id});
+                var result = this.store.query({id: id}),
+                    resourceLayer;
 
                 if (result.length > 0) {
-                    return result[0].res;
+                    if (result[0].link) {
+                        resourceLayer = result[0].object.res;
+                    } else {
+                        resourceLayer = result[0].res;
+                    }
+
+                    return resourceLayer;
                 }
 
                 return null;
@@ -260,7 +275,7 @@ define([
                     return array.indexOf(listKeynames, res.keyname) !== -1;
                 });
 
-                array.forEach(layersResources, function (layerResource) {
+                array.forEach(layersResources, lang.hitch(this, function (layerResource) {
                     if (layerResource.link && layerResource.object && layerResource.object.styles &&
                         lang.isArray(layerResource.object.styles) && layerResource.object.styles.length > 0) {
                         style = layerResource.object.styles[0];
@@ -270,10 +285,79 @@ define([
                     } else {
                         style = null;
                     }
-                    stylesDict[layerResource.keyname] = style;
-                });
+
+                    stylesDict[layerResource.keyname] = style && style.json ? style.json : null;
+                }));
 
                 return stylesDict;
+            },
+
+            getStyleByLayerId: function (layerId) {
+                var layerResource,
+                    style,
+                    stylesDict = {};
+
+                layerResource = this.store.query({id: layerId});
+
+                if (layerResource.length > 0) {
+                    layerResource = layerResource[0];
+                } else {
+                    return null;
+                }
+
+                if (layerResource.link && layerResource.object && layerResource.object.styles &&
+                    lang.isArray(layerResource.object.styles) && layerResource.object.styles.length > 0) {
+                    style = layerResource.object.styles[0];
+                } else if (layerResource.styles && lang.isArray(layerResource.styles) &&
+                    layerResource.styles.length > 0) {
+                    style = layerResource.styles[0];
+                } else {
+                    style = null;
+                }
+
+                return style && style.json ? style.json : null;
+            },
+
+            _parseXmlStyle: function (xmlStyle) {
+                var metadataItems = query('metadata item', xmlStyle),
+                    jsonStyle = null,
+                    parsedMetadataItem;
+
+                if (metadataItems.length > 0) {
+                    array.forEach(metadataItems, lang.hitch(this, function (metadataItem) {
+                        parsedMetadataItem = this._parseMetadataItem(metadataItem);
+
+                        if (!jsonStyle) {
+                            jsonStyle = {};
+                        }
+                        this._fillJsonStyle(parsedMetadataItem, jsonStyle);
+                    }));
+                }
+
+                return jsonStyle;
+            },
+
+            _parseMetadataItem: function (metadataItem) {
+                return {
+                    key: attr.get(metadataItem, 'key'),
+                    value: attr.get(metadataItem, 'value')
+                }
+            },
+
+            _fillJsonStyle: function (parsedMetadataItem, jsonStyle) {
+                if (!parsedMetadataItem.value) {
+                    return false;
+                }
+
+                var valueForParsing = parsedMetadataItem.value.replace(/'/g, '"');
+                switch (parsedMetadataItem.key) {
+                    case 'clusters-states-styles':
+                        jsonStyle.clustersStatesStyles = JSON.parse(valueForParsing);
+                        break;
+                    case 'selected-object-style':
+                        jsonStyle.selectedObjectStyle = JSON.parse(valueForParsing);
+                        break;
+                }
             }
         });
     });

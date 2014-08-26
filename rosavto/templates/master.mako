@@ -22,6 +22,7 @@
             dojoConfig = {
                 isDebug: true,
                 async: true,
+                cacheBust: true,
                 baseUrl: "${request.static_url('rosavto:static/js/')}",
                 packages: [
                     { name: "rosavto", location: 'rosavto' },

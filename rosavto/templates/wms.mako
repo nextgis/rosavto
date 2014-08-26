@@ -13,7 +13,8 @@
         require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
             var map = new Map('map', {
                     center: [59.9175, 30.1410], // Задаем центр
-                    zoom: 10 // Указываем начальный зум
+                    zoom: 10 // Указываем начальный зум,
+                    legend: true
                 });
 
             // Добавляем WMS слой
@@ -34,7 +35,8 @@
         require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
             var map = new Map('map', {
                 center: [59.9175, 30.1410],
-                zoom: 10
+                zoom: 10,
+                legend: true
             });
 
             map.addWmsLayer('http://nextgis.ru/cgi-bin/wms?', 'NextGIS Demo WMS', {

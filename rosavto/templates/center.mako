@@ -40,11 +40,11 @@
                             mapIdentify,
                             attributeGetter;
 
-                    map.addNgwTileLayer('Тестовые дороги', ngwUrlBase, 8);
-                    map.addNgwTileLayer('Регионы', ngwUrlBase, 7);
-                    map.addNgwTileLayer('Нормативные участки дорог', ngwUrlBase, 10);
-                    map.addNgwTileLayer('Участки подрядных организаций', ngwUrlBase, 9);
-                    map.addNgwTileLayer('Метеостанции', ngwUrlBase, 11);
+                    map.addNgwTileLayer('Тестовые дороги', ngwProxyUrl, 8);
+                    map.addNgwTileLayer('Регионы', ngwProxyUrl, 7);
+                    map.addNgwTileLayer('Нормативные участки дорог', ngwProxyUrl, 10);
+                    map.addNgwTileLayer('Участки подрядных организаций', ngwProxyUrl, 9);
+                    map.addNgwTileLayer('Метеостанции', ngwProxyUrl, 11);
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
