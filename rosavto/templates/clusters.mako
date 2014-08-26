@@ -93,7 +93,18 @@
                         for (var i = 0; i < stationsCount; i++) {
                             var feature = stations.features[i];
 
+                            if (!styles[feature.properties.type_sensor]) {
+                                console.log(feature.properties.type_sensor + ' style is not found');
+                                continue;
+                            }
+
+                            if (!styles[feature.properties.type_sensor].clustersStatesStyles[feature.properties.state]) {
+                                console.log(feature.properties.state + ' state is not described');
+                                continue;
+                            }
+
                             var feature_style = styles[feature.properties.type_sensor].clustersStatesStyles[feature.properties.state];
+
 
                             // Строим иконку маркера, определяя стиль по названию состояния
                             var icon = L.icon(feature_style);
