@@ -205,10 +205,17 @@ define([
             },
 
             getLayerById: function (id) {
-                var result = this.store.query({id: id});
+                var result = this.store.query({id: id}),
+                    resourceLayer;
 
                 if (result.length > 0) {
-                    return result[0].res;
+                    if (result[0].link) {
+                        resourceLayer = result[0].object.res;
+                    } else {
+                        resourceLayer = result[0].res;
+                    }
+
+                    return resourceLayer;
                 }
 
                 return null;
