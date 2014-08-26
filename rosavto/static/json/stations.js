@@ -9,7 +9,7 @@ var stations = {
             "id": "node/40889936",
             "properties": {
                 "@id": "node/40889936",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24,7 +24,7 @@ var stations = {
             "id": "node/40901233",
             "properties": {
                 "@id": "node/40901233",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -49,7 +49,7 @@ var stations = {
             "id": "node/40901950",
             "properties": {
                 "@id": "node/40901950",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -76,7 +76,7 @@ var stations = {
             "id": "node/40903852",
             "properties": {
                 "@id": "node/40903852",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -102,7 +102,7 @@ var stations = {
             "id": "node/40905170",
             "properties": {
                 "@id": "node/40905170",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -127,7 +127,7 @@ var stations = {
             "id": "node/40906288",
             "properties": {
                 "@id": "node/40906288",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -142,7 +142,7 @@ var stations = {
             "id": "node/40908219",
             "properties": {
                 "@id": "node/40908219",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -169,7 +169,7 @@ var stations = {
             "id": "node/43063830",
             "properties": {
                 "@id": "node/43063830",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТрансАЗС"
             },
             "geometry": {
@@ -185,7 +185,7 @@ var stations = {
             "id": "node/43076189",
             "properties": {
                 "@id": "node/43076189",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "ref": "39",
@@ -204,7 +204,7 @@ var stations = {
             "id": "node/60572986",
             "properties": {
                 "@id": "node/60572986",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Independent",
                 "fuel:HGV_diesel": "no",
                 "fuel:diesel": "yes",
@@ -227,7 +227,7 @@ var stations = {
             "id": "node/71471313",
             "properties": {
                 "@id": "node/71471313",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -255,7 +255,7 @@ var stations = {
             "id": "node/71472418",
             "properties": {
                 "@id": "node/71472418",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -272,7 +272,7 @@ var stations = {
             "id": "node/82788641",
             "properties": {
                 "@id": "node/82788641",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -294,7 +294,7 @@ var stations = {
             "id": "node/90020051",
             "properties": {
                 "@id": "node/90020051",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Юхнов АНП",
                 "operator": "Юхнов АНП"
             },
@@ -311,7 +311,7 @@ var stations = {
             "id": "node/96918565",
             "properties": {
                 "@id": "node/96918565",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -328,7 +328,7 @@ var stations = {
             "id": "node/96950047",
             "properties": {
                 "@id": "node/96950047",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "ОАО РН-МОСКВА"
@@ -346,7 +346,7 @@ var stations = {
             "id": "node/140116196",
             "properties": {
                 "@id": "node/140116196",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -361,7 +361,7 @@ var stations = {
             "id": "node/141008920",
             "properties": {
                 "@id": "node/141008920",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Марьина Роща",
                 "operator": "BP"
             },
@@ -378,7 +378,7 @@ var stations = {
             "id": "node/141057959",
             "properties": {
                 "@id": "node/141057959",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -395,7 +395,7 @@ var stations = {
             "id": "node/156396496",
             "properties": {
                 "@id": "node/156396496",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -411,7 +411,7 @@ var stations = {
             "id": "node/159004168",
             "properties": {
                 "@id": "node/159004168",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -438,7 +438,7 @@ var stations = {
                 "@id": "node/160690203",
                 "addr:housenumber": "5",
                 "addr:street": "улица Преображенский Вал",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -454,7 +454,7 @@ var stations = {
             "id": "node/173464030",
             "properties": {
                 "@id": "node/173464030",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "building": "yes",
                 "name": "Роснефть",
@@ -474,7 +474,7 @@ var stations = {
             "id": "node/197163842",
             "properties": {
                 "@id": "node/197163842",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -500,7 +500,7 @@ var stations = {
             "id": "node/244204036",
             "properties": {
                 "@id": "node/244204036",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -515,7 +515,7 @@ var stations = {
             "id": "node/244204056",
             "properties": {
                 "@id": "node/244204056",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -540,7 +540,7 @@ var stations = {
             "id": "node/244205852",
             "properties": {
                 "@id": "node/244205852",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Донская",
                 "operator": "BP"
             },
@@ -557,7 +557,7 @@ var stations = {
             "id": "node/244466150",
             "properties": {
                 "@id": "node/244466150",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "THK"
             },
             "geometry": {
@@ -573,7 +573,7 @@ var stations = {
             "id": "node/245917599",
             "properties": {
                 "@id": "node/245917599",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Руспетрол",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
@@ -594,7 +594,7 @@ var stations = {
             "id": "node/245924631",
             "properties": {
                 "@id": "node/245924631",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -620,7 +620,7 @@ var stations = {
             "id": "node/245942565",
             "properties": {
                 "@id": "node/245942565",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -639,7 +639,7 @@ var stations = {
             "id": "node/248014366",
             "properties": {
                 "@id": "node/248014366",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Профсоюзная",
                 "operator": "BP"
             },
@@ -656,7 +656,7 @@ var stations = {
             "id": "node/248014390",
             "properties": {
                 "@id": "node/248014390",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Беляево",
                 "operator": "BP"
             },
@@ -673,7 +673,7 @@ var stations = {
             "id": "node/248463258",
             "properties": {
                 "@id": "node/248463258",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -701,7 +701,7 @@ var stations = {
             "id": "node/248964898",
             "properties": {
                 "@id": "node/248964898",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -716,7 +716,7 @@ var stations = {
             "id": "node/249298245",
             "properties": {
                 "@id": "node/249298245",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -731,7 +731,7 @@ var stations = {
             "id": "node/249300822",
             "properties": {
                 "@id": "node/249300822",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -760,7 +760,7 @@ var stations = {
             "id": "node/249670280",
             "properties": {
                 "@id": "node/249670280",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -778,7 +778,7 @@ var stations = {
             "id": "node/249719336",
             "properties": {
                 "@id": "node/249719336",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -803,7 +803,7 @@ var stations = {
             "id": "node/249719401",
             "properties": {
                 "@id": "node/249719401",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Каширская",
                 "operator": "BP"
             },
@@ -820,7 +820,7 @@ var stations = {
             "id": "node/250583776",
             "properties": {
                 "@id": "node/250583776",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Маттехресурс"
             },
             "geometry": {
@@ -836,7 +836,7 @@ var stations = {
             "id": "node/252845374",
             "properties": {
                 "@id": "node/252845374",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Волгоградская",
                 "operator": "BP"
             },
@@ -855,7 +855,7 @@ var stations = {
                 "@id": "node/253317182",
                 "addr:housenumber": "10",
                 "addr:street": "улица Академика Курчатова",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть",
                 "operator": "ООО \"Татнефть-АЗС-Запад\"",
@@ -875,7 +875,7 @@ var stations = {
             "id": "node/253317552",
             "properties": {
                 "@id": "node/253317552",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
                 "operator": "Татнефть"
@@ -893,7 +893,7 @@ var stations = {
             "id": "node/253367367",
             "properties": {
                 "@id": "node/253367367",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Долгопрудный",
                 "operator": "BP"
             },
@@ -910,7 +910,7 @@ var stations = {
             "id": "node/253402862",
             "properties": {
                 "@id": "node/253402862",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "GP"
             },
             "geometry": {
@@ -926,7 +926,7 @@ var stations = {
             "id": "node/254419256",
             "properties": {
                 "@id": "node/254419256",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Транс АЗС"
@@ -944,7 +944,7 @@ var stations = {
             "id": "node/254420212",
             "properties": {
                 "@id": "node/254420212",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -959,7 +959,7 @@ var stations = {
             "id": "node/254432524",
             "properties": {
                 "@id": "node/254432524",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -974,7 +974,7 @@ var stations = {
             "id": "node/254672411",
             "properties": {
                 "@id": "node/254672411",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -989,7 +989,7 @@ var stations = {
             "id": "node/254672440",
             "properties": {
                 "@id": "node/254672440",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Новокосино",
                 "operator": "BP"
             },
@@ -1006,7 +1006,7 @@ var stations = {
             "id": "node/254979115",
             "properties": {
                 "@id": "node/254979115",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -1029,7 +1029,7 @@ var stations = {
             "id": "node/254979122",
             "properties": {
                 "@id": "node/254979122",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНП",
                 "ref": "77"
             },
@@ -1046,7 +1046,7 @@ var stations = {
             "id": "node/254979123",
             "properties": {
                 "@id": "node/254979123",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНП"
             },
             "geometry": {
@@ -1062,7 +1062,7 @@ var stations = {
             "id": "node/254979126",
             "properties": {
                 "@id": "node/254979126",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Интел"
             },
             "geometry": {
@@ -1078,7 +1078,7 @@ var stations = {
             "id": "node/254979149",
             "properties": {
                 "@id": "node/254979149",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "\"ТНП\"",
                 "ref": "8"
             },
@@ -1095,7 +1095,7 @@ var stations = {
             "id": "node/254979153",
             "properties": {
                 "@id": "node/254979153",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1110,7 +1110,7 @@ var stations = {
             "id": "node/254979165",
             "properties": {
                 "@id": "node/254979165",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1125,7 +1125,7 @@ var stations = {
             "id": "node/254979202",
             "properties": {
                 "@id": "node/254979202",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Топаз"
             },
             "geometry": {
@@ -1141,7 +1141,7 @@ var stations = {
             "id": "node/254979205",
             "properties": {
                 "@id": "node/254979205",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Тверьнефтепродукт"
             },
             "geometry": {
@@ -1157,7 +1157,7 @@ var stations = {
             "id": "node/254979226",
             "properties": {
                 "@id": "node/254979226",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Европа",
                 "ref": "3"
             },
@@ -1174,7 +1174,7 @@ var stations = {
             "id": "node/254979230",
             "properties": {
                 "@id": "node/254979230",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНП",
                 "ref": "1"
             },
@@ -1191,7 +1191,7 @@ var stations = {
             "id": "node/254979232",
             "properties": {
                 "@id": "node/254979232",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "\"Интел\"",
                 "ref": "5"
             },
@@ -1208,7 +1208,7 @@ var stations = {
             "id": "node/254979240",
             "properties": {
                 "@id": "node/254979240",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Интел"
             },
             "geometry": {
@@ -1224,7 +1224,7 @@ var stations = {
             "id": "node/254979247",
             "properties": {
                 "@id": "node/254979247",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1239,7 +1239,7 @@ var stations = {
             "id": "node/254979272",
             "properties": {
                 "@id": "node/254979272",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1254,7 +1254,7 @@ var stations = {
             "id": "node/254979286",
             "properties": {
                 "@id": "node/254979286",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -1272,7 +1272,7 @@ var stations = {
             "id": "node/254979421",
             "properties": {
                 "@id": "node/254979421",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -1290,7 +1290,7 @@ var stations = {
             "id": "node/254979474",
             "properties": {
                 "@id": "node/254979474",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -1308,7 +1308,7 @@ var stations = {
             "id": "node/254979517",
             "properties": {
                 "@id": "node/254979517",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1323,7 +1323,7 @@ var stations = {
             "id": "node/254979540",
             "properties": {
                 "@id": "node/254979540",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТТР"
             },
             "geometry": {
@@ -1339,7 +1339,7 @@ var stations = {
             "id": "node/254979542",
             "properties": {
                 "@id": "node/254979542",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Тверьнефтепродукт",
                 "operator": "Тверьнефтепродукт",
                 "ref": "1"
@@ -1357,7 +1357,7 @@ var stations = {
             "id": "node/254979544",
             "properties": {
                 "@id": "node/254979544",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1372,7 +1372,7 @@ var stations = {
             "id": "node/254979546",
             "properties": {
                 "@id": "node/254979546",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Восточный"
             },
             "geometry": {
@@ -1388,7 +1388,7 @@ var stations = {
             "id": "node/254979593",
             "properties": {
                 "@id": "node/254979593",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "ref": "2",
@@ -1407,7 +1407,7 @@ var stations = {
             "id": "node/254979597",
             "properties": {
                 "@id": "node/254979597",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Тверьнефтепродукт"
             },
             "geometry": {
@@ -1423,7 +1423,7 @@ var stations = {
             "id": "node/254979601",
             "properties": {
                 "@id": "node/254979601",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Славнефть"
             },
             "geometry": {
@@ -1439,7 +1439,7 @@ var stations = {
             "id": "node/254979611",
             "properties": {
                 "@id": "node/254979611",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Сургутнефтегаз"
             },
             "geometry": {
@@ -1455,7 +1455,7 @@ var stations = {
             "id": "node/254979626",
             "properties": {
                 "@id": "node/254979626",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Сургутнефтегаз"
             },
             "geometry": {
@@ -1471,7 +1471,7 @@ var stations = {
             "id": "node/254979647",
             "properties": {
                 "@id": "node/254979647",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Интел"
             },
             "geometry": {
@@ -1487,7 +1487,7 @@ var stations = {
             "id": "node/254979672",
             "properties": {
                 "@id": "node/254979672",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Лукойл",
                 "website": "http://www.lukoil.ru/"
             },
@@ -1504,7 +1504,7 @@ var stations = {
             "id": "node/254979799",
             "properties": {
                 "@id": "node/254979799",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Акойл"
             },
@@ -1521,7 +1521,7 @@ var stations = {
             "id": "node/254979800",
             "properties": {
                 "@id": "node/254979800",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНП"
             },
             "geometry": {
@@ -1537,7 +1537,7 @@ var stations = {
             "id": "node/254979801",
             "properties": {
                 "@id": "node/254979801",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1552,7 +1552,7 @@ var stations = {
             "id": "node/254979813",
             "properties": {
                 "@id": "node/254979813",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "НТК"
             },
             "geometry": {
@@ -1568,7 +1568,7 @@ var stations = {
             "id": "node/254979848",
             "properties": {
                 "@id": "node/254979848",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "comment": "АЗС №64, кафе, магазин",
                 "fuel:biogas": "yes",
                 "fuel:diesel": "yes",
@@ -1594,7 +1594,7 @@ var stations = {
             "id": "node/254979856",
             "properties": {
                 "@id": "node/254979856",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть АЗС 16",
                 "note": "155 км а/д Москва - Ст.Петербург",
                 "operator": "Роснефть",
@@ -1613,7 +1613,7 @@ var stations = {
             "id": "node/254979857",
             "properties": {
                 "@id": "node/254979857",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "М10",
                 "website": "http://m10-oil.ru"
             },
@@ -1630,7 +1630,7 @@ var stations = {
             "id": "node/254979858",
             "properties": {
                 "@id": "node/254979858",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1648,7 +1648,7 @@ var stations = {
                 "addr:city": "Москва",
                 "addr:housename": "вл3",
                 "addr:street": "Преображенская улица",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -1669,7 +1669,7 @@ var stations = {
             "id": "node/255476026",
             "properties": {
                 "@id": "node/255476026",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -1685,7 +1685,7 @@ var stations = {
             "id": "node/255476027",
             "properties": {
                 "@id": "node/255476027",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Ерёмино",
                 "operator": "BP"
             },
@@ -1702,7 +1702,7 @@ var stations = {
             "id": "node/255519215",
             "properties": {
                 "@id": "node/255519215",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "БТК",
                 "fuel:diesel": "yes",
                 "fuel:e85": "no",
@@ -1724,7 +1724,7 @@ var stations = {
             "id": "node/256390586",
             "properties": {
                 "@id": "node/256390586",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -1749,7 +1749,7 @@ var stations = {
             "id": "node/256533062",
             "properties": {
                 "@id": "node/256533062",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP"
             },
             "geometry": {
@@ -1765,7 +1765,7 @@ var stations = {
             "id": "node/256533065",
             "properties": {
                 "@id": "node/256533065",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -1781,7 +1781,7 @@ var stations = {
             "id": "node/256663627",
             "properties": {
                 "@id": "node/256663627",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -1797,7 +1797,7 @@ var stations = {
             "id": "node/256664434",
             "properties": {
                 "@id": "node/256664434",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Газпромнефть",
                 "opening_hours": "24/7",
                 "operator": "ОАО \"Газпром нефть\"",
@@ -1817,7 +1817,7 @@ var stations = {
             "id": "node/256912698",
             "properties": {
                 "@id": "node/256912698",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Навойл"
             },
             "geometry": {
@@ -1833,7 +1833,7 @@ var stations = {
             "id": "node/257508084",
             "properties": {
                 "@id": "node/257508084",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Транс-АЗС"
             },
             "geometry": {
@@ -1849,7 +1849,7 @@ var stations = {
             "id": "node/257508313",
             "properties": {
                 "@id": "node/257508313",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1864,7 +1864,7 @@ var stations = {
             "id": "node/258538790",
             "properties": {
                 "@id": "node/258538790",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
             },
@@ -1881,7 +1881,7 @@ var stations = {
             "id": "node/258827801",
             "properties": {
                 "@id": "node/258827801",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Гейн ойл"
             },
             "geometry": {
@@ -1897,7 +1897,7 @@ var stations = {
             "id": "node/258828056",
             "properties": {
                 "@id": "node/258828056",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -1923,7 +1923,7 @@ var stations = {
             "id": "node/258848738",
             "properties": {
                 "@id": "node/258848738",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -1939,7 +1939,7 @@ var stations = {
             "id": "node/258851602",
             "properties": {
                 "@id": "node/258851602",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1954,7 +1954,7 @@ var stations = {
             "id": "node/258851871",
             "properties": {
                 "@id": "node/258851871",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -1969,7 +1969,7 @@ var stations = {
             "id": "node/264525321",
             "properties": {
                 "@id": "node/264525321",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Татнефть"
             },
             "geometry": {
@@ -1985,7 +1985,7 @@ var stations = {
             "id": "node/264532445",
             "properties": {
                 "@id": "node/264532445",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "car_wash": "yes",
@@ -2017,7 +2017,7 @@ var stations = {
             "id": "node/265960605",
             "properties": {
                 "@id": "node/265960605",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Unkoil"
             },
             "geometry": {
@@ -2033,7 +2033,7 @@ var stations = {
             "id": "node/265960614",
             "properties": {
                 "@id": "node/265960614",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -2061,7 +2061,7 @@ var stations = {
             "id": "node/266099044",
             "properties": {
                 "@id": "node/266099044",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -2078,7 +2078,7 @@ var stations = {
             "id": "node/266600687",
             "properties": {
                 "@id": "node/266600687",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -2094,7 +2094,7 @@ var stations = {
             "id": "node/266721952",
             "properties": {
                 "@id": "node/266721952",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -2110,7 +2110,7 @@ var stations = {
             "id": "node/266950405",
             "properties": {
                 "@id": "node/266950405",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Нефто-Сервис"
             },
             "geometry": {
@@ -2126,7 +2126,7 @@ var stations = {
             "id": "node/266950848",
             "properties": {
                 "@id": "node/266950848",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "bp connect",
                 "operator": "BP"
             },
@@ -2143,7 +2143,7 @@ var stations = {
             "id": "node/267581532",
             "properties": {
                 "@id": "node/267581532",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Shell",
                 "operator": "Shell",
                 "website": "http://www.shell.com.ru/"
@@ -2161,7 +2161,7 @@ var stations = {
             "id": "node/267581533",
             "properties": {
                 "@id": "node/267581533",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "BP"
             },
             "geometry": {
@@ -2177,7 +2177,7 @@ var stations = {
             "id": "node/267819962",
             "properties": {
                 "@id": "node/267819962",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "car_wash": "yes",
@@ -2210,7 +2210,7 @@ var stations = {
             "id": "node/267856786",
             "properties": {
                 "@id": "node/267856786",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Трасса",
                 "operator": "Трасса"
             },
@@ -2227,7 +2227,7 @@ var stations = {
             "id": "node/267856845",
             "properties": {
                 "@id": "node/267856845",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "НеоТек"
             },
             "geometry": {
@@ -2243,7 +2243,7 @@ var stations = {
             "id": "node/267859118",
             "properties": {
                 "@id": "node/267859118",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -2268,7 +2268,7 @@ var stations = {
             "id": "node/268074536",
             "properties": {
                 "@id": "node/268074536",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть",
                 "website": "http://www.gazprom-neft.ru/"
@@ -2286,7 +2286,7 @@ var stations = {
             "id": "node/268425313",
             "properties": {
                 "@id": "node/268425313",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Транс АЗС",
                 "name:ru": "Транс АЗС"
             },
@@ -2303,7 +2303,7 @@ var stations = {
             "id": "node/268902927",
             "properties": {
                 "@id": "node/268902927",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -2331,7 +2331,7 @@ var stations = {
             "id": "node/269224220",
             "properties": {
                 "@id": "node/269224220",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -2349,7 +2349,7 @@ var stations = {
             "id": "node/270194050",
             "properties": {
                 "@id": "node/270194050",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть",
                 "operator": "Татнефть"
@@ -2367,7 +2367,7 @@ var stations = {
             "id": "node/270194052",
             "properties": {
                 "@id": "node/270194052",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть",
                 "operator": "ООО \"Татнефть-АЗС-Запад\" АЗС-279"
             },
@@ -2384,7 +2384,7 @@ var stations = {
             "id": "node/270308278",
             "properties": {
                 "@id": "node/270308278",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -2400,7 +2400,7 @@ var stations = {
             "id": "node/270704303",
             "properties": {
                 "@id": "node/270704303",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "description": "АЗК №7 Нахимовский",
                 "fuel:octane_91": "yes",
@@ -2422,7 +2422,7 @@ var stations = {
             "id": "node/271319852",
             "properties": {
                 "@id": "node/271319852",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -2437,7 +2437,7 @@ var stations = {
             "id": "node/271343783",
             "properties": {
                 "@id": "node/271343783",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_92": "yes",
@@ -2460,7 +2460,7 @@ var stations = {
             "id": "node/271841060",
             "properties": {
                 "@id": "node/271841060",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -2475,7 +2475,7 @@ var stations = {
             "id": "node/272526497",
             "properties": {
                 "@id": "node/272526497",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -2501,7 +2501,7 @@ var stations = {
             "id": "node/272607792",
             "properties": {
                 "@id": "node/272607792",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -2519,7 +2519,7 @@ var stations = {
             "id": "node/272607858",
             "properties": {
                 "@id": "node/272607858",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -2536,7 +2536,7 @@ var stations = {
             "id": "node/272607919",
             "properties": {
                 "@id": "node/272607919",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Татнефть",
@@ -2555,7 +2555,7 @@ var stations = {
             "id": "node/272622083",
             "properties": {
                 "@id": "node/272622083",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -2576,7 +2576,7 @@ var stations = {
             "id": "node/277068943",
             "properties": {
                 "@id": "node/277068943",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -2591,7 +2591,7 @@ var stations = {
             "id": "node/277542311",
             "properties": {
                 "@id": "node/277542311",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -2622,7 +2622,7 @@ var stations = {
             "id": "node/277556779",
             "properties": {
                 "@id": "node/277556779",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Неотек",
                 "building": "yes",
                 "description": "ПМК",
@@ -2642,7 +2642,7 @@ var stations = {
             "id": "node/286650635",
             "properties": {
                 "@id": "node/286650635",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Лукойл",
                 "operator": "Лукойл",
                 "website": "http://www.lukoil.ru/"
@@ -2660,7 +2660,7 @@ var stations = {
             "id": "node/287259688",
             "properties": {
                 "@id": "node/287259688",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -2675,7 +2675,7 @@ var stations = {
             "id": "node/287259830",
             "properties": {
                 "@id": "node/287259830",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -2693,7 +2693,7 @@ var stations = {
             "id": "node/287261627",
             "properties": {
                 "@id": "node/287261627",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "contact:website": "http://www.rosneft.ru",
                 "fuel:diesel": "yes",
@@ -2719,7 +2719,7 @@ var stations = {
             "id": "node/287262230",
             "properties": {
                 "@id": "node/287262230",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -2745,7 +2745,7 @@ var stations = {
             "id": "node/289773310",
             "properties": {
                 "@id": "node/289773310",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -2761,7 +2761,7 @@ var stations = {
             "id": "node/289971040",
             "properties": {
                 "@id": "node/289971040",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -2787,7 +2787,7 @@ var stations = {
             "id": "node/293137068",
             "properties": {
                 "@id": "node/293137068",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ООО «Октан»",
                 "name": "ООО «Октан»",
                 "operator": "ООО «Октан»"
@@ -2805,7 +2805,7 @@ var stations = {
             "id": "node/293842158",
             "properties": {
                 "@id": "node/293842158",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "СБС XXI"
             },
             "geometry": {
@@ -2821,7 +2821,7 @@ var stations = {
             "id": "node/293843300",
             "properties": {
                 "@id": "node/293843300",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -2837,7 +2837,7 @@ var stations = {
             "id": "node/295239746",
             "properties": {
                 "@id": "node/295239746",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "operator": "Нефтьмагистраль"
@@ -2855,7 +2855,7 @@ var stations = {
             "id": "node/297420847",
             "properties": {
                 "@id": "node/297420847",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes"
@@ -2873,7 +2873,7 @@ var stations = {
             "id": "node/299067905",
             "properties": {
                 "@id": "node/299067905",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -2893,7 +2893,7 @@ var stations = {
             "id": "node/299215963",
             "properties": {
                 "@id": "node/299215963",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -2908,7 +2908,7 @@ var stations = {
             "id": "node/299815024",
             "properties": {
                 "@id": "node/299815024",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Москворечье",
                 "operator": "BP"
             },
@@ -2925,7 +2925,7 @@ var stations = {
             "id": "node/300117832",
             "properties": {
                 "@id": "node/300117832",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -2950,7 +2950,7 @@ var stations = {
             "id": "node/300117839",
             "properties": {
                 "@id": "node/300117839",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -2969,7 +2969,7 @@ var stations = {
             "id": "node/300117904",
             "properties": {
                 "@id": "node/300117904",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -2985,7 +2985,7 @@ var stations = {
             "id": "node/300402433",
             "properties": {
                 "@id": "node/300402433",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3000,7 +3000,7 @@ var stations = {
             "id": "node/300404981",
             "properties": {
                 "@id": "node/300404981",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3015,7 +3015,7 @@ var stations = {
             "id": "node/300414211",
             "properties": {
                 "@id": "node/300414211",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "BP",
                 "name": "BP",
                 "operator": "BP"
@@ -3033,7 +3033,7 @@ var stations = {
             "id": "node/300414539",
             "properties": {
                 "@id": "node/300414539",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "BP",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -3059,7 +3059,7 @@ var stations = {
             "id": "node/300420029",
             "properties": {
                 "@id": "node/300420029",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3074,7 +3074,7 @@ var stations = {
             "id": "node/300423850",
             "properties": {
                 "@id": "node/300423850",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3089,7 +3089,7 @@ var stations = {
             "id": "node/300424755",
             "properties": {
                 "@id": "node/300424755",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3104,7 +3104,7 @@ var stations = {
             "id": "node/300747465",
             "properties": {
                 "@id": "node/300747465",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3119,7 +3119,7 @@ var stations = {
             "id": "node/301193905",
             "properties": {
                 "@id": "node/301193905",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Кунцево",
                 "operator": "BP"
             },
@@ -3136,7 +3136,7 @@ var stations = {
             "id": "node/301981569",
             "properties": {
                 "@id": "node/301981569",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3151,7 +3151,7 @@ var stations = {
             "id": "node/302642903",
             "properties": {
                 "@id": "node/302642903",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -3170,7 +3170,7 @@ var stations = {
             "id": "node/302644885",
             "properties": {
                 "@id": "node/302644885",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Самсон"
             },
             "geometry": {
@@ -3186,7 +3186,7 @@ var stations = {
             "id": "node/302699817",
             "properties": {
                 "@id": "node/302699817",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ГейнОйл"
             },
             "geometry": {
@@ -3202,7 +3202,7 @@ var stations = {
             "id": "node/303022807",
             "properties": {
                 "@id": "node/303022807",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3217,7 +3217,7 @@ var stations = {
             "id": "node/303066538",
             "properties": {
                 "@id": "node/303066538",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -3243,7 +3243,7 @@ var stations = {
             "id": "node/303186027",
             "properties": {
                 "@id": "node/303186027",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Аминьевская",
                 "operator": "BP"
             },
@@ -3260,7 +3260,7 @@ var stations = {
             "id": "node/303186206",
             "properties": {
                 "@id": "node/303186206",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3275,7 +3275,7 @@ var stations = {
             "id": "node/303186309",
             "properties": {
                 "@id": "node/303186309",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "no",
                 "fuel:octane_92": "yes",
@@ -3301,7 +3301,7 @@ var stations = {
             "id": "node/303255225",
             "properties": {
                 "@id": "node/303255225",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3316,7 +3316,7 @@ var stations = {
             "id": "node/303256507",
             "properties": {
                 "@id": "node/303256507",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "contact:phone": "+7 495 4014922",
                 "operator": "Транс АЗС"
             },
@@ -3333,7 +3333,7 @@ var stations = {
             "id": "node/303286985",
             "properties": {
                 "@id": "node/303286985",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -3350,7 +3350,7 @@ var stations = {
             "id": "node/303385589",
             "properties": {
                 "@id": "node/303385589",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -3375,7 +3375,7 @@ var stations = {
             "id": "node/303453940",
             "properties": {
                 "@id": "node/303453940",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "building": "yes",
                 "name": "Shell",
                 "operator": "ООО \"Шелл нефть\""
@@ -3393,7 +3393,7 @@ var stations = {
             "id": "node/303495712",
             "properties": {
                 "@id": "node/303495712",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "building": "yes",
                 "fuel:diesel": "yes",
@@ -3419,7 +3419,7 @@ var stations = {
             "id": "node/303546176",
             "properties": {
                 "@id": "node/303546176",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -3448,7 +3448,7 @@ var stations = {
             "id": "node/303557405",
             "properties": {
                 "@id": "node/303557405",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "НК",
                 "operator": "НК"
             },
@@ -3465,7 +3465,7 @@ var stations = {
             "id": "node/303566569",
             "properties": {
                 "@id": "node/303566569",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Альфа-ПетРол",
                 "operator": "Альфа-ПетРол"
             },
@@ -3482,7 +3482,7 @@ var stations = {
             "id": "node/303593432",
             "properties": {
                 "@id": "node/303593432",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "МТК",
                 "operator": "МТК"
             },
@@ -3499,7 +3499,7 @@ var stations = {
             "id": "node/304045859",
             "properties": {
                 "@id": "node/304045859",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Гейн-Ойл"
             },
             "geometry": {
@@ -3515,7 +3515,7 @@ var stations = {
             "id": "node/304252597",
             "properties": {
                 "@id": "node/304252597",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3530,7 +3530,7 @@ var stations = {
             "id": "node/304252741",
             "properties": {
                 "@id": "node/304252741",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -3546,7 +3546,7 @@ var stations = {
             "id": "node/304252938",
             "properties": {
                 "@id": "node/304252938",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -3563,7 +3563,7 @@ var stations = {
             "id": "node/304252989",
             "properties": {
                 "@id": "node/304252989",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -3588,7 +3588,7 @@ var stations = {
             "id": "node/304254048",
             "properties": {
                 "@id": "node/304254048",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть"
             },
             "geometry": {
@@ -3604,7 +3604,7 @@ var stations = {
             "id": "node/304300327",
             "properties": {
                 "@id": "node/304300327",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -3621,7 +3621,7 @@ var stations = {
             "properties": {
                 "@id": "node/304886269",
                 "addr:street": "Проезд N 4807",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -3646,7 +3646,7 @@ var stations = {
             "id": "node/305063097",
             "properties": {
                 "@id": "node/305063097",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -3661,7 +3661,7 @@ var stations = {
             "id": "node/305063109",
             "properties": {
                 "@id": "node/305063109",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -3677,7 +3677,7 @@ var stations = {
             "id": "node/305118135",
             "properties": {
                 "@id": "node/305118135",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АГНС №10"
             },
             "geometry": {
@@ -3693,7 +3693,7 @@ var stations = {
             "id": "node/305137312",
             "properties": {
                 "@id": "node/305137312",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Молодёжная",
                 "operator": "BP"
             },
@@ -3710,7 +3710,7 @@ var stations = {
             "id": "node/305156198",
             "properties": {
                 "@id": "node/305156198",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -3734,7 +3734,7 @@ var stations = {
             "id": "node/305379583",
             "properties": {
                 "@id": "node/305379583",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -3760,7 +3760,7 @@ var stations = {
             "id": "node/305492871",
             "properties": {
                 "@id": "node/305492871",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
@@ -3784,7 +3784,7 @@ var stations = {
             "id": "node/305584766",
             "properties": {
                 "@id": "node/305584766",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -3804,7 +3804,7 @@ var stations = {
             "id": "node/305620739",
             "properties": {
                 "@id": "node/305620739",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -3832,7 +3832,7 @@ var stations = {
             "id": "node/305641852",
             "properties": {
                 "@id": "node/305641852",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -3848,7 +3848,7 @@ var stations = {
             "id": "node/305701405",
             "properties": {
                 "@id": "node/305701405",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Shell",
                 "operator": "Shell",
                 "website": "http://www.shell.com.ru/"
@@ -3866,7 +3866,7 @@ var stations = {
             "id": "node/305776101",
             "properties": {
                 "@id": "node/305776101",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP",
                 "operator": "BP"
             },
@@ -3883,7 +3883,7 @@ var stations = {
             "id": "node/306520914",
             "properties": {
                 "@id": "node/306520914",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС TJ"
             },
             "geometry": {
@@ -3899,7 +3899,7 @@ var stations = {
             "id": "node/306576270",
             "properties": {
                 "@id": "node/306576270",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Нахимовский пр-т",
                 "operator": "ЗАО ПКЭК"
             },
@@ -3916,7 +3916,7 @@ var stations = {
             "id": "node/307944265",
             "properties": {
                 "@id": "node/307944265",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -3933,7 +3933,7 @@ var stations = {
             "id": "node/308179048",
             "properties": {
                 "@id": "node/308179048",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -3953,7 +3953,7 @@ var stations = {
             "id": "node/308179050",
             "properties": {
                 "@id": "node/308179050",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -3975,7 +3975,7 @@ var stations = {
             "id": "node/308179051",
             "properties": {
                 "@id": "node/308179051",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -4009,7 +4009,7 @@ var stations = {
             "id": "node/308179052",
             "properties": {
                 "@id": "node/308179052",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -4030,7 +4030,7 @@ var stations = {
             "id": "node/308228026",
             "properties": {
                 "@id": "node/308228026",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4045,7 +4045,7 @@ var stations = {
             "id": "node/308235454",
             "properties": {
                 "@id": "node/308235454",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "contact:website": "http://www.rosneft.ru",
                 "fuel:diesel": "yes",
@@ -4071,7 +4071,7 @@ var stations = {
             "id": "node/310109542",
             "properties": {
                 "@id": "node/310109542",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -4099,7 +4099,7 @@ var stations = {
             "id": "node/310172402",
             "properties": {
                 "@id": "node/310172402",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -4116,7 +4116,7 @@ var stations = {
             "id": "node/310531745",
             "properties": {
                 "@id": "node/310531745",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4131,7 +4131,7 @@ var stations = {
             "id": "node/311338183",
             "properties": {
                 "@id": "node/311338183",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:biogas": "yes"
             },
             "geometry": {
@@ -4147,7 +4147,7 @@ var stations = {
             "id": "node/312109235",
             "properties": {
                 "@id": "node/312109235",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4162,7 +4162,7 @@ var stations = {
             "id": "node/312426478",
             "properties": {
                 "@id": "node/312426478",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "НЕОТЕК",
                 "name": "НЕОТЕК",
                 "operator": "ЗАО \"ОЗОН\"",
@@ -4181,7 +4181,7 @@ var stations = {
             "id": "node/312714072",
             "properties": {
                 "@id": "node/312714072",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fixme": "А что ещё остались заправки ЮКОС? Такой компании уже пару лет не существует.",
                 "name": "ЮКОС"
             },
@@ -4198,7 +4198,7 @@ var stations = {
             "id": "node/313217943",
             "properties": {
                 "@id": "node/313217943",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Дмитровская",
                 "operator": "BP"
             },
@@ -4215,7 +4215,7 @@ var stations = {
             "id": "node/314817762",
             "properties": {
                 "@id": "node/314817762",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4230,7 +4230,7 @@ var stations = {
             "id": "node/315028223",
             "properties": {
                 "@id": "node/315028223",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "нафто-сервис"
             },
             "geometry": {
@@ -4246,7 +4246,7 @@ var stations = {
             "id": "node/315708000",
             "properties": {
                 "@id": "node/315708000",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Котельники",
                 "operator": "BP"
             },
@@ -4263,7 +4263,7 @@ var stations = {
             "id": "node/315905525",
             "properties": {
                 "@id": "node/315905525",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP",
                 "operator": "BP"
             },
@@ -4280,7 +4280,7 @@ var stations = {
             "id": "node/315907675",
             "properties": {
                 "@id": "node/315907675",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "description": "мало-известная марка",
                 "name": "Евроойл"
             },
@@ -4297,7 +4297,7 @@ var stations = {
             "id": "node/315908966",
             "properties": {
                 "@id": "node/315908966",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Транссервис"
             },
             "geometry": {
@@ -4313,7 +4313,7 @@ var stations = {
             "id": "node/315909154",
             "properties": {
                 "@id": "node/315909154",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4328,7 +4328,7 @@ var stations = {
             "id": "node/316005153",
             "properties": {
                 "@id": "node/316005153",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4343,7 +4343,7 @@ var stations = {
             "id": "node/316005787",
             "properties": {
                 "@id": "node/316005787",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "интол"
             },
             "geometry": {
@@ -4359,7 +4359,7 @@ var stations = {
             "id": "node/316005788",
             "properties": {
                 "@id": "node/316005788",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -4390,7 +4390,7 @@ var stations = {
             "id": "node/316376234",
             "properties": {
                 "@id": "node/316376234",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Транс АЗС"
             },
             "geometry": {
@@ -4406,7 +4406,7 @@ var stations = {
             "id": "node/317221660",
             "properties": {
                 "@id": "node/317221660",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -4425,7 +4425,7 @@ var stations = {
             "id": "node/317254871",
             "properties": {
                 "@id": "node/317254871",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -4452,7 +4452,7 @@ var stations = {
             "id": "node/317350116",
             "properties": {
                 "@id": "node/317350116",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4467,7 +4467,7 @@ var stations = {
             "id": "node/317350124",
             "properties": {
                 "@id": "node/317350124",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4482,7 +4482,7 @@ var stations = {
             "id": "node/317350125",
             "properties": {
                 "@id": "node/317350125",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4497,7 +4497,7 @@ var stations = {
             "id": "node/317350126",
             "properties": {
                 "@id": "node/317350126",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4512,7 +4512,7 @@ var stations = {
             "id": "node/317456645",
             "properties": {
                 "@id": "node/317456645",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -4537,7 +4537,7 @@ var stations = {
             "id": "node/317522659",
             "properties": {
                 "@id": "node/317522659",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "operator": "ООО Валар",
                 "website": "http://www.valar-azk.ru/"
@@ -4555,7 +4555,7 @@ var stations = {
             "id": "node/317815825",
             "properties": {
                 "@id": "node/317815825",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -4582,7 +4582,7 @@ var stations = {
             "id": "node/324209961",
             "properties": {
                 "@id": "node/324209961",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -4608,7 +4608,7 @@ var stations = {
             "id": "node/324210401",
             "properties": {
                 "@id": "node/324210401",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -4629,7 +4629,7 @@ var stations = {
             "id": "node/331238303",
             "properties": {
                 "@id": "node/331238303",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -4647,7 +4647,7 @@ var stations = {
             "id": "node/331758205",
             "properties": {
                 "@id": "node/331758205",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ЕТК",
                 "name": "Егорьевское",
                 "payment:cards": "yes"
@@ -4665,7 +4665,7 @@ var stations = {
             "id": "node/332345115",
             "properties": {
                 "@id": "node/332345115",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4680,7 +4680,7 @@ var stations = {
             "id": "node/332788218",
             "properties": {
                 "@id": "node/332788218",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -4708,7 +4708,7 @@ var stations = {
             "id": "node/335767334",
             "properties": {
                 "@id": "node/335767334",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "ethanol": "no",
                 "fuel:biodiesel": "no",
                 "fuel:diesel": "no",
@@ -4730,7 +4730,7 @@ var stations = {
             "id": "node/339978922",
             "properties": {
                 "@id": "node/339978922",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -4751,7 +4751,7 @@ var stations = {
             "id": "node/342070481",
             "properties": {
                 "@id": "node/342070481",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4766,7 +4766,7 @@ var stations = {
             "id": "node/343225334",
             "properties": {
                 "@id": "node/343225334",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Клин",
                 "operator": "BP"
             },
@@ -4783,7 +4783,7 @@ var stations = {
             "id": "node/343225336",
             "properties": {
                 "@id": "node/343225336",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -4806,7 +4806,7 @@ var stations = {
             "id": "node/344853021",
             "properties": {
                 "@id": "node/344853021",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ЕКА",
                 "name": "ЕКА",
                 "operator": "ЕКА",
@@ -4825,7 +4825,7 @@ var stations = {
             "id": "node/345818751",
             "properties": {
                 "@id": "node/345818751",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -4841,7 +4841,7 @@ var stations = {
             "id": "node/346399910",
             "properties": {
                 "@id": "node/346399910",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Калуганефть"
             },
             "geometry": {
@@ -4857,7 +4857,7 @@ var stations = {
             "id": "node/346399929",
             "properties": {
                 "@id": "node/346399929",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Калуганефть"
             },
             "geometry": {
@@ -4873,7 +4873,7 @@ var stations = {
             "id": "node/347239174",
             "properties": {
                 "@id": "node/347239174",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -4889,7 +4889,7 @@ var stations = {
             "id": "node/347770847",
             "properties": {
                 "@id": "node/347770847",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -4906,7 +4906,7 @@ var stations = {
             "id": "node/349885303",
             "properties": {
                 "@id": "node/349885303",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -4921,7 +4921,7 @@ var stations = {
             "id": "node/352942835",
             "properties": {
                 "@id": "node/352942835",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Лукойл",
                 "website": "http://www.lukoil.ru/"
             },
@@ -4938,7 +4938,7 @@ var stations = {
             "id": "node/354003099",
             "properties": {
                 "@id": "node/354003099",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Unkoil"
             },
             "geometry": {
@@ -4954,7 +4954,7 @@ var stations = {
             "id": "node/355870051",
             "properties": {
                 "@id": "node/355870051",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -4970,7 +4970,7 @@ var stations = {
             "id": "node/355870052",
             "properties": {
                 "@id": "node/355870052",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -4986,7 +4986,7 @@ var stations = {
             "id": "node/356516994",
             "properties": {
                 "@id": "node/356516994",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5001,7 +5001,7 @@ var stations = {
             "id": "node/359066396",
             "properties": {
                 "@id": "node/359066396",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "ref": "7",
@@ -5020,7 +5020,7 @@ var stations = {
             "id": "node/359974009",
             "properties": {
                 "@id": "node/359974009",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Shell",
                 "name": "Шелл",
                 "opening_hours": "24/7",
@@ -5040,7 +5040,7 @@ var stations = {
             "id": "node/360348607",
             "properties": {
                 "@id": "node/360348607",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -5058,7 +5058,7 @@ var stations = {
             "id": "node/360348610",
             "properties": {
                 "@id": "node/360348610",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК \"Трасса\"",
                 "operator": "ТНК"
@@ -5076,7 +5076,7 @@ var stations = {
             "id": "node/360952286",
             "properties": {
                 "@id": "node/360952286",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5091,7 +5091,7 @@ var stations = {
             "id": "node/364137036",
             "properties": {
                 "@id": "node/364137036",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5106,7 +5106,7 @@ var stations = {
             "id": "node/364137067",
             "properties": {
                 "@id": "node/364137067",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АвтоМиг"
             },
             "geometry": {
@@ -5122,7 +5122,7 @@ var stations = {
             "id": "node/365383468",
             "properties": {
                 "@id": "node/365383468",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -5150,7 +5150,7 @@ var stations = {
             "id": "node/371241767",
             "properties": {
                 "@id": "node/371241767",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть",
                 "operator": "Татнефть"
@@ -5168,7 +5168,7 @@ var stations = {
             "id": "node/371706631",
             "properties": {
                 "@id": "node/371706631",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "car_wash": "yes",
@@ -5200,7 +5200,7 @@ var stations = {
             "id": "node/384404421",
             "properties": {
                 "@id": "node/384404421",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "IP"
             },
             "geometry": {
@@ -5216,7 +5216,7 @@ var stations = {
             "id": "node/384404478",
             "properties": {
                 "@id": "node/384404478",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Октан"
             },
             "geometry": {
@@ -5232,7 +5232,7 @@ var stations = {
             "id": "node/385076254",
             "properties": {
                 "@id": "node/385076254",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5247,7 +5247,7 @@ var stations = {
             "id": "node/385100000",
             "properties": {
                 "@id": "node/385100000",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -5278,7 +5278,7 @@ var stations = {
             "id": "node/385289399",
             "properties": {
                 "@id": "node/385289399",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗК Новочеремушкинская",
                 "operator": "ОАО ТНК-Столица"
             },
@@ -5300,7 +5300,7 @@ var stations = {
                 "addr:housenumber": "27",
                 "addr:postcode": "140185",
                 "addr:street": "Кооперативная улица",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "contact:phone": "+7 4955567247",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -5323,7 +5323,7 @@ var stations = {
             "id": "node/385954560",
             "properties": {
                 "@id": "node/385954560",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5338,7 +5338,7 @@ var stations = {
             "id": "node/385972980",
             "properties": {
                 "@id": "node/385972980",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -5360,7 +5360,7 @@ var stations = {
             "id": "node/385972982",
             "properties": {
                 "@id": "node/385972982",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТрансАЗС"
             },
             "geometry": {
@@ -5376,7 +5376,7 @@ var stations = {
             "id": "node/386165065",
             "properties": {
                 "@id": "node/386165065",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5391,7 +5391,7 @@ var stations = {
             "id": "node/388125713",
             "properties": {
                 "@id": "node/388125713",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -5418,7 +5418,7 @@ var stations = {
             "id": "node/388132800",
             "properties": {
                 "@id": "node/388132800",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -5450,7 +5450,7 @@ var stations = {
             "id": "node/388340216",
             "properties": {
                 "@id": "node/388340216",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5465,7 +5465,7 @@ var stations = {
             "id": "node/388381924",
             "properties": {
                 "@id": "node/388381924",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС 82 километр",
                 "operator": "АЗС 82 километр"
             },
@@ -5482,7 +5482,7 @@ var stations = {
             "id": "node/389858767",
             "properties": {
                 "@id": "node/389858767",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -5508,7 +5508,7 @@ var stations = {
             "id": "node/390542609",
             "properties": {
                 "@id": "node/390542609",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -5532,7 +5532,7 @@ var stations = {
             "id": "node/392938543",
             "properties": {
                 "@id": "node/392938543",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -5564,7 +5564,7 @@ var stations = {
             "id": "node/393136387",
             "properties": {
                 "@id": "node/393136387",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_92": "yes",
@@ -5584,7 +5584,7 @@ var stations = {
             "id": "node/393459120",
             "properties": {
                 "@id": "node/393459120",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -5601,7 +5601,7 @@ var stations = {
             "id": "node/395214156",
             "properties": {
                 "@id": "node/395214156",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Shell",
                 "operator": "Shell",
                 "website": "http://www.shell.com.ru/"
@@ -5619,7 +5619,7 @@ var stations = {
             "id": "node/402914010",
             "properties": {
                 "@id": "node/402914010",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -5635,7 +5635,7 @@ var stations = {
             "id": "node/406352345",
             "properties": {
                 "@id": "node/406352345",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Unkoil"
             },
             "geometry": {
@@ -5651,7 +5651,7 @@ var stations = {
             "id": "node/408208320",
             "properties": {
                 "@id": "node/408208320",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТРК №2",
                 "operator": "ООО \"ЛУКОЙЛ-ВОЛГАНЕФТЕПРОДУКТ\"",
                 "website": "http://www.lukoil.ru/"
@@ -5669,7 +5669,7 @@ var stations = {
             "id": "node/410694910",
             "properties": {
                 "@id": "node/410694910",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5684,7 +5684,7 @@ var stations = {
             "id": "node/410833649",
             "properties": {
                 "@id": "node/410833649",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -5713,7 +5713,7 @@ var stations = {
             "id": "node/410848148",
             "properties": {
                 "@id": "node/410848148",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5728,7 +5728,7 @@ var stations = {
             "id": "node/410999902",
             "properties": {
                 "@id": "node/410999902",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Транс АЗС"
             },
             "geometry": {
@@ -5744,7 +5744,7 @@ var stations = {
             "id": "node/411229569",
             "properties": {
                 "@id": "node/411229569",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5759,7 +5759,7 @@ var stations = {
             "id": "node/412383941",
             "properties": {
                 "@id": "node/412383941",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5774,7 +5774,7 @@ var stations = {
             "id": "node/412451258",
             "properties": {
                 "@id": "node/412451258",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -5793,7 +5793,7 @@ var stations = {
             "id": "node/413021843",
             "properties": {
                 "@id": "node/413021843",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Галакарт",
                 "name": "Галакарт",
                 "operator": "Галакарт"
@@ -5811,7 +5811,7 @@ var stations = {
             "id": "node/413056066",
             "properties": {
                 "@id": "node/413056066",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP",
                 "operator": "BP"
             },
@@ -5828,7 +5828,7 @@ var stations = {
             "id": "node/413141227",
             "properties": {
                 "@id": "node/413141227",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -5843,7 +5843,7 @@ var stations = {
             "id": "node/413334999",
             "properties": {
                 "@id": "node/413334999",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -5862,7 +5862,7 @@ var stations = {
             "id": "node/413335170",
             "properties": {
                 "@id": "node/413335170",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "name:ru": "АЗС"
@@ -5880,7 +5880,7 @@ var stations = {
             "id": "node/413342453",
             "properties": {
                 "@id": "node/413342453",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -5899,7 +5899,7 @@ var stations = {
             "id": "node/413342457",
             "properties": {
                 "@id": "node/413342457",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -5921,7 +5921,7 @@ var stations = {
             "id": "node/413342458",
             "properties": {
                 "@id": "node/413342458",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -5942,7 +5942,7 @@ var stations = {
             "id": "node/413342466",
             "properties": {
                 "@id": "node/413342466",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Никоил"
             },
             "geometry": {
@@ -5958,7 +5958,7 @@ var stations = {
             "id": "node/413342468",
             "properties": {
                 "@id": "node/413342468",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "opening_hours": "24/7"
@@ -5976,7 +5976,7 @@ var stations = {
             "id": "node/413344736",
             "properties": {
                 "@id": "node/413344736",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -5992,7 +5992,7 @@ var stations = {
             "id": "node/413347034",
             "properties": {
                 "@id": "node/413347034",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "БТК",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
@@ -6014,7 +6014,7 @@ var stations = {
             "id": "node/413347057",
             "properties": {
                 "@id": "node/413347057",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -6033,7 +6033,7 @@ var stations = {
             "id": "node/413347060",
             "properties": {
                 "@id": "node/413347060",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Нефто-Сервис"
             },
             "geometry": {
@@ -6049,7 +6049,7 @@ var stations = {
             "id": "node/413347063",
             "properties": {
                 "@id": "node/413347063",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Shell"
             },
             "geometry": {
@@ -6065,7 +6065,7 @@ var stations = {
             "id": "node/413347064",
             "properties": {
                 "@id": "node/413347064",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -6084,7 +6084,7 @@ var stations = {
             "id": "node/413347067",
             "properties": {
                 "@id": "node/413347067",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "БТК",
                 "name": "БТК",
                 "operator": "БТК"
@@ -6102,7 +6102,7 @@ var stations = {
             "id": "node/414980612",
             "properties": {
                 "@id": "node/414980612",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -6117,7 +6117,7 @@ var stations = {
             "id": "node/416505042",
             "properties": {
                 "@id": "node/416505042",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -6135,7 +6135,7 @@ var stations = {
             "id": "node/417799835",
             "properties": {
                 "@id": "node/417799835",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Взлётная",
                 "operator": "BP"
             },
@@ -6152,7 +6152,7 @@ var stations = {
             "id": "node/417948908",
             "properties": {
                 "@id": "node/417948908",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -6168,7 +6168,7 @@ var stations = {
             "id": "node/418194901",
             "properties": {
                 "@id": "node/418194901",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -6186,7 +6186,7 @@ var stations = {
             "id": "node/418637697",
             "properties": {
                 "@id": "node/418637697",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Паритет"
             },
             "geometry": {
@@ -6202,7 +6202,7 @@ var stations = {
             "id": "node/418648970",
             "properties": {
                 "@id": "node/418648970",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Лукойл 363",
                 "operator": "ЛУКОЙЛ-Центрнефтепродукт",
                 "website": "http://www.lukoil.ru/"
@@ -6220,7 +6220,7 @@ var stations = {
             "id": "node/418655589",
             "properties": {
                 "@id": "node/418655589",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -6236,7 +6236,7 @@ var stations = {
             "id": "node/418752176",
             "properties": {
                 "@id": "node/418752176",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Пр-т Вернадского",
                 "operator": "BP"
             },
@@ -6253,7 +6253,7 @@ var stations = {
             "id": "node/419151139",
             "properties": {
                 "@id": "node/419151139",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Кондор"
             },
             "geometry": {
@@ -6269,7 +6269,7 @@ var stations = {
             "id": "node/419272204",
             "properties": {
                 "@id": "node/419272204",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -6296,7 +6296,7 @@ var stations = {
             "id": "node/419541502",
             "properties": {
                 "@id": "node/419541502",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -6315,7 +6315,7 @@ var stations = {
             "id": "node/419576043",
             "properties": {
                 "@id": "node/419576043",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "УНКоил",
                 "operator": "УНКоил"
             },
@@ -6332,7 +6332,7 @@ var stations = {
             "id": "node/419823706",
             "properties": {
                 "@id": "node/419823706",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -6347,7 +6347,7 @@ var stations = {
             "id": "node/419836859",
             "properties": {
                 "@id": "node/419836859",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -6367,7 +6367,7 @@ var stations = {
             "id": "node/420017013",
             "properties": {
                 "@id": "node/420017013",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "building": "yes",
                 "contact:website": "http://www.gazprom-neft.ru",
@@ -6396,7 +6396,7 @@ var stations = {
             "id": "node/423200169",
             "properties": {
                 "@id": "node/423200169",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -6428,7 +6428,7 @@ var stations = {
             "id": "node/423753871",
             "properties": {
                 "@id": "node/423753871",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -6447,7 +6447,7 @@ var stations = {
             "id": "node/424188004",
             "properties": {
                 "@id": "node/424188004",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Shell",
                 "name": "Shell",
                 "operator": "Shell",
@@ -6466,7 +6466,7 @@ var stations = {
             "id": "node/424188006",
             "properties": {
                 "@id": "node/424188006",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Aris",
                 "name": "Aris",
                 "operator": "Aris"
@@ -6484,7 +6484,7 @@ var stations = {
             "id": "node/424188009",
             "properties": {
                 "@id": "node/424188009",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -6503,7 +6503,7 @@ var stations = {
             "id": "node/424188012",
             "properties": {
                 "@id": "node/424188012",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -6522,7 +6522,7 @@ var stations = {
             "id": "node/424296318",
             "properties": {
                 "@id": "node/424296318",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -6550,7 +6550,7 @@ var stations = {
             "id": "node/424296322",
             "properties": {
                 "@id": "node/424296322",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -6567,7 +6567,7 @@ var stations = {
             "id": "node/424296323",
             "properties": {
                 "@id": "node/424296323",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "name": "Газпромнефть",
                 "opening_hours": "24/7",
@@ -6588,7 +6588,7 @@ var stations = {
             "id": "node/427921971",
             "properties": {
                 "@id": "node/427921971",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Татнефть",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
@@ -6608,7 +6608,7 @@ var stations = {
             "id": "node/427957520",
             "properties": {
                 "@id": "node/427957520",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ВСК"
             },
             "geometry": {
@@ -6624,7 +6624,7 @@ var stations = {
             "id": "node/427957542",
             "properties": {
                 "@id": "node/427957542",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -6640,7 +6640,7 @@ var stations = {
             "id": "node/429222328",
             "properties": {
                 "@id": "node/429222328",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "GP",
                 "name": "GP",
                 "operator": "GP"
@@ -6658,7 +6658,7 @@ var stations = {
             "id": "node/429615633",
             "properties": {
                 "@id": "node/429615633",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -6673,7 +6673,7 @@ var stations = {
             "id": "node/429615634",
             "properties": {
                 "@id": "node/429615634",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
@@ -6694,7 +6694,7 @@ var stations = {
             "id": "node/430152408",
             "properties": {
                 "@id": "node/430152408",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -6721,7 +6721,7 @@ var stations = {
             "id": "node/430453323",
             "properties": {
                 "@id": "node/430453323",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -6739,7 +6739,7 @@ var stations = {
             "id": "node/432058189",
             "properties": {
                 "@id": "node/432058189",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -6754,7 +6754,7 @@ var stations = {
             "id": "node/434098643",
             "properties": {
                 "@id": "node/434098643",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -6771,7 +6771,7 @@ var stations = {
             "id": "node/434163086",
             "properties": {
                 "@id": "node/434163086",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -6786,7 +6786,7 @@ var stations = {
             "id": "node/437489473",
             "properties": {
                 "@id": "node/437489473",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -6804,7 +6804,7 @@ var stations = {
             "id": "node/437533781",
             "properties": {
                 "@id": "node/437533781",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ЕТК",
                 "name": "ЕТК",
                 "operator": "ИП Светлова И.В."
@@ -6822,7 +6822,7 @@ var stations = {
             "id": "node/438571267",
             "properties": {
                 "@id": "node/438571267",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -6838,7 +6838,7 @@ var stations = {
             "id": "node/439238282",
             "properties": {
                 "@id": "node/439238282",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "NPS",
                 "operator": "АЗС №10"
             },
@@ -6855,7 +6855,7 @@ var stations = {
             "id": "node/440361286",
             "properties": {
                 "@id": "node/440361286",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "car_wash": "yes",
@@ -6887,7 +6887,7 @@ var stations = {
             "id": "node/440773838",
             "properties": {
                 "@id": "node/440773838",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС",
                 "operator": "Нико-Петрол"
             },
@@ -6904,7 +6904,7 @@ var stations = {
             "id": "node/440888123",
             "properties": {
                 "@id": "node/440888123",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС \"Энергорегион\"",
                 "operator": "Энергорегион"
             },
@@ -6921,7 +6921,7 @@ var stations = {
             "id": "node/440903104",
             "properties": {
                 "@id": "node/440903104",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -6937,7 +6937,7 @@ var stations = {
             "id": "node/440903129",
             "properties": {
                 "@id": "node/440903129",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС ТНК № 2",
                 "operator": "ТНК-BP"
             },
@@ -6954,7 +6954,7 @@ var stations = {
             "id": "node/440903136",
             "properties": {
                 "@id": "node/440903136",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗК ТНК № 1",
                 "operator": "ТНК-BP"
             },
@@ -6971,7 +6971,7 @@ var stations = {
             "id": "node/441057343",
             "properties": {
                 "@id": "node/441057343",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "М10",
                 "website": "http://m10-oil.ru"
             },
@@ -6988,7 +6988,7 @@ var stations = {
             "id": "node/441610851",
             "properties": {
                 "@id": "node/441610851",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -7003,7 +7003,7 @@ var stations = {
             "id": "node/442338928",
             "properties": {
                 "@id": "node/442338928",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Газпром нефть",
                 "operator": "ООО Фирма \"Техно-Ойл\"",
                 "ref": "13",
@@ -7022,7 +7022,7 @@ var stations = {
             "id": "node/442669215",
             "properties": {
                 "@id": "node/442669215",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "no",
@@ -7044,7 +7044,7 @@ var stations = {
             "id": "node/442875501",
             "properties": {
                 "@id": "node/442875501",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -7060,7 +7060,7 @@ var stations = {
             "id": "node/442886264",
             "properties": {
                 "@id": "node/442886264",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -7076,7 +7076,7 @@ var stations = {
             "id": "node/443108793",
             "properties": {
                 "@id": "node/443108793",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Роснефть",
@@ -7096,7 +7096,7 @@ var stations = {
             "id": "node/444765733",
             "properties": {
                 "@id": "node/444765733",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -7111,7 +7111,7 @@ var stations = {
             "id": "node/444806904",
             "properties": {
                 "@id": "node/444806904",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -7127,7 +7127,7 @@ var stations = {
             "id": "node/444806925",
             "properties": {
                 "@id": "node/444806925",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -7158,7 +7158,7 @@ var stations = {
             "id": "node/444806928",
             "properties": {
                 "@id": "node/444806928",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -7189,7 +7189,7 @@ var stations = {
             "id": "node/444812464",
             "properties": {
                 "@id": "node/444812464",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -7216,7 +7216,7 @@ var stations = {
             "id": "node/444812465",
             "properties": {
                 "@id": "node/444812465",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -7243,7 +7243,7 @@ var stations = {
             "id": "node/444812474",
             "properties": {
                 "@id": "node/444812474",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "СибурИнтерОйл"
             },
             "geometry": {
@@ -7259,7 +7259,7 @@ var stations = {
             "id": "node/444819417",
             "properties": {
                 "@id": "node/444819417",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -7280,7 +7280,7 @@ var stations = {
             "id": "node/444819421",
             "properties": {
                 "@id": "node/444819421",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -7295,7 +7295,7 @@ var stations = {
             "id": "node/444819426",
             "properties": {
                 "@id": "node/444819426",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -7310,7 +7310,7 @@ var stations = {
             "id": "node/444819429",
             "properties": {
                 "@id": "node/444819429",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ECO"
             },
             "geometry": {
@@ -7326,7 +7326,7 @@ var stations = {
             "id": "node/444819433",
             "properties": {
                 "@id": "node/444819433",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Сибирнефть"
             },
             "geometry": {
@@ -7342,7 +7342,7 @@ var stations = {
             "id": "node/444819434",
             "properties": {
                 "@id": "node/444819434",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -7359,7 +7359,7 @@ var stations = {
             "id": "node/444819439",
             "properties": {
                 "@id": "node/444819439",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "AMI"
             },
             "geometry": {
@@ -7375,7 +7375,7 @@ var stations = {
             "id": "node/444819441",
             "properties": {
                 "@id": "node/444819441",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -7390,7 +7390,7 @@ var stations = {
             "id": "node/444819481",
             "properties": {
                 "@id": "node/444819481",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Лукойл 363",
                 "operator": "ЛУКОЙЛ-Центрнефтепродукт",
                 "website": "http://www.lukoil.ru/"
@@ -7408,7 +7408,7 @@ var stations = {
             "id": "node/445052230",
             "properties": {
                 "@id": "node/445052230",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Мегаойл"
             },
             "geometry": {
@@ -7424,7 +7424,7 @@ var stations = {
             "id": "node/445317534",
             "properties": {
                 "@id": "node/445317534",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Меркурий",
                 "operator": "Меркурий"
             },
@@ -7441,7 +7441,7 @@ var stations = {
             "id": "node/446218402",
             "properties": {
                 "@id": "node/446218402",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Ступино",
                 "operator": "BP"
             },
@@ -7458,7 +7458,7 @@ var stations = {
             "id": "node/446317726",
             "properties": {
                 "@id": "node/446317726",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -7474,7 +7474,7 @@ var stations = {
             "id": "node/448112007",
             "properties": {
                 "@id": "node/448112007",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -7493,7 +7493,7 @@ var stations = {
             "id": "node/448316859",
             "properties": {
                 "@id": "node/448316859",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -7512,7 +7512,7 @@ var stations = {
             "id": "node/448897324",
             "properties": {
                 "@id": "node/448897324",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Нефть Магистраль"
             },
             "geometry": {
@@ -7528,7 +7528,7 @@ var stations = {
             "id": "node/448897337",
             "properties": {
                 "@id": "node/448897337",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -7545,7 +7545,7 @@ var stations = {
             "id": "node/448926496",
             "properties": {
                 "@id": "node/448926496",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -7576,7 +7576,7 @@ var stations = {
             "id": "node/448926558",
             "properties": {
                 "@id": "node/448926558",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТрансАЗС"
             },
             "geometry": {
@@ -7592,7 +7592,7 @@ var stations = {
             "id": "node/448938744",
             "properties": {
                 "@id": "node/448938744",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -7607,7 +7607,7 @@ var stations = {
             "id": "node/448938747",
             "properties": {
                 "@id": "node/448938747",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -7623,7 +7623,7 @@ var stations = {
             "id": "node/448938753",
             "properties": {
                 "@id": "node/448938753",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "СТС",
                 "operator": "Ликойл"
             },
@@ -7640,7 +7640,7 @@ var stations = {
             "id": "node/448938759",
             "properties": {
                 "@id": "node/448938759",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Транс оил"
             },
             "geometry": {
@@ -7656,7 +7656,7 @@ var stations = {
             "id": "node/448938766",
             "properties": {
                 "@id": "node/448938766",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "car_wash": "yes",
@@ -7687,7 +7687,7 @@ var stations = {
             "id": "node/448938779",
             "properties": {
                 "@id": "node/448938779",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -7702,7 +7702,7 @@ var stations = {
             "id": "node/448938780",
             "properties": {
                 "@id": "node/448938780",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "car_wash": "yes",
@@ -7733,7 +7733,7 @@ var stations = {
             "id": "node/448950750",
             "properties": {
                 "@id": "node/448950750",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -7748,7 +7748,7 @@ var stations = {
             "id": "node/448950752",
             "properties": {
                 "@id": "node/448950752",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
@@ -7776,7 +7776,7 @@ var stations = {
             "id": "node/448950760",
             "properties": {
                 "@id": "node/448950760",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Транс АЗС"
             },
             "geometry": {
@@ -7792,7 +7792,7 @@ var stations = {
             "id": "node/448950761",
             "properties": {
                 "@id": "node/448950761",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Транс АЗС"
             },
             "geometry": {
@@ -7808,7 +7808,7 @@ var stations = {
             "id": "node/448950766",
             "properties": {
                 "@id": "node/448950766",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -7839,7 +7839,7 @@ var stations = {
             "id": "node/448950773",
             "properties": {
                 "@id": "node/448950773",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -7866,7 +7866,7 @@ var stations = {
             "id": "node/448950776",
             "properties": {
                 "@id": "node/448950776",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Сургутнефтегаз"
             },
             "geometry": {
@@ -7882,7 +7882,7 @@ var stations = {
             "id": "node/448950781",
             "properties": {
                 "@id": "node/448950781",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -7899,7 +7899,7 @@ var stations = {
             "id": "node/448966607",
             "properties": {
                 "@id": "node/448966607",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -7916,7 +7916,7 @@ var stations = {
             "id": "node/448990648",
             "properties": {
                 "@id": "node/448990648",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "comment": "АЗС №443, ООО «ЛУКОЙЛ-Центрнефтепродукт», 150 км а/д М-10 \"Россия\", лево",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -7942,7 +7942,7 @@ var stations = {
                 "@id": "node/448990654",
                 "addr:city": "Эммаус",
                 "addr:housenumber": "2B",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:biogas": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -7968,7 +7968,7 @@ var stations = {
             "id": "node/448990655",
             "properties": {
                 "@id": "node/448990655",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "comment": "АЗС №442, ООО «ЛУКОЙЛ-Центрнефтепродукт», пос. Эммаусс, на 152 км. + 400 м. (правая сторона) а/д М-10",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -7992,7 +7992,7 @@ var stations = {
             "id": "node/448990666",
             "properties": {
                 "@id": "node/448990666",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "no",
                 "fuel:lpg": "yes",
                 "fuel:octane_92": "no",
@@ -8012,7 +8012,7 @@ var stations = {
             "id": "node/449816503",
             "properties": {
                 "@id": "node/449816503",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_92": "yes",
@@ -8034,7 +8034,7 @@ var stations = {
             "id": "node/449825712",
             "properties": {
                 "@id": "node/449825712",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -8051,7 +8051,7 @@ var stations = {
             "id": "node/449825723",
             "properties": {
                 "@id": "node/449825723",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -8068,7 +8068,7 @@ var stations = {
             "id": "node/449829029",
             "properties": {
                 "@id": "node/449829029",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Самсон"
             },
             "geometry": {
@@ -8084,7 +8084,7 @@ var stations = {
             "id": "node/449833171",
             "properties": {
                 "@id": "node/449833171",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -8111,7 +8111,7 @@ var stations = {
             "id": "node/449833172",
             "properties": {
                 "@id": "node/449833172",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -8140,7 +8140,7 @@ var stations = {
             "id": "node/450839398",
             "properties": {
                 "@id": "node/450839398",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -8157,7 +8157,7 @@ var stations = {
             "id": "node/454362647",
             "properties": {
                 "@id": "node/454362647",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "БТК",
                 "operator": "БТК"
             },
@@ -8174,7 +8174,7 @@ var stations = {
             "id": "node/456309675",
             "properties": {
                 "@id": "node/456309675",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "НЕФТО"
             },
             "geometry": {
@@ -8190,7 +8190,7 @@ var stations = {
             "id": "node/456309687",
             "properties": {
                 "@id": "node/456309687",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -8206,7 +8206,7 @@ var stations = {
             "id": "node/456309690",
             "properties": {
                 "@id": "node/456309690",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "GF"
             },
             "geometry": {
@@ -8222,7 +8222,7 @@ var stations = {
             "id": "node/456309693",
             "properties": {
                 "@id": "node/456309693",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГНС"
             },
@@ -8239,7 +8239,7 @@ var stations = {
             "id": "node/457367858",
             "properties": {
                 "@id": "node/457367858",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Автокар"
             },
             "geometry": {
@@ -8255,7 +8255,7 @@ var stations = {
             "id": "node/460354308",
             "properties": {
                 "@id": "node/460354308",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -8270,7 +8270,7 @@ var stations = {
             "id": "node/460357796",
             "properties": {
                 "@id": "node/460357796",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -8286,7 +8286,7 @@ var stations = {
             "id": "node/460357797",
             "properties": {
                 "@id": "node/460357797",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -8302,7 +8302,7 @@ var stations = {
             "id": "node/460369355",
             "properties": {
                 "@id": "node/460369355",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -8318,7 +8318,7 @@ var stations = {
             "id": "node/460369364",
             "properties": {
                 "@id": "node/460369364",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -8346,7 +8346,7 @@ var stations = {
             "id": "node/460369511",
             "properties": {
                 "@id": "node/460369511",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -8361,7 +8361,7 @@ var stations = {
             "id": "node/460376626",
             "properties": {
                 "@id": "node/460376626",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -8389,7 +8389,7 @@ var stations = {
             "id": "node/460376627",
             "properties": {
                 "@id": "node/460376627",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -8416,7 +8416,7 @@ var stations = {
             "id": "node/460376641",
             "properties": {
                 "@id": "node/460376641",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -8432,7 +8432,7 @@ var stations = {
             "id": "node/460376663",
             "properties": {
                 "@id": "node/460376663",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -8447,7 +8447,7 @@ var stations = {
             "id": "node/460390282",
             "properties": {
                 "@id": "node/460390282",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -8479,7 +8479,7 @@ var stations = {
             "id": "node/460400280",
             "properties": {
                 "@id": "node/460400280",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Интеройл"
             },
             "geometry": {
@@ -8495,7 +8495,7 @@ var stations = {
             "id": "node/460400296",
             "properties": {
                 "@id": "node/460400296",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Заправка \"Дальнобойщик\""
             },
             "geometry": {
@@ -8511,7 +8511,7 @@ var stations = {
             "id": "node/460400299",
             "properties": {
                 "@id": "node/460400299",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Русский Газ (АГЗС)"
             },
             "geometry": {
@@ -8527,7 +8527,7 @@ var stations = {
             "id": "node/460402026",
             "properties": {
                 "@id": "node/460402026",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -8543,7 +8543,7 @@ var stations = {
             "id": "node/460402027",
             "properties": {
                 "@id": "node/460402027",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -8559,7 +8559,7 @@ var stations = {
             "id": "node/460402029",
             "properties": {
                 "@id": "node/460402029",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -8574,7 +8574,7 @@ var stations = {
             "id": "node/460415116",
             "properties": {
                 "@id": "node/460415116",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Спецнефтепродукт"
             },
             "geometry": {
@@ -8590,7 +8590,7 @@ var stations = {
             "id": "node/460415123",
             "properties": {
                 "@id": "node/460415123",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -8605,7 +8605,7 @@ var stations = {
             "id": "node/460423699",
             "properties": {
                 "@id": "node/460423699",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -8621,7 +8621,7 @@ var stations = {
             "id": "node/460426079",
             "properties": {
                 "@id": "node/460426079",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Сибнефть"
             },
             "geometry": {
@@ -8637,7 +8637,7 @@ var stations = {
             "id": "node/460431289",
             "properties": {
                 "@id": "node/460431289",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -8668,7 +8668,7 @@ var stations = {
             "id": "node/460431301",
             "properties": {
                 "@id": "node/460431301",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -8688,7 +8688,7 @@ var stations = {
             "id": "node/460432188",
             "properties": {
                 "@id": "node/460432188",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Подсолнух",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -8706,7 +8706,7 @@ var stations = {
             "id": "node/460432405",
             "properties": {
                 "@id": "node/460432405",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -8724,7 +8724,7 @@ var stations = {
             "id": "node/460434127",
             "properties": {
                 "@id": "node/460434127",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Ойл Шоп",
                 "name": "Ойл Шоп",
                 "operator": "Ойл Шоп"
@@ -8742,7 +8742,7 @@ var stations = {
             "id": "node/461485625",
             "properties": {
                 "@id": "node/461485625",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть"
             },
             "geometry": {
@@ -8758,7 +8758,7 @@ var stations = {
             "id": "node/461507765",
             "properties": {
                 "@id": "node/461507765",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -8773,7 +8773,7 @@ var stations = {
             "id": "node/463299768",
             "properties": {
                 "@id": "node/463299768",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -8795,7 +8795,7 @@ var stations = {
             "id": "node/465243068",
             "properties": {
                 "@id": "node/465243068",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Середа-Ойл"
             },
             "geometry": {
@@ -8811,7 +8811,7 @@ var stations = {
             "id": "node/465548917",
             "properties": {
                 "@id": "node/465548917",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -8832,7 +8832,7 @@ var stations = {
             "id": "node/465556450",
             "properties": {
                 "@id": "node/465556450",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -8847,7 +8847,7 @@ var stations = {
             "id": "node/468749285",
             "properties": {
                 "@id": "node/468749285",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -8873,7 +8873,7 @@ var stations = {
             "id": "node/468749287",
             "properties": {
                 "@id": "node/468749287",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -8899,7 +8899,7 @@ var stations = {
             "id": "node/469370396",
             "properties": {
                 "@id": "node/469370396",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -8917,7 +8917,7 @@ var stations = {
             "id": "node/470235321",
             "properties": {
                 "@id": "node/470235321",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -8934,7 +8934,7 @@ var stations = {
             "id": "node/470235323",
             "properties": {
                 "@id": "node/470235323",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "kiosk": "yes"
             },
             "geometry": {
@@ -8950,7 +8950,7 @@ var stations = {
             "id": "node/470235325",
             "properties": {
                 "@id": "node/470235325",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Щербинка",
                 "operator": "BP"
             },
@@ -8967,7 +8967,7 @@ var stations = {
             "id": "node/470235327",
             "properties": {
                 "@id": "node/470235327",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Грин Лин"
             },
             "geometry": {
@@ -8983,7 +8983,7 @@ var stations = {
             "id": "node/470238768",
             "properties": {
                 "@id": "node/470238768",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Интеройл"
             },
             "geometry": {
@@ -8999,7 +8999,7 @@ var stations = {
             "id": "node/470245179",
             "properties": {
                 "@id": "node/470245179",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -9017,7 +9017,7 @@ var stations = {
             "id": "node/470246272",
             "properties": {
                 "@id": "node/470246272",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть",
                 "ref": "147",
@@ -9036,7 +9036,7 @@ var stations = {
             "id": "node/470246273",
             "properties": {
                 "@id": "node/470246273",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -9056,7 +9056,7 @@ var stations = {
             "id": "node/470246275",
             "properties": {
                 "@id": "node/470246275",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
@@ -9082,7 +9082,7 @@ var stations = {
             "id": "node/470247657",
             "properties": {
                 "@id": "node/470247657",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Интеройл"
             },
             "geometry": {
@@ -9098,7 +9098,7 @@ var stations = {
             "id": "node/470247662",
             "properties": {
                 "@id": "node/470247662",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -9115,7 +9115,7 @@ var stations = {
             "id": "node/470247663",
             "properties": {
                 "@id": "node/470247663",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -9132,7 +9132,7 @@ var stations = {
             "id": "node/470250787",
             "properties": {
                 "@id": "node/470250787",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "name": "Лес"
             },
@@ -9149,7 +9149,7 @@ var stations = {
             "id": "node/470258180",
             "properties": {
                 "@id": "node/470258180",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -9164,7 +9164,7 @@ var stations = {
             "id": "node/470258316",
             "properties": {
                 "@id": "node/470258316",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -9179,7 +9179,7 @@ var stations = {
             "id": "node/470258328",
             "properties": {
                 "@id": "node/470258328",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -9195,7 +9195,7 @@ var stations = {
             "id": "node/470258331",
             "properties": {
                 "@id": "node/470258331",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -9210,7 +9210,7 @@ var stations = {
             "id": "node/470258337",
             "properties": {
                 "@id": "node/470258337",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "no",
                 "fuel:lpg": "yes",
                 "fuel:octane_92": "no",
@@ -9230,7 +9230,7 @@ var stations = {
             "id": "node/470268881",
             "properties": {
                 "@id": "node/470268881",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -9246,7 +9246,7 @@ var stations = {
             "id": "node/470268893",
             "properties": {
                 "@id": "node/470268893",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Лукойл"
             },
             "geometry": {
@@ -9262,7 +9262,7 @@ var stations = {
             "id": "node/470268894",
             "properties": {
                 "@id": "node/470268894",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -9278,7 +9278,7 @@ var stations = {
             "id": "node/470356684",
             "properties": {
                 "@id": "node/470356684",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Интел"
             },
             "geometry": {
@@ -9294,7 +9294,7 @@ var stations = {
             "id": "node/470970736",
             "properties": {
                 "@id": "node/470970736",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -9322,7 +9322,7 @@ var stations = {
             "id": "node/471526521",
             "properties": {
                 "@id": "node/471526521",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -9338,7 +9338,7 @@ var stations = {
             "id": "node/471596660",
             "properties": {
                 "@id": "node/471596660",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -9354,7 +9354,7 @@ var stations = {
             "id": "node/471762200",
             "properties": {
                 "@id": "node/471762200",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -9374,7 +9374,7 @@ var stations = {
             "id": "node/471762201",
             "properties": {
                 "@id": "node/471762201",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Калуганефть"
             },
             "geometry": {
@@ -9390,7 +9390,7 @@ var stations = {
             "id": "node/471762202",
             "properties": {
                 "@id": "node/471762202",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "AMI"
             },
             "geometry": {
@@ -9406,7 +9406,7 @@ var stations = {
             "id": "node/471764489",
             "properties": {
                 "@id": "node/471764489",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -9422,7 +9422,7 @@ var stations = {
             "id": "node/471779798",
             "properties": {
                 "@id": "node/471779798",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -9438,7 +9438,7 @@ var stations = {
             "properties": {
                 "@id": "node/471779805",
                 "abandoned": "yes",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes"
@@ -9456,7 +9456,7 @@ var stations = {
             "id": "node/471779815",
             "properties": {
                 "@id": "node/471779815",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -9471,7 +9471,7 @@ var stations = {
             "id": "node/471779816",
             "properties": {
                 "@id": "node/471779816",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "РК"
             },
             "geometry": {
@@ -9487,7 +9487,7 @@ var stations = {
             "id": "node/471779846",
             "properties": {
                 "@id": "node/471779846",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -9509,7 +9509,7 @@ var stations = {
             "id": "node/471779847",
             "properties": {
                 "@id": "node/471779847",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Калуганефть"
             },
             "geometry": {
@@ -9525,7 +9525,7 @@ var stations = {
             "id": "node/471782975",
             "properties": {
                 "@id": "node/471782975",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -9546,7 +9546,7 @@ var stations = {
             "id": "node/471782987",
             "properties": {
                 "@id": "node/471782987",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -9561,7 +9561,7 @@ var stations = {
             "id": "node/471783524",
             "properties": {
                 "@id": "node/471783524",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -9583,7 +9583,7 @@ var stations = {
             "id": "node/471783525",
             "properties": {
                 "@id": "node/471783525",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -9605,7 +9605,7 @@ var stations = {
             "id": "node/471785085",
             "properties": {
                 "@id": "node/471785085",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -9626,7 +9626,7 @@ var stations = {
             "id": "node/471785087",
             "properties": {
                 "@id": "node/471785087",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Shell",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -9648,7 +9648,7 @@ var stations = {
             "id": "node/471785088",
             "properties": {
                 "@id": "node/471785088",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть",
                 "operator": "Татнефть",
@@ -9667,7 +9667,7 @@ var stations = {
             "id": "node/471785094",
             "properties": {
                 "@id": "node/471785094",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Интеройл"
             },
             "geometry": {
@@ -9683,7 +9683,7 @@ var stations = {
             "id": "node/471785095",
             "properties": {
                 "@id": "node/471785095",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "RK-Oil",
                 "name": "RK-Oil",
                 "operator": "RK-Oil"
@@ -9701,7 +9701,7 @@ var stations = {
             "id": "node/471785096",
             "properties": {
                 "@id": "node/471785096",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть",
                 "operator": "Татнефть"
@@ -9719,7 +9719,7 @@ var stations = {
             "id": "node/471785101",
             "properties": {
                 "@id": "node/471785101",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -9751,7 +9751,7 @@ var stations = {
             "id": "node/471785108",
             "properties": {
                 "@id": "node/471785108",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -9769,7 +9769,7 @@ var stations = {
             "id": "node/471785111",
             "properties": {
                 "@id": "node/471785111",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -9787,7 +9787,7 @@ var stations = {
             "id": "node/471785112",
             "properties": {
                 "@id": "node/471785112",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -9815,7 +9815,7 @@ var stations = {
             "id": "node/471786398",
             "properties": {
                 "@id": "node/471786398",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -9833,7 +9833,7 @@ var stations = {
             "id": "node/471787436",
             "properties": {
                 "@id": "node/471787436",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -9865,7 +9865,7 @@ var stations = {
             "id": "node/471789210",
             "properties": {
                 "@id": "node/471789210",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -9882,7 +9882,7 @@ var stations = {
             "id": "node/471789211",
             "properties": {
                 "@id": "node/471789211",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -9899,7 +9899,7 @@ var stations = {
             "id": "node/471823379",
             "properties": {
                 "@id": "node/471823379",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -9914,7 +9914,7 @@ var stations = {
             "id": "node/471987919",
             "properties": {
                 "@id": "node/471987919",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -9937,7 +9937,7 @@ var stations = {
             "id": "node/471988148",
             "properties": {
                 "@id": "node/471988148",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "AMI",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -9960,7 +9960,7 @@ var stations = {
             "id": "node/471991007",
             "properties": {
                 "@id": "node/471991007",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -9975,7 +9975,7 @@ var stations = {
             "id": "node/472025511",
             "properties": {
                 "@id": "node/472025511",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Славнефть",
                 "name": "Славнефть",
                 "operator": "Славнефть"
@@ -9993,7 +9993,7 @@ var stations = {
             "id": "node/472029276",
             "properties": {
                 "@id": "node/472029276",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "ТНК",
                 "construction": "yes",
                 "name": "ТНК",
@@ -10012,7 +10012,7 @@ var stations = {
             "id": "node/472195799",
             "properties": {
                 "@id": "node/472195799",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть",
                 "operator": "АЗС №38"
             },
@@ -10029,7 +10029,7 @@ var stations = {
             "id": "node/472360708",
             "properties": {
                 "@id": "node/472360708",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -10045,7 +10045,7 @@ var stations = {
             "id": "node/472360711",
             "properties": {
                 "@id": "node/472360711",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -10061,7 +10061,7 @@ var stations = {
             "id": "node/472620706",
             "properties": {
                 "@id": "node/472620706",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Артойл"
             },
             "geometry": {
@@ -10077,7 +10077,7 @@ var stations = {
             "id": "node/472808259",
             "properties": {
                 "@id": "node/472808259",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -10102,7 +10102,7 @@ var stations = {
             "id": "node/472809244",
             "properties": {
                 "@id": "node/472809244",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "НПС"
             },
             "geometry": {
@@ -10118,7 +10118,7 @@ var stations = {
             "id": "node/472811658",
             "properties": {
                 "@id": "node/472811658",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10133,7 +10133,7 @@ var stations = {
             "id": "node/472812101",
             "properties": {
                 "@id": "node/472812101",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "НПС"
             },
             "geometry": {
@@ -10149,7 +10149,7 @@ var stations = {
             "id": "node/473399099",
             "properties": {
                 "@id": "node/473399099",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "website": "http://www.gazprom-neft.ru/"
             },
             "geometry": {
@@ -10165,7 +10165,7 @@ var stations = {
             "id": "node/473420321",
             "properties": {
                 "@id": "node/473420321",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -10181,7 +10181,7 @@ var stations = {
             "id": "node/473420323",
             "properties": {
                 "@id": "node/473420323",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -10197,7 +10197,7 @@ var stations = {
             "id": "node/473423800",
             "properties": {
                 "@id": "node/473423800",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -10214,7 +10214,7 @@ var stations = {
             "id": "node/473423801",
             "properties": {
                 "@id": "node/473423801",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -10241,7 +10241,7 @@ var stations = {
             "id": "node/473423802",
             "properties": {
                 "@id": "node/473423802",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -10269,7 +10269,7 @@ var stations = {
             "id": "node/473424554",
             "properties": {
                 "@id": "node/473424554",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "НЕФ"
             },
             "geometry": {
@@ -10285,7 +10285,7 @@ var stations = {
             "id": "node/473424557",
             "properties": {
                 "@id": "node/473424557",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "НЕФ"
             },
             "geometry": {
@@ -10301,7 +10301,7 @@ var stations = {
             "id": "node/474395732",
             "properties": {
                 "@id": "node/474395732",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Lik"
             },
             "geometry": {
@@ -10319,7 +10319,7 @@ var stations = {
                 "@id": "node/475018193",
                 "addr:housenumber": "88",
                 "addr:street": "Шоссейная улица",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10334,7 +10334,7 @@ var stations = {
             "id": "node/475527483",
             "properties": {
                 "@id": "node/475527483",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -10352,7 +10352,7 @@ var stations = {
             "id": "node/475538584",
             "properties": {
                 "@id": "node/475538584",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10367,7 +10367,7 @@ var stations = {
             "id": "node/475550272",
             "properties": {
                 "@id": "node/475550272",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АГСН №12",
                 "phone": "8(495)3541853"
             },
@@ -10384,7 +10384,7 @@ var stations = {
             "id": "node/476457364",
             "properties": {
                 "@id": "node/476457364",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "opening_hours": "24/7",
                 "operator": "ТрансАЗС"
             },
@@ -10401,7 +10401,7 @@ var stations = {
             "id": "node/476640093",
             "properties": {
                 "@id": "node/476640093",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -10417,7 +10417,7 @@ var stations = {
             "id": "node/477227669",
             "properties": {
                 "@id": "node/477227669",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть",
                 "operator": "Татнефть"
@@ -10435,7 +10435,7 @@ var stations = {
             "id": "node/477227768",
             "properties": {
                 "@id": "node/477227768",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10450,7 +10450,7 @@ var stations = {
             "id": "node/478499857",
             "properties": {
                 "@id": "node/478499857",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС",
                 "operator": "Аист"
             },
@@ -10467,7 +10467,7 @@ var stations = {
             "id": "node/478532200",
             "properties": {
                 "@id": "node/478532200",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗК ТНК",
                 "operator": "ТНК"
             },
@@ -10484,7 +10484,7 @@ var stations = {
             "id": "node/478953117",
             "properties": {
                 "@id": "node/478953117",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Ивановская",
                 "operator": "ЗАО ПКЭК"
             },
@@ -10501,7 +10501,7 @@ var stations = {
             "id": "node/478953970",
             "properties": {
                 "@id": "node/478953970",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -10517,7 +10517,7 @@ var stations = {
             "id": "node/479715935",
             "properties": {
                 "@id": "node/479715935",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Нефтьмагистраль",
                 "name": "Нефтьмагистраль",
                 "operator": "Нефтьмагистраль"
@@ -10535,7 +10535,7 @@ var stations = {
             "id": "node/479725350",
             "properties": {
                 "@id": "node/479725350",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -10561,7 +10561,7 @@ var stations = {
             "id": "node/479725834",
             "properties": {
                 "@id": "node/479725834",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпромнефть",
                 "name": "Газпромнефть",
                 "opening_hours": "24/7",
@@ -10583,7 +10583,7 @@ var stations = {
             "id": "node/479726954",
             "properties": {
                 "@id": "node/479726954",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -10608,7 +10608,7 @@ var stations = {
             "id": "node/480019121",
             "properties": {
                 "@id": "node/480019121",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -10634,7 +10634,7 @@ var stations = {
             "id": "node/480638770",
             "properties": {
                 "@id": "node/480638770",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -10666,7 +10666,7 @@ var stations = {
             "id": "node/481106608",
             "properties": {
                 "@id": "node/481106608",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -10688,7 +10688,7 @@ var stations = {
             "id": "node/482766559",
             "properties": {
                 "@id": "node/482766559",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Славнефть"
             },
             "geometry": {
@@ -10704,7 +10704,7 @@ var stations = {
             "id": "node/482803503",
             "properties": {
                 "@id": "node/482803503",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "hgv": "no",
                 "name": "BP Можайская",
                 "operator": "BP"
@@ -10722,7 +10722,7 @@ var stations = {
             "id": "node/485655037",
             "properties": {
                 "@id": "node/485655037",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС \"ЛОГОС ПЛЮС\""
             },
             "geometry": {
@@ -10738,7 +10738,7 @@ var stations = {
             "id": "node/485987163",
             "properties": {
                 "@id": "node/485987163",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10753,7 +10753,7 @@ var stations = {
             "id": "node/486064718",
             "properties": {
                 "@id": "node/486064718",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10768,7 +10768,7 @@ var stations = {
             "id": "node/487074499",
             "properties": {
                 "@id": "node/487074499",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10783,7 +10783,7 @@ var stations = {
             "id": "node/487103452",
             "properties": {
                 "@id": "node/487103452",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Shell Select",
                 "opening_hours": "24/7",
                 "operator": "Shell",
@@ -10802,7 +10802,7 @@ var stations = {
             "id": "node/489281884",
             "properties": {
                 "@id": "node/489281884",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Газпромнефть"
             },
             "geometry": {
@@ -10818,7 +10818,7 @@ var stations = {
             "id": "node/489281887",
             "properties": {
                 "@id": "node/489281887",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -10836,7 +10836,7 @@ var stations = {
             "id": "node/489281891",
             "properties": {
                 "@id": "node/489281891",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "name": "Газпромнефть",
@@ -10859,7 +10859,7 @@ var stations = {
             "id": "node/489281899",
             "properties": {
                 "@id": "node/489281899",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -10877,7 +10877,7 @@ var stations = {
             "id": "node/489444143",
             "properties": {
                 "@id": "node/489444143",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Владимирская",
                 "operator": "BP"
             },
@@ -10894,7 +10894,7 @@ var stations = {
             "id": "node/490981470",
             "properties": {
                 "@id": "node/490981470",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10909,7 +10909,7 @@ var stations = {
             "id": "node/491260431",
             "properties": {
                 "@id": "node/491260431",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -10928,7 +10928,7 @@ var stations = {
             "id": "node/492097789",
             "properties": {
                 "@id": "node/492097789",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10943,7 +10943,7 @@ var stations = {
             "id": "node/492164687",
             "properties": {
                 "@id": "node/492164687",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
@@ -10963,7 +10963,7 @@ var stations = {
             "id": "node/492869509",
             "properties": {
                 "@id": "node/492869509",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -10978,7 +10978,7 @@ var stations = {
             "id": "node/495979826",
             "properties": {
                 "@id": "node/495979826",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Транс АЗС"
             },
             "geometry": {
@@ -10994,7 +10994,7 @@ var stations = {
             "id": "node/495984671",
             "properties": {
                 "@id": "node/495984671",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "lpg": "yes"
             },
             "geometry": {
@@ -11010,7 +11010,7 @@ var stations = {
             "id": "node/496057594",
             "properties": {
                 "@id": "node/496057594",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -11025,7 +11025,7 @@ var stations = {
             "id": "node/503843345",
             "properties": {
                 "@id": "node/503843345",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -11055,7 +11055,7 @@ var stations = {
             "id": "node/507103394",
             "properties": {
                 "@id": "node/507103394",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -11087,7 +11087,7 @@ var stations = {
             "id": "node/507103396",
             "properties": {
                 "@id": "node/507103396",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -11119,7 +11119,7 @@ var stations = {
             "id": "node/507103399",
             "properties": {
                 "@id": "node/507103399",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "AMI",
                 "operator": "AMI"
             },
@@ -11136,7 +11136,7 @@ var stations = {
             "id": "node/507773813",
             "properties": {
                 "@id": "node/507773813",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -11157,7 +11157,7 @@ var stations = {
             "id": "node/510903264",
             "properties": {
                 "@id": "node/510903264",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -11180,7 +11180,7 @@ var stations = {
             "id": "node/510905726",
             "properties": {
                 "@id": "node/510905726",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -11211,7 +11211,7 @@ var stations = {
             "id": "node/510919880",
             "properties": {
                 "@id": "node/510919880",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -11227,7 +11227,7 @@ var stations = {
             "id": "node/510919884",
             "properties": {
                 "@id": "node/510919884",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -11259,7 +11259,7 @@ var stations = {
             "id": "node/510923331",
             "properties": {
                 "@id": "node/510923331",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Роснефть",
                 "operator": "ОАО \"Роснефть\"",
                 "website": "http://www.rosneft.ru"
@@ -11277,7 +11277,7 @@ var stations = {
             "id": "node/510923335",
             "properties": {
                 "@id": "node/510923335",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -11298,7 +11298,7 @@ var stations = {
             "id": "node/510962568",
             "properties": {
                 "@id": "node/510962568",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -11328,7 +11328,7 @@ var stations = {
             "id": "node/510970932",
             "properties": {
                 "@id": "node/510970932",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТрансАЗС"
             },
             "geometry": {
@@ -11344,7 +11344,7 @@ var stations = {
             "id": "node/513422052",
             "properties": {
                 "@id": "node/513422052",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Сургутнефтегаз"
             },
             "geometry": {
@@ -11360,7 +11360,7 @@ var stations = {
             "id": "node/514344425",
             "properties": {
                 "@id": "node/514344425",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "car_wash": "yes",
@@ -11392,7 +11392,7 @@ var stations = {
             "id": "node/515032029",
             "properties": {
                 "@id": "node/515032029",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Нефтегазмагистраль"
             },
             "geometry": {
@@ -11408,7 +11408,7 @@ var stations = {
             "id": "node/515749428",
             "properties": {
                 "@id": "node/515749428",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -11426,7 +11426,7 @@ var stations = {
             "id": "node/515749843",
             "properties": {
                 "@id": "node/515749843",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть АЗС 13",
                 "note": "165 км а/д Москва - Ст.Петербург",
                 "operator": "Роснефть",
@@ -11445,7 +11445,7 @@ var stations = {
             "id": "node/515778393",
             "properties": {
                 "@id": "node/515778393",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Aris",
                 "operator": "Aris"
             },
@@ -11462,7 +11462,7 @@ var stations = {
             "id": "node/516106703",
             "properties": {
                 "@id": "node/516106703",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Сургутнефтегаз"
             },
             "geometry": {
@@ -11478,7 +11478,7 @@ var stations = {
             "id": "node/517360842",
             "properties": {
                 "@id": "node/517360842",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -11495,7 +11495,7 @@ var stations = {
             "id": "node/521282878",
             "properties": {
                 "@id": "node/521282878",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "М10",
                 "website": "http://m10-oil.ru"
             },
@@ -11512,7 +11512,7 @@ var stations = {
             "id": "node/521283522",
             "properties": {
                 "@id": "node/521283522",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Роснефть АЗС 14",
                 "note": "ш. Москва - СПб, 202 км",
                 "operator": "Роснефть",
@@ -11531,7 +11531,7 @@ var stations = {
             "id": "node/527738008",
             "properties": {
                 "@id": "node/527738008",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС №389"
             },
             "geometry": {
@@ -11547,7 +11547,7 @@ var stations = {
             "id": "node/527768764",
             "properties": {
                 "@id": "node/527768764",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -11574,7 +11574,7 @@ var stations = {
             "id": "node/528068132",
             "properties": {
                 "@id": "node/528068132",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -11589,7 +11589,7 @@ var stations = {
             "id": "node/528068401",
             "properties": {
                 "@id": "node/528068401",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -11604,7 +11604,7 @@ var stations = {
             "id": "node/528123317",
             "properties": {
                 "@id": "node/528123317",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "БТК",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
@@ -11626,7 +11626,7 @@ var stations = {
             "id": "node/528123391",
             "properties": {
                 "@id": "node/528123391",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -11656,7 +11656,7 @@ var stations = {
             "id": "node/528512262",
             "properties": {
                 "@id": "node/528512262",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -11672,7 +11672,7 @@ var stations = {
             "id": "node/528518755",
             "properties": {
                 "@id": "node/528518755",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Транс АЗС"
             },
             "geometry": {
@@ -11688,7 +11688,7 @@ var stations = {
             "id": "node/528674217",
             "properties": {
                 "@id": "node/528674217",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Нефтьмагистраль",
                 "name": "Нефтьмагистраль",
                 "operator": "Нефтьмагистраль"
@@ -11706,7 +11706,7 @@ var stations = {
             "id": "node/528764908",
             "properties": {
                 "@id": "node/528764908",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "АЗС Комплекс"
             },
             "geometry": {
@@ -11722,7 +11722,7 @@ var stations = {
             "id": "node/528965729",
             "properties": {
                 "@id": "node/528965729",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "BP Северянин",
                 "operator": "BP"
             },
@@ -11739,7 +11739,7 @@ var stations = {
             "id": "node/529052201",
             "properties": {
                 "@id": "node/529052201",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "normal": "gas",
                 "fuel:diesel": "yes",
@@ -11766,7 +11766,7 @@ var stations = {
             "id": "node/529108887",
             "properties": {
                 "@id": "node/529108887",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "THK",
                 "name": "THK"
             },
@@ -11783,7 +11783,7 @@ var stations = {
             "id": "node/529836282",
             "properties": {
                 "@id": "node/529836282",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -11799,7 +11799,7 @@ var stations = {
             "id": "node/530061111",
             "properties": {
                 "@id": "node/530061111",
-                "state": "inaccessible",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "IP"
             },
             "geometry": {
@@ -11815,7 +11815,7 @@ var stations = {
             "id": "node/530577922",
             "properties": {
                 "@id": "node/530577922",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "№50",
                 "operator": "Лукойл",
                 "website": "http://www.lukoil.ru/"
@@ -11833,7 +11833,7 @@ var stations = {
             "id": "node/531506945",
             "properties": {
                 "@id": "node/531506945",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -11848,7 +11848,7 @@ var stations = {
             "id": "node/533304251",
             "properties": {
                 "@id": "node/533304251",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Shell",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -11868,7 +11868,7 @@ var stations = {
             "id": "node/533478769",
             "properties": {
                 "@id": "node/533478769",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "description": "131 км а/д М9 Москва - Рига",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -11888,7 +11888,7 @@ var stations = {
             "id": "node/537478844",
             "properties": {
                 "@id": "node/537478844",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "name": "Интел"
             },
             "geometry": {
@@ -11904,7 +11904,7 @@ var stations = {
             "id": "node/537514924",
             "properties": {
                 "@id": "node/537514924",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_92": "no",
@@ -11929,7 +11929,7 @@ var stations = {
             "id": "node/537531052",
             "properties": {
                 "@id": "node/537531052",
-                "state": "normal"
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -11944,7 +11944,7 @@ var stations = {
             "id": "node/537778417",
             "properties": {
                 "@id": "node/537778417",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "operator": "IP"
             },
             "geometry": {
@@ -11960,7 +11960,7 @@ var stations = {
             "id": "node/540665223",
             "properties": {
                 "@id": "node/540665223",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -11984,7 +11984,7 @@ var stations = {
             "id": "node/540665226",
             "properties": {
                 "@id": "node/540665226",
-                "state": "normal",
+                "type_sensor": "sensors_video", "state": "normal",
                 "brand": "Татнефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -12005,7 +12005,7 @@ var stations = {
             "id": "node/540675641",
             "properties": {
                 "@id": "node/540675641",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Стинвест"
             },
             "geometry": {
@@ -12021,7 +12021,7 @@ var stations = {
             "id": "node/543370613",
             "properties": {
                 "@id": "node/543370613",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -12038,7 +12038,7 @@ var stations = {
             "properties": {
                 "@id": "node/543370990",
                 "addr:housenumber": "стр.1",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК 70км",
                 "operator": "ТНК"
             },
@@ -12055,7 +12055,7 @@ var stations = {
             "id": "node/543371300",
             "properties": {
                 "@id": "node/543371300",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Unkoil"
             },
             "geometry": {
@@ -12071,7 +12071,7 @@ var stations = {
             "id": "node/543371302",
             "properties": {
                 "@id": "node/543371302",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "З"
             },
             "geometry": {
@@ -12087,7 +12087,7 @@ var stations = {
             "id": "node/543372497",
             "properties": {
                 "@id": "node/543372497",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Эльф-ойл",
                 "operator": "Эльф-ойл",
                 "website": "http://www.elf-oil.ru"
@@ -12105,7 +12105,7 @@ var stations = {
             "id": "node/543372510",
             "properties": {
                 "@id": "node/543372510",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "148 км"
             },
             "geometry": {
@@ -12121,7 +12121,7 @@ var stations = {
             "id": "node/544601086",
             "properties": {
                 "@id": "node/544601086",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -12147,7 +12147,7 @@ var stations = {
             "id": "node/549232976",
             "properties": {
                 "@id": "node/549232976",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -12165,7 +12165,7 @@ var stations = {
             "id": "node/549232980",
             "properties": {
                 "@id": "node/549232980",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -12180,7 +12180,7 @@ var stations = {
             "id": "node/551208170",
             "properties": {
                 "@id": "node/551208170",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -12195,7 +12195,7 @@ var stations = {
             "id": "node/554753597",
             "properties": {
                 "@id": "node/554753597",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть"
             },
             "geometry": {
@@ -12211,7 +12211,7 @@ var stations = {
             "id": "node/556978264",
             "properties": {
                 "@id": "node/556978264",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -12237,7 +12237,7 @@ var stations = {
             "id": "node/557681318",
             "properties": {
                 "@id": "node/557681318",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Комплекс 1",
                 "fuel:lpg": "yes",
                 "name": "Комплекс 1",
@@ -12256,7 +12256,7 @@ var stations = {
             "id": "node/559980459",
             "properties": {
                 "@id": "node/559980459",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "construction": "yes",
                 "name": "ТНК",
@@ -12275,7 +12275,7 @@ var stations = {
             "id": "node/560392201",
             "properties": {
                 "@id": "node/560392201",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "note": "Gas"
             },
             "geometry": {
@@ -12291,7 +12291,7 @@ var stations = {
             "id": "node/564298934",
             "properties": {
                 "@id": "node/564298934",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Мигеко",
                 "operator": "Мигеко"
             },
@@ -12308,7 +12308,7 @@ var stations = {
             "id": "node/565425149",
             "properties": {
                 "@id": "node/565425149",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "\"НТК\""
             },
             "geometry": {
@@ -12324,7 +12324,7 @@ var stations = {
             "id": "node/566122444",
             "properties": {
                 "@id": "node/566122444",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -12351,7 +12351,7 @@ var stations = {
             "id": "node/566234664",
             "properties": {
                 "@id": "node/566234664",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл",
                 "operator": "Лукойл",
                 "website": "http://www.lukoil.ru/"
@@ -12369,7 +12369,7 @@ var stations = {
             "id": "node/566595180",
             "properties": {
                 "@id": "node/566595180",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Электон",
                 "operator": "Электон"
             },
@@ -12386,7 +12386,7 @@ var stations = {
             "id": "node/566595191",
             "properties": {
                 "@id": "node/566595191",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -12401,7 +12401,7 @@ var stations = {
             "id": "node/567801459",
             "properties": {
                 "@id": "node/567801459",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -12428,7 +12428,7 @@ var stations = {
             "id": "node/568793022",
             "properties": {
                 "@id": "node/568793022",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -12443,7 +12443,7 @@ var stations = {
             "id": "node/568793023",
             "properties": {
                 "@id": "node/568793023",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Газпромнефть"
             },
             "geometry": {
@@ -12459,7 +12459,7 @@ var stations = {
             "id": "node/568857452",
             "properties": {
                 "@id": "node/568857452",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Юхнов АНП"
             },
             "geometry": {
@@ -12475,7 +12475,7 @@ var stations = {
             "id": "node/568857455",
             "properties": {
                 "@id": "node/568857455",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС 163 км"
             },
             "geometry": {
@@ -12491,7 +12491,7 @@ var stations = {
             "id": "node/568857457",
             "properties": {
                 "@id": "node/568857457",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -12508,7 +12508,7 @@ var stations = {
             "id": "node/568857475",
             "properties": {
                 "@id": "node/568857475",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -12523,7 +12523,7 @@ var stations = {
             "id": "node/568857485",
             "properties": {
                 "@id": "node/568857485",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -12538,7 +12538,7 @@ var stations = {
             "id": "node/568857486",
             "properties": {
                 "@id": "node/568857486",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -12558,7 +12558,7 @@ var stations = {
             "id": "node/568857491",
             "properties": {
                 "@id": "node/568857491",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -12578,7 +12578,7 @@ var stations = {
             "id": "node/568857495",
             "properties": {
                 "@id": "node/568857495",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -12596,7 +12596,7 @@ var stations = {
             "id": "node/568857497",
             "properties": {
                 "@id": "node/568857497",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -12614,7 +12614,7 @@ var stations = {
             "id": "node/568857500",
             "properties": {
                 "@id": "node/568857500",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "СЭМ",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -12636,7 +12636,7 @@ var stations = {
             "id": "node/568857518",
             "properties": {
                 "@id": "node/568857518",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -12668,7 +12668,7 @@ var stations = {
             "id": "node/568857520",
             "properties": {
                 "@id": "node/568857520",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -12684,7 +12684,7 @@ var stations = {
             "id": "node/568857523",
             "properties": {
                 "@id": "node/568857523",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:HGV_diesel": "yes",
@@ -12715,7 +12715,7 @@ var stations = {
             "id": "node/569088452",
             "properties": {
                 "@id": "node/569088452",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -12730,7 +12730,7 @@ var stations = {
             "id": "node/569696769",
             "properties": {
                 "@id": "node/569696769",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "НЕФТО"
             },
             "geometry": {
@@ -12746,7 +12746,7 @@ var stations = {
             "id": "node/571426419",
             "properties": {
                 "@id": "node/571426419",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Shell",
                 "operator": "Shell",
                 "website": "http://www.shell.com.ru/"
@@ -12764,7 +12764,7 @@ var stations = {
             "id": "node/571828282",
             "properties": {
                 "@id": "node/571828282",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл",
                 "operator": "Лукойл",
                 "website": "http://www.lukoil.ru/"
@@ -12782,7 +12782,7 @@ var stations = {
             "id": "node/571883953",
             "properties": {
                 "@id": "node/571883953",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл",
                 "operator": "Лукойл",
                 "ref": "4",
@@ -12801,7 +12801,7 @@ var stations = {
             "id": "node/571905070",
             "properties": {
                 "@id": "node/571905070",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл"
             },
             "geometry": {
@@ -12817,7 +12817,7 @@ var stations = {
             "id": "node/572561564",
             "properties": {
                 "@id": "node/572561564",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -12834,7 +12834,7 @@ var stations = {
             "id": "node/573343667",
             "properties": {
                 "@id": "node/573343667",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -12850,7 +12850,7 @@ var stations = {
             "id": "node/574814421",
             "properties": {
                 "@id": "node/574814421",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефтьмагистраль",
                 "operator": "АЗС №1"
             },
@@ -12867,7 +12867,7 @@ var stations = {
             "id": "node/574814422",
             "properties": {
                 "@id": "node/574814422",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Транс АЗС"
             },
             "geometry": {
@@ -12883,7 +12883,7 @@ var stations = {
             "id": "node/574839053",
             "properties": {
                 "@id": "node/574839053",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -12903,7 +12903,7 @@ var stations = {
             "id": "node/574850239",
             "properties": {
                 "@id": "node/574850239",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "name": "Трасса",
                 "operator": "Трасса"
@@ -12921,7 +12921,7 @@ var stations = {
             "id": "node/574850281",
             "properties": {
                 "@id": "node/574850281",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Unkoil",
                 "description": "АЗС №21 Unkoil",
                 "name": "Unkoil",
@@ -12940,7 +12940,7 @@ var stations = {
             "id": "node/579487895",
             "properties": {
                 "@id": "node/579487895",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Трасса",
                 "operator": "Трасса"
             },
@@ -12957,7 +12957,7 @@ var stations = {
             "id": "node/580795289",
             "properties": {
                 "@id": "node/580795289",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -12979,7 +12979,7 @@ var stations = {
             "id": "node/580817435",
             "properties": {
                 "@id": "node/580817435",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть №125"
             },
             "geometry": {
@@ -12995,7 +12995,7 @@ var stations = {
             "id": "node/580817442",
             "properties": {
                 "@id": "node/580817442",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_95": "yes",
                 "name": "Татнефть №127",
                 "operator": "ООО \"Татнефть - АЗС - Запад\""
@@ -13013,7 +13013,7 @@ var stations = {
             "id": "node/581872821",
             "properties": {
                 "@id": "node/581872821",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -13030,7 +13030,7 @@ var stations = {
             "id": "node/582807959",
             "properties": {
                 "@id": "node/582807959",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лотос"
             },
             "geometry": {
@@ -13046,7 +13046,7 @@ var stations = {
             "id": "node/582822653",
             "properties": {
                 "@id": "node/582822653",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -13065,7 +13065,7 @@ var stations = {
             "id": "node/582822656",
             "properties": {
                 "@id": "node/582822656",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -13084,7 +13084,7 @@ var stations = {
             "id": "node/582823154",
             "properties": {
                 "@id": "node/582823154",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Shell",
                 "operator": "Shell",
                 "website": "http://www.shell.com.ru/"
@@ -13102,7 +13102,7 @@ var stations = {
             "id": "node/582824350",
             "properties": {
                 "@id": "node/582824350",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -13129,7 +13129,7 @@ var stations = {
             "id": "node/582982826",
             "properties": {
                 "@id": "node/582982826",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -13144,7 +13144,7 @@ var stations = {
             "id": "node/586302632",
             "properties": {
                 "@id": "node/586302632",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -13159,7 +13159,7 @@ var stations = {
             "id": "node/586455895",
             "properties": {
                 "@id": "node/586455895",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "К36"
             },
             "geometry": {
@@ -13175,7 +13175,7 @@ var stations = {
             "id": "node/586600912",
             "properties": {
                 "@id": "node/586600912",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ООО \"Компания СБС-XXI\""
             },
@@ -13192,7 +13192,7 @@ var stations = {
             "id": "node/586900458",
             "properties": {
                 "@id": "node/586900458",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -13209,7 +13209,7 @@ var stations = {
             "id": "node/586902279",
             "properties": {
                 "@id": "node/586902279",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -13225,7 +13225,7 @@ var stations = {
             "id": "node/588454870",
             "properties": {
                 "@id": "node/588454870",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "УНКоил",
                 "operator": "УНКойл"
             },
@@ -13242,7 +13242,7 @@ var stations = {
             "id": "node/588454871",
             "properties": {
                 "@id": "node/588454871",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "УНКоил",
                 "operator": "УНКоил"
             },
@@ -13259,7 +13259,7 @@ var stations = {
             "id": "node/590654528",
             "properties": {
                 "@id": "node/590654528",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -13277,7 +13277,7 @@ var stations = {
             "id": "node/593905407",
             "properties": {
                 "@id": "node/593905407",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -13292,7 +13292,7 @@ var stations = {
             "id": "node/593920200",
             "properties": {
                 "@id": "node/593920200",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Орехово-Зуево",
                 "operator": "BP"
             },
@@ -13309,7 +13309,7 @@ var stations = {
             "id": "node/595484104",
             "properties": {
                 "@id": "node/595484104",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -13335,7 +13335,7 @@ var stations = {
             "id": "node/596691834",
             "properties": {
                 "@id": "node/596691834",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК Нефть",
                 "operator": "ТНК"
@@ -13353,7 +13353,7 @@ var stations = {
             "id": "node/598471636",
             "properties": {
                 "@id": "node/598471636",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТрансАЗС"
             },
             "geometry": {
@@ -13369,7 +13369,7 @@ var stations = {
             "id": "node/598471638",
             "properties": {
                 "@id": "node/598471638",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Транс АЗС"
             },
             "geometry": {
@@ -13385,7 +13385,7 @@ var stations = {
             "id": "node/598897708",
             "properties": {
                 "@id": "node/598897708",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -13402,7 +13402,7 @@ var stations = {
             "id": "node/598898710",
             "properties": {
                 "@id": "node/598898710",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -13419,7 +13419,7 @@ var stations = {
             "id": "node/598902931",
             "properties": {
                 "@id": "node/598902931",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "\"Нэк\""
             },
             "geometry": {
@@ -13435,7 +13435,7 @@ var stations = {
             "id": "node/599082458",
             "properties": {
                 "@id": "node/599082458",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "description": "92, 95 бензин",
                 "fixme": "User defined",
                 "name": "ТрансАЗС"
@@ -13453,7 +13453,7 @@ var stations = {
             "id": "node/603956345",
             "properties": {
                 "@id": "node/603956345",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть"
             },
@@ -13470,7 +13470,7 @@ var stations = {
             "id": "node/604693217",
             "properties": {
                 "@id": "node/604693217",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -13485,7 +13485,7 @@ var stations = {
             "id": "node/605732086",
             "properties": {
                 "@id": "node/605732086",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -13500,7 +13500,7 @@ var stations = {
             "id": "node/606191838",
             "properties": {
                 "@id": "node/606191838",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпромнефть",
                 "disused": "yes"
             },
@@ -13517,7 +13517,7 @@ var stations = {
             "id": "node/606967148",
             "properties": {
                 "@id": "node/606967148",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сокол"
             },
             "geometry": {
@@ -13533,7 +13533,7 @@ var stations = {
             "id": "node/606976007",
             "properties": {
                 "@id": "node/606976007",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -13552,7 +13552,7 @@ var stations = {
             "id": "node/608076061",
             "properties": {
                 "@id": "node/608076061",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -13583,7 +13583,7 @@ var stations = {
             "id": "node/609546094",
             "properties": {
                 "@id": "node/609546094",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -13598,7 +13598,7 @@ var stations = {
             "id": "node/609900645",
             "properties": {
                 "@id": "node/609900645",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -13618,7 +13618,7 @@ var stations = {
             "id": "node/610548448",
             "properties": {
                 "@id": "node/610548448",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -13639,7 +13639,7 @@ var stations = {
             "id": "node/610773015",
             "properties": {
                 "@id": "node/610773015",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -13664,7 +13664,7 @@ var stations = {
             "id": "node/611029842",
             "properties": {
                 "@id": "node/611029842",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -13692,7 +13692,7 @@ var stations = {
             "id": "node/611077018",
             "properties": {
                 "@id": "node/611077018",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -13713,7 +13713,7 @@ var stations = {
             "id": "node/613401317",
             "properties": {
                 "@id": "node/613401317",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "GB Petrol"
             },
             "geometry": {
@@ -13729,7 +13729,7 @@ var stations = {
             "id": "node/615561144",
             "properties": {
                 "@id": "node/615561144",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "kiosk": "yes",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -13747,7 +13747,7 @@ var stations = {
             "id": "node/616294537",
             "properties": {
                 "@id": "node/616294537",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Транс АЗС"
             },
             "geometry": {
@@ -13763,7 +13763,7 @@ var stations = {
             "id": "node/616755618",
             "properties": {
                 "@id": "node/616755618",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -13778,7 +13778,7 @@ var stations = {
             "id": "node/617836693",
             "properties": {
                 "@id": "node/617836693",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -13794,7 +13794,7 @@ var stations = {
             "id": "node/617836697",
             "properties": {
                 "@id": "node/617836697",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "НЕОТЕК"
             },
             "geometry": {
@@ -13810,7 +13810,7 @@ var stations = {
             "id": "node/617836737",
             "properties": {
                 "@id": "node/617836737",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -13826,7 +13826,7 @@ var stations = {
             "id": "node/618559761",
             "properties": {
                 "@id": "node/618559761",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -13853,7 +13853,7 @@ var stations = {
             "id": "node/618700012",
             "properties": {
                 "@id": "node/618700012",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -13878,7 +13878,7 @@ var stations = {
             "id": "node/619373403",
             "properties": {
                 "@id": "node/619373403",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС \"Мострансавто\""
             },
             "geometry": {
@@ -13894,7 +13894,7 @@ var stations = {
             "id": "node/619392277",
             "properties": {
                 "@id": "node/619392277",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -13925,7 +13925,7 @@ var stations = {
             "id": "node/619748739",
             "properties": {
                 "@id": "node/619748739",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -13943,7 +13943,7 @@ var stations = {
             "id": "node/620370408",
             "properties": {
                 "@id": "node/620370408",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Гришков и Ко",
                 "operator": "Гришков и компания"
             },
@@ -13960,7 +13960,7 @@ var stations = {
             "id": "node/622196856",
             "properties": {
                 "@id": "node/622196856",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -13975,7 +13975,7 @@ var stations = {
             "id": "node/622584700",
             "properties": {
                 "@id": "node/622584700",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -13993,7 +13993,7 @@ var stations = {
             "id": "node/623570685",
             "properties": {
                 "@id": "node/623570685",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -14020,7 +14020,7 @@ var stations = {
             "id": "node/623578045",
             "properties": {
                 "@id": "node/623578045",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "NPS"
             },
             "geometry": {
@@ -14036,7 +14036,7 @@ var stations = {
             "id": "node/623578052",
             "properties": {
                 "@id": "node/623578052",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -14067,7 +14067,7 @@ var stations = {
             "id": "node/623580374",
             "properties": {
                 "@id": "node/623580374",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Uniqoil"
             },
             "geometry": {
@@ -14083,7 +14083,7 @@ var stations = {
             "id": "node/624448497",
             "properties": {
                 "@id": "node/624448497",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сургутнефтегаз"
             },
             "geometry": {
@@ -14099,7 +14099,7 @@ var stations = {
             "id": "node/624777037",
             "properties": {
                 "@id": "node/624777037",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "ethanol": "no",
                 "fuel:biodiesel": "no",
                 "fuel:diesel": "yes",
@@ -14123,7 +14123,7 @@ var stations = {
             "id": "node/628673318",
             "properties": {
                 "@id": "node/628673318",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Бензин+газ"
             },
             "geometry": {
@@ -14139,7 +14139,7 @@ var stations = {
             "id": "node/629216167",
             "properties": {
                 "@id": "node/629216167",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:biogas": "yes",
                 "fuel:cng": "yes",
                 "fuel:e10": "yes",
@@ -14159,7 +14159,7 @@ var stations = {
             "id": "node/630391652",
             "properties": {
                 "@id": "node/630391652",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лотос"
             },
             "geometry": {
@@ -14175,7 +14175,7 @@ var stations = {
             "id": "node/630391654",
             "properties": {
                 "@id": "node/630391654",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ПТК"
             },
             "geometry": {
@@ -14191,7 +14191,7 @@ var stations = {
             "id": "node/630391750",
             "properties": {
                 "@id": "node/630391750",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -14217,7 +14217,7 @@ var stations = {
             "id": "node/630982922",
             "properties": {
                 "@id": "node/630982922",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Транссервис"
             },
             "geometry": {
@@ -14233,7 +14233,7 @@ var stations = {
             "id": "node/631042644",
             "properties": {
                 "@id": "node/631042644",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -14261,7 +14261,7 @@ var stations = {
             "id": "node/631129961",
             "properties": {
                 "@id": "node/631129961",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -14276,7 +14276,7 @@ var stations = {
             "id": "node/631171937",
             "properties": {
                 "@id": "node/631171937",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -14292,7 +14292,7 @@ var stations = {
             "id": "node/632367454",
             "properties": {
                 "@id": "node/632367454",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -14320,7 +14320,7 @@ var stations = {
             "id": "node/632814016",
             "properties": {
                 "@id": "node/632814016",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -14342,7 +14342,7 @@ var stations = {
             "id": "node/632814037",
             "properties": {
                 "@id": "node/632814037",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -14357,7 +14357,7 @@ var stations = {
             "id": "node/633132266",
             "properties": {
                 "@id": "node/633132266",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -14372,7 +14372,7 @@ var stations = {
             "id": "node/633632132",
             "properties": {
                 "@id": "node/633632132",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -14389,7 +14389,7 @@ var stations = {
             "id": "node/637696435",
             "properties": {
                 "@id": "node/637696435",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -14405,7 +14405,7 @@ var stations = {
             "id": "node/638467679",
             "properties": {
                 "@id": "node/638467679",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "City Oil",
                 "operator": "City Oil"
             },
@@ -14422,7 +14422,7 @@ var stations = {
             "id": "node/641567503",
             "properties": {
                 "@id": "node/641567503",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Тверьнефтепродукт",
                 "operator": "Тверьнефтепродукт"
             },
@@ -14439,7 +14439,7 @@ var stations = {
             "id": "node/641612904",
             "properties": {
                 "@id": "node/641612904",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -14472,7 +14472,7 @@ var stations = {
             "id": "node/641690847",
             "properties": {
                 "@id": "node/641690847",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -14487,7 +14487,7 @@ var stations = {
             "id": "node/642103073",
             "properties": {
                 "@id": "node/642103073",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Руснефть"
             },
             "geometry": {
@@ -14503,7 +14503,7 @@ var stations = {
             "id": "node/648576303",
             "properties": {
                 "@id": "node/648576303",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -14518,7 +14518,7 @@ var stations = {
             "id": "node/652423924",
             "properties": {
                 "@id": "node/652423924",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "disused": "yes",
                 "name": "TatNeft"
             },
@@ -14535,7 +14535,7 @@ var stations = {
             "id": "node/656084971",
             "properties": {
                 "@id": "node/656084971",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -14561,7 +14561,7 @@ var stations = {
             "id": "node/656692719",
             "properties": {
                 "@id": "node/656692719",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "name": "ПП"
@@ -14579,7 +14579,7 @@ var stations = {
             "id": "node/659019560",
             "properties": {
                 "@id": "node/659019560",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -14600,7 +14600,7 @@ var stations = {
             "id": "node/659019561",
             "properties": {
                 "@id": "node/659019561",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -14626,7 +14626,7 @@ var stations = {
             "id": "node/659802803",
             "properties": {
                 "@id": "node/659802803",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -14651,7 +14651,7 @@ var stations = {
             "id": "node/659953508",
             "properties": {
                 "@id": "node/659953508",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -14678,7 +14678,7 @@ var stations = {
             "id": "node/659954663",
             "properties": {
                 "@id": "node/659954663",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть"
             },
@@ -14695,7 +14695,7 @@ var stations = {
             "id": "node/660151804",
             "properties": {
                 "@id": "node/660151804",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -14710,7 +14710,7 @@ var stations = {
             "id": "node/660396961",
             "properties": {
                 "@id": "node/660396961",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -14727,7 +14727,7 @@ var stations = {
             "id": "node/660562335",
             "properties": {
                 "@id": "node/660562335",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -14754,7 +14754,7 @@ var stations = {
             "id": "node/661046154",
             "properties": {
                 "@id": "node/661046154",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "opening_hours": "24/7",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -14772,7 +14772,7 @@ var stations = {
             "id": "node/661046158",
             "properties": {
                 "@id": "node/661046158",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -14793,7 +14793,7 @@ var stations = {
             "id": "node/661046159",
             "properties": {
                 "@id": "node/661046159",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -14815,7 +14815,7 @@ var stations = {
             "id": "node/661087904",
             "properties": {
                 "@id": "node/661087904",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -14830,7 +14830,7 @@ var stations = {
             "id": "node/661087911",
             "properties": {
                 "@id": "node/661087911",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -14845,7 +14845,7 @@ var stations = {
             "id": "node/661516045",
             "properties": {
                 "@id": "node/661516045",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -14862,7 +14862,7 @@ var stations = {
             "id": "node/661516053",
             "properties": {
                 "@id": "node/661516053",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -14879,7 +14879,7 @@ var stations = {
             "id": "node/661542265",
             "properties": {
                 "@id": "node/661542265",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -14910,7 +14910,7 @@ var stations = {
             "id": "node/661542268",
             "properties": {
                 "@id": "node/661542268",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -14942,7 +14942,7 @@ var stations = {
             "id": "node/661542270",
             "properties": {
                 "@id": "node/661542270",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ОРТК",
                 "operator": "ОРТК"
             },
@@ -14959,7 +14959,7 @@ var stations = {
             "id": "node/661542272",
             "properties": {
                 "@id": "node/661542272",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -14976,7 +14976,7 @@ var stations = {
             "id": "node/661542274",
             "properties": {
                 "@id": "node/661542274",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -15003,7 +15003,7 @@ var stations = {
             "id": "node/661542275",
             "properties": {
                 "@id": "node/661542275",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -15035,7 +15035,7 @@ var stations = {
             "id": "node/661549713",
             "properties": {
                 "@id": "node/661549713",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -15053,7 +15053,7 @@ var stations = {
             "id": "node/662190377",
             "properties": {
                 "@id": "node/662190377",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -15068,7 +15068,7 @@ var stations = {
             "id": "node/662559176",
             "properties": {
                 "@id": "node/662559176",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Shell",
                 "fuel:biodiesel": "no",
                 "fuel:biogas": "no",
@@ -15092,7 +15092,7 @@ var stations = {
             "id": "node/662755936",
             "properties": {
                 "@id": "node/662755936",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -15120,7 +15120,7 @@ var stations = {
             "id": "node/663657543",
             "properties": {
                 "@id": "node/663657543",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Арис"
             },
             "geometry": {
@@ -15136,7 +15136,7 @@ var stations = {
             "id": "node/663756832",
             "properties": {
                 "@id": "node/663756832",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru/new/azslocator/station/4079",
@@ -15163,7 +15163,7 @@ var stations = {
             "id": "node/664657754",
             "properties": {
                 "@id": "node/664657754",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -15184,7 +15184,7 @@ var stations = {
                 "@id": "node/671184850",
                 "addr:city": "Зеленоград",
                 "addr:street": "Андреевка",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -15203,7 +15203,7 @@ var stations = {
             "id": "node/671587072",
             "properties": {
                 "@id": "node/671587072",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -15235,7 +15235,7 @@ var stations = {
             "id": "node/671808735",
             "properties": {
                 "@id": "node/671808735",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -15254,7 +15254,7 @@ var stations = {
             "id": "node/671808739",
             "properties": {
                 "@id": "node/671808739",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -15275,7 +15275,7 @@ var stations = {
             "id": "node/671931598",
             "properties": {
                 "@id": "node/671931598",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -15290,7 +15290,7 @@ var stations = {
             "id": "node/672056128",
             "properties": {
                 "@id": "node/672056128",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -15312,7 +15312,7 @@ var stations = {
             "id": "node/672056130",
             "properties": {
                 "@id": "node/672056130",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС (пропан)"
             },
@@ -15329,7 +15329,7 @@ var stations = {
             "id": "node/672056140",
             "properties": {
                 "@id": "node/672056140",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Стинвест"
             },
             "geometry": {
@@ -15345,7 +15345,7 @@ var stations = {
             "id": "node/672056141",
             "properties": {
                 "@id": "node/672056141",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -15361,7 +15361,7 @@ var stations = {
             "id": "node/674032297",
             "properties": {
                 "@id": "node/674032297",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -15376,7 +15376,7 @@ var stations = {
             "id": "node/675516448",
             "properties": {
                 "@id": "node/675516448",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "construction": "yes",
                 "description": "Закрыто на ремонт",
                 "name": "Роснефть",
@@ -15396,7 +15396,7 @@ var stations = {
             "id": "node/675516455",
             "properties": {
                 "@id": "node/675516455",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -15412,7 +15412,7 @@ var stations = {
             "id": "node/675516466",
             "properties": {
                 "@id": "node/675516466",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -15439,7 +15439,7 @@ var stations = {
             "id": "node/675516469",
             "properties": {
                 "@id": "node/675516469",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -15462,7 +15462,7 @@ var stations = {
             "id": "node/676103083",
             "properties": {
                 "@id": "node/676103083",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "description": "АЗС",
                 "name": "ТНК"
             },
@@ -15479,7 +15479,7 @@ var stations = {
             "id": "node/676228540",
             "properties": {
                 "@id": "node/676228540",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Очаково",
                 "operator": "BP"
             },
@@ -15496,7 +15496,7 @@ var stations = {
             "id": "node/676929680",
             "properties": {
                 "@id": "node/676929680",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "BP",
                 "name": "BP",
                 "operator": "BP"
@@ -15514,7 +15514,7 @@ var stations = {
             "id": "node/678295661",
             "properties": {
                 "@id": "node/678295661",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -15529,7 +15529,7 @@ var stations = {
             "id": "node/679414152",
             "properties": {
                 "@id": "node/679414152",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Ясенево",
                 "operator": "BP"
             },
@@ -15546,7 +15546,7 @@ var stations = {
             "id": "node/679415021",
             "properties": {
                 "@id": "node/679415021",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP",
                 "operator": "BP"
             },
@@ -15563,7 +15563,7 @@ var stations = {
             "id": "node/679417969",
             "properties": {
                 "@id": "node/679417969",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Юго-Западная",
                 "operator": "BP"
             },
@@ -15580,7 +15580,7 @@ var stations = {
             "id": "node/679426962",
             "properties": {
                 "@id": "node/679426962",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -15604,7 +15604,7 @@ var stations = {
             "id": "node/679454741",
             "properties": {
                 "@id": "node/679454741",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Кубанская",
                 "operator": "BP"
             },
@@ -15621,7 +15621,7 @@ var stations = {
             "id": "node/679454860",
             "properties": {
                 "@id": "node/679454860",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Люблинская",
                 "operator": "BP"
             },
@@ -15638,7 +15638,7 @@ var stations = {
             "id": "node/679473567",
             "properties": {
                 "@id": "node/679473567",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Лосиный остров",
                 "operator": "BP"
             },
@@ -15655,7 +15655,7 @@ var stations = {
             "id": "node/679474552",
             "properties": {
                 "@id": "node/679474552",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Мытищи",
                 "operator": "BP"
             },
@@ -15672,7 +15672,7 @@ var stations = {
             "id": "node/679474639",
             "properties": {
                 "@id": "node/679474639",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
@@ -15692,7 +15692,7 @@ var stations = {
             "id": "node/683267541",
             "properties": {
                 "@id": "node/683267541",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -15723,7 +15723,7 @@ var stations = {
             "id": "node/683267542",
             "properties": {
                 "@id": "node/683267542",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -15754,7 +15754,7 @@ var stations = {
             "id": "node/684596679",
             "properties": {
                 "@id": "node/684596679",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Нефто"
             },
             "geometry": {
@@ -15770,7 +15770,7 @@ var stations = {
             "id": "node/684670626",
             "properties": {
                 "@id": "node/684670626",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ЕТК",
                 "name": "ЕТК",
                 "operator": "ИП Светлова И.В."
@@ -15788,7 +15788,7 @@ var stations = {
             "id": "node/684670637",
             "properties": {
                 "@id": "node/684670637",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -15803,7 +15803,7 @@ var stations = {
             "id": "node/685445264",
             "properties": {
                 "@id": "node/685445264",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -15832,7 +15832,7 @@ var stations = {
             "id": "node/685777477",
             "properties": {
                 "@id": "node/685777477",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть"
             },
             "geometry": {
@@ -15848,7 +15848,7 @@ var stations = {
             "id": "node/685777585",
             "properties": {
                 "@id": "node/685777585",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -15876,7 +15876,7 @@ var stations = {
             "id": "node/686210650",
             "properties": {
                 "@id": "node/686210650",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -15892,7 +15892,7 @@ var stations = {
             "id": "node/686657558",
             "properties": {
                 "@id": "node/686657558",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -15911,7 +15911,7 @@ var stations = {
             "id": "node/687519962",
             "properties": {
                 "@id": "node/687519962",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -15931,7 +15931,7 @@ var stations = {
             "id": "node/688768583",
             "properties": {
                 "@id": "node/688768583",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -15948,7 +15948,7 @@ var stations = {
             "id": "node/688778040",
             "properties": {
                 "@id": "node/688778040",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "operator": "Aris"
             },
@@ -15965,7 +15965,7 @@ var stations = {
             "id": "node/690017305",
             "properties": {
                 "@id": "node/690017305",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -15983,7 +15983,7 @@ var stations = {
             "id": "node/690361404",
             "properties": {
                 "@id": "node/690361404",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -16005,7 +16005,7 @@ var stations = {
             "id": "node/691811436",
             "properties": {
                 "@id": "node/691811436",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -16022,7 +16022,7 @@ var stations = {
             "id": "node/694059800",
             "properties": {
                 "@id": "node/694059800",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Лукойл"
             },
             "geometry": {
@@ -16038,7 +16038,7 @@ var stations = {
             "id": "node/694059803",
             "properties": {
                 "@id": "node/694059803",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_92": "yes",
@@ -16059,7 +16059,7 @@ var stations = {
             "id": "node/694059806",
             "properties": {
                 "@id": "node/694059806",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -16075,7 +16075,7 @@ var stations = {
             "id": "node/694059815",
             "properties": {
                 "@id": "node/694059815",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Газпромнефть",
                 "operator": "Газпром нефть",
                 "ref": "АЗС №112"
@@ -16093,7 +16093,7 @@ var stations = {
             "id": "node/694098208",
             "properties": {
                 "@id": "node/694098208",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТрансАЗС",
                 "website": "http://www.transazs.com/"
             },
@@ -16110,7 +16110,7 @@ var stations = {
             "id": "node/694098210",
             "properties": {
                 "@id": "node/694098210",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТрансАЗС",
                 "website": "http://www.transazs.com/"
             },
@@ -16127,7 +16127,7 @@ var stations = {
             "id": "node/694335049",
             "properties": {
                 "@id": "node/694335049",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -16142,7 +16142,7 @@ var stations = {
             "id": "node/698836785",
             "properties": {
                 "@id": "node/698836785",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ИНТОП",
                 "fuel:HGV_diesel": "no",
                 "fuel:diesel": "yes",
@@ -16167,7 +16167,7 @@ var stations = {
             "id": "node/698836786",
             "properties": {
                 "@id": "node/698836786",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -16182,7 +16182,7 @@ var stations = {
             "id": "node/698868288",
             "properties": {
                 "@id": "node/698868288",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "description": "Всегда хорошее топливо. Заправляюсь только тут 2007-2010",
                 "name": "АЗС ТНК\"",
                 "name:ru": "АЗС ТНК\""
@@ -16200,7 +16200,7 @@ var stations = {
             "id": "node/698985353",
             "properties": {
                 "@id": "node/698985353",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -16215,7 +16215,7 @@ var stations = {
             "id": "node/698985354",
             "properties": {
                 "@id": "node/698985354",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -16230,7 +16230,7 @@ var stations = {
             "id": "node/699049354",
             "properties": {
                 "@id": "node/699049354",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сибнефть"
             },
             "geometry": {
@@ -16246,7 +16246,7 @@ var stations = {
             "id": "node/699673208",
             "properties": {
                 "@id": "node/699673208",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -16261,7 +16261,7 @@ var stations = {
             "id": "node/700902859",
             "properties": {
                 "@id": "node/700902859",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -16287,7 +16287,7 @@ var stations = {
             "id": "node/700908236",
             "properties": {
                 "@id": "node/700908236",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -16303,7 +16303,7 @@ var stations = {
             "id": "node/700912199",
             "properties": {
                 "@id": "node/700912199",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP",
                 "operator": "BP"
             },
@@ -16320,7 +16320,7 @@ var stations = {
             "id": "node/700913407",
             "properties": {
                 "@id": "node/700913407",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -16336,7 +16336,7 @@ var stations = {
             "id": "node/700916376",
             "properties": {
                 "@id": "node/700916376",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -16352,7 +16352,7 @@ var stations = {
             "id": "node/701240933",
             "properties": {
                 "@id": "node/701240933",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:HGV_diesel": "no",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
@@ -16372,7 +16372,7 @@ var stations = {
             "id": "node/701739873",
             "properties": {
                 "@id": "node/701739873",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "no",
                 "fuel:octane_92": "yes",
@@ -16399,7 +16399,7 @@ var stations = {
             "id": "node/701740036",
             "properties": {
                 "@id": "node/701740036",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -16417,7 +16417,7 @@ var stations = {
             "id": "node/701740297",
             "properties": {
                 "@id": "node/701740297",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефтьмагистраль",
                 "website": "http://www.neftm.ru/"
             },
@@ -16434,7 +16434,7 @@ var stations = {
             "id": "node/701998319",
             "properties": {
                 "@id": "node/701998319",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -16462,7 +16462,7 @@ var stations = {
             "id": "node/702984850",
             "properties": {
                 "@id": "node/702984850",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "source": "GPS"
             },
             "geometry": {
@@ -16478,7 +16478,7 @@ var stations = {
             "id": "node/703067944",
             "properties": {
                 "@id": "node/703067944",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -16499,7 +16499,7 @@ var stations = {
             "id": "node/703072435",
             "properties": {
                 "@id": "node/703072435",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -16520,7 +16520,7 @@ var stations = {
             "id": "node/704835232",
             "properties": {
                 "@id": "node/704835232",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -16535,7 +16535,7 @@ var stations = {
             "id": "node/706444355",
             "properties": {
                 "@id": "node/706444355",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -16550,7 +16550,7 @@ var stations = {
             "id": "node/706968807",
             "properties": {
                 "@id": "node/706968807",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -16567,7 +16567,7 @@ var stations = {
             "id": "node/708413624",
             "properties": {
                 "@id": "node/708413624",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -16592,7 +16592,7 @@ var stations = {
             "id": "node/708420127",
             "properties": {
                 "@id": "node/708420127",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Мовиль"
             },
             "geometry": {
@@ -16608,7 +16608,7 @@ var stations = {
             "id": "node/708442353",
             "properties": {
                 "@id": "node/708442353",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "name": "Нефтьмагистраль №14",
                 "operator": "Нефтьмагистраль"
@@ -16626,7 +16626,7 @@ var stations = {
             "id": "node/708442357",
             "properties": {
                 "@id": "node/708442357",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "name": "Нефтьмагистраль №15",
                 "operator": "Нефтьмагистраль"
@@ -16644,7 +16644,7 @@ var stations = {
             "id": "node/708442361",
             "properties": {
                 "@id": "node/708442361",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефтосервис"
             },
             "geometry": {
@@ -16660,7 +16660,7 @@ var stations = {
             "id": "node/710573713",
             "properties": {
                 "@id": "node/710573713",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС \"Энергорегион\"",
                 "operator": "Энергорегион"
             },
@@ -16677,7 +16677,7 @@ var stations = {
             "id": "node/710681250",
             "properties": {
                 "@id": "node/710681250",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -16693,7 +16693,7 @@ var stations = {
             "id": "node/710681251",
             "properties": {
                 "@id": "node/710681251",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Мегаойл"
             },
             "geometry": {
@@ -16709,7 +16709,7 @@ var stations = {
             "id": "node/712920726",
             "properties": {
                 "@id": "node/712920726",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95plus": "yes",
@@ -16739,7 +16739,7 @@ var stations = {
             "id": "node/712921568",
             "properties": {
                 "@id": "node/712921568",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -16755,7 +16755,7 @@ var stations = {
             "id": "node/712934531",
             "properties": {
                 "@id": "node/712934531",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -16775,7 +16775,7 @@ var stations = {
             "id": "node/717201620",
             "properties": {
                 "@id": "node/717201620",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -16795,7 +16795,7 @@ var stations = {
             "id": "node/717367867",
             "properties": {
                 "@id": "node/717367867",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -16812,7 +16812,7 @@ var stations = {
             "id": "node/717367879",
             "properties": {
                 "@id": "node/717367879",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "РосНефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -16830,7 +16830,7 @@ var stations = {
             "id": "node/717379826",
             "properties": {
                 "@id": "node/717379826",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "name": "АЗС Лоран"
@@ -16848,7 +16848,7 @@ var stations = {
             "id": "node/717381375",
             "properties": {
                 "@id": "node/717381375",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -16863,7 +16863,7 @@ var stations = {
             "id": "node/717381380",
             "properties": {
                 "@id": "node/717381380",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -16879,7 +16879,7 @@ var stations = {
             "id": "node/717391255",
             "properties": {
                 "@id": "node/717391255",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -16895,7 +16895,7 @@ var stations = {
             "id": "node/722806945",
             "properties": {
                 "@id": "node/722806945",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Shell",
                 "name": "Shell",
                 "operator": "Shell"
@@ -16913,7 +16913,7 @@ var stations = {
             "id": "node/722812510",
             "properties": {
                 "@id": "node/722812510",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК 100км",
                 "operator": "ТНК",
                 "source": "voice"
@@ -16931,7 +16931,7 @@ var stations = {
             "id": "node/722842041",
             "properties": {
                 "@id": "node/722842041",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС на 145 км"
             },
             "geometry": {
@@ -16947,7 +16947,7 @@ var stations = {
             "id": "node/722847725",
             "properties": {
                 "@id": "node/722847725",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Паритет",
                 "source": "voice"
             },
@@ -16964,7 +16964,7 @@ var stations = {
             "id": "node/724397796",
             "properties": {
                 "@id": "node/724397796",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -16980,7 +16980,7 @@ var stations = {
             "id": "node/726727312",
             "properties": {
                 "@id": "node/726727312",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -16995,7 +16995,7 @@ var stations = {
             "id": "node/727494464",
             "properties": {
                 "@id": "node/727494464",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -17023,7 +17023,7 @@ var stations = {
             "id": "node/727520556",
             "properties": {
                 "@id": "node/727520556",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "name": "Лукойл",
                 "operator": "Лукойл",
@@ -17042,7 +17042,7 @@ var stations = {
             "id": "node/727532146",
             "properties": {
                 "@id": "node/727532146",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Славнефть"
             },
             "geometry": {
@@ -17058,7 +17058,7 @@ var stations = {
             "id": "node/727537366",
             "properties": {
                 "@id": "node/727537366",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "МосОЙЛ"
             },
             "geometry": {
@@ -17074,7 +17074,7 @@ var stations = {
             "id": "node/728349963",
             "properties": {
                 "@id": "node/728349963",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл",
                 "operator": "Лукойл",
                 "website": "http://www.lukoil.ru/"
@@ -17092,7 +17092,7 @@ var stations = {
             "id": "node/729024579",
             "properties": {
                 "@id": "node/729024579",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17113,7 +17113,7 @@ var stations = {
             "id": "node/730660076",
             "properties": {
                 "@id": "node/730660076",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -17128,7 +17128,7 @@ var stations = {
             "id": "node/730855008",
             "properties": {
                 "@id": "node/730855008",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "181-й км"
             },
             "geometry": {
@@ -17144,7 +17144,7 @@ var stations = {
             "id": "node/730855019",
             "properties": {
                 "@id": "node/730855019",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -17159,7 +17159,7 @@ var stations = {
             "id": "node/730946837",
             "properties": {
                 "@id": "node/730946837",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ВЭЛС Сервис"
             },
             "geometry": {
@@ -17175,7 +17175,7 @@ var stations = {
             "id": "node/731992221",
             "properties": {
                 "@id": "node/731992221",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК №6",
                 "operator": "ТНК"
             },
@@ -17192,7 +17192,7 @@ var stations = {
             "id": "node/731992305",
             "properties": {
                 "@id": "node/731992305",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -17207,7 +17207,7 @@ var stations = {
             "id": "node/732339419",
             "properties": {
                 "@id": "node/732339419",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -17228,7 +17228,7 @@ var stations = {
             "id": "node/732656373",
             "properties": {
                 "@id": "node/732656373",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "construction": "yes",
                 "disused": "yes",
                 "ethanol": "no",
@@ -17251,7 +17251,7 @@ var stations = {
             "id": "node/732978272",
             "properties": {
                 "@id": "node/732978272",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17272,7 +17272,7 @@ var stations = {
             "id": "node/733686941",
             "properties": {
                 "@id": "node/733686941",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -17288,7 +17288,7 @@ var stations = {
             "id": "node/733895641",
             "properties": {
                 "@id": "node/733895641",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Энергорегион"
             },
             "geometry": {
@@ -17304,7 +17304,7 @@ var stations = {
             "id": "node/733958063",
             "properties": {
                 "@id": "node/733958063",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -17320,7 +17320,7 @@ var stations = {
             "id": "node/734509129",
             "properties": {
                 "@id": "node/734509129",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17341,7 +17341,7 @@ var stations = {
             "id": "node/734509150",
             "properties": {
                 "@id": "node/734509150",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "disused": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17361,7 +17361,7 @@ var stations = {
             "id": "node/734509156",
             "properties": {
                 "@id": "node/734509156",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -17379,7 +17379,7 @@ var stations = {
             "id": "node/734509165",
             "properties": {
                 "@id": "node/734509165",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -17397,7 +17397,7 @@ var stations = {
             "id": "node/734904042",
             "properties": {
                 "@id": "node/734904042",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17418,7 +17418,7 @@ var stations = {
             "id": "node/735479022",
             "properties": {
                 "@id": "node/735479022",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -17446,7 +17446,7 @@ var stations = {
             "id": "node/735479031",
             "properties": {
                 "@id": "node/735479031",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
             },
@@ -17463,7 +17463,7 @@ var stations = {
             "id": "node/735479099",
             "properties": {
                 "@id": "node/735479099",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -17478,7 +17478,7 @@ var stations = {
             "id": "node/735479127",
             "properties": {
                 "@id": "node/735479127",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17497,7 +17497,7 @@ var stations = {
             "id": "node/735479132",
             "properties": {
                 "@id": "node/735479132",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17517,7 +17517,7 @@ var stations = {
             "id": "node/735518726",
             "properties": {
                 "@id": "node/735518726",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "name": "ё4",
@@ -17536,7 +17536,7 @@ var stations = {
             "id": "node/735518741",
             "properties": {
                 "@id": "node/735518741",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17556,7 +17556,7 @@ var stations = {
             "id": "node/735561339",
             "properties": {
                 "@id": "node/735561339",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "РКОйл"
             },
             "geometry": {
@@ -17572,7 +17572,7 @@ var stations = {
             "id": "node/735618935",
             "properties": {
                 "@id": "node/735618935",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17591,7 +17591,7 @@ var stations = {
             "id": "node/735618951",
             "properties": {
                 "@id": "node/735618951",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -17608,7 +17608,7 @@ var stations = {
             "id": "node/735618959",
             "properties": {
                 "@id": "node/735618959",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17627,7 +17627,7 @@ var stations = {
             "id": "node/735618965",
             "properties": {
                 "@id": "node/735618965",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -17645,7 +17645,7 @@ var stations = {
             "id": "node/735618974",
             "properties": {
                 "@id": "node/735618974",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -17660,7 +17660,7 @@ var stations = {
             "id": "node/735771248",
             "properties": {
                 "@id": "node/735771248",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17679,7 +17679,7 @@ var stations = {
             "id": "node/735771255",
             "properties": {
                 "@id": "node/735771255",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17698,7 +17698,7 @@ var stations = {
             "id": "node/735771263",
             "properties": {
                 "@id": "node/735771263",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17719,7 +17719,7 @@ var stations = {
             "id": "node/735771364",
             "properties": {
                 "@id": "node/735771364",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -17737,7 +17737,7 @@ var stations = {
             "id": "node/735771411",
             "properties": {
                 "@id": "node/735771411",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17756,7 +17756,7 @@ var stations = {
             "id": "node/736806717",
             "properties": {
                 "@id": "node/736806717",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -17771,7 +17771,7 @@ var stations = {
             "id": "node/736806786",
             "properties": {
                 "@id": "node/736806786",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "РТК"
             },
             "geometry": {
@@ -17787,7 +17787,7 @@ var stations = {
             "id": "node/738257152",
             "properties": {
                 "@id": "node/738257152",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК-BP"
             },
@@ -17804,7 +17804,7 @@ var stations = {
             "id": "node/738268517",
             "properties": {
                 "@id": "node/738268517",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "№93",
                 "operator": "Татнефть"
             },
@@ -17821,7 +17821,7 @@ var stations = {
             "id": "node/738268754",
             "properties": {
                 "@id": "node/738268754",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -17841,7 +17841,7 @@ var stations = {
             "id": "node/738501080",
             "properties": {
                 "@id": "node/738501080",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -17856,7 +17856,7 @@ var stations = {
             "id": "node/739462811",
             "properties": {
                 "@id": "node/739462811",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -17878,7 +17878,7 @@ var stations = {
                 "@id": "node/740392470",
                 "addr:housenumber": "1А с3А",
                 "addr:street": "Пороховская улица",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -17897,7 +17897,7 @@ var stations = {
             "id": "node/747056605",
             "properties": {
                 "@id": "node/747056605",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -17926,7 +17926,7 @@ var stations = {
             "properties": {
                 "@id": "node/747847813",
                 "addr:street": "97-й км. а/д Балтия",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Элегант АЗС № 3",
                 "operator": "ООО Элегант"
             },
@@ -17943,7 +17943,7 @@ var stations = {
             "id": "node/751314239",
             "properties": {
                 "@id": "node/751314239",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС \"Трасса\"",
                 "operator": "ТНК"
             },
@@ -17960,7 +17960,7 @@ var stations = {
             "id": "node/758559456",
             "properties": {
                 "@id": "node/758559456",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Русь-Ойл"
             },
             "geometry": {
@@ -17976,7 +17976,7 @@ var stations = {
             "id": "node/760312278",
             "properties": {
                 "@id": "node/760312278",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Ютек Ойл"
             },
             "geometry": {
@@ -17992,7 +17992,7 @@ var stations = {
             "id": "node/760312294",
             "properties": {
                 "@id": "node/760312294",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпромнефть",
                 "name": "Газпромнефть АЗС №66",
                 "operator": "Газпромнефть",
@@ -18011,7 +18011,7 @@ var stations = {
             "id": "node/760312304",
             "properties": {
                 "@id": "node/760312304",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл",
                 "operator": "Лукойл",
                 "website": "http://www.lukoil.ru"
@@ -18029,7 +18029,7 @@ var stations = {
             "id": "node/760312310",
             "properties": {
                 "@id": "node/760312310",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -18047,7 +18047,7 @@ var stations = {
             "id": "node/760312333",
             "properties": {
                 "@id": "node/760312333",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ПТК",
                 "operator": "ПТК"
             },
@@ -18064,7 +18064,7 @@ var stations = {
             "id": "node/760312339",
             "properties": {
                 "@id": "node/760312339",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "comment": "АЗС №463, ООО «ЛУКОЙЛ-Центрнефтепродукт», Тверская область, Торжокский район, Марьинское с/п, на а/м Москва-Санкт-Петербург (210 км право) в районе д. Колесные Горки",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -18089,7 +18089,7 @@ var stations = {
             "id": "node/760312344",
             "properties": {
                 "@id": "node/760312344",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТверьНефтеПродукт"
             },
             "geometry": {
@@ -18105,7 +18105,7 @@ var stations = {
             "id": "node/762436349",
             "properties": {
                 "@id": "node/762436349",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18120,7 +18120,7 @@ var stations = {
             "id": "node/763155406",
             "properties": {
                 "@id": "node/763155406",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "City Oil",
                 "opening_hours": "24/7"
             },
@@ -18137,7 +18137,7 @@ var stations = {
             "id": "node/765869459",
             "properties": {
                 "@id": "node/765869459",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "РОСНЕФТЬ",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -18155,7 +18155,7 @@ var stations = {
             "id": "node/766684343",
             "properties": {
                 "@id": "node/766684343",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18170,7 +18170,7 @@ var stations = {
             "id": "node/766972400",
             "properties": {
                 "@id": "node/766972400",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -18189,7 +18189,7 @@ var stations = {
             "id": "node/767527285",
             "properties": {
                 "@id": "node/767527285",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -18214,7 +18214,7 @@ var stations = {
             "id": "node/767527577",
             "properties": {
                 "@id": "node/767527577",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -18234,7 +18234,7 @@ var stations = {
             "id": "node/767527610",
             "properties": {
                 "@id": "node/767527610",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Оил Шоп",
                 "operator": "Оил Шоп"
             },
@@ -18251,7 +18251,7 @@ var stations = {
             "id": "node/772426858",
             "properties": {
                 "@id": "node/772426858",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18266,7 +18266,7 @@ var stations = {
             "id": "node/772426861",
             "properties": {
                 "@id": "node/772426861",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -18298,7 +18298,7 @@ var stations = {
             "id": "node/772426862",
             "properties": {
                 "@id": "node/772426862",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть",
                 "operator": "Татнефть"
@@ -18316,7 +18316,7 @@ var stations = {
             "id": "node/772426865",
             "properties": {
                 "@id": "node/772426865",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -18337,7 +18337,7 @@ var stations = {
             "id": "node/772426867",
             "properties": {
                 "@id": "node/772426867",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -18355,7 +18355,7 @@ var stations = {
             "id": "node/773542495",
             "properties": {
                 "@id": "node/773542495",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -18381,7 +18381,7 @@ var stations = {
             "id": "node/776009275",
             "properties": {
                 "@id": "node/776009275",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18396,7 +18396,7 @@ var stations = {
             "id": "node/776009282",
             "properties": {
                 "@id": "node/776009282",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18411,7 +18411,7 @@ var stations = {
             "id": "node/777221772",
             "properties": {
                 "@id": "node/777221772",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сибирнефть"
             },
             "geometry": {
@@ -18427,7 +18427,7 @@ var stations = {
             "id": "node/777221853",
             "properties": {
                 "@id": "node/777221853",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС 134км"
             },
             "geometry": {
@@ -18443,7 +18443,7 @@ var stations = {
             "id": "node/777221867",
             "properties": {
                 "@id": "node/777221867",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Эльф-ойл",
                 "operator": "Эльф-ойл",
                 "website": "http://www.elf-oil.ru"
@@ -18461,7 +18461,7 @@ var stations = {
             "id": "node/777221892",
             "properties": {
                 "@id": "node/777221892",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Ступ-Ойл"
             },
             "geometry": {
@@ -18477,7 +18477,7 @@ var stations = {
             "id": "node/777222084",
             "properties": {
                 "@id": "node/777222084",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -18509,7 +18509,7 @@ var stations = {
             "id": "node/777222158",
             "properties": {
                 "@id": "node/777222158",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -18528,7 +18528,7 @@ var stations = {
             "id": "node/777222246",
             "properties": {
                 "@id": "node/777222246",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -18555,7 +18555,7 @@ var stations = {
             "id": "node/777373407",
             "properties": {
                 "@id": "node/777373407",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефто"
             },
             "geometry": {
@@ -18571,7 +18571,7 @@ var stations = {
             "id": "node/778015766",
             "properties": {
                 "@id": "node/778015766",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -18602,7 +18602,7 @@ var stations = {
             "id": "node/778095598",
             "properties": {
                 "@id": "node/778095598",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18617,7 +18617,7 @@ var stations = {
             "id": "node/778095626",
             "properties": {
                 "@id": "node/778095626",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18632,7 +18632,7 @@ var stations = {
             "id": "node/778095729",
             "properties": {
                 "@id": "node/778095729",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТЭКО"
             },
             "geometry": {
@@ -18648,7 +18648,7 @@ var stations = {
             "id": "node/778095824",
             "properties": {
                 "@id": "node/778095824",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -18665,7 +18665,7 @@ var stations = {
             "id": "node/778095845",
             "properties": {
                 "@id": "node/778095845",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -18684,7 +18684,7 @@ var stations = {
             "id": "node/778907115",
             "properties": {
                 "@id": "node/778907115",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18699,7 +18699,7 @@ var stations = {
             "id": "node/793180551",
             "properties": {
                 "@id": "node/793180551",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18714,7 +18714,7 @@ var stations = {
             "id": "node/793242994",
             "properties": {
                 "@id": "node/793242994",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18729,7 +18729,7 @@ var stations = {
             "id": "node/793895867",
             "properties": {
                 "@id": "node/793895867",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -18757,7 +18757,7 @@ var stations = {
             "id": "node/795245411",
             "properties": {
                 "@id": "node/795245411",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Коломенская нефтяная компания"
             },
             "geometry": {
@@ -18773,7 +18773,7 @@ var stations = {
             "id": "node/796074387",
             "properties": {
                 "@id": "node/796074387",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Shell",
                 "name": "Shell",
                 "operator": "Shell"
@@ -18791,7 +18791,7 @@ var stations = {
             "id": "node/796074392",
             "properties": {
                 "@id": "node/796074392",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Меридиан Экспресс"
             },
             "geometry": {
@@ -18807,7 +18807,7 @@ var stations = {
             "id": "node/796074400",
             "properties": {
                 "@id": "node/796074400",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -18824,7 +18824,7 @@ var stations = {
             "id": "node/796074406",
             "properties": {
                 "@id": "node/796074406",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -18843,7 +18843,7 @@ var stations = {
             "id": "node/796136727",
             "properties": {
                 "@id": "node/796136727",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -18858,7 +18858,7 @@ var stations = {
             "id": "node/796141714",
             "properties": {
                 "@id": "node/796141714",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "РуссНефть",
                 "name": "РуссНефть",
                 "operator": "РуссНефть"
@@ -18876,7 +18876,7 @@ var stations = {
             "id": "node/796568040",
             "properties": {
                 "@id": "node/796568040",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Славнефть",
                 "name": "Славнефть",
                 "operator": "Славнефть"
@@ -18894,7 +18894,7 @@ var stations = {
             "id": "node/796568657",
             "properties": {
                 "@id": "node/796568657",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Славнефть",
                 "name": "Славнефть",
                 "operator": "Славнефть"
@@ -18912,7 +18912,7 @@ var stations = {
             "id": "node/798799233",
             "properties": {
                 "@id": "node/798799233",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -18940,7 +18940,7 @@ var stations = {
             "id": "node/805039091",
             "properties": {
                 "@id": "node/805039091",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Ютек ойл"
             },
             "geometry": {
@@ -18956,7 +18956,7 @@ var stations = {
             "id": "node/805582257",
             "properties": {
                 "@id": "node/805582257",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть",
                 "ref": "157",
@@ -18975,7 +18975,7 @@ var stations = {
             "id": "node/805582261",
             "properties": {
                 "@id": "node/805582261",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Трасса",
                 "operator": "Трасса",
                 "website": "http://trassagk.ru/trassa_azs/"
@@ -18993,7 +18993,7 @@ var stations = {
             "id": "node/805582263",
             "properties": {
                 "@id": "node/805582263",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fixme": "verify operator's name",
                 "operator": "Shell"
             },
@@ -19010,7 +19010,7 @@ var stations = {
             "id": "node/807643677",
             "properties": {
                 "@id": "node/807643677",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефтосервис"
             },
             "geometry": {
@@ -19026,7 +19026,7 @@ var stations = {
             "id": "node/812196434",
             "properties": {
                 "@id": "node/812196434",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -19046,7 +19046,7 @@ var stations = {
             "id": "node/814042023",
             "properties": {
                 "@id": "node/814042023",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Русь",
                 "name": "Русь",
                 "operator": "Русь"
@@ -19064,7 +19064,7 @@ var stations = {
             "id": "node/814042030",
             "properties": {
                 "@id": "node/814042030",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19079,7 +19079,7 @@ var stations = {
             "id": "node/814042034",
             "properties": {
                 "@id": "node/814042034",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Русь",
                 "operator": "Русь"
             },
@@ -19096,7 +19096,7 @@ var stations = {
             "id": "node/814042037",
             "properties": {
                 "@id": "node/814042037",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -19114,7 +19114,7 @@ var stations = {
             "id": "node/814042041",
             "properties": {
                 "@id": "node/814042041",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть"
             },
@@ -19131,7 +19131,7 @@ var stations = {
             "id": "node/814050053",
             "properties": {
                 "@id": "node/814050053",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "BP"
             },
             "geometry": {
@@ -19147,7 +19147,7 @@ var stations = {
             "id": "node/817064290",
             "properties": {
                 "@id": "node/817064290",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Тиса"
             },
             "geometry": {
@@ -19163,7 +19163,7 @@ var stations = {
             "id": "node/820151163",
             "properties": {
                 "@id": "node/820151163",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -19180,7 +19180,7 @@ var stations = {
             "id": "node/824111473",
             "properties": {
                 "@id": "node/824111473",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "shop": "kiosk"
             },
             "geometry": {
@@ -19196,7 +19196,7 @@ var stations = {
             "id": "node/824382593",
             "properties": {
                 "@id": "node/824382593",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19211,7 +19211,7 @@ var stations = {
             "id": "node/825859501",
             "properties": {
                 "@id": "node/825859501",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -19239,7 +19239,7 @@ var stations = {
             "id": "node/827290630",
             "properties": {
                 "@id": "node/827290630",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19254,7 +19254,7 @@ var stations = {
             "id": "node/830088981",
             "properties": {
                 "@id": "node/830088981",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19269,7 +19269,7 @@ var stations = {
             "id": "node/835550129",
             "properties": {
                 "@id": "node/835550129",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК-BP"
             },
             "geometry": {
@@ -19285,7 +19285,7 @@ var stations = {
             "id": "node/837545962",
             "properties": {
                 "@id": "node/837545962",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "ele": "194.0",
                 "name": "АЗС"
             },
@@ -19302,7 +19302,7 @@ var stations = {
             "id": "node/837545973",
             "properties": {
                 "@id": "node/837545973",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "ele": "179.0",
@@ -19329,7 +19329,7 @@ var stations = {
             "id": "node/837545974",
             "properties": {
                 "@id": "node/837545974",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "ele": "214.0"
             },
             "geometry": {
@@ -19345,7 +19345,7 @@ var stations = {
             "id": "node/837545975",
             "properties": {
                 "@id": "node/837545975",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "ele": "222.0",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -19363,7 +19363,7 @@ var stations = {
             "id": "node/837545984",
             "properties": {
                 "@id": "node/837545984",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "ele": "210.0",
                 "name": "Татнефть",
@@ -19382,7 +19382,7 @@ var stations = {
             "id": "node/837545985",
             "properties": {
                 "@id": "node/837545985",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "ele": "210.0",
                 "name": "Роснефть",
@@ -19401,7 +19401,7 @@ var stations = {
             "id": "node/837891103",
             "properties": {
                 "@id": "node/837891103",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Канда"
             },
             "geometry": {
@@ -19417,7 +19417,7 @@ var stations = {
             "id": "node/840049679",
             "properties": {
                 "@id": "node/840049679",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Shell",
                 "name": "Shell",
                 "operator": "Shell",
@@ -19437,7 +19437,7 @@ var stations = {
             "id": "node/842265804",
             "properties": {
                 "@id": "node/842265804",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ОРТК",
                 "shop": "kiosk"
             },
@@ -19454,7 +19454,7 @@ var stations = {
             "id": "node/842326430",
             "properties": {
                 "@id": "node/842326430",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Нефто"
             },
             "geometry": {
@@ -19470,7 +19470,7 @@ var stations = {
             "id": "node/842326454",
             "properties": {
                 "@id": "node/842326454",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19485,7 +19485,7 @@ var stations = {
             "id": "node/842326461",
             "properties": {
                 "@id": "node/842326461",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Shell",
                 "operator": "Shell"
             },
@@ -19502,7 +19502,7 @@ var stations = {
             "id": "node/842326465",
             "properties": {
                 "@id": "node/842326465",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Транснефть"
             },
             "geometry": {
@@ -19518,7 +19518,7 @@ var stations = {
             "id": "node/842935270",
             "properties": {
                 "@id": "node/842935270",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19533,7 +19533,7 @@ var stations = {
             "id": "node/842942210",
             "properties": {
                 "@id": "node/842942210",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "РосНефтеСервис",
                 "operator": "РосНефтеСервис"
             },
@@ -19550,7 +19550,7 @@ var stations = {
             "id": "node/843084336",
             "properties": {
                 "@id": "node/843084336",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "fuel:octane_91": "no",
                 "fuel:octane_95": "no",
@@ -19570,7 +19570,7 @@ var stations = {
             "id": "node/843161279",
             "properties": {
                 "@id": "node/843161279",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -19586,7 +19586,7 @@ var stations = {
             "id": "node/843161294",
             "properties": {
                 "@id": "node/843161294",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19601,7 +19601,7 @@ var stations = {
             "id": "node/843161327",
             "properties": {
                 "@id": "node/843161327",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть"
             },
             "geometry": {
@@ -19617,7 +19617,7 @@ var stations = {
             "id": "node/843376281",
             "properties": {
                 "@id": "node/843376281",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "ele": "211.0",
                 "name": "Татнефть",
@@ -19636,7 +19636,7 @@ var stations = {
             "id": "node/843738076",
             "properties": {
                 "@id": "node/843738076",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19651,7 +19651,7 @@ var stations = {
             "id": "node/844175049",
             "properties": {
                 "@id": "node/844175049",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19666,7 +19666,7 @@ var stations = {
             "id": "node/844617921",
             "properties": {
                 "@id": "node/844617921",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "ele": "219.0",
                 "name": "Роснефть",
@@ -19685,7 +19685,7 @@ var stations = {
             "id": "node/845291653",
             "properties": {
                 "@id": "node/845291653",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -19704,7 +19704,7 @@ var stations = {
             "id": "node/846426194",
             "properties": {
                 "@id": "node/846426194",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -19727,7 +19727,7 @@ var stations = {
             "id": "node/848267462",
             "properties": {
                 "@id": "node/848267462",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -19746,7 +19746,7 @@ var stations = {
                 "@id": "node/849699739",
                 "addr:city": "Брёхово",
                 "addr:street": "Пятницкое шоссе",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть"
             },
@@ -19763,7 +19763,7 @@ var stations = {
             "id": "node/849912825",
             "properties": {
                 "@id": "node/849912825",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -19784,7 +19784,7 @@ var stations = {
             "id": "node/855481106",
             "properties": {
                 "@id": "node/855481106",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Лукойл"
             },
             "geometry": {
@@ -19800,7 +19800,7 @@ var stations = {
             "id": "node/861091860",
             "properties": {
                 "@id": "node/861091860",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -19819,7 +19819,7 @@ var stations = {
             "id": "node/861093097",
             "properties": {
                 "@id": "node/861093097",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -19841,7 +19841,7 @@ var stations = {
             "id": "node/864421707",
             "properties": {
                 "@id": "node/864421707",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -19856,7 +19856,7 @@ var stations = {
             "id": "node/870652966",
             "properties": {
                 "@id": "node/870652966",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Интеройл"
             },
             "geometry": {
@@ -19872,7 +19872,7 @@ var stations = {
             "id": "node/870652994",
             "properties": {
                 "@id": "node/870652994",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -19899,7 +19899,7 @@ var stations = {
             "id": "node/870654754",
             "properties": {
                 "@id": "node/870654754",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Интеройл",
                 "operator": "Интеройл"
             },
@@ -19916,7 +19916,7 @@ var stations = {
             "id": "node/870656640",
             "properties": {
                 "@id": "node/870656640",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Зорина"
             },
             "geometry": {
@@ -19932,7 +19932,7 @@ var stations = {
             "id": "node/873619202",
             "properties": {
                 "@id": "node/873619202",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "operator": "ОАО \"Роснефть\"",
                 "website": "http://www.rosneft.ru"
@@ -19950,7 +19950,7 @@ var stations = {
             "id": "node/873619211",
             "properties": {
                 "@id": "node/873619211",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "description": "АЗК \"Гольяново\"",
                 "name": "ТНК",
                 "operator": "ОАО \"ТНК-Столица\""
@@ -19968,7 +19968,7 @@ var stations = {
             "id": "node/873628151",
             "properties": {
                 "@id": "node/873628151",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -19984,7 +19984,7 @@ var stations = {
             "id": "node/873634972",
             "properties": {
                 "@id": "node/873634972",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "IP"
             },
             "geometry": {
@@ -20000,7 +20000,7 @@ var stations = {
             "id": "node/873646879",
             "properties": {
                 "@id": "node/873646879",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "GF"
             },
             "geometry": {
@@ -20016,7 +20016,7 @@ var stations = {
             "id": "node/873646883",
             "properties": {
                 "@id": "node/873646883",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -20032,7 +20032,7 @@ var stations = {
             "id": "node/873646891",
             "properties": {
                 "@id": "node/873646891",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -20051,7 +20051,7 @@ var stations = {
             "id": "node/873646898",
             "properties": {
                 "@id": "node/873646898",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Лукойл"
             },
             "geometry": {
@@ -20067,7 +20067,7 @@ var stations = {
             "id": "node/873646902",
             "properties": {
                 "@id": "node/873646902",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -20086,7 +20086,7 @@ var stations = {
             "id": "node/873646905",
             "properties": {
                 "@id": "node/873646905",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -20105,7 +20105,7 @@ var stations = {
             "id": "node/873646912",
             "properties": {
                 "@id": "node/873646912",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Red Line"
             },
             "geometry": {
@@ -20121,7 +20121,7 @@ var stations = {
             "id": "node/873646914",
             "properties": {
                 "@id": "node/873646914",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -20148,7 +20148,7 @@ var stations = {
             "id": "node/873646923",
             "properties": {
                 "@id": "node/873646923",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -20169,7 +20169,7 @@ var stations = {
             "id": "node/873650019",
             "properties": {
                 "@id": "node/873650019",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "БТК",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
@@ -20191,7 +20191,7 @@ var stations = {
             "id": "node/873650021",
             "properties": {
                 "@id": "node/873650021",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "БТК"
             },
             "geometry": {
@@ -20207,7 +20207,7 @@ var stations = {
             "id": "node/873650023",
             "properties": {
                 "@id": "node/873650023",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Shell",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -20228,7 +20228,7 @@ var stations = {
             "id": "node/873650026",
             "properties": {
                 "@id": "node/873650026",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "comment": "АЗС №201, ООО «ЛУКОЙЛ-Центрнефтепродукт», Ногинский район, 35-й км а/д Москва-Нижний Новгород, М-7 Волга-1",
@@ -20262,7 +20262,7 @@ var stations = {
             "id": "node/873650028",
             "properties": {
                 "@id": "node/873650028",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Горьковская",
                 "operator": "BP"
             },
@@ -20279,7 +20279,7 @@ var stations = {
             "id": "node/876510410",
             "properties": {
                 "@id": "node/876510410",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -20300,7 +20300,7 @@ var stations = {
             "id": "node/876979074",
             "properties": {
                 "@id": "node/876979074",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл АЗС№2",
                 "operator": "Лукойл-Волганефтепродукт",
                 "website": "http://www.lukoil.ru/"
@@ -20318,7 +20318,7 @@ var stations = {
             "id": "node/878784034",
             "properties": {
                 "@id": "node/878784034",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -20334,7 +20334,7 @@ var stations = {
             "id": "node/880835283",
             "properties": {
                 "@id": "node/880835283",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ЕКА",
                 "name": "ЕКА",
                 "operator": "ЕКА",
@@ -20353,7 +20353,7 @@ var stations = {
             "id": "node/880835285",
             "properties": {
                 "@id": "node/880835285",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -20371,7 +20371,7 @@ var stations = {
             "id": "node/884564282",
             "properties": {
                 "@id": "node/884564282",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "name": "EKA",
@@ -20394,7 +20394,7 @@ var stations = {
             "id": "node/888529856",
             "properties": {
                 "@id": "node/888529856",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -20411,7 +20411,7 @@ var stations = {
             "id": "node/888530584",
             "properties": {
                 "@id": "node/888530584",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -20426,7 +20426,7 @@ var stations = {
             "id": "node/890138880",
             "properties": {
                 "@id": "node/890138880",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "operator": "ТНК"
             },
@@ -20443,7 +20443,7 @@ var stations = {
             "id": "node/893893120",
             "properties": {
                 "@id": "node/893893120",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть",
                 "ref": "153",
@@ -20462,7 +20462,7 @@ var stations = {
             "id": "node/893893222",
             "properties": {
                 "@id": "node/893893222",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть",
                 "ref": "156",
@@ -20481,7 +20481,7 @@ var stations = {
             "id": "node/894063107",
             "properties": {
                 "@id": "node/894063107",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -20499,7 +20499,7 @@ var stations = {
             "id": "node/894063139",
             "properties": {
                 "@id": "node/894063139",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "opening_hours": "24/7",
@@ -20519,7 +20519,7 @@ var stations = {
             "id": "node/895247035",
             "properties": {
                 "@id": "node/895247035",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -20535,7 +20535,7 @@ var stations = {
             "id": "node/895247038",
             "properties": {
                 "@id": "node/895247038",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP"
             },
             "geometry": {
@@ -20551,7 +20551,7 @@ var stations = {
             "id": "node/895247053",
             "properties": {
                 "@id": "node/895247053",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -20567,7 +20567,7 @@ var stations = {
             "id": "node/895247056",
             "properties": {
                 "@id": "node/895247056",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -20598,7 +20598,7 @@ var stations = {
             "id": "node/895252006",
             "properties": {
                 "@id": "node/895252006",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -20615,7 +20615,7 @@ var stations = {
             "id": "node/895254261",
             "properties": {
                 "@id": "node/895254261",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -20630,7 +20630,7 @@ var stations = {
             "id": "node/895254263",
             "properties": {
                 "@id": "node/895254263",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -20654,7 +20654,7 @@ var stations = {
             "id": "node/895256160",
             "properties": {
                 "@id": "node/895256160",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Спрут",
                 "operator": "Спрут"
             },
@@ -20671,7 +20671,7 @@ var stations = {
             "id": "node/895256161",
             "properties": {
                 "@id": "node/895256161",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Спрут"
             },
             "geometry": {
@@ -20687,7 +20687,7 @@ var stations = {
             "id": "node/895256361",
             "properties": {
                 "@id": "node/895256361",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -20709,7 +20709,7 @@ var stations = {
             "id": "node/895256362",
             "properties": {
                 "@id": "node/895256362",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "РК",
                 "operator": "РК"
             },
@@ -20726,7 +20726,7 @@ var stations = {
             "id": "node/895256363",
             "properties": {
                 "@id": "node/895256363",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -20745,7 +20745,7 @@ var stations = {
             "id": "node/895257147",
             "properties": {
                 "@id": "node/895257147",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть",
                 "operator": "Татнефть"
@@ -20763,7 +20763,7 @@ var stations = {
             "id": "node/897218023",
             "properties": {
                 "@id": "node/897218023",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Транс АЗС",
                 "opening_hours": "24/7"
             },
@@ -20782,7 +20782,7 @@ var stations = {
                 "@id": "node/903919539",
                 "addr:housenumber": "142Б",
                 "addr:street": "Варшавское шоссе",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -20811,7 +20811,7 @@ var stations = {
             "id": "node/908773764",
             "properties": {
                 "@id": "node/908773764",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Стандарт Ойл"
@@ -20829,7 +20829,7 @@ var stations = {
             "id": "node/910333243",
             "properties": {
                 "@id": "node/910333243",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -20847,7 +20847,7 @@ var stations = {
             "id": "node/910541475",
             "properties": {
                 "@id": "node/910541475",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -20864,7 +20864,7 @@ var stations = {
             "id": "node/912462642",
             "properties": {
                 "@id": "node/912462642",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:biodiesel": "no",
                 "fuel:octane_91": "yes",
                 "shop": "yes"
@@ -20882,7 +20882,7 @@ var stations = {
             "id": "node/913245440",
             "properties": {
                 "@id": "node/913245440",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -20897,7 +20897,7 @@ var stations = {
             "id": "node/913367658",
             "properties": {
                 "@id": "node/913367658",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_76": "yes",
@@ -20921,7 +20921,7 @@ var stations = {
             "id": "node/914273020",
             "properties": {
                 "@id": "node/914273020",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "UnkOil"
             },
             "geometry": {
@@ -20937,7 +20937,7 @@ var stations = {
             "id": "node/914278025",
             "properties": {
                 "@id": "node/914278025",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -20953,7 +20953,7 @@ var stations = {
             "id": "node/919410701",
             "properties": {
                 "@id": "node/919410701",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Нефтьмагистраль"
             },
             "geometry": {
@@ -20969,7 +20969,7 @@ var stations = {
             "id": "node/920594239",
             "properties": {
                 "@id": "node/920594239",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -20984,7 +20984,7 @@ var stations = {
             "id": "node/922738439",
             "properties": {
                 "@id": "node/922738439",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -21004,7 +21004,7 @@ var stations = {
             "id": "node/927221491",
             "properties": {
                 "@id": "node/927221491",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Безнзин Московского НПЗ"
             },
             "geometry": {
@@ -21020,7 +21020,7 @@ var stations = {
             "id": "node/928424083",
             "properties": {
                 "@id": "node/928424083",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сургутнефтегаз"
             },
             "geometry": {
@@ -21036,7 +21036,7 @@ var stations = {
             "id": "node/928426840",
             "properties": {
                 "@id": "node/928426840",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "IP"
             },
             "geometry": {
@@ -21052,7 +21052,7 @@ var stations = {
             "id": "node/928426841",
             "properties": {
                 "@id": "node/928426841",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "М10",
                 "website": "http://m10-oil.ru"
             },
@@ -21069,7 +21069,7 @@ var stations = {
             "id": "node/930705803",
             "properties": {
                 "@id": "node/930705803",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes"
@@ -21087,7 +21087,7 @@ var stations = {
             "id": "node/933768035",
             "properties": {
                 "@id": "node/933768035",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21102,7 +21102,7 @@ var stations = {
             "id": "node/933778080",
             "properties": {
                 "@id": "node/933778080",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21117,7 +21117,7 @@ var stations = {
             "id": "node/937011128",
             "properties": {
                 "@id": "node/937011128",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21132,7 +21132,7 @@ var stations = {
             "id": "node/943660073",
             "properties": {
                 "@id": "node/943660073",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -21163,7 +21163,7 @@ var stations = {
             "id": "node/944507012",
             "properties": {
                 "@id": "node/944507012",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -21179,7 +21179,7 @@ var stations = {
             "id": "node/944640131",
             "properties": {
                 "@id": "node/944640131",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ЕКА"
             },
             "geometry": {
@@ -21199,7 +21199,7 @@ var stations = {
                 "addr:country": "RU",
                 "addr:housenumber": "7",
                 "addr:street": "Ореховая улица",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Владимир-ОПТОН",
                 "website": "http://www.vladopton.ru/"
             },
@@ -21216,7 +21216,7 @@ var stations = {
             "id": "node/949785044",
             "properties": {
                 "@id": "node/949785044",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
             },
@@ -21233,7 +21233,7 @@ var stations = {
             "id": "node/952672003",
             "properties": {
                 "@id": "node/952672003",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -21253,7 +21253,7 @@ var stations = {
             "id": "node/952673385",
             "properties": {
                 "@id": "node/952673385",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -21274,7 +21274,7 @@ var stations = {
             "id": "node/959228791",
             "properties": {
                 "@id": "node/959228791",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС «В чаще»"
             },
             "geometry": {
@@ -21290,7 +21290,7 @@ var stations = {
             "id": "node/960646417",
             "properties": {
                 "@id": "node/960646417",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "BP",
                 "opening_hours": "24/7",
                 "operator": "BP",
@@ -21309,7 +21309,7 @@ var stations = {
             "id": "node/963722667",
             "properties": {
                 "@id": "node/963722667",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21324,7 +21324,7 @@ var stations = {
             "id": "node/966926622",
             "properties": {
                 "@id": "node/966926622",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -21342,7 +21342,7 @@ var stations = {
             "id": "node/967645790",
             "properties": {
                 "@id": "node/967645790",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:biogas": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -21369,7 +21369,7 @@ var stations = {
                 "addr:country": "RU",
                 "addr:housenumber": "29/6",
                 "addr:street": "Костомаровская набережная",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗК \"Костомаровская\"",
                 "operator": "ТНК"
             },
@@ -21386,7 +21386,7 @@ var stations = {
             "id": "node/970963866",
             "properties": {
                 "@id": "node/970963866",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -21414,7 +21414,7 @@ var stations = {
             "id": "node/971645268",
             "properties": {
                 "@id": "node/971645268",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС \"транс НЕФТО\""
             },
             "geometry": {
@@ -21430,7 +21430,7 @@ var stations = {
             "id": "node/972520228",
             "properties": {
                 "@id": "node/972520228",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -21456,7 +21456,7 @@ var stations = {
             "id": "node/975808547",
             "properties": {
                 "@id": "node/975808547",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:1_25": "no",
                 "fuel:1_50": "no",
                 "fuel:GTL_diesel": "no",
@@ -21486,7 +21486,7 @@ var stations = {
             "id": "node/977715897",
             "properties": {
                 "@id": "node/977715897",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Энергорегион"
             },
             "geometry": {
@@ -21502,7 +21502,7 @@ var stations = {
             "id": "node/977723794",
             "properties": {
                 "@id": "node/977723794",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "M&S"
             },
             "geometry": {
@@ -21518,7 +21518,7 @@ var stations = {
             "id": "node/981225901",
             "properties": {
                 "@id": "node/981225901",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -21547,7 +21547,7 @@ var stations = {
             "id": "node/982909815",
             "properties": {
                 "@id": "node/982909815",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21562,7 +21562,7 @@ var stations = {
             "id": "node/983775563",
             "properties": {
                 "@id": "node/983775563",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "name": "Газпромнефть",
                 "opening_hours": "24/7",
@@ -21583,7 +21583,7 @@ var stations = {
             "id": "node/985794555",
             "properties": {
                 "@id": "node/985794555",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -21608,7 +21608,7 @@ var stations = {
             "id": "node/987040867",
             "properties": {
                 "@id": "node/987040867",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21623,7 +21623,7 @@ var stations = {
             "id": "node/987778880",
             "properties": {
                 "@id": "node/987778880",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -21649,7 +21649,7 @@ var stations = {
             "id": "node/990081488",
             "properties": {
                 "@id": "node/990081488",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "name": "ТрансАзс",
@@ -21668,7 +21668,7 @@ var stations = {
             "id": "node/990187845",
             "properties": {
                 "@id": "node/990187845",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -21684,7 +21684,7 @@ var stations = {
             "id": "node/991358811",
             "properties": {
                 "@id": "node/991358811",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Знаменское АЗС"
             },
             "geometry": {
@@ -21700,7 +21700,7 @@ var stations = {
             "id": "node/993233192",
             "properties": {
                 "@id": "node/993233192",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -21716,7 +21716,7 @@ var stations = {
             "id": "node/993243048",
             "properties": {
                 "@id": "node/993243048",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21731,7 +21731,7 @@ var stations = {
             "id": "node/994404786",
             "properties": {
                 "@id": "node/994404786",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -21751,7 +21751,7 @@ var stations = {
             "id": "node/994744303",
             "properties": {
                 "@id": "node/994744303",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -21779,7 +21779,7 @@ var stations = {
             "id": "node/1000005269",
             "properties": {
                 "@id": "node/1000005269",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -21805,7 +21805,7 @@ var stations = {
             "id": "node/1000049644",
             "properties": {
                 "@id": "node/1000049644",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21820,7 +21820,7 @@ var stations = {
             "id": "node/1000049651",
             "properties": {
                 "@id": "node/1000049651",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -21840,7 +21840,7 @@ var stations = {
             "id": "node/1000049652",
             "properties": {
                 "@id": "node/1000049652",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21855,7 +21855,7 @@ var stations = {
             "id": "node/1000049655",
             "properties": {
                 "@id": "node/1000049655",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -21874,7 +21874,7 @@ var stations = {
             "id": "node/1000049659",
             "properties": {
                 "@id": "node/1000049659",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -21905,7 +21905,7 @@ var stations = {
             "id": "node/1000049664",
             "properties": {
                 "@id": "node/1000049664",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21920,7 +21920,7 @@ var stations = {
             "id": "node/1000049665",
             "properties": {
                 "@id": "node/1000049665",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК-BP"
             },
@@ -21937,7 +21937,7 @@ var stations = {
             "id": "node/1002186239",
             "properties": {
                 "@id": "node/1002186239",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -21953,7 +21953,7 @@ var stations = {
             "id": "node/1002576726",
             "properties": {
                 "@id": "node/1002576726",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -21976,7 +21976,7 @@ var stations = {
             "id": "node/1003588840",
             "properties": {
                 "@id": "node/1003588840",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -21991,7 +21991,7 @@ var stations = {
             "id": "node/1004258060",
             "properties": {
                 "@id": "node/1004258060",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -22006,7 +22006,7 @@ var stations = {
             "id": "node/1008169133",
             "properties": {
                 "@id": "node/1008169133",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -22021,7 +22021,7 @@ var stations = {
             "id": "node/1012654326",
             "properties": {
                 "@id": "node/1012654326",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Finna"
             },
             "geometry": {
@@ -22037,7 +22037,7 @@ var stations = {
             "id": "node/1012654551",
             "properties": {
                 "@id": "node/1012654551",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "City Oil"
             },
             "geometry": {
@@ -22053,7 +22053,7 @@ var stations = {
             "id": "node/1012654559",
             "properties": {
                 "@id": "node/1012654559",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ООО РосТех"
             },
             "geometry": {
@@ -22069,7 +22069,7 @@ var stations = {
             "id": "node/1013233139",
             "properties": {
                 "@id": "node/1013233139",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Морион"
             },
             "geometry": {
@@ -22085,7 +22085,7 @@ var stations = {
             "id": "node/1013640204",
             "properties": {
                 "@id": "node/1013640204",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ЭталонНефтеПродукт"
             },
             "geometry": {
@@ -22101,7 +22101,7 @@ var stations = {
             "id": "node/1013640223",
             "properties": {
                 "@id": "node/1013640223",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС Газпром"
             },
             "geometry": {
@@ -22117,7 +22117,7 @@ var stations = {
             "id": "node/1013640728",
             "properties": {
                 "@id": "node/1013640728",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Караван"
             },
             "geometry": {
@@ -22133,7 +22133,7 @@ var stations = {
             "id": "node/1013730627",
             "properties": {
                 "@id": "node/1013730627",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Газпром"
             },
@@ -22150,7 +22150,7 @@ var stations = {
             "id": "node/1013730786",
             "properties": {
                 "@id": "node/1013730786",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "City Oil",
                 "operator": "City Oil"
             },
@@ -22167,7 +22167,7 @@ var stations = {
             "id": "node/1013999554",
             "properties": {
                 "@id": "node/1013999554",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -22183,7 +22183,7 @@ var stations = {
             "id": "node/1014060555",
             "properties": {
                 "@id": "node/1014060555",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -22199,7 +22199,7 @@ var stations = {
             "id": "node/1014598260",
             "properties": {
                 "@id": "node/1014598260",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -22214,7 +22214,7 @@ var stations = {
             "id": "node/1014831684",
             "properties": {
                 "@id": "node/1014831684",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -22232,7 +22232,7 @@ var stations = {
             "id": "node/1015578790",
             "properties": {
                 "@id": "node/1015578790",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Ойл Шоп-1"
             },
             "geometry": {
@@ -22248,7 +22248,7 @@ var stations = {
             "id": "node/1015578793",
             "properties": {
                 "@id": "node/1015578793",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Ойл Шоп-1"
             },
             "geometry": {
@@ -22264,7 +22264,7 @@ var stations = {
             "id": "node/1016453683",
             "properties": {
                 "@id": "node/1016453683",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -22280,7 +22280,7 @@ var stations = {
             "id": "node/1016523107",
             "properties": {
                 "@id": "node/1016523107",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК-Столица",
                 "shop": "yes"
@@ -22298,7 +22298,7 @@ var stations = {
             "id": "node/1020183827",
             "properties": {
                 "@id": "node/1020183827",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -22318,7 +22318,7 @@ var stations = {
             "id": "node/1020765348",
             "properties": {
                 "@id": "node/1020765348",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -22341,7 +22341,7 @@ var stations = {
                 "addr:country": "RU",
                 "addr:housenumber": "30 строение 1",
                 "addr:street": "3-й Угрешский проезд",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -22357,7 +22357,7 @@ var stations = {
             "id": "node/1022840802",
             "properties": {
                 "@id": "node/1022840802",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -22377,7 +22377,7 @@ var stations = {
             "id": "node/1023584877",
             "properties": {
                 "@id": "node/1023584877",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -22397,7 +22397,7 @@ var stations = {
             "id": "node/1025201129",
             "properties": {
                 "@id": "node/1025201129",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -22422,7 +22422,7 @@ var stations = {
             "id": "node/1025218497",
             "properties": {
                 "@id": "node/1025218497",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -22449,7 +22449,7 @@ var stations = {
             "id": "node/1025229774",
             "properties": {
                 "@id": "node/1025229774",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -22468,7 +22468,7 @@ var stations = {
             "id": "node/1030027683",
             "properties": {
                 "@id": "node/1030027683",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -22483,7 +22483,7 @@ var stations = {
             "id": "node/1032490010",
             "properties": {
                 "@id": "node/1032490010",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -22498,7 +22498,7 @@ var stations = {
             "id": "node/1036541599",
             "properties": {
                 "@id": "node/1036541599",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -22514,7 +22514,7 @@ var stations = {
             "id": "node/1036695028",
             "properties": {
                 "@id": "node/1036695028",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Трансазссервис"
             },
             "geometry": {
@@ -22530,7 +22530,7 @@ var stations = {
             "id": "node/1039566897",
             "properties": {
                 "@id": "node/1039566897",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -22560,7 +22560,7 @@ var stations = {
             "id": "node/1042611477",
             "properties": {
                 "@id": "node/1042611477",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -22575,7 +22575,7 @@ var stations = {
             "id": "node/1043302738",
             "properties": {
                 "@id": "node/1043302738",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -22590,7 +22590,7 @@ var stations = {
             "id": "node/1043717187",
             "properties": {
                 "@id": "node/1043717187",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -22605,7 +22605,7 @@ var stations = {
             "id": "node/1044822285",
             "properties": {
                 "@id": "node/1044822285",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -22621,7 +22621,7 @@ var stations = {
             "id": "node/1051980036",
             "properties": {
                 "@id": "node/1051980036",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -22639,7 +22639,7 @@ var stations = {
             "id": "node/1052527309",
             "properties": {
                 "@id": "node/1052527309",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Аист"
             },
             "geometry": {
@@ -22655,7 +22655,7 @@ var stations = {
             "id": "node/1052527338",
             "properties": {
                 "@id": "node/1052527338",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -22670,7 +22670,7 @@ var stations = {
             "id": "node/1052560637",
             "properties": {
                 "@id": "node/1052560637",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Ростехно"
             },
             "geometry": {
@@ -22686,7 +22686,7 @@ var stations = {
             "id": "node/1052560645",
             "properties": {
                 "@id": "node/1052560645",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -22704,7 +22704,7 @@ var stations = {
             "id": "node/1060722258",
             "properties": {
                 "@id": "node/1060722258",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "СТС"
             },
             "geometry": {
@@ -22720,7 +22720,7 @@ var stations = {
             "id": "node/1063709331",
             "properties": {
                 "@id": "node/1063709331",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Обнинск"
             },
@@ -22737,7 +22737,7 @@ var stations = {
             "id": "node/1067382198",
             "properties": {
                 "@id": "node/1067382198",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ОРТК",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -22759,7 +22759,7 @@ var stations = {
             "id": "node/1073951117",
             "properties": {
                 "@id": "node/1073951117",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нил петролеум"
             },
             "geometry": {
@@ -22775,7 +22775,7 @@ var stations = {
             "id": "node/1084263261",
             "properties": {
                 "@id": "node/1084263261",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "name": "BP Супонево",
@@ -22794,7 +22794,7 @@ var stations = {
             "id": "node/1089145739",
             "properties": {
                 "@id": "node/1089145739",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -22821,7 +22821,7 @@ var stations = {
             "id": "node/1091070349",
             "properties": {
                 "@id": "node/1091070349",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Сибирьнефть",
                 "name": "Сибирьнефть",
                 "operator": "Сибирьнефть"
@@ -22839,7 +22839,7 @@ var stations = {
             "id": "node/1091461081",
             "properties": {
                 "@id": "node/1091461081",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -22871,7 +22871,7 @@ var stations = {
             "id": "node/1094242559",
             "properties": {
                 "@id": "node/1094242559",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -22890,7 +22890,7 @@ var stations = {
             "id": "node/1096676562",
             "properties": {
                 "@id": "node/1096676562",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -22912,7 +22912,7 @@ var stations = {
             "id": "node/1096676573",
             "properties": {
                 "@id": "node/1096676573",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТранзАЗС"
             },
             "geometry": {
@@ -22928,7 +22928,7 @@ var stations = {
             "id": "node/1096955190",
             "properties": {
                 "@id": "node/1096955190",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -22954,7 +22954,7 @@ var stations = {
             "id": "node/1100526498",
             "properties": {
                 "@id": "node/1100526498",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
@@ -22982,7 +22982,7 @@ var stations = {
             "id": "node/1107252806",
             "properties": {
                 "@id": "node/1107252806",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -22998,7 +22998,7 @@ var stations = {
             "id": "node/1108672094",
             "properties": {
                 "@id": "node/1108672094",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "\"ТТР\""
             },
             "geometry": {
@@ -23014,7 +23014,7 @@ var stations = {
             "id": "node/1108934543",
             "properties": {
                 "@id": "node/1108934543",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Союзгаз"
             },
@@ -23031,7 +23031,7 @@ var stations = {
             "id": "node/1112481343",
             "properties": {
                 "@id": "node/1112481343",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "shop": "kiosk"
             },
             "geometry": {
@@ -23047,7 +23047,7 @@ var stations = {
             "id": "node/1114089663",
             "properties": {
                 "@id": "node/1114089663",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -23062,7 +23062,7 @@ var stations = {
             "id": "node/1114090556",
             "properties": {
                 "@id": "node/1114090556",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -23077,7 +23077,7 @@ var stations = {
             "id": "node/1118973595",
             "properties": {
                 "@id": "node/1118973595",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -23102,7 +23102,7 @@ var stations = {
             "id": "node/1120088622",
             "properties": {
                 "@id": "node/1120088622",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Shell",
                 "name": "Shell",
                 "operator": "Shell"
@@ -23120,7 +23120,7 @@ var stations = {
             "id": "node/1122101924",
             "properties": {
                 "@id": "node/1122101924",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru"
             },
@@ -23137,7 +23137,7 @@ var stations = {
             "id": "node/1122796839",
             "properties": {
                 "@id": "node/1122796839",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -23158,7 +23158,7 @@ var stations = {
             "id": "node/1123162496",
             "properties": {
                 "@id": "node/1123162496",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Джет Петролиум",
@@ -23177,7 +23177,7 @@ var stations = {
             "id": "node/1124522676",
             "properties": {
                 "@id": "node/1124522676",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "name": "Лукойл",
                 "operator": "Лукойл"
@@ -23195,7 +23195,7 @@ var stations = {
             "id": "node/1124523338",
             "properties": {
                 "@id": "node/1124523338",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -23212,7 +23212,7 @@ var stations = {
             "id": "node/1125937172",
             "properties": {
                 "@id": "node/1125937172",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -23229,7 +23229,7 @@ var stations = {
                 "@id": "node/1127192830",
                 "addr:housenumber": "28",
                 "addr:street": "Бакинская улица",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -23256,7 +23256,7 @@ var stations = {
             "id": "node/1127499402",
             "properties": {
                 "@id": "node/1127499402",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Газпром (автомат)",
                 "operator": "Газпром"
             },
@@ -23273,7 +23273,7 @@ var stations = {
             "id": "node/1127499460",
             "properties": {
                 "@id": "node/1127499460",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -23289,7 +23289,7 @@ var stations = {
             "id": "node/1127528325",
             "properties": {
                 "@id": "node/1127528325",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -23309,7 +23309,7 @@ var stations = {
             "id": "node/1127528406",
             "properties": {
                 "@id": "node/1127528406",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -23330,7 +23330,7 @@ var stations = {
             "id": "node/1127558415",
             "properties": {
                 "@id": "node/1127558415",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Мега-оил"
             },
             "geometry": {
@@ -23346,7 +23346,7 @@ var stations = {
             "id": "node/1127573282",
             "properties": {
                 "@id": "node/1127573282",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "MMK Petrol"
             },
             "geometry": {
@@ -23362,7 +23362,7 @@ var stations = {
             "id": "node/1127573296",
             "properties": {
                 "@id": "node/1127573296",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -23394,7 +23394,7 @@ var stations = {
             "id": "node/1127573298",
             "properties": {
                 "@id": "node/1127573298",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -23426,7 +23426,7 @@ var stations = {
             "id": "node/1127573300",
             "properties": {
                 "@id": "node/1127573300",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "BP",
                 "name": "BP",
                 "operator": "BP"
@@ -23444,7 +23444,7 @@ var stations = {
             "id": "node/1127574720",
             "properties": {
                 "@id": "node/1127574720",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -23465,7 +23465,7 @@ var stations = {
             "id": "node/1131009830",
             "properties": {
                 "@id": "node/1131009830",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -23489,7 +23489,7 @@ var stations = {
             "id": "node/1132241687",
             "properties": {
                 "@id": "node/1132241687",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -23510,7 +23510,7 @@ var stations = {
                 "addr:housenumber": "38 с1",
                 "addr:region": "Москва",
                 "addr:street": "Заводская улица",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -23526,7 +23526,7 @@ var stations = {
             "id": "node/1138188988",
             "properties": {
                 "@id": "node/1138188988",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -23555,7 +23555,7 @@ var stations = {
             "id": "node/1138969498",
             "properties": {
                 "@id": "node/1138969498",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -23576,7 +23576,7 @@ var stations = {
             "id": "node/1140142980",
             "properties": {
                 "@id": "node/1140142980",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP",
                 "operator": "BP"
             },
@@ -23593,7 +23593,7 @@ var stations = {
             "id": "node/1140441316",
             "properties": {
                 "@id": "node/1140441316",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Морион",
@@ -23612,7 +23612,7 @@ var stations = {
             "id": "node/1142118155",
             "properties": {
                 "@id": "node/1142118155",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -23637,7 +23637,7 @@ var stations = {
             "id": "node/1142515453",
             "properties": {
                 "@id": "node/1142515453",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -23665,7 +23665,7 @@ var stations = {
             "id": "node/1143760921",
             "properties": {
                 "@id": "node/1143760921",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -23680,7 +23680,7 @@ var stations = {
             "id": "node/1144007835",
             "properties": {
                 "@id": "node/1144007835",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "shop": "no"
             },
             "geometry": {
@@ -23696,7 +23696,7 @@ var stations = {
             "id": "node/1147143017",
             "properties": {
                 "@id": "node/1147143017",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:lpg": "yes",
                 "opening_hours": "24/7"
@@ -23714,7 +23714,7 @@ var stations = {
             "id": "node/1147907258",
             "properties": {
                 "@id": "node/1147907258",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -23730,7 +23730,7 @@ var stations = {
             "id": "node/1154044457",
             "properties": {
                 "@id": "node/1154044457",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "VK",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -23749,7 +23749,7 @@ var stations = {
             "id": "node/1154058242",
             "properties": {
                 "@id": "node/1154058242",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -23775,7 +23775,7 @@ var stations = {
             "id": "node/1154809635",
             "properties": {
                 "@id": "node/1154809635",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -23790,7 +23790,7 @@ var stations = {
             "id": "node/1160758319",
             "properties": {
                 "@id": "node/1160758319",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:lpg": "no",
                 "shop": "no"
@@ -23808,7 +23808,7 @@ var stations = {
             "id": "node/1160835999",
             "properties": {
                 "@id": "node/1160835999",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -23824,7 +23824,7 @@ var stations = {
             "id": "node/1161915838",
             "properties": {
                 "@id": "node/1161915838",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -23850,7 +23850,7 @@ var stations = {
             "id": "node/1163539539",
             "properties": {
                 "@id": "node/1163539539",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -23866,7 +23866,7 @@ var stations = {
             "id": "node/1164971708",
             "properties": {
                 "@id": "node/1164971708",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -23886,7 +23886,7 @@ var stations = {
             "id": "node/1165217309",
             "properties": {
                 "@id": "node/1165217309",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -23901,7 +23901,7 @@ var stations = {
             "id": "node/1171948720",
             "properties": {
                 "@id": "node/1171948720",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Лукойл",
                 "website": "http://www.lukoil.ru/"
             },
@@ -23918,7 +23918,7 @@ var stations = {
             "id": "node/1172937405",
             "properties": {
                 "@id": "node/1172937405",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Гейн Ойл",
                 "operator": "Гейн Ойл"
             },
@@ -23935,7 +23935,7 @@ var stations = {
             "id": "node/1173985413",
             "properties": {
                 "@id": "node/1173985413",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes"
             },
@@ -23952,7 +23952,7 @@ var stations = {
             "id": "node/1177013649",
             "properties": {
                 "@id": "node/1177013649",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -23967,7 +23967,7 @@ var stations = {
             "id": "node/1177148889",
             "properties": {
                 "@id": "node/1177148889",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -23983,7 +23983,7 @@ var stations = {
             "id": "node/1180869246",
             "properties": {
                 "@id": "node/1180869246",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -24013,7 +24013,7 @@ var stations = {
             "id": "node/1180869284",
             "properties": {
                 "@id": "node/1180869284",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24028,7 +24028,7 @@ var stations = {
             "id": "node/1181765889",
             "properties": {
                 "@id": "node/1181765889",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24043,7 +24043,7 @@ var stations = {
             "id": "node/1184306943",
             "properties": {
                 "@id": "node/1184306943",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть",
                 "ref": "148",
@@ -24062,7 +24062,7 @@ var stations = {
             "id": "node/1184306946",
             "properties": {
                 "@id": "node/1184306946",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24077,7 +24077,7 @@ var stations = {
             "id": "node/1184306949",
             "properties": {
                 "@id": "node/1184306949",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "BP"
             },
             "geometry": {
@@ -24093,7 +24093,7 @@ var stations = {
             "id": "node/1184306954",
             "properties": {
                 "@id": "node/1184306954",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "operator": "Татнефть",
                 "ref": "154",
@@ -24112,7 +24112,7 @@ var stations = {
             "id": "node/1184306955",
             "properties": {
                 "@id": "node/1184306955",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP Дон-1",
                 "operator": "BP"
             },
@@ -24129,7 +24129,7 @@ var stations = {
             "id": "node/1184412850",
             "properties": {
                 "@id": "node/1184412850",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Трасса",
                 "operator": "Трасса"
             },
@@ -24146,7 +24146,7 @@ var stations = {
             "id": "node/1186583846",
             "properties": {
                 "@id": "node/1186583846",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24161,7 +24161,7 @@ var stations = {
             "id": "node/1191845585",
             "properties": {
                 "@id": "node/1191845585",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Independent",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -24181,7 +24181,7 @@ var stations = {
             "id": "node/1194436549",
             "properties": {
                 "@id": "node/1194436549",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -24200,7 +24200,7 @@ var stations = {
             "id": "node/1195166747",
             "properties": {
                 "@id": "node/1195166747",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТрансАЗС"
             },
             "geometry": {
@@ -24216,7 +24216,7 @@ var stations = {
             "id": "node/1195441415",
             "properties": {
                 "@id": "node/1195441415",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "operator": "Газпромнефть"
             },
@@ -24233,7 +24233,7 @@ var stations = {
             "id": "node/1195441840",
             "properties": {
                 "@id": "node/1195441840",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_98": "yes",
                 "name": "Караван",
@@ -24252,7 +24252,7 @@ var stations = {
             "id": "node/1195441977",
             "properties": {
                 "@id": "node/1195441977",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -24268,7 +24268,7 @@ var stations = {
             "id": "node/1195442002",
             "properties": {
                 "@id": "node/1195442002",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_98": "yes",
                 "name": "Karavan",
@@ -24288,7 +24288,7 @@ var stations = {
             "id": "node/1195442096",
             "properties": {
                 "@id": "node/1195442096",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -24304,7 +24304,7 @@ var stations = {
             "id": "node/1195442122",
             "properties": {
                 "@id": "node/1195442122",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -24331,7 +24331,7 @@ var stations = {
             "id": "node/1199025038",
             "properties": {
                 "@id": "node/1199025038",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -24350,7 +24350,7 @@ var stations = {
             "id": "node/1199954973",
             "properties": {
                 "@id": "node/1199954973",
-                "state": "warning",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Малахит"
             },
             "geometry": {
@@ -24366,7 +24366,7 @@ var stations = {
             "id": "node/1200680263",
             "properties": {
                 "@id": "node/1200680263",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -24392,7 +24392,7 @@ var stations = {
             "id": "node/1200774918",
             "properties": {
                 "@id": "node/1200774918",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "note": "примерно",
@@ -24411,7 +24411,7 @@ var stations = {
             "id": "node/1200776714",
             "properties": {
                 "@id": "node/1200776714",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "AMI",
                 "name": "AMI",
                 "note": "примерно",
@@ -24430,7 +24430,7 @@ var stations = {
             "id": "node/1201431307",
             "properties": {
                 "@id": "node/1201431307",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -24448,7 +24448,7 @@ var stations = {
             "id": "node/1203350169",
             "properties": {
                 "@id": "node/1203350169",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС ТНК"
             },
             "geometry": {
@@ -24464,7 +24464,7 @@ var stations = {
             "id": "node/1203350227",
             "properties": {
                 "@id": "node/1203350227",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "Propane",
                 "fuel:propane": "yes",
                 "name": "ИнтерОйл"
@@ -24482,7 +24482,7 @@ var stations = {
             "id": "node/1203350292",
             "properties": {
                 "@id": "node/1203350292",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "NPS"
             },
             "geometry": {
@@ -24498,7 +24498,7 @@ var stations = {
             "id": "node/1203350498",
             "properties": {
                 "@id": "node/1203350498",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС Финна",
                 "operator": "ИП Кучма А.А. АЗС№5"
             },
@@ -24515,7 +24515,7 @@ var stations = {
             "id": "node/1203350515",
             "properties": {
                 "@id": "node/1203350515",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС Исткор",
                 "note": "примерно"
             },
@@ -24532,7 +24532,7 @@ var stations = {
             "id": "node/1206136423",
             "properties": {
                 "@id": "node/1206136423",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24547,7 +24547,7 @@ var stations = {
             "id": "node/1207562632",
             "properties": {
                 "@id": "node/1207562632",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24562,7 +24562,7 @@ var stations = {
             "id": "node/1210809087",
             "properties": {
                 "@id": "node/1210809087",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24577,7 +24577,7 @@ var stations = {
             "id": "node/1211028820",
             "properties": {
                 "@id": "node/1211028820",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефто-Сервис"
             },
             "geometry": {
@@ -24593,7 +24593,7 @@ var stations = {
             "id": "node/1212013157",
             "properties": {
                 "@id": "node/1212013157",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
             },
@@ -24610,7 +24610,7 @@ var stations = {
             "id": "node/1212013167",
             "properties": {
                 "@id": "node/1212013167",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
             },
@@ -24627,7 +24627,7 @@ var stations = {
             "id": "node/1212182158",
             "properties": {
                 "@id": "node/1212182158",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "РосТех",
                 "operator": "РосТех"
             },
@@ -24644,7 +24644,7 @@ var stations = {
             "id": "node/1212199280",
             "properties": {
                 "@id": "node/1212199280",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Finna",
                 "operator": "Finna"
             },
@@ -24661,7 +24661,7 @@ var stations = {
             "id": "node/1212265123",
             "properties": {
                 "@id": "node/1212265123",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Старбург",
                 "operator": "Старбург"
             },
@@ -24678,7 +24678,7 @@ var stations = {
             "id": "node/1215769656",
             "properties": {
                 "@id": "node/1215769656",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24693,7 +24693,7 @@ var stations = {
             "id": "node/1215769659",
             "properties": {
                 "@id": "node/1215769659",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Nikka"
             },
             "geometry": {
@@ -24709,7 +24709,7 @@ var stations = {
             "id": "node/1215769663",
             "properties": {
                 "@id": "node/1215769663",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24724,7 +24724,7 @@ var stations = {
             "id": "node/1215776151",
             "properties": {
                 "@id": "node/1215776151",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "BP",
                 "name": "bp",
                 "operator": "BP"
@@ -24742,7 +24742,7 @@ var stations = {
             "id": "node/1215827584",
             "properties": {
                 "@id": "node/1215827584",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24757,7 +24757,7 @@ var stations = {
             "id": "node/1215839234",
             "properties": {
                 "@id": "node/1215839234",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24772,7 +24772,7 @@ var stations = {
             "id": "node/1215848144",
             "properties": {
                 "@id": "node/1215848144",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -24803,7 +24803,7 @@ var stations = {
             "id": "node/1215907028",
             "properties": {
                 "@id": "node/1215907028",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24818,7 +24818,7 @@ var stations = {
             "id": "node/1222432540",
             "properties": {
                 "@id": "node/1222432540",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24833,7 +24833,7 @@ var stations = {
             "id": "node/1223197592",
             "properties": {
                 "@id": "node/1223197592",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТТП"
             },
             "geometry": {
@@ -24849,7 +24849,7 @@ var stations = {
             "id": "node/1227907756",
             "properties": {
                 "@id": "node/1227907756",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "ethanol": "no",
                 "fuel:biodiesel": "no",
                 "fuel:diesel": "no",
@@ -24871,7 +24871,7 @@ var stations = {
             "id": "node/1228166812",
             "properties": {
                 "@id": "node/1228166812",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Пропан",
                 "opening_hours": "24/7"
@@ -24893,7 +24893,7 @@ var stations = {
                 "addr:country": "RU",
                 "addr:housenumber": "31А",
                 "addr:street": "Ижорская улица",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "ethanol": "no",
                 "fuel:biodiesel": "no",
                 "fuel:diesel": "no",
@@ -24916,7 +24916,7 @@ var stations = {
             "id": "node/1229307037",
             "properties": {
                 "@id": "node/1229307037",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -24931,7 +24931,7 @@ var stations = {
             "id": "node/1229515380",
             "properties": {
                 "@id": "node/1229515380",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Independent",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -24954,7 +24954,7 @@ var stations = {
             "id": "node/1230942873",
             "properties": {
                 "@id": "node/1230942873",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС Пущино-Академсервис"
             },
             "geometry": {
@@ -24970,7 +24970,7 @@ var stations = {
             "id": "node/1233440943",
             "properties": {
                 "@id": "node/1233440943",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -24991,7 +24991,7 @@ var stations = {
             "id": "node/1235177268",
             "properties": {
                 "@id": "node/1235177268",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
@@ -25011,7 +25011,7 @@ var stations = {
             "id": "node/1235529321",
             "properties": {
                 "@id": "node/1235529321",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Nikka"
             },
             "geometry": {
@@ -25027,7 +25027,7 @@ var stations = {
             "id": "node/1235619808",
             "properties": {
                 "@id": "node/1235619808",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Спецнефтепродукт",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
@@ -25049,7 +25049,7 @@ var stations = {
             "id": "node/1239157578",
             "properties": {
                 "@id": "node/1239157578",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -25065,7 +25065,7 @@ var stations = {
             "id": "node/1239890771",
             "properties": {
                 "@id": "node/1239890771",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25080,7 +25080,7 @@ var stations = {
             "id": "node/1240023292",
             "properties": {
                 "@id": "node/1240023292",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25095,7 +25095,7 @@ var stations = {
             "id": "node/1240219272",
             "properties": {
                 "@id": "node/1240219272",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -25111,7 +25111,7 @@ var stations = {
             "id": "node/1241167594",
             "properties": {
                 "@id": "node/1241167594",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -25127,7 +25127,7 @@ var stations = {
             "id": "node/1246044251",
             "properties": {
                 "@id": "node/1246044251",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС Трасса",
                 "operator": "Трасса"
             },
@@ -25144,7 +25144,7 @@ var stations = {
             "id": "node/1247886655",
             "properties": {
                 "@id": "node/1247886655",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -25166,7 +25166,7 @@ var stations = {
             "id": "node/1249479037",
             "properties": {
                 "@id": "node/1249479037",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -25182,7 +25182,7 @@ var stations = {
             "id": "node/1249479061",
             "properties": {
                 "@id": "node/1249479061",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Мэридиан"
             },
             "geometry": {
@@ -25198,7 +25198,7 @@ var stations = {
             "id": "node/1249479069",
             "properties": {
                 "@id": "node/1249479069",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -25226,7 +25226,7 @@ var stations = {
             "id": "node/1251024331",
             "properties": {
                 "@id": "node/1251024331",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -25245,7 +25245,7 @@ var stations = {
             "id": "node/1253999736",
             "properties": {
                 "@id": "node/1253999736",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25260,7 +25260,7 @@ var stations = {
             "id": "node/1255297876",
             "properties": {
                 "@id": "node/1255297876",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25275,7 +25275,7 @@ var stations = {
             "id": "node/1255619995",
             "properties": {
                 "@id": "node/1255619995",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25290,7 +25290,7 @@ var stations = {
             "id": "node/1255986229",
             "properties": {
                 "@id": "node/1255986229",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -25306,7 +25306,7 @@ var stations = {
             "id": "node/1256474813",
             "properties": {
                 "@id": "node/1256474813",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25321,7 +25321,7 @@ var stations = {
             "id": "node/1256947521",
             "properties": {
                 "@id": "node/1256947521",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25336,7 +25336,7 @@ var stations = {
             "id": "node/1256947606",
             "properties": {
                 "@id": "node/1256947606",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "фсв"
             },
             "geometry": {
@@ -25352,7 +25352,7 @@ var stations = {
             "id": "node/1257052128",
             "properties": {
                 "@id": "node/1257052128",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -25380,7 +25380,7 @@ var stations = {
             "id": "node/1257997018",
             "properties": {
                 "@id": "node/1257997018",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "bp",
                 "operator": "ЗАО \"ПКЭК\"",
                 "ref": "Тверь-1",
@@ -25399,7 +25399,7 @@ var stations = {
             "id": "node/1258250348",
             "properties": {
                 "@id": "node/1258250348",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "operator": "Нефтьмагистраль",
@@ -25418,7 +25418,7 @@ var stations = {
             "id": "node/1261471066",
             "properties": {
                 "@id": "node/1261471066",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -25449,7 +25449,7 @@ var stations = {
             "id": "node/1261472989",
             "properties": {
                 "@id": "node/1261472989",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "operator": "ООО «Стромстрой»"
             },
@@ -25466,7 +25466,7 @@ var stations = {
             "id": "node/1262577310",
             "properties": {
                 "@id": "node/1262577310",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:biodiesel": "no",
                 "fuel:diesel": "yes",
                 "name": "Лукойл",
@@ -25485,7 +25485,7 @@ var stations = {
             "id": "node/1263405470",
             "properties": {
                 "@id": "node/1263405470",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -25513,7 +25513,7 @@ var stations = {
                 "addr:country": "RU",
                 "addr:housenumber": "24",
                 "addr:street": "проезд Шабулина",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -25533,7 +25533,7 @@ var stations = {
             "id": "node/1264655050",
             "properties": {
                 "@id": "node/1264655050",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Автоэконом"
             },
             "geometry": {
@@ -25549,7 +25549,7 @@ var stations = {
             "id": "node/1264930296",
             "properties": {
                 "@id": "node/1264930296",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпромнефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -25570,7 +25570,7 @@ var stations = {
             "id": "node/1266449375",
             "properties": {
                 "@id": "node/1266449375",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -25586,7 +25586,7 @@ var stations = {
             "id": "node/1271026133",
             "properties": {
                 "@id": "node/1271026133",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25601,7 +25601,7 @@ var stations = {
             "id": "node/1272770448",
             "properties": {
                 "@id": "node/1272770448",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -25620,7 +25620,7 @@ var stations = {
             "id": "node/1272770469",
             "properties": {
                 "@id": "node/1272770469",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Русь",
                 "name": "Русь",
                 "operator": "Русь"
@@ -25638,7 +25638,7 @@ var stations = {
             "id": "node/1272770484",
             "properties": {
                 "@id": "node/1272770484",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ДТК",
                 "name": "ДТК",
                 "operator": "ДТК"
@@ -25656,7 +25656,7 @@ var stations = {
             "id": "node/1272770507",
             "properties": {
                 "@id": "node/1272770507",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -25675,7 +25675,7 @@ var stations = {
             "id": "node/1272770518",
             "properties": {
                 "@id": "node/1272770518",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "М2"
             },
             "geometry": {
@@ -25691,7 +25691,7 @@ var stations = {
             "id": "node/1272770544",
             "properties": {
                 "@id": "node/1272770544",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -25713,7 +25713,7 @@ var stations = {
             "id": "node/1272770555",
             "properties": {
                 "@id": "node/1272770555",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ДТК",
                 "name": "ДТК",
                 "operator": "ДТК"
@@ -25731,7 +25731,7 @@ var stations = {
             "id": "node/1272770588",
             "properties": {
                 "@id": "node/1272770588",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "М2"
             },
             "geometry": {
@@ -25747,7 +25747,7 @@ var stations = {
             "id": "node/1274690345",
             "properties": {
                 "@id": "node/1274690345",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -25773,7 +25773,7 @@ var stations = {
             "id": "node/1275656292",
             "properties": {
                 "@id": "node/1275656292",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25788,7 +25788,7 @@ var stations = {
             "id": "node/1277048359",
             "properties": {
                 "@id": "node/1277048359",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "БТК",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
@@ -25810,7 +25810,7 @@ var stations = {
             "id": "node/1279181835",
             "properties": {
                 "@id": "node/1279181835",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -25826,7 +25826,7 @@ var stations = {
             "id": "node/1279181851",
             "properties": {
                 "@id": "node/1279181851",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Аксойл"
             },
@@ -25843,7 +25843,7 @@ var stations = {
             "id": "node/1280030565",
             "properties": {
                 "@id": "node/1280030565",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Русойл"
             },
             "geometry": {
@@ -25859,7 +25859,7 @@ var stations = {
             "id": "node/1280086678",
             "properties": {
                 "@id": "node/1280086678",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл"
             },
             "geometry": {
@@ -25875,7 +25875,7 @@ var stations = {
             "id": "node/1280130449",
             "properties": {
                 "@id": "node/1280130449",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сокол"
             },
             "geometry": {
@@ -25891,7 +25891,7 @@ var stations = {
             "id": "node/1281185514",
             "properties": {
                 "@id": "node/1281185514",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Крас АЗС"
             },
             "geometry": {
@@ -25907,7 +25907,7 @@ var stations = {
             "id": "node/1281575359",
             "properties": {
                 "@id": "node/1281575359",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ОАО Вега"
             },
             "geometry": {
@@ -25923,7 +25923,7 @@ var stations = {
             "id": "node/1282548487",
             "properties": {
                 "@id": "node/1282548487",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -25944,7 +25944,7 @@ var stations = {
             "id": "node/1283209017",
             "properties": {
                 "@id": "node/1283209017",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Калуга-Нефть",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -25965,7 +25965,7 @@ var stations = {
             "id": "node/1283953973",
             "properties": {
                 "@id": "node/1283953973",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25980,7 +25980,7 @@ var stations = {
             "id": "node/1284243347",
             "properties": {
                 "@id": "node/1284243347",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -25995,7 +25995,7 @@ var stations = {
             "id": "node/1287626017",
             "properties": {
                 "@id": "node/1287626017",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26010,7 +26010,7 @@ var stations = {
             "id": "node/1287643253",
             "properties": {
                 "@id": "node/1287643253",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26025,7 +26025,7 @@ var stations = {
             "id": "node/1288287513",
             "properties": {
                 "@id": "node/1288287513",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "СТинвест"
             },
             "geometry": {
@@ -26041,7 +26041,7 @@ var stations = {
             "id": "node/1288781240",
             "properties": {
                 "@id": "node/1288781240",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "contact:website": "http://www.rosneft.ru",
                 "fuel:diesel": "no",
@@ -26067,7 +26067,7 @@ var stations = {
             "id": "node/1293143746",
             "properties": {
                 "@id": "node/1293143746",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -26098,7 +26098,7 @@ var stations = {
             "id": "node/1296562004",
             "properties": {
                 "@id": "node/1296562004",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ИП Тихонов"
             },
             "geometry": {
@@ -26114,7 +26114,7 @@ var stations = {
             "id": "node/1297684281",
             "properties": {
                 "@id": "node/1297684281",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ОРТК"
             },
             "geometry": {
@@ -26130,7 +26130,7 @@ var stations = {
             "id": "node/1298713922",
             "properties": {
                 "@id": "node/1298713922",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -26146,7 +26146,7 @@ var stations = {
             "id": "node/1300452855",
             "properties": {
                 "@id": "node/1300452855",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -26164,7 +26164,7 @@ var stations = {
             "id": "node/1302128414",
             "properties": {
                 "@id": "node/1302128414",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "TatNeft"
             },
             "geometry": {
@@ -26180,7 +26180,7 @@ var stations = {
             "id": "node/1302969710",
             "properties": {
                 "@id": "node/1302969710",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "ethanol": "no",
                 "fuel:biodiesel": "no",
                 "fuel:diesel": "no",
@@ -26203,7 +26203,7 @@ var stations = {
             "id": "node/1305260055",
             "properties": {
                 "@id": "node/1305260055",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
@@ -26224,7 +26224,7 @@ var stations = {
             "id": "node/1305260067",
             "properties": {
                 "@id": "node/1305260067",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
@@ -26244,7 +26244,7 @@ var stations = {
             "id": "node/1305260071",
             "properties": {
                 "@id": "node/1305260071",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Джет Петролеум"
@@ -26262,7 +26262,7 @@ var stations = {
             "id": "node/1305260085",
             "properties": {
                 "@id": "node/1305260085",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes"
             },
             "geometry": {
@@ -26278,7 +26278,7 @@ var stations = {
             "id": "node/1305655408",
             "properties": {
                 "@id": "node/1305655408",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "BP",
                 "name": "BP",
                 "operator": "BP"
@@ -26296,7 +26296,7 @@ var stations = {
             "id": "node/1305655419",
             "properties": {
                 "@id": "node/1305655419",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:diesel": "yes",
@@ -26323,7 +26323,7 @@ var stations = {
             "id": "node/1305794144",
             "properties": {
                 "@id": "node/1305794144",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "ethanol": "no",
                 "fuel:biodiesel": "no",
                 "fuel:diesel": "no",
@@ -26346,7 +26346,7 @@ var stations = {
             "id": "node/1306396138",
             "properties": {
                 "@id": "node/1306396138",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26361,7 +26361,7 @@ var stations = {
             "id": "node/1307513347",
             "properties": {
                 "@id": "node/1307513347",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -26381,7 +26381,7 @@ var stations = {
             "id": "node/1307513354",
             "properties": {
                 "@id": "node/1307513354",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС Лукойл",
                 "website": "http://www.lukoil.ru/"
             },
@@ -26398,7 +26398,7 @@ var stations = {
             "id": "node/1316083543",
             "properties": {
                 "@id": "node/1316083543",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26413,7 +26413,7 @@ var stations = {
             "id": "node/1317343384",
             "properties": {
                 "@id": "node/1317343384",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26428,7 +26428,7 @@ var stations = {
             "id": "node/1320944811",
             "properties": {
                 "@id": "node/1320944811",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP",
                 "operator": "BP",
                 "shop": "yes"
@@ -26446,7 +26446,7 @@ var stations = {
             "id": "node/1324047770",
             "properties": {
                 "@id": "node/1324047770",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС КОНТРАКТ"
             },
             "geometry": {
@@ -26462,7 +26462,7 @@ var stations = {
             "id": "node/1324645701",
             "properties": {
                 "@id": "node/1324645701",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26477,7 +26477,7 @@ var stations = {
             "id": "node/1324846829",
             "properties": {
                 "@id": "node/1324846829",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть"
             },
             "geometry": {
@@ -26493,7 +26493,7 @@ var stations = {
             "id": "node/1325001965",
             "properties": {
                 "@id": "node/1325001965",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26508,7 +26508,7 @@ var stations = {
             "id": "node/1325306450",
             "properties": {
                 "@id": "node/1325306450",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -26524,7 +26524,7 @@ var stations = {
             "id": "node/1327248988",
             "properties": {
                 "@id": "node/1327248988",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26539,7 +26539,7 @@ var stations = {
             "id": "node/1329323162",
             "properties": {
                 "@id": "node/1329323162",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Пропан",
                 "name:ru": "Пропан"
             },
@@ -26556,7 +26556,7 @@ var stations = {
             "id": "node/1332217226",
             "properties": {
                 "@id": "node/1332217226",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "ref": "8",
@@ -26575,7 +26575,7 @@ var stations = {
             "id": "node/1332217337",
             "properties": {
                 "@id": "node/1332217337",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Сибирьнефть"
             },
             "geometry": {
@@ -26591,7 +26591,7 @@ var stations = {
             "id": "node/1332217338",
             "properties": {
                 "@id": "node/1332217338",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -26612,7 +26612,7 @@ var stations = {
             "id": "node/1332647624",
             "properties": {
                 "@id": "node/1332647624",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -26630,7 +26630,7 @@ var stations = {
             "id": "node/1332803875",
             "properties": {
                 "@id": "node/1332803875",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефтьмагистраль"
             },
             "geometry": {
@@ -26646,7 +26646,7 @@ var stations = {
             "id": "node/1332803927",
             "properties": {
                 "@id": "node/1332803927",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лоран"
             },
             "geometry": {
@@ -26662,7 +26662,7 @@ var stations = {
             "id": "node/1332804040",
             "properties": {
                 "@id": "node/1332804040",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -26694,7 +26694,7 @@ var stations = {
             "id": "node/1336537404",
             "properties": {
                 "@id": "node/1336537404",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "М10",
                 "website": "http://m10-oil.ru"
             },
@@ -26711,7 +26711,7 @@ var stations = {
             "id": "node/1336873005",
             "properties": {
                 "@id": "node/1336873005",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Нефто-Сервис"
             },
             "geometry": {
@@ -26727,7 +26727,7 @@ var stations = {
             "id": "node/1337959957",
             "properties": {
                 "@id": "node/1337959957",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС",
                 "opening_hours": "Mo-Su 07:00-23:00",
@@ -26746,7 +26746,7 @@ var stations = {
             "id": "node/1338513023",
             "properties": {
                 "@id": "node/1338513023",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26761,7 +26761,7 @@ var stations = {
             "id": "node/1340330143",
             "properties": {
                 "@id": "node/1340330143",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26776,7 +26776,7 @@ var stations = {
             "id": "node/1340350273",
             "properties": {
                 "@id": "node/1340350273",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Скорпион"
             },
             "geometry": {
@@ -26794,7 +26794,7 @@ var stations = {
                 "@id": "node/1341452881",
                 "addr:housenumber": "2",
                 "addr:street": "Охотничья улица",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26809,7 +26809,7 @@ var stations = {
             "id": "node/1345556777",
             "properties": {
                 "@id": "node/1345556777",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26824,7 +26824,7 @@ var stations = {
             "id": "node/1346893361",
             "properties": {
                 "@id": "node/1346893361",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "no",
                 "fuel:lpg": "yes",
                 "name": "АЗГС"
@@ -26842,7 +26842,7 @@ var stations = {
             "id": "node/1346893455",
             "properties": {
                 "@id": "node/1346893455",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -26869,7 +26869,7 @@ var stations = {
             "id": "node/1352176604",
             "properties": {
                 "@id": "node/1352176604",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Меридиан"
             },
             "geometry": {
@@ -26885,7 +26885,7 @@ var stations = {
             "id": "node/1357403175",
             "properties": {
                 "@id": "node/1357403175",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:biogas": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -26905,7 +26905,7 @@ var stations = {
             "id": "node/1357625902",
             "properties": {
                 "@id": "node/1357625902",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Пропан"
             },
@@ -26922,7 +26922,7 @@ var stations = {
             "id": "node/1360057471",
             "properties": {
                 "@id": "node/1360057471",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС DP №3"
             },
             "geometry": {
@@ -26938,7 +26938,7 @@ var stations = {
             "id": "node/1361567296",
             "properties": {
                 "@id": "node/1361567296",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26953,7 +26953,7 @@ var stations = {
             "id": "node/1362693917",
             "properties": {
                 "@id": "node/1362693917",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26968,7 +26968,7 @@ var stations = {
             "id": "node/1366349296",
             "properties": {
                 "@id": "node/1366349296",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -26983,7 +26983,7 @@ var stations = {
             "id": "node/1368696127",
             "properties": {
                 "@id": "node/1368696127",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
@@ -27011,7 +27011,7 @@ var stations = {
             "id": "node/1369479429",
             "properties": {
                 "@id": "node/1369479429",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -27031,7 +27031,7 @@ var stations = {
             "id": "node/1371208079",
             "properties": {
                 "@id": "node/1371208079",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -27056,7 +27056,7 @@ var stations = {
             "id": "node/1371208080",
             "properties": {
                 "@id": "node/1371208080",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -27073,7 +27073,7 @@ var stations = {
             "id": "node/1371502774",
             "properties": {
                 "@id": "node/1371502774",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -27097,7 +27097,7 @@ var stations = {
             "id": "node/1373089972",
             "properties": {
                 "@id": "node/1373089972",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:1_25": "no",
                 "fuel:1_50": "no",
                 "fuel:GTL_diesel": "no",
@@ -27127,7 +27127,7 @@ var stations = {
             "id": "node/1373152837",
             "properties": {
                 "@id": "node/1373152837",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -27142,7 +27142,7 @@ var stations = {
             "id": "node/1373591731",
             "properties": {
                 "@id": "node/1373591731",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК"
             },
             "geometry": {
@@ -27158,7 +27158,7 @@ var stations = {
             "id": "node/1373685928",
             "properties": {
                 "@id": "node/1373685928",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -27174,7 +27174,7 @@ var stations = {
             "id": "node/1373719199",
             "properties": {
                 "@id": "node/1373719199",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -27190,7 +27190,7 @@ var stations = {
             "id": "node/1373772922",
             "properties": {
                 "@id": "node/1373772922",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -27222,7 +27222,7 @@ var stations = {
             "id": "node/1375520513",
             "properties": {
                 "@id": "node/1375520513",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл"
             },
             "geometry": {
@@ -27238,7 +27238,7 @@ var stations = {
             "id": "node/1376475897",
             "properties": {
                 "@id": "node/1376475897",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "GF"
             },
             "geometry": {
@@ -27254,7 +27254,7 @@ var stations = {
             "id": "node/1379349694",
             "properties": {
                 "@id": "node/1379349694",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "BP",
                 "operator": "BP"
             },
@@ -27271,7 +27271,7 @@ var stations = {
             "id": "node/1385291912",
             "properties": {
                 "@id": "node/1385291912",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -27298,7 +27298,7 @@ var stations = {
             "id": "node/1387188141",
             "properties": {
                 "@id": "node/1387188141",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "GF"
             },
             "geometry": {
@@ -27314,7 +27314,7 @@ var stations = {
             "id": "node/1387188143",
             "properties": {
                 "@id": "node/1387188143",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -27330,7 +27330,7 @@ var stations = {
             "id": "node/1387661135",
             "properties": {
                 "@id": "node/1387661135",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ГРЭЙС РОУД"
             },
             "geometry": {
@@ -27346,7 +27346,7 @@ var stations = {
             "id": "node/1387661136",
             "properties": {
                 "@id": "node/1387661136",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ДОЛУС"
             },
             "geometry": {
@@ -27362,7 +27362,7 @@ var stations = {
             "id": "node/1388699017",
             "properties": {
                 "@id": "node/1388699017",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "contact:website": "http://www.rosneft.ru",
                 "fuel:diesel": "no",
@@ -27388,7 +27388,7 @@ var stations = {
             "id": "node/1390624741",
             "properties": {
                 "@id": "node/1390624741",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -27403,7 +27403,7 @@ var stations = {
             "id": "node/1391127535",
             "properties": {
                 "@id": "node/1391127535",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -27428,7 +27428,7 @@ var stations = {
                 "addr:housenumber": "21",
                 "addr:postcode": "111625",
                 "addr:street": "Каскадная улица",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Shell",
                 "name": "Shell Каскадная",
                 "operator": "Shell",
@@ -27447,7 +27447,7 @@ var stations = {
             "id": "node/1392027200",
             "properties": {
                 "@id": "node/1392027200",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -27473,7 +27473,7 @@ var stations = {
             "id": "node/1395058048",
             "properties": {
                 "@id": "node/1395058048",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "operator": "ТНК"
             },
@@ -27490,7 +27490,7 @@ var stations = {
             "id": "node/1395955779",
             "properties": {
                 "@id": "node/1395955779",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "name": "Газпромнефть",
                 "opening_hours": "24/7",
@@ -27512,7 +27512,7 @@ var stations = {
             "id": "node/1396369063",
             "properties": {
                 "@id": "node/1396369063",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -27527,7 +27527,7 @@ var stations = {
             "id": "node/1396696785",
             "properties": {
                 "@id": "node/1396696785",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -27553,7 +27553,7 @@ var stations = {
             "id": "node/1396835450",
             "properties": {
                 "@id": "node/1396835450",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС N 3 Владимир-Оптон"
             },
             "geometry": {
@@ -27569,7 +27569,7 @@ var stations = {
             "id": "node/1397055963",
             "properties": {
                 "@id": "node/1397055963",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -27586,7 +27586,7 @@ var stations = {
             "id": "node/1397151026",
             "properties": {
                 "@id": "node/1397151026",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -27601,7 +27601,7 @@ var stations = {
             "id": "node/1399406899",
             "properties": {
                 "@id": "node/1399406899",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Мэридан"
             },
             "geometry": {
@@ -27617,7 +27617,7 @@ var stations = {
             "id": "node/1399573213",
             "properties": {
                 "@id": "node/1399573213",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:GTL_diesel": "yes",
                 "fuel:biodiesel": "yes",
                 "fuel:diesel": "yes",
@@ -27640,7 +27640,7 @@ var stations = {
             "id": "node/1404778270",
             "properties": {
                 "@id": "node/1404778270",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Никойл"
             },
             "geometry": {
@@ -27656,7 +27656,7 @@ var stations = {
             "id": "node/1408202099",
             "properties": {
                 "@id": "node/1408202099",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_91": "yes",
                 "fuel:octane_92": "yes",
@@ -27681,7 +27681,7 @@ var stations = {
             "id": "node/1408523314",
             "properties": {
                 "@id": "node/1408523314",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -27703,7 +27703,7 @@ var stations = {
             "properties": {
                 "@id": "node/1409636634",
                 "alt_name": "JP",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Джет Петролеум",
                 "ref": "452"
             },
@@ -27720,7 +27720,7 @@ var stations = {
             "id": "node/1410945808",
             "properties": {
                 "@id": "node/1410945808",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -27738,7 +27738,7 @@ var stations = {
             "id": "node/1411131686",
             "properties": {
                 "@id": "node/1411131686",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "operator": "Гейн Ойл"
@@ -27756,7 +27756,7 @@ var stations = {
             "id": "node/1411415747",
             "properties": {
                 "@id": "node/1411415747",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -27784,7 +27784,7 @@ var stations = {
             "id": "node/1411590899",
             "properties": {
                 "@id": "node/1411590899",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "building": "yes",
@@ -27816,7 +27816,7 @@ var stations = {
             "id": "node/1412524688",
             "properties": {
                 "@id": "node/1412524688",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -27844,7 +27844,7 @@ var stations = {
             "id": "node/1414317335",
             "properties": {
                 "@id": "node/1414317335",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл",
                 "website": "http://www.lukoil.ru/"
             },
@@ -27861,7 +27861,7 @@ var stations = {
             "id": "node/1414675040",
             "properties": {
                 "@id": "node/1414675040",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -27877,7 +27877,7 @@ var stations = {
             "id": "node/1416430361",
             "properties": {
                 "@id": "node/1416430361",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "name": "ТНК"
@@ -27895,7 +27895,7 @@ var stations = {
             "id": "node/1420257731",
             "properties": {
                 "@id": "node/1420257731",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "name": "Лукойл",
                 "operator": "Лукойл",
@@ -27914,7 +27914,7 @@ var stations = {
             "id": "node/1420258806",
             "properties": {
                 "@id": "node/1420258806",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "name": "Лукойл",
                 "operator": "Лукойл",
@@ -27933,7 +27933,7 @@ var stations = {
             "id": "node/1420262809",
             "properties": {
                 "@id": "node/1420262809",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "City Oil",
                 "operator": "City Oil",
                 "shop": "yes"
@@ -27951,7 +27951,7 @@ var stations = {
             "id": "node/1420265211",
             "properties": {
                 "@id": "node/1420265211",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "City Oil"
             },
             "geometry": {
@@ -27967,7 +27967,7 @@ var stations = {
             "id": "node/1420272761",
             "properties": {
                 "@id": "node/1420272761",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Владимир-ОПТОН",
                 "operator": "ЗАО \"Владимир-ОПТОН\""
             },
@@ -27984,7 +27984,7 @@ var stations = {
             "id": "node/1420272774",
             "properties": {
                 "@id": "node/1420272774",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл",
                 "operator": "Лукойл",
                 "website": "http://www.lukoil.ru/"
@@ -28002,7 +28002,7 @@ var stations = {
             "id": "node/1420279448",
             "properties": {
                 "@id": "node/1420279448",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "City Oil"
             },
             "geometry": {
@@ -28018,7 +28018,7 @@ var stations = {
             "id": "node/1420297020",
             "properties": {
                 "@id": "node/1420297020",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "City Oil",
                 "operator": "City Oil"
             },
@@ -28035,7 +28035,7 @@ var stations = {
             "id": "node/1420318146",
             "properties": {
                 "@id": "node/1420318146",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:lpg": "yes"
             },
@@ -28052,7 +28052,7 @@ var stations = {
             "id": "node/1420318162",
             "properties": {
                 "@id": "node/1420318162",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28067,7 +28067,7 @@ var stations = {
             "id": "node/1420332101",
             "properties": {
                 "@id": "node/1420332101",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "РосТех",
                 "operator": "РосТех"
             },
@@ -28084,7 +28084,7 @@ var stations = {
             "id": "node/1420332108",
             "properties": {
                 "@id": "node/1420332108",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сибнефть",
                 "operator": "Сибнефть"
             },
@@ -28101,7 +28101,7 @@ var stations = {
             "id": "node/1420332166",
             "properties": {
                 "@id": "node/1420332166",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Finna",
                 "operator": "Finna"
             },
@@ -28118,7 +28118,7 @@ var stations = {
             "id": "node/1420347804",
             "properties": {
                 "@id": "node/1420347804",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Finna",
                 "operator": "Finna"
             },
@@ -28135,7 +28135,7 @@ var stations = {
             "id": "node/1420347807",
             "properties": {
                 "@id": "node/1420347807",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "operator": "ООО \"ЛУКОЙЛ-Центрнефтепродукт\"",
                 "ref": "3",
@@ -28154,7 +28154,7 @@ var stations = {
             "id": "node/1420347809",
             "properties": {
                 "@id": "node/1420347809",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Мега- Ойл",
                 "operator": "Мега- Ойл"
             },
@@ -28171,7 +28171,7 @@ var stations = {
             "id": "node/1420347811",
             "properties": {
                 "@id": "node/1420347811",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "РосТех",
                 "operator": "РосТех"
             },
@@ -28188,7 +28188,7 @@ var stations = {
             "id": "node/1420365000",
             "properties": {
                 "@id": "node/1420365000",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "City Oil",
                 "operator": "City Oil"
             },
@@ -28205,7 +28205,7 @@ var stations = {
             "id": "node/1423035721",
             "properties": {
                 "@id": "node/1423035721",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -28221,7 +28221,7 @@ var stations = {
             "id": "node/1426763627",
             "properties": {
                 "@id": "node/1426763627",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -28246,7 +28246,7 @@ var stations = {
             "id": "node/1426763628",
             "properties": {
                 "@id": "node/1426763628",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Газпромнефть",
                 "opening_hours": "24/7",
                 "operator": "ОАО \"Газпром нефть\"",
@@ -28266,7 +28266,7 @@ var stations = {
             "id": "node/1429245256",
             "properties": {
                 "@id": "node/1429245256",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -28286,7 +28286,7 @@ var stations = {
             "id": "node/1430422953",
             "properties": {
                 "@id": "node/1430422953",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -28305,7 +28305,7 @@ var stations = {
             "id": "node/1430983821",
             "properties": {
                 "@id": "node/1430983821",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "no",
                 "fuel:octane_92": "yes",
@@ -28326,7 +28326,7 @@ var stations = {
             "id": "node/1431678991",
             "properties": {
                 "@id": "node/1431678991",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28341,7 +28341,7 @@ var stations = {
             "id": "node/1434063978",
             "properties": {
                 "@id": "node/1434063978",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Роснефть"
             },
             "geometry": {
@@ -28357,7 +28357,7 @@ var stations = {
             "id": "node/1435477692",
             "properties": {
                 "@id": "node/1435477692",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28372,7 +28372,7 @@ var stations = {
             "id": "node/1437413449",
             "properties": {
                 "@id": "node/1437413449",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -28398,7 +28398,7 @@ var stations = {
             "id": "node/1437752757",
             "properties": {
                 "@id": "node/1437752757",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28413,7 +28413,7 @@ var stations = {
             "id": "node/1438339938",
             "properties": {
                 "@id": "node/1438339938",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -28438,7 +28438,7 @@ var stations = {
             "id": "node/1446012358",
             "properties": {
                 "@id": "node/1446012358",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28453,7 +28453,7 @@ var stations = {
             "id": "node/1447791215",
             "properties": {
                 "@id": "node/1447791215",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28468,7 +28468,7 @@ var stations = {
             "id": "node/1447938410",
             "properties": {
                 "@id": "node/1447938410",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сибирь нефть"
             },
             "geometry": {
@@ -28484,7 +28484,7 @@ var stations = {
             "id": "node/1456873469",
             "properties": {
                 "@id": "node/1456873469",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Пропан"
             },
             "geometry": {
@@ -28500,7 +28500,7 @@ var stations = {
             "id": "node/1456875871",
             "properties": {
                 "@id": "node/1456875871",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -28529,7 +28529,7 @@ var stations = {
                 "@id": "node/1456878213",
                 "addr:housenumber": "67 с1",
                 "addr:street": "Рябиновая улица",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "no",
@@ -28556,7 +28556,7 @@ var stations = {
                 "addr:housenumber": "6",
                 "addr:region": "Москва",
                 "addr:street": "Проезд N 4807",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Валента"
             },
             "geometry": {
@@ -28572,7 +28572,7 @@ var stations = {
             "id": "node/1459155647",
             "properties": {
                 "@id": "node/1459155647",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28587,7 +28587,7 @@ var stations = {
             "id": "node/1460284136",
             "properties": {
                 "@id": "node/1460284136",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28602,7 +28602,7 @@ var stations = {
             "id": "node/1460284562",
             "properties": {
                 "@id": "node/1460284562",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -28621,7 +28621,7 @@ var stations = {
             "id": "node/1460583481",
             "properties": {
                 "@id": "node/1460583481",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -28637,7 +28637,7 @@ var stations = {
             "id": "node/1462102769",
             "properties": {
                 "@id": "node/1462102769",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "БТК",
                 "fuel:diesel": "yes",
                 "fuel:e85": "no",
@@ -28659,7 +28659,7 @@ var stations = {
             "id": "node/1465037719",
             "properties": {
                 "@id": "node/1465037719",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes"
@@ -28677,7 +28677,7 @@ var stations = {
             "id": "node/1468061262",
             "properties": {
                 "@id": "node/1468061262",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -28698,7 +28698,7 @@ var stations = {
             "id": "node/1468365302",
             "properties": {
                 "@id": "node/1468365302",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -28718,7 +28718,7 @@ var stations = {
             "id": "node/1468365350",
             "properties": {
                 "@id": "node/1468365350",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "TNK",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -28741,7 +28741,7 @@ var stations = {
             "id": "node/1469025302",
             "properties": {
                 "@id": "node/1469025302",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28756,7 +28756,7 @@ var stations = {
             "id": "node/1469042374",
             "properties": {
                 "@id": "node/1469042374",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -28772,7 +28772,7 @@ var stations = {
             "id": "node/1469076589",
             "properties": {
                 "@id": "node/1469076589",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Башкирнефть"
             },
             "geometry": {
@@ -28788,7 +28788,7 @@ var stations = {
             "id": "node/1469076598",
             "properties": {
                 "@id": "node/1469076598",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "sun petrol"
             },
             "geometry": {
@@ -28804,7 +28804,7 @@ var stations = {
             "id": "node/1469094807",
             "properties": {
                 "@id": "node/1469094807",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС-Комплекс",
                 "opening_hours": "24/7"
             },
@@ -28821,7 +28821,7 @@ var stations = {
             "id": "node/1470892606",
             "properties": {
                 "@id": "node/1470892606",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28836,7 +28836,7 @@ var stations = {
             "id": "node/1475178935",
             "properties": {
                 "@id": "node/1475178935",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Татнефть"
             },
             "geometry": {
@@ -28852,7 +28852,7 @@ var stations = {
             "id": "node/1475406564",
             "properties": {
                 "@id": "node/1475406564",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes"
@@ -28870,7 +28870,7 @@ var stations = {
             "id": "node/1476518852",
             "properties": {
                 "@id": "node/1476518852",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -28886,7 +28886,7 @@ var stations = {
             "id": "node/1479230782",
             "properties": {
                 "@id": "node/1479230782",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -28917,7 +28917,7 @@ var stations = {
             "id": "node/1479326545",
             "properties": {
                 "@id": "node/1479326545",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -28933,7 +28933,7 @@ var stations = {
             "id": "node/1479830262",
             "properties": {
                 "@id": "node/1479830262",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -28948,7 +28948,7 @@ var stations = {
             "id": "node/1482356505",
             "properties": {
                 "@id": "node/1482356505",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть"
             },
@@ -28965,7 +28965,7 @@ var stations = {
             "id": "node/1482374613",
             "properties": {
                 "@id": "node/1482374613",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -28990,7 +28990,7 @@ var stations = {
             "id": "node/1482883965",
             "properties": {
                 "@id": "node/1482883965",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефтемагитраль"
             },
             "geometry": {
@@ -29006,7 +29006,7 @@ var stations = {
             "id": "node/1484307228",
             "properties": {
                 "@id": "node/1484307228",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "SunPetrol",
                 "opening_hours": "24/7"
             },
@@ -29023,7 +29023,7 @@ var stations = {
             "id": "node/1485767094",
             "properties": {
                 "@id": "node/1485767094",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29038,7 +29038,7 @@ var stations = {
             "id": "node/1487652242",
             "properties": {
                 "@id": "node/1487652242",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -29063,7 +29063,7 @@ var stations = {
             "id": "node/1488360803",
             "properties": {
                 "@id": "node/1488360803",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_91": "yes",
@@ -29083,7 +29083,7 @@ var stations = {
             "id": "node/1489658003",
             "properties": {
                 "@id": "node/1489658003",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -29103,7 +29103,7 @@ var stations = {
             "id": "node/1489658007",
             "properties": {
                 "@id": "node/1489658007",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Пропан",
                 "opening_hours": "24/7"
@@ -29121,7 +29121,7 @@ var stations = {
             "id": "node/1492768823",
             "properties": {
                 "@id": "node/1492768823",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29136,7 +29136,7 @@ var stations = {
             "id": "node/1494048211",
             "properties": {
                 "@id": "node/1494048211",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "NOVA petroleum"
             },
             "geometry": {
@@ -29152,7 +29152,7 @@ var stations = {
             "id": "node/1494130861",
             "properties": {
                 "@id": "node/1494130861",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Sun oil"
             },
             "geometry": {
@@ -29168,7 +29168,7 @@ var stations = {
             "id": "node/1494130867",
             "properties": {
                 "@id": "node/1494130867",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Energy"
             },
             "geometry": {
@@ -29184,7 +29184,7 @@ var stations = {
             "id": "node/1494130983",
             "properties": {
                 "@id": "node/1494130983",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29199,7 +29199,7 @@ var stations = {
             "id": "node/1494131142",
             "properties": {
                 "@id": "node/1494131142",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС 123 км"
             },
             "geometry": {
@@ -29215,7 +29215,7 @@ var stations = {
             "id": "node/1494140141",
             "properties": {
                 "@id": "node/1494140141",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Газпромнефть"
             },
             "geometry": {
@@ -29231,7 +29231,7 @@ var stations = {
             "id": "node/1494140144",
             "properties": {
                 "@id": "node/1494140144",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Газпромнефть",
                 "operator": "ООО \"ТД \"Альфа-Трейд\" ТЗК №353"
             },
@@ -29248,7 +29248,7 @@ var stations = {
             "id": "node/1494140149",
             "properties": {
                 "@id": "node/1494140149",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29263,7 +29263,7 @@ var stations = {
             "id": "node/1494145200",
             "properties": {
                 "@id": "node/1494145200",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл",
                 "operator": "Лукойл"
             },
@@ -29280,7 +29280,7 @@ var stations = {
             "id": "node/1494157414",
             "properties": {
                 "@id": "node/1494157414",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29295,7 +29295,7 @@ var stations = {
             "id": "node/1494485636",
             "properties": {
                 "@id": "node/1494485636",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29310,7 +29310,7 @@ var stations = {
             "id": "node/1494485668",
             "properties": {
                 "@id": "node/1494485668",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Караван"
             },
             "geometry": {
@@ -29326,7 +29326,7 @@ var stations = {
             "id": "node/1494485687",
             "properties": {
                 "@id": "node/1494485687",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29341,7 +29341,7 @@ var stations = {
             "id": "node/1494485709",
             "properties": {
                 "@id": "node/1494485709",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes"
@@ -29364,7 +29364,7 @@ var stations = {
                 "addr:housenumber": "102А",
                 "addr:region": "Ярославская область",
                 "addr:street": "улица Свободы",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Орион"
             },
             "geometry": {
@@ -29380,7 +29380,7 @@ var stations = {
             "id": "node/1497122979",
             "properties": {
                 "@id": "node/1497122979",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефтьмагистраль",
                 "operator": "Интэграл М №4",
                 "shop": "yes",
@@ -29399,7 +29399,7 @@ var stations = {
             "id": "node/1501398934",
             "properties": {
                 "@id": "node/1501398934",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29416,7 +29416,7 @@ var stations = {
                 "@id": "node/1506543155",
                 "addr:region": "Московская область",
                 "addr:street": "Борисовское шоссе",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -29435,7 +29435,7 @@ var stations = {
             "id": "node/1506544846",
             "properties": {
                 "@id": "node/1506544846",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -29451,7 +29451,7 @@ var stations = {
             "id": "node/1506544863",
             "properties": {
                 "@id": "node/1506544863",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29466,7 +29466,7 @@ var stations = {
             "id": "node/1508530629",
             "properties": {
                 "@id": "node/1508530629",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Орион",
                 "name": "Орион",
                 "operator": "Орион"
@@ -29484,7 +29484,7 @@ var stations = {
             "id": "node/1519935170",
             "properties": {
                 "@id": "node/1519935170",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29499,7 +29499,7 @@ var stations = {
             "id": "node/1523448785",
             "properties": {
                 "@id": "node/1523448785",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29514,7 +29514,7 @@ var stations = {
             "id": "node/1523545598",
             "properties": {
                 "@id": "node/1523545598",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29529,7 +29529,7 @@ var stations = {
             "id": "node/1524395701",
             "properties": {
                 "@id": "node/1524395701",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК",
                 "operator": "ТНК",
@@ -29548,7 +29548,7 @@ var stations = {
             "id": "node/1524885569",
             "properties": {
                 "@id": "node/1524885569",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29563,7 +29563,7 @@ var stations = {
             "id": "node/1530965239",
             "properties": {
                 "@id": "node/1530965239",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -29579,7 +29579,7 @@ var stations = {
             "id": "node/1531065222",
             "properties": {
                 "@id": "node/1531065222",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ЕКА"
             },
             "geometry": {
@@ -29595,7 +29595,7 @@ var stations = {
             "id": "node/1537995699",
             "properties": {
                 "@id": "node/1537995699",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Интероил",
                 "name": "Интероил",
                 "operator": "Интероил"
@@ -29613,7 +29613,7 @@ var stations = {
             "id": "node/1539152827",
             "properties": {
                 "@id": "node/1539152827",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29628,7 +29628,7 @@ var stations = {
             "id": "node/1539456874",
             "properties": {
                 "@id": "node/1539456874",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Пропан"
             },
@@ -29645,7 +29645,7 @@ var stations = {
             "id": "node/1542239776",
             "properties": {
                 "@id": "node/1542239776",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29660,7 +29660,7 @@ var stations = {
             "id": "node/1542240289",
             "properties": {
                 "@id": "node/1542240289",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29675,7 +29675,7 @@ var stations = {
             "id": "node/1542855770",
             "properties": {
                 "@id": "node/1542855770",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29690,7 +29690,7 @@ var stations = {
             "id": "node/1543115620",
             "properties": {
                 "@id": "node/1543115620",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Нефтьмагистраль"
@@ -29708,7 +29708,7 @@ var stations = {
             "id": "node/1544191718",
             "properties": {
                 "@id": "node/1544191718",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -29734,7 +29734,7 @@ var stations = {
             "id": "node/1560958897",
             "properties": {
                 "@id": "node/1560958897",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "TatNeft"
             },
             "geometry": {
@@ -29750,7 +29750,7 @@ var stations = {
             "id": "node/1560958932",
             "properties": {
                 "@id": "node/1560958932",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "азс \"ТАК\""
             },
             "geometry": {
@@ -29766,7 +29766,7 @@ var stations = {
             "id": "node/1562240179",
             "properties": {
                 "@id": "node/1562240179",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Газпромнефть"
             },
             "geometry": {
@@ -29782,7 +29782,7 @@ var stations = {
             "id": "node/1562240195",
             "properties": {
                 "@id": "node/1562240195",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29797,7 +29797,7 @@ var stations = {
             "id": "node/1565500185",
             "properties": {
                 "@id": "node/1565500185",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -29825,7 +29825,7 @@ var stations = {
             "id": "node/1579303503",
             "properties": {
                 "@id": "node/1579303503",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -29844,7 +29844,7 @@ var stations = {
             "id": "node/1579303541",
             "properties": {
                 "@id": "node/1579303541",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Таруса-Oil"
             },
             "geometry": {
@@ -29860,7 +29860,7 @@ var stations = {
             "id": "node/1579303592",
             "properties": {
                 "@id": "node/1579303592",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29875,7 +29875,7 @@ var stations = {
             "id": "node/1582718092",
             "properties": {
                 "@id": "node/1582718092",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -29891,7 +29891,7 @@ var stations = {
             "id": "node/1585464088",
             "properties": {
                 "@id": "node/1585464088",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29906,7 +29906,7 @@ var stations = {
             "id": "node/1598141878",
             "properties": {
                 "@id": "node/1598141878",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -29927,7 +29927,7 @@ var stations = {
             "id": "node/1601428504",
             "properties": {
                 "@id": "node/1601428504",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -29953,7 +29953,7 @@ var stations = {
             "id": "node/1601428509",
             "properties": {
                 "@id": "node/1601428509",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -29974,7 +29974,7 @@ var stations = {
             "id": "node/1603158881",
             "properties": {
                 "@id": "node/1603158881",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -29989,7 +29989,7 @@ var stations = {
             "id": "node/1604617588",
             "properties": {
                 "@id": "node/1604617588",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "M3-OIL",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -30010,7 +30010,7 @@ var stations = {
             "id": "node/1604645966",
             "properties": {
                 "@id": "node/1604645966",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -30029,7 +30029,7 @@ var stations = {
             "id": "node/1604645967",
             "properties": {
                 "@id": "node/1604645967",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "contact:website": "http://www.gazprom-neft.ru",
                 "fuel:HGV_diesel": "yes",
@@ -30058,7 +30058,7 @@ var stations = {
             "id": "node/1606635581",
             "properties": {
                 "@id": "node/1606635581",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "name": "Лукойл"
             },
@@ -30075,7 +30075,7 @@ var stations = {
             "id": "node/1613986679",
             "properties": {
                 "@id": "node/1613986679",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -30091,7 +30091,7 @@ var stations = {
             "id": "node/1623522177",
             "properties": {
                 "@id": "node/1623522177",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Газпромнефть",
                 "operator": "Газпромнефть",
                 "website": "http://www.gazprom-neft.ru/"
@@ -30109,7 +30109,7 @@ var stations = {
             "id": "node/1628541995",
             "properties": {
                 "@id": "node/1628541995",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -30125,7 +30125,7 @@ var stations = {
             "id": "node/1629528527",
             "properties": {
                 "@id": "node/1629528527",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл",
                 "operator": "Лукойл"
             },
@@ -30142,7 +30142,7 @@ var stations = {
             "id": "node/1631024087",
             "properties": {
                 "@id": "node/1631024087",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Uniqoil"
@@ -30160,7 +30160,7 @@ var stations = {
             "id": "node/1633607767",
             "properties": {
                 "@id": "node/1633607767",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -30175,7 +30175,7 @@ var stations = {
             "id": "node/1638695915",
             "properties": {
                 "@id": "node/1638695915",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "NPS",
                 "operator": "АЗС №11"
             },
@@ -30192,7 +30192,7 @@ var stations = {
             "id": "node/1640689723",
             "properties": {
                 "@id": "node/1640689723",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Finna",
                 "operator": "Finna"
             },
@@ -30209,7 +30209,7 @@ var stations = {
             "id": "node/1641297515",
             "properties": {
                 "@id": "node/1641297515",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть",
                 "name": "Роснефть",
                 "operator": "Роснефть",
@@ -30229,7 +30229,7 @@ var stations = {
             "id": "node/1643934523",
             "properties": {
                 "@id": "node/1643934523",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -30244,7 +30244,7 @@ var stations = {
             "id": "node/1646236901",
             "properties": {
                 "@id": "node/1646236901",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -30260,7 +30260,7 @@ var stations = {
             "id": "node/1646722354",
             "properties": {
                 "@id": "node/1646722354",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -30275,7 +30275,7 @@ var stations = {
             "id": "node/1646722371",
             "properties": {
                 "@id": "node/1646722371",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -30290,7 +30290,7 @@ var stations = {
             "id": "node/1648929077",
             "properties": {
                 "@id": "node/1648929077",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -30310,7 +30310,7 @@ var stations = {
             "id": "node/1649344890",
             "properties": {
                 "@id": "node/1649344890",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -30337,7 +30337,7 @@ var stations = {
             "id": "node/1654291047",
             "properties": {
                 "@id": "node/1654291047",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпромнефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -30360,7 +30360,7 @@ var stations = {
             "id": "node/1659090648",
             "properties": {
                 "@id": "node/1659090648",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -30375,7 +30375,7 @@ var stations = {
             "id": "node/1666453513",
             "properties": {
                 "@id": "node/1666453513",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -30390,7 +30390,7 @@ var stations = {
             "id": "node/1667330067",
             "properties": {
                 "@id": "node/1667330067",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Трасса",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -30411,7 +30411,7 @@ var stations = {
             "id": "node/1667624111",
             "properties": {
                 "@id": "node/1667624111",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e10": "yes",
                 "fuel:octane_91": "yes",
@@ -30431,7 +30431,7 @@ var stations = {
             "id": "node/1668718505",
             "properties": {
                 "@id": "node/1668718505",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -30458,7 +30458,7 @@ var stations = {
             "id": "node/1668997769",
             "properties": {
                 "@id": "node/1668997769",
-                "state": "alarm",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:HGV_diesel": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -30481,7 +30481,7 @@ var stations = {
             "id": "node/1671990742",
             "properties": {
                 "@id": "node/1671990742",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -30496,7 +30496,7 @@ var stations = {
             "id": "node/1676059706",
             "properties": {
                 "@id": "node/1676059706",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -30517,7 +30517,7 @@ var stations = {
             "id": "node/1678233763",
             "properties": {
                 "@id": "node/1678233763",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:1_25": "no",
                 "fuel:1_50": "no",
                 "fuel:GTL_diesel": "no",
@@ -30550,7 +30550,7 @@ var stations = {
             "id": "node/1680470625",
             "properties": {
                 "@id": "node/1680470625",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -30565,7 +30565,7 @@ var stations = {
             "id": "node/1680605043",
             "properties": {
                 "@id": "node/1680605043",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Трасса",
                 "operator": "Трасса"
             },
@@ -30582,7 +30582,7 @@ var stations = {
             "id": "node/1681467197",
             "properties": {
                 "@id": "node/1681467197",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -30598,7 +30598,7 @@ var stations = {
             "id": "node/1682383213",
             "properties": {
                 "@id": "node/1682383213",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -30613,7 +30613,7 @@ var stations = {
             "id": "node/1683148545",
             "properties": {
                 "@id": "node/1683148545",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпромнефть",
                 "name": "Газпромнефть",
                 "opening_hours": "24/7",
@@ -30635,7 +30635,7 @@ var stations = {
             "id": "node/1683155899",
             "properties": {
                 "@id": "node/1683155899",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "car_wash": "yes",
@@ -30666,7 +30666,7 @@ var stations = {
             "id": "node/1683940527",
             "properties": {
                 "@id": "node/1683940527",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_95": "yes",
                 "name": "Подушкино-сервис",
                 "operator": "ОРТК"
@@ -30684,7 +30684,7 @@ var stations = {
             "id": "node/1692465415",
             "properties": {
                 "@id": "node/1692465415",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
@@ -30712,7 +30712,7 @@ var stations = {
             "id": "node/1692819281",
             "properties": {
                 "@id": "node/1692819281",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл"
             },
             "geometry": {
@@ -30728,7 +30728,7 @@ var stations = {
             "id": "node/1694252380",
             "properties": {
                 "@id": "node/1694252380",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "highway": "services",
                 "name": "АЗС \"Восточная\""
             },
@@ -30745,7 +30745,7 @@ var stations = {
             "id": "node/1694252389",
             "properties": {
                 "@id": "node/1694252389",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "highway": "services",
                 "name": "АЗС"
             },
@@ -30764,7 +30764,7 @@ var stations = {
                 "@id": "node/1694252398",
                 "addr:housenumber": "96",
                 "addr:street": "проспект Ильича",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -30793,7 +30793,7 @@ var stations = {
             "id": "node/1695233028",
             "properties": {
                 "@id": "node/1695233028",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -30818,7 +30818,7 @@ var stations = {
             "id": "node/1695233029",
             "properties": {
                 "@id": "node/1695233029",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -30843,7 +30843,7 @@ var stations = {
             "id": "node/1699207313",
             "properties": {
                 "@id": "node/1699207313",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -30867,7 +30867,7 @@ var stations = {
             "id": "node/1700231943",
             "properties": {
                 "@id": "node/1700231943",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "BP",
                 "name": "BP Connect",
                 "operator": "BP"
@@ -30885,7 +30885,7 @@ var stations = {
             "id": "node/1705485757",
             "properties": {
                 "@id": "node/1705485757",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "заправка 5 автобусного парка"
             },
             "geometry": {
@@ -30901,7 +30901,7 @@ var stations = {
             "id": "node/1706301829",
             "properties": {
                 "@id": "node/1706301829",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
@@ -30921,7 +30921,7 @@ var stations = {
             "id": "node/1707201787",
             "properties": {
                 "@id": "node/1707201787",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Арис",
                 "name": "Арис",
                 "operator": "Арис",
@@ -30940,7 +30940,7 @@ var stations = {
             "id": "node/1712548456",
             "properties": {
                 "@id": "node/1712548456",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
@@ -30960,7 +30960,7 @@ var stations = {
             "id": "node/1715878249",
             "properties": {
                 "@id": "node/1715878249",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
@@ -30980,7 +30980,7 @@ var stations = {
             "id": "node/1721946148",
             "properties": {
                 "@id": "node/1721946148",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -30996,7 +30996,7 @@ var stations = {
             "id": "node/1721955546",
             "properties": {
                 "@id": "node/1721955546",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ГАЗПРОМ НЕФТЬ",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -31016,7 +31016,7 @@ var stations = {
             "id": "node/1721957157",
             "properties": {
                 "@id": "node/1721957157",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes"
@@ -31034,7 +31034,7 @@ var stations = {
             "id": "node/1722725300",
             "properties": {
                 "@id": "node/1722725300",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31049,7 +31049,7 @@ var stations = {
             "id": "node/1725396205",
             "properties": {
                 "@id": "node/1725396205",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
                 "fuel:octane_92": "yes",
@@ -31071,7 +31071,7 @@ var stations = {
             "id": "node/1726497000",
             "properties": {
                 "@id": "node/1726497000",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефтьмагистраль"
             },
             "geometry": {
@@ -31087,7 +31087,7 @@ var stations = {
             "id": "node/1727484508",
             "properties": {
                 "@id": "node/1727484508",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31102,7 +31102,7 @@ var stations = {
             "id": "node/1731485381",
             "properties": {
                 "@id": "node/1731485381",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -31128,7 +31128,7 @@ var stations = {
             "id": "node/1732706926",
             "properties": {
                 "@id": "node/1732706926",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть №261",
                 "operator": "ТАТнефть"
             },
@@ -31145,7 +31145,7 @@ var stations = {
             "id": "node/1738623999",
             "properties": {
                 "@id": "node/1738623999",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -31164,7 +31164,7 @@ var stations = {
             "id": "node/1739195014",
             "properties": {
                 "@id": "node/1739195014",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Караван"
             },
             "geometry": {
@@ -31180,7 +31180,7 @@ var stations = {
             "id": "node/1739837674",
             "properties": {
                 "@id": "node/1739837674",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть"
             },
             "geometry": {
@@ -31196,7 +31196,7 @@ var stations = {
             "id": "node/1746312492",
             "properties": {
                 "@id": "node/1746312492",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -31212,7 +31212,7 @@ var stations = {
             "id": "node/1748816540",
             "properties": {
                 "@id": "node/1748816540",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -31228,7 +31228,7 @@ var stations = {
             "id": "node/1749051007",
             "properties": {
                 "@id": "node/1749051007",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -31256,7 +31256,7 @@ var stations = {
             "id": "node/1749413323",
             "properties": {
                 "@id": "node/1749413323",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -31281,7 +31281,7 @@ var stations = {
             "id": "node/1749413324",
             "properties": {
                 "@id": "node/1749413324",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31296,7 +31296,7 @@ var stations = {
             "id": "node/1749413340",
             "properties": {
                 "@id": "node/1749413340",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes"
@@ -31314,7 +31314,7 @@ var stations = {
             "id": "node/1749420466",
             "properties": {
                 "@id": "node/1749420466",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС Грейтек",
                 "operator": "Грейтек"
             },
@@ -31331,7 +31331,7 @@ var stations = {
             "id": "node/1749420470",
             "properties": {
                 "@id": "node/1749420470",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "Роснефть",
                 "website": "http://www.rosneft.ru/"
@@ -31349,7 +31349,7 @@ var stations = {
             "id": "node/1755105150",
             "properties": {
                 "@id": "node/1755105150",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК",
                 "operator": "ТНК"
             },
@@ -31366,7 +31366,7 @@ var stations = {
             "id": "node/1755361594",
             "properties": {
                 "@id": "node/1755361594",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -31387,7 +31387,7 @@ var stations = {
             "id": "node/1756885365",
             "properties": {
                 "@id": "node/1756885365",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Шелл"
             },
             "geometry": {
@@ -31403,7 +31403,7 @@ var stations = {
             "id": "node/1758242165",
             "properties": {
                 "@id": "node/1758242165",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31418,7 +31418,7 @@ var stations = {
             "id": "node/1760050752",
             "properties": {
                 "@id": "node/1760050752",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31433,7 +31433,7 @@ var stations = {
             "id": "node/1760837954",
             "properties": {
                 "@id": "node/1760837954",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Электон-Нефтегаз"
             },
             "geometry": {
@@ -31449,7 +31449,7 @@ var stations = {
             "id": "node/1766555878",
             "properties": {
                 "@id": "node/1766555878",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Газпром"
             },
             "geometry": {
@@ -31465,7 +31465,7 @@ var stations = {
             "id": "node/1767290715",
             "properties": {
                 "@id": "node/1767290715",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31480,7 +31480,7 @@ var stations = {
             "id": "node/1767290716",
             "properties": {
                 "@id": "node/1767290716",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31495,7 +31495,7 @@ var stations = {
             "id": "node/1769448328",
             "properties": {
                 "@id": "node/1769448328",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "description": "автозаправочная станция для автомобилей на газе",
                 "fuel:lpg": "yes",
                 "name": "АГЭС"
@@ -31513,7 +31513,7 @@ var stations = {
             "id": "node/1770808005",
             "properties": {
                 "@id": "node/1770808005",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -31535,7 +31535,7 @@ var stations = {
             "id": "node/1777195458",
             "properties": {
                 "@id": "node/1777195458",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефто"
             },
             "geometry": {
@@ -31553,7 +31553,7 @@ var stations = {
                 "@id": "node/1777195459",
                 "addr:housenumber": "51-й км (справа)",
                 "addr:street": "Симферопольское шоссе",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -31578,7 +31578,7 @@ var stations = {
             "id": "node/1780065548",
             "properties": {
                 "@id": "node/1780065548",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31593,7 +31593,7 @@ var stations = {
             "id": "node/1781533887",
             "properties": {
                 "@id": "node/1781533887",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Детдомстрой"
             },
             "geometry": {
@@ -31609,7 +31609,7 @@ var stations = {
             "id": "node/1781879441",
             "properties": {
                 "@id": "node/1781879441",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "Нефто"
             },
             "geometry": {
@@ -31625,7 +31625,7 @@ var stations = {
             "id": "node/1782846472",
             "properties": {
                 "@id": "node/1782846472",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -31641,7 +31641,7 @@ var stations = {
             "id": "node/1784528648",
             "properties": {
                 "@id": "node/1784528648",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Кремлёвская АЗС"
             },
             "geometry": {
@@ -31657,7 +31657,7 @@ var stations = {
             "id": "node/1785991568",
             "properties": {
                 "@id": "node/1785991568",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ОРТК",
                 "name": "ОРТК",
                 "operator": "ОРТК"
@@ -31675,7 +31675,7 @@ var stations = {
             "id": "node/1786581253",
             "properties": {
                 "@id": "node/1786581253",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сургутнефтегаз"
             },
             "geometry": {
@@ -31691,7 +31691,7 @@ var stations = {
             "id": "node/1792799691",
             "properties": {
                 "@id": "node/1792799691",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
                 "fuel:octane_80": "yes",
@@ -31714,7 +31714,7 @@ var stations = {
             "id": "node/1793351064",
             "properties": {
                 "@id": "node/1793351064",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС 137км"
             },
             "geometry": {
@@ -31730,7 +31730,7 @@ var stations = {
             "id": "node/1794558695",
             "properties": {
                 "@id": "node/1794558695",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31745,7 +31745,7 @@ var stations = {
             "id": "node/1799833630",
             "properties": {
                 "@id": "node/1799833630",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Трасса"
             },
             "geometry": {
@@ -31761,7 +31761,7 @@ var stations = {
             "id": "node/1801244945",
             "properties": {
                 "@id": "node/1801244945",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31776,7 +31776,7 @@ var stations = {
             "id": "node/1806404765",
             "properties": {
                 "@id": "node/1806404765",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -31805,7 +31805,7 @@ var stations = {
             "id": "node/1807654925",
             "properties": {
                 "@id": "node/1807654925",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31820,7 +31820,7 @@ var stations = {
             "id": "node/1817085668",
             "properties": {
                 "@id": "node/1817085668",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Владимир-Оптон"
             },
             "geometry": {
@@ -31836,7 +31836,7 @@ var stations = {
             "id": "node/1827315014",
             "properties": {
                 "@id": "node/1827315014",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Эко-ойл"
             },
             "geometry": {
@@ -31852,7 +31852,7 @@ var stations = {
             "id": "node/1828733100",
             "properties": {
                 "@id": "node/1828733100",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -31874,7 +31874,7 @@ var stations = {
             "id": "node/1828903575",
             "properties": {
                 "@id": "node/1828903575",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТКН"
             },
             "geometry": {
@@ -31890,7 +31890,7 @@ var stations = {
             "id": "node/1828947039",
             "properties": {
                 "@id": "node/1828947039",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Газовая заправка"
             },
             "geometry": {
@@ -31906,7 +31906,7 @@ var stations = {
             "id": "node/1829378676",
             "properties": {
                 "@id": "node/1829378676",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Автозаправка",
                 "operator": "ЗАО Корунд"
             },
@@ -31923,7 +31923,7 @@ var stations = {
             "id": "node/1832915763",
             "properties": {
                 "@id": "node/1832915763",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -31938,7 +31938,7 @@ var stations = {
             "id": "node/1833244874",
             "properties": {
                 "@id": "node/1833244874",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -31954,7 +31954,7 @@ var stations = {
             "id": "node/1833593587",
             "properties": {
                 "@id": "node/1833593587",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -31973,7 +31973,7 @@ var stations = {
             "id": "node/1835127647",
             "properties": {
                 "@id": "node/1835127647",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС «Протва»"
             },
             "geometry": {
@@ -31989,7 +31989,7 @@ var stations = {
             "id": "node/1835370818",
             "properties": {
                 "@id": "node/1835370818",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "City Oil",
                 "operator": "City Oil"
             },
@@ -32006,7 +32006,7 @@ var stations = {
             "id": "node/1836678568",
             "properties": {
                 "@id": "node/1836678568",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -32030,7 +32030,7 @@ var stations = {
             "id": "node/1837958933",
             "properties": {
                 "@id": "node/1837958933",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32045,7 +32045,7 @@ var stations = {
             "id": "node/1840143837",
             "properties": {
                 "@id": "node/1840143837",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -32075,7 +32075,7 @@ var stations = {
             "id": "node/1843586482",
             "properties": {
                 "@id": "node/1843586482",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:GTL_diesel": "no",
                 "fuel:HGV_diesel": "no",
                 "fuel:biodiesel": "no",
@@ -32104,7 +32104,7 @@ var stations = {
             "id": "node/1847223654",
             "properties": {
                 "@id": "node/1847223654",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -32129,7 +32129,7 @@ var stations = {
             "id": "node/1857918438",
             "properties": {
                 "@id": "node/1857918438",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -32154,7 +32154,7 @@ var stations = {
             "id": "node/1858187541",
             "properties": {
                 "@id": "node/1858187541",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "shop": "no"
             },
@@ -32171,7 +32171,7 @@ var stations = {
             "id": "node/1861329638",
             "properties": {
                 "@id": "node/1861329638",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "no",
@@ -32198,7 +32198,7 @@ var stations = {
             "id": "node/1863593651",
             "properties": {
                 "@id": "node/1863593651",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "name": "Нефтьмагистраль",
@@ -32217,7 +32217,7 @@ var stations = {
             "id": "node/1865609234",
             "properties": {
                 "@id": "node/1865609234",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32232,7 +32232,7 @@ var stations = {
             "id": "node/1865609258",
             "properties": {
                 "@id": "node/1865609258",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -32251,7 +32251,7 @@ var stations = {
             "id": "node/1868197124",
             "properties": {
                 "@id": "node/1868197124",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:HGV_diesel": "yes",
                 "fuel:diesel": "yes",
@@ -32280,7 +32280,7 @@ var stations = {
             "id": "node/1874109753",
             "properties": {
                 "@id": "node/1874109753",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Сибнефть"
             },
             "geometry": {
@@ -32296,7 +32296,7 @@ var stations = {
             "id": "node/1875693640",
             "properties": {
                 "@id": "node/1875693640",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС \"Агро-Маркет\""
             },
             "geometry": {
@@ -32312,7 +32312,7 @@ var stations = {
             "id": "node/1877397975",
             "properties": {
                 "@id": "node/1877397975",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "source": "Bing"
             },
             "geometry": {
@@ -32328,7 +32328,7 @@ var stations = {
             "id": "node/1879334384",
             "properties": {
                 "@id": "node/1879334384",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ГейнОйл",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -32350,7 +32350,7 @@ var stations = {
             "id": "node/1885570981",
             "properties": {
                 "@id": "node/1885570981",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Техно-Ойл"
             },
             "geometry": {
@@ -32366,7 +32366,7 @@ var stations = {
             "id": "node/1887908216",
             "properties": {
                 "@id": "node/1887908216",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "газовая заправка"
             },
@@ -32383,7 +32383,7 @@ var stations = {
             "id": "node/1891994132",
             "properties": {
                 "@id": "node/1891994132",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -32400,7 +32400,7 @@ var stations = {
             "id": "node/1896895970",
             "properties": {
                 "@id": "node/1896895970",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "construction": "yes",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
@@ -32422,7 +32422,7 @@ var stations = {
             "id": "node/1903826363",
             "properties": {
                 "@id": "node/1903826363",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС №2 Владимир-Оптон"
             },
             "geometry": {
@@ -32438,7 +32438,7 @@ var stations = {
             "id": "node/1906233930",
             "properties": {
                 "@id": "node/1906233930",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32453,7 +32453,7 @@ var stations = {
             "id": "node/1906234591",
             "properties": {
                 "@id": "node/1906234591",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -32473,7 +32473,7 @@ var stations = {
             "id": "node/1913835587",
             "properties": {
                 "@id": "node/1913835587",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "opening_hours": "24/7",
@@ -32492,7 +32492,7 @@ var stations = {
             "id": "node/1914270153",
             "properties": {
                 "@id": "node/1914270153",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -32508,7 +32508,7 @@ var stations = {
             "id": "node/1914649383",
             "properties": {
                 "@id": "node/1914649383",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32523,7 +32523,7 @@ var stations = {
             "id": "node/1920059884",
             "properties": {
                 "@id": "node/1920059884",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "no",
                 "fuel:lpg": "yes",
                 "name": "АГЗС",
@@ -32542,7 +32542,7 @@ var stations = {
             "id": "node/1920060235",
             "properties": {
                 "@id": "node/1920060235",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "description": "газовая заправка",
                 "fuel:lpg": "yes",
                 "shop": "no"
@@ -32560,7 +32560,7 @@ var stations = {
             "id": "node/1929547655",
             "properties": {
                 "@id": "node/1929547655",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "operator": "Грин Лин"
@@ -32578,7 +32578,7 @@ var stations = {
             "id": "node/1935067143",
             "properties": {
                 "@id": "node/1935067143",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ООО Юлтек"
             },
             "geometry": {
@@ -32594,7 +32594,7 @@ var stations = {
             "id": "node/1937228643",
             "properties": {
                 "@id": "node/1937228643",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32609,7 +32609,7 @@ var stations = {
             "id": "node/1938243382",
             "properties": {
                 "@id": "node/1938243382",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -32625,7 +32625,7 @@ var stations = {
             "id": "node/1940343255",
             "properties": {
                 "@id": "node/1940343255",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32640,7 +32640,7 @@ var stations = {
             "id": "node/1942189154",
             "properties": {
                 "@id": "node/1942189154",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -32656,7 +32656,7 @@ var stations = {
             "id": "node/1952482480",
             "properties": {
                 "@id": "node/1952482480",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Би-Пи",
                 "fixme": "Разобраться куда можно выезжать с заправки, а куда нет.",
                 "name": "BP"
@@ -32674,7 +32674,7 @@ var stations = {
             "id": "node/1957151681",
             "properties": {
                 "@id": "node/1957151681",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32689,7 +32689,7 @@ var stations = {
             "id": "node/1958642731",
             "properties": {
                 "@id": "node/1958642731",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК"
             },
             "geometry": {
@@ -32705,7 +32705,7 @@ var stations = {
             "id": "node/1965186302",
             "properties": {
                 "@id": "node/1965186302",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32720,7 +32720,7 @@ var stations = {
             "id": "node/1972616628",
             "properties": {
                 "@id": "node/1972616628",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -32736,7 +32736,7 @@ var stations = {
             "id": "node/1977669136",
             "properties": {
                 "@id": "node/1977669136",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32751,7 +32751,7 @@ var stations = {
             "id": "node/1977669194",
             "properties": {
                 "@id": "node/1977669194",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -32768,7 +32768,7 @@ var stations = {
             "id": "node/1977669199",
             "properties": {
                 "@id": "node/1977669199",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32783,7 +32783,7 @@ var stations = {
             "id": "node/1987977605",
             "properties": {
                 "@id": "node/1987977605",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -32800,7 +32800,7 @@ var stations = {
             "id": "node/2002186966",
             "properties": {
                 "@id": "node/2002186966",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -32816,7 +32816,7 @@ var stations = {
             "id": "node/2012002421",
             "properties": {
                 "@id": "node/2012002421",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32831,7 +32831,7 @@ var stations = {
             "id": "node/2012522122",
             "properties": {
                 "@id": "node/2012522122",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС Оптан"
             },
             "geometry": {
@@ -32847,7 +32847,7 @@ var stations = {
             "id": "node/2012692596",
             "properties": {
                 "@id": "node/2012692596",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32862,7 +32862,7 @@ var stations = {
             "id": "node/2012693431",
             "properties": {
                 "@id": "node/2012693431",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32877,7 +32877,7 @@ var stations = {
             "id": "node/2012693435",
             "properties": {
                 "@id": "node/2012693435",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32892,7 +32892,7 @@ var stations = {
             "id": "node/2014943564",
             "properties": {
                 "@id": "node/2014943564",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32907,7 +32907,7 @@ var stations = {
             "id": "node/2014943568",
             "properties": {
                 "@id": "node/2014943568",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32922,7 +32922,7 @@ var stations = {
             "id": "node/2028002035",
             "properties": {
                 "@id": "node/2028002035",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -32937,7 +32937,7 @@ var stations = {
             "id": "node/2032039475",
             "properties": {
                 "@id": "node/2032039475",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -32964,7 +32964,7 @@ var stations = {
             "id": "node/2032249662",
             "properties": {
                 "@id": "node/2032249662",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть"
             },
             "geometry": {
@@ -32980,7 +32980,7 @@ var stations = {
             "id": "node/2034592713",
             "properties": {
                 "@id": "node/2034592713",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -33000,7 +33000,7 @@ var stations = {
             "id": "node/2035399992",
             "properties": {
                 "@id": "node/2035399992",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -33016,7 +33016,7 @@ var stations = {
             "id": "node/2035401489",
             "properties": {
                 "@id": "node/2035401489",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -33032,7 +33032,7 @@ var stations = {
             "id": "node/2036668966",
             "properties": {
                 "@id": "node/2036668966",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33047,7 +33047,7 @@ var stations = {
             "id": "node/2036823580",
             "properties": {
                 "@id": "node/2036823580",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпромнефть",
                 "opening_hours": "24/7",
                 "operator": "ОАО \"Газпром нефть\"",
@@ -33067,7 +33067,7 @@ var stations = {
             "id": "node/2039853149",
             "properties": {
                 "@id": "node/2039853149",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл"
             },
             "geometry": {
@@ -33083,7 +33083,7 @@ var stations = {
             "id": "node/2044642148",
             "properties": {
                 "@id": "node/2044642148",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -33100,7 +33100,7 @@ var stations = {
             "id": "node/2047765385",
             "properties": {
                 "@id": "node/2047765385",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes"
             },
             "geometry": {
@@ -33116,7 +33116,7 @@ var stations = {
             "id": "node/2047980691",
             "properties": {
                 "@id": "node/2047980691",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_98": "yes",
@@ -33135,7 +33135,7 @@ var stations = {
             "id": "node/2048026228",
             "properties": {
                 "@id": "node/2048026228",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -33154,7 +33154,7 @@ var stations = {
             "id": "node/2048982164",
             "properties": {
                 "@id": "node/2048982164",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "General Fueller",
                 "operator": "GF"
             },
@@ -33171,7 +33171,7 @@ var stations = {
             "id": "node/2056061159",
             "properties": {
                 "@id": "node/2056061159",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -33187,7 +33187,7 @@ var stations = {
             "id": "node/2057021995",
             "properties": {
                 "@id": "node/2057021995",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "contact:email": "analog-holding@yandex.ru",
                 "contact:fax": "+7 4955566877",
                 "contact:phone": "+7 4955564246",
@@ -33211,7 +33211,7 @@ var stations = {
             "id": "node/2058842035",
             "properties": {
                 "@id": "node/2058842035",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -33239,7 +33239,7 @@ var stations = {
             "id": "node/2059696093",
             "properties": {
                 "@id": "node/2059696093",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -33267,7 +33267,7 @@ var stations = {
             "id": "node/2061601608",
             "properties": {
                 "@id": "node/2061601608",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -33283,7 +33283,7 @@ var stations = {
             "id": "node/2063205786",
             "properties": {
                 "@id": "node/2063205786",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС Shell"
             },
             "geometry": {
@@ -33299,7 +33299,7 @@ var stations = {
             "id": "node/2064774211",
             "properties": {
                 "@id": "node/2064774211",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33314,7 +33314,7 @@ var stations = {
             "id": "node/2075908177",
             "properties": {
                 "@id": "node/2075908177",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fixme": "check"
             },
             "geometry": {
@@ -33330,7 +33330,7 @@ var stations = {
             "id": "node/2077386764",
             "properties": {
                 "@id": "node/2077386764",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33345,7 +33345,7 @@ var stations = {
             "id": "node/2088247675",
             "properties": {
                 "@id": "node/2088247675",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Нефтьмагистраль",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
@@ -33365,7 +33365,7 @@ var stations = {
             "id": "node/2090034266",
             "properties": {
                 "@id": "node/2090034266",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТД Нефтьмагистраль",
                 "fuel:octane_95": "yes",
                 "name": "Нефтьмагистраль"
@@ -33383,7 +33383,7 @@ var stations = {
             "id": "node/2099817751",
             "properties": {
                 "@id": "node/2099817751",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -33410,7 +33410,7 @@ var stations = {
             "id": "node/2099817760",
             "properties": {
                 "@id": "node/2099817760",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:lpg": "yes",
                 "name": "АЗГС"
@@ -33428,7 +33428,7 @@ var stations = {
             "id": "node/2110876843",
             "properties": {
                 "@id": "node/2110876843",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33443,7 +33443,7 @@ var stations = {
             "id": "node/2117316769",
             "properties": {
                 "@id": "node/2117316769",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -33459,7 +33459,7 @@ var stations = {
             "id": "node/2122911584",
             "properties": {
                 "@id": "node/2122911584",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33474,7 +33474,7 @@ var stations = {
             "id": "node/2126045478",
             "properties": {
                 "@id": "node/2126045478",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33489,7 +33489,7 @@ var stations = {
             "id": "node/2132470372",
             "properties": {
                 "@id": "node/2132470372",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33504,7 +33504,7 @@ var stations = {
             "id": "node/2148859350",
             "properties": {
                 "@id": "node/2148859350",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33519,7 +33519,7 @@ var stations = {
             "id": "node/2148891629",
             "properties": {
                 "@id": "node/2148891629",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТатНефть"
             },
             "geometry": {
@@ -33535,7 +33535,7 @@ var stations = {
             "id": "node/2148891637",
             "properties": {
                 "@id": "node/2148891637",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть",
                 "operator": "ОАО «НК «Роснефть»»"
             },
@@ -33552,7 +33552,7 @@ var stations = {
             "id": "node/2149456384",
             "properties": {
                 "@id": "node/2149456384",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33567,7 +33567,7 @@ var stations = {
             "id": "node/2156076561",
             "properties": {
                 "@id": "node/2156076561",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -33583,7 +33583,7 @@ var stations = {
             "id": "node/2162070896",
             "properties": {
                 "@id": "node/2162070896",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпромнефть",
                 "name": "АЗС"
             },
@@ -33600,7 +33600,7 @@ var stations = {
             "id": "node/2162390871",
             "properties": {
                 "@id": "node/2162390871",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -33620,7 +33620,7 @@ var stations = {
             "id": "node/2163895764",
             "properties": {
                 "@id": "node/2163895764",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33635,7 +33635,7 @@ var stations = {
             "id": "node/2172459851",
             "properties": {
                 "@id": "node/2172459851",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Нефто"
             },
             "geometry": {
@@ -33651,7 +33651,7 @@ var stations = {
             "id": "node/2173879138",
             "properties": {
                 "@id": "node/2173879138",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -33670,7 +33670,7 @@ var stations = {
             "id": "node/2192847958",
             "properties": {
                 "@id": "node/2192847958",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "no",
                 "fuel:lpg": "yes"
             },
@@ -33687,7 +33687,7 @@ var stations = {
             "id": "node/2206469778",
             "properties": {
                 "@id": "node/2206469778",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33702,7 +33702,7 @@ var stations = {
             "id": "node/2216274152",
             "properties": {
                 "@id": "node/2216274152",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТрансАЗС",
                 "operator": "АЗС №49"
             },
@@ -33719,7 +33719,7 @@ var stations = {
             "id": "node/2231040666",
             "properties": {
                 "@id": "node/2231040666",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33734,7 +33734,7 @@ var stations = {
             "id": "node/2235667070",
             "properties": {
                 "@id": "node/2235667070",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -33759,7 +33759,7 @@ var stations = {
             "id": "node/2235667084",
             "properties": {
                 "@id": "node/2235667084",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -33783,7 +33783,7 @@ var stations = {
             "id": "node/2235667092",
             "properties": {
                 "@id": "node/2235667092",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -33808,7 +33808,7 @@ var stations = {
             "id": "node/2235667106",
             "properties": {
                 "@id": "node/2235667106",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "yes",
@@ -33836,7 +33836,7 @@ var stations = {
             "id": "node/2237672782",
             "properties": {
                 "@id": "node/2237672782",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -33861,7 +33861,7 @@ var stations = {
             "id": "node/2237672787",
             "properties": {
                 "@id": "node/2237672787",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -33885,7 +33885,7 @@ var stations = {
             "id": "node/2237672802",
             "properties": {
                 "@id": "node/2237672802",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -33911,7 +33911,7 @@ var stations = {
             "id": "node/2237672803",
             "properties": {
                 "@id": "node/2237672803",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -33938,7 +33938,7 @@ var stations = {
             "id": "node/2242358287",
             "properties": {
                 "@id": "node/2242358287",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -33953,7 +33953,7 @@ var stations = {
             "id": "node/2261104116",
             "properties": {
                 "@id": "node/2261104116",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Автоэконом"
             },
             "geometry": {
@@ -33969,7 +33969,7 @@ var stations = {
             "id": "node/2261274395",
             "properties": {
                 "@id": "node/2261274395",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -33995,7 +33995,7 @@ var stations = {
             "id": "node/2261620768",
             "properties": {
                 "@id": "node/2261620768",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "atm": "yes",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
@@ -34025,7 +34025,7 @@ var stations = {
             "id": "node/2267067395",
             "properties": {
                 "@id": "node/2267067395",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -34049,7 +34049,7 @@ var stations = {
             "id": "node/2273387143",
             "properties": {
                 "@id": "node/2273387143",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34077,7 +34077,7 @@ var stations = {
             "id": "node/2273387147",
             "properties": {
                 "@id": "node/2273387147",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34105,7 +34105,7 @@ var stations = {
             "id": "node/2273387150",
             "properties": {
                 "@id": "node/2273387150",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34133,7 +34133,7 @@ var stations = {
             "id": "node/2273387156",
             "properties": {
                 "@id": "node/2273387156",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -34162,7 +34162,7 @@ var stations = {
             "id": "node/2273387164",
             "properties": {
                 "@id": "node/2273387164",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -34190,7 +34190,7 @@ var stations = {
             "id": "node/2273387167",
             "properties": {
                 "@id": "node/2273387167",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -34217,7 +34217,7 @@ var stations = {
             "id": "node/2273387170",
             "properties": {
                 "@id": "node/2273387170",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -34245,7 +34245,7 @@ var stations = {
             "id": "node/2273387175",
             "properties": {
                 "@id": "node/2273387175",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -34273,7 +34273,7 @@ var stations = {
             "id": "node/2273387178",
             "properties": {
                 "@id": "node/2273387178",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34299,7 +34299,7 @@ var stations = {
             "id": "node/2273387180",
             "properties": {
                 "@id": "node/2273387180",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34325,7 +34325,7 @@ var stations = {
             "id": "node/2273387182",
             "properties": {
                 "@id": "node/2273387182",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34351,7 +34351,7 @@ var stations = {
             "id": "node/2273387185",
             "properties": {
                 "@id": "node/2273387185",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34379,7 +34379,7 @@ var stations = {
             "id": "node/2273387188",
             "properties": {
                 "@id": "node/2273387188",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34407,7 +34407,7 @@ var stations = {
             "id": "node/2273387191",
             "properties": {
                 "@id": "node/2273387191",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34434,7 +34434,7 @@ var stations = {
             "id": "node/2273387195",
             "properties": {
                 "@id": "node/2273387195",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "contact:website": "http://www.lukoil.ru",
                 "fuel:diesel": "yes",
@@ -34462,7 +34462,7 @@ var stations = {
             "id": "node/2275345667",
             "properties": {
                 "@id": "node/2275345667",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Роснефть"
             },
             "geometry": {
@@ -34478,7 +34478,7 @@ var stations = {
             "id": "node/2277314214",
             "properties": {
                 "@id": "node/2277314214",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34493,7 +34493,7 @@ var stations = {
             "id": "node/2279060517",
             "properties": {
                 "@id": "node/2279060517",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34508,7 +34508,7 @@ var stations = {
             "id": "node/2281928551",
             "properties": {
                 "@id": "node/2281928551",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34523,7 +34523,7 @@ var stations = {
             "id": "node/2289695087",
             "properties": {
                 "@id": "node/2289695087",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "construction": "yes",
                 "name": "Интеройл"
             },
@@ -34540,7 +34540,7 @@ var stations = {
             "id": "node/2289695090",
             "properties": {
                 "@id": "node/2289695090",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "construction": "yes",
                 "name": "ТНК"
             },
@@ -34557,7 +34557,7 @@ var stations = {
             "id": "node/2290176529",
             "properties": {
                 "@id": "node/2290176529",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ТНК",
                 "name": "ТНК"
             },
@@ -34574,7 +34574,7 @@ var stations = {
             "id": "node/2290176532",
             "properties": {
                 "@id": "node/2290176532",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Трасса"
             },
             "geometry": {
@@ -34590,7 +34590,7 @@ var stations = {
             "id": "node/2302161141",
             "properties": {
                 "@id": "node/2302161141",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34605,7 +34605,7 @@ var stations = {
             "id": "node/2308095318",
             "properties": {
                 "@id": "node/2308095318",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "BP",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -34627,7 +34627,7 @@ var stations = {
             "id": "node/2308095376",
             "properties": {
                 "@id": "node/2308095376",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34642,7 +34642,7 @@ var stations = {
             "id": "node/2308974771",
             "properties": {
                 "@id": "node/2308974771",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34657,7 +34657,7 @@ var stations = {
             "id": "node/2322027918",
             "properties": {
                 "@id": "node/2322027918",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "\"Трасса\" №14",
                 "source": "http://trassagk.ru/trassa_azs/locator/detail.php?ID=221"
             },
@@ -34674,7 +34674,7 @@ var stations = {
             "id": "node/2324002711",
             "properties": {
                 "@id": "node/2324002711",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "А"
             },
             "geometry": {
@@ -34690,7 +34690,7 @@ var stations = {
             "id": "node/2324055219",
             "properties": {
                 "@id": "node/2324055219",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -34707,7 +34707,7 @@ var stations = {
             "id": "node/2324069854",
             "properties": {
                 "@id": "node/2324069854",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34722,7 +34722,7 @@ var stations = {
             "id": "node/2324106081",
             "properties": {
                 "@id": "node/2324106081",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -34739,7 +34739,7 @@ var stations = {
             "id": "node/2324109839",
             "properties": {
                 "@id": "node/2324109839",
-                "state": "warning",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Интоп",
                 "name": "Интоп",
                 "operator": "Интоп"
@@ -34757,7 +34757,7 @@ var stations = {
             "id": "node/2324112969",
             "properties": {
                 "@id": "node/2324112969",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34772,7 +34772,7 @@ var stations = {
             "id": "node/2324120076",
             "properties": {
                 "@id": "node/2324120076",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:lpg": "no",
                 "fuel:octane_80": "yes",
@@ -34794,7 +34794,7 @@ var stations = {
             "id": "node/2324121505",
             "properties": {
                 "@id": "node/2324121505",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Татнефть",
                 "name": "Татнефть",
                 "operator": "Татнефть"
@@ -34812,7 +34812,7 @@ var stations = {
             "id": "node/2324125743",
             "properties": {
                 "@id": "node/2324125743",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Русь",
                 "name": "Русь",
                 "operator": "Русь"
@@ -34830,7 +34830,7 @@ var stations = {
             "id": "node/2326056709",
             "properties": {
                 "@id": "node/2326056709",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
             },
@@ -34847,7 +34847,7 @@ var stations = {
             "id": "node/2326063793",
             "properties": {
                 "@id": "node/2326063793",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "RKOIL",
                 "name": "RKOIL",
                 "operator": "RKOIL"
@@ -34865,7 +34865,7 @@ var stations = {
             "id": "node/2326063795",
             "properties": {
                 "@id": "node/2326063795",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "RKOIL",
                 "name": "RKOIL",
                 "operator": "RKOIL"
@@ -34883,7 +34883,7 @@ var stations = {
             "id": "node/2326777331",
             "properties": {
                 "@id": "node/2326777331",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпромнефть",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -34903,7 +34903,7 @@ var stations = {
             "id": "node/2326818533",
             "properties": {
                 "@id": "node/2326818533",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Lik",
                 "name": "Lik",
                 "operator": "Lik"
@@ -34921,7 +34921,7 @@ var stations = {
             "id": "node/2326824417",
             "properties": {
                 "@id": "node/2326824417",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Lik",
                 "name": "Lik",
                 "operator": "Lik"
@@ -34939,7 +34939,7 @@ var stations = {
             "id": "node/2333166662",
             "properties": {
                 "@id": "node/2333166662",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34954,7 +34954,7 @@ var stations = {
             "id": "node/2333175063",
             "properties": {
                 "@id": "node/2333175063",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -34969,7 +34969,7 @@ var stations = {
             "id": "node/2339351503",
             "properties": {
                 "@id": "node/2339351503",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Plus"
             },
             "geometry": {
@@ -34985,7 +34985,7 @@ var stations = {
             "id": "node/2339359547",
             "properties": {
                 "@id": "node/2339359547",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35000,7 +35000,7 @@ var stations = {
             "id": "node/2339375027",
             "properties": {
                 "@id": "node/2339375027",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "SunPetrol"
             },
             "geometry": {
@@ -35016,7 +35016,7 @@ var stations = {
             "id": "node/2340007385",
             "properties": {
                 "@id": "node/2340007385",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35031,7 +35031,7 @@ var stations = {
             "id": "node/2340016744",
             "properties": {
                 "@id": "node/2340016744",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35046,7 +35046,7 @@ var stations = {
             "id": "node/2349392581",
             "properties": {
                 "@id": "node/2349392581",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:lpg": "yes",
                 "name": "АГЗС"
@@ -35064,7 +35064,7 @@ var stations = {
             "id": "node/2351261233",
             "properties": {
                 "@id": "node/2351261233",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "source": "bing"
             },
             "geometry": {
@@ -35080,7 +35080,7 @@ var stations = {
             "id": "node/2359420746",
             "properties": {
                 "@id": "node/2359420746",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35098,7 +35098,7 @@ var stations = {
                 "addr:city": "Москва",
                 "addr:housenumber": "ВЛ21",
                 "addr:street": "улица Лобачевского",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "operator": "ГазпромНефть"
             },
@@ -35115,7 +35115,7 @@ var stations = {
             "id": "node/2368717817",
             "properties": {
                 "@id": "node/2368717817",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35130,7 +35130,7 @@ var stations = {
             "id": "node/2377769314",
             "properties": {
                 "@id": "node/2377769314",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
                 "name": "АЗС \"Роснефть\"",
@@ -35149,7 +35149,7 @@ var stations = {
             "id": "node/2377965616",
             "properties": {
                 "@id": "node/2377965616",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35164,7 +35164,7 @@ var stations = {
             "id": "node/2378469968",
             "properties": {
                 "@id": "node/2378469968",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35179,7 +35179,7 @@ var stations = {
             "id": "node/2379630908",
             "properties": {
                 "@id": "node/2379630908",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -35198,7 +35198,7 @@ var stations = {
             "id": "node/2381129442",
             "properties": {
                 "@id": "node/2381129442",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Аист"
             },
             "geometry": {
@@ -35214,7 +35214,7 @@ var stations = {
             "id": "node/2381147152",
             "properties": {
                 "@id": "node/2381147152",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -35230,7 +35230,7 @@ var stations = {
             "id": "node/2381147154",
             "properties": {
                 "@id": "node/2381147154",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Аист"
             },
             "geometry": {
@@ -35246,7 +35246,7 @@ var stations = {
             "id": "node/2382424617",
             "properties": {
                 "@id": "node/2382424617",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть"
             },
             "geometry": {
@@ -35262,7 +35262,7 @@ var stations = {
             "id": "node/2382584064",
             "properties": {
                 "@id": "node/2382584064",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -35278,7 +35278,7 @@ var stations = {
             "id": "node/2382590427",
             "properties": {
                 "@id": "node/2382590427",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "NPS"
             },
             "geometry": {
@@ -35294,7 +35294,7 @@ var stations = {
             "id": "node/2382637312",
             "properties": {
                 "@id": "node/2382637312",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -35310,7 +35310,7 @@ var stations = {
             "id": "node/2383770905",
             "properties": {
                 "@id": "node/2383770905",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС",
                 "operator": "Рязаньоблгаз"
             },
@@ -35327,7 +35327,7 @@ var stations = {
             "id": "node/2383772012",
             "properties": {
                 "@id": "node/2383772012",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35342,7 +35342,7 @@ var stations = {
             "id": "node/2383773538",
             "properties": {
                 "@id": "node/2383773538",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35358,7 +35358,7 @@ var stations = {
             "properties": {
                 "@id": "node/2384317312",
                 "abandoned": "yes",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС №312"
             },
             "geometry": {
@@ -35374,7 +35374,7 @@ var stations = {
             "id": "node/2384322135",
             "properties": {
                 "@id": "node/2384322135",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -35390,7 +35390,7 @@ var stations = {
             "id": "node/2384330743",
             "properties": {
                 "@id": "node/2384330743",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35405,7 +35405,7 @@ var stations = {
             "id": "node/2386334792",
             "properties": {
                 "@id": "node/2386334792",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35420,7 +35420,7 @@ var stations = {
             "id": "node/2397130015",
             "properties": {
                 "@id": "node/2397130015",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:biogas": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
@@ -35440,7 +35440,7 @@ var stations = {
             "id": "node/2398543565",
             "properties": {
                 "@id": "node/2398543565",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл"
             },
             "geometry": {
@@ -35456,7 +35456,7 @@ var stations = {
             "id": "node/2399630522",
             "properties": {
                 "@id": "node/2399630522",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Трасса"
             },
             "geometry": {
@@ -35472,7 +35472,7 @@ var stations = {
             "id": "node/2403358681",
             "properties": {
                 "@id": "node/2403358681",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35487,7 +35487,7 @@ var stations = {
             "id": "node/2404126465",
             "properties": {
                 "@id": "node/2404126465",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Нефто-сервис",
                 "fuel:lpg": "yes",
                 "name": "АГЗС-пропан"
@@ -35505,7 +35505,7 @@ var stations = {
             "id": "node/2404251920",
             "properties": {
                 "@id": "node/2404251920",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35520,7 +35520,7 @@ var stations = {
             "id": "node/2404986699",
             "properties": {
                 "@id": "node/2404986699",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35535,7 +35535,7 @@ var stations = {
             "id": "node/2409991183",
             "properties": {
                 "@id": "node/2409991183",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -35554,7 +35554,7 @@ var stations = {
             "id": "node/2411731890",
             "properties": {
                 "@id": "node/2411731890",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -35573,7 +35573,7 @@ var stations = {
             "id": "node/2412632443",
             "properties": {
                 "@id": "node/2412632443",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -35589,7 +35589,7 @@ var stations = {
             "id": "node/2415104323",
             "properties": {
                 "@id": "node/2415104323",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Аист"
             },
             "geometry": {
@@ -35605,7 +35605,7 @@ var stations = {
             "id": "node/2416866068",
             "properties": {
                 "@id": "node/2416866068",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Аист"
             },
             "geometry": {
@@ -35621,7 +35621,7 @@ var stations = {
             "id": "node/2417531377",
             "properties": {
                 "@id": "node/2417531377",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Заправка"
             },
             "geometry": {
@@ -35637,7 +35637,7 @@ var stations = {
             "id": "node/2419688883",
             "properties": {
                 "@id": "node/2419688883",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "UnkOil"
             },
             "geometry": {
@@ -35653,7 +35653,7 @@ var stations = {
             "id": "node/2421999041",
             "properties": {
                 "@id": "node/2421999041",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35668,7 +35668,7 @@ var stations = {
             "id": "node/2426999722",
             "properties": {
                 "@id": "node/2426999722",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35683,7 +35683,7 @@ var stations = {
             "id": "node/2427154291",
             "properties": {
                 "@id": "node/2427154291",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Avant"
             },
             "geometry": {
@@ -35699,7 +35699,7 @@ var stations = {
             "id": "node/2427154450",
             "properties": {
                 "@id": "node/2427154450",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35714,7 +35714,7 @@ var stations = {
             "id": "node/2427772203",
             "properties": {
                 "@id": "node/2427772203",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -35733,7 +35733,7 @@ var stations = {
             "id": "node/2428853963",
             "properties": {
                 "@id": "node/2428853963",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35748,7 +35748,7 @@ var stations = {
             "id": "node/2430705848",
             "properties": {
                 "@id": "node/2430705848",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "opening_hours": "24/7",
                 "shop": "no"
             },
@@ -35765,7 +35765,7 @@ var stations = {
             "id": "node/2435685921",
             "properties": {
                 "@id": "node/2435685921",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35780,7 +35780,7 @@ var stations = {
             "id": "node/2439183919",
             "properties": {
                 "@id": "node/2439183919",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТкНП",
                 "opening_hours": "24/7"
             },
@@ -35797,7 +35797,7 @@ var stations = {
             "id": "node/2441331416",
             "properties": {
                 "@id": "node/2441331416",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "IP"
             },
             "geometry": {
@@ -35813,7 +35813,7 @@ var stations = {
             "id": "node/2444209297",
             "properties": {
                 "@id": "node/2444209297",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -35828,7 +35828,7 @@ var stations = {
             "id": "node/2444554837",
             "properties": {
                 "@id": "node/2444554837",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС"
             },
             "geometry": {
@@ -35845,7 +35845,7 @@ var stations = {
             "properties": {
                 "@id": "node/2444646694",
                 "addr:country": "RU",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "BP",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
@@ -35865,7 +35865,7 @@ var stations = {
             "id": "node/2444907000",
             "properties": {
                 "@id": "node/2444907000",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -35881,7 +35881,7 @@ var stations = {
             "id": "node/2447566502",
             "properties": {
                 "@id": "node/2447566502",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -35897,7 +35897,7 @@ var stations = {
             "id": "node/2450915182",
             "properties": {
                 "@id": "node/2450915182",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "name": "Роснефть"
             },
@@ -35914,7 +35914,7 @@ var stations = {
             "id": "node/2451128983",
             "properties": {
                 "@id": "node/2451128983",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "name": "ЯС"
             },
@@ -35931,7 +35931,7 @@ var stations = {
             "id": "node/2452696526",
             "properties": {
                 "@id": "node/2452696526",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "name": "ТНК"
             },
@@ -35948,7 +35948,7 @@ var stations = {
             "id": "node/2459632748",
             "properties": {
                 "@id": "node/2459632748",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "operator": "Лукойл"
             },
@@ -35965,7 +35965,7 @@ var stations = {
             "id": "node/2460209103",
             "properties": {
                 "@id": "node/2460209103",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "name": "Shell",
                 "operator": "Shell"
@@ -35983,7 +35983,7 @@ var stations = {
             "id": "node/2461230471",
             "properties": {
                 "@id": "node/2461230471",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "name": "ТНК",
                 "operator": "ТНК"
@@ -36001,7 +36001,7 @@ var stations = {
             "id": "node/2461657268",
             "properties": {
                 "@id": "node/2461657268",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -36016,7 +36016,7 @@ var stations = {
             "id": "node/2465148459",
             "properties": {
                 "@id": "node/2465148459",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Газпром нефть",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -36044,7 +36044,7 @@ var stations = {
             "id": "node/2467286580",
             "properties": {
                 "@id": "node/2467286580",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "name": "Трасса",
                 "operator": "Трасса"
@@ -36062,7 +36062,7 @@ var stations = {
             "id": "node/2470862203",
             "properties": {
                 "@id": "node/2470862203",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС \"СДВ\""
             },
             "geometry": {
@@ -36078,7 +36078,7 @@ var stations = {
             "id": "node/2473539877",
             "properties": {
                 "@id": "node/2473539877",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "yes",
@@ -36097,7 +36097,7 @@ var stations = {
             "id": "node/2485428440",
             "properties": {
                 "@id": "node/2485428440",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АЗС Трасса"
             },
             "geometry": {
@@ -36113,7 +36113,7 @@ var stations = {
             "id": "node/2502004332",
             "properties": {
                 "@id": "node/2502004332",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "name": "Агнкс метан",
                 "name:en": "Methan"
@@ -36131,7 +36131,7 @@ var stations = {
             "id": "node/2507507647",
             "properties": {
                 "@id": "node/2507507647",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Газпромнефть"
             },
             "geometry": {
@@ -36147,7 +36147,7 @@ var stations = {
             "id": "node/2520878154",
             "properties": {
                 "@id": "node/2520878154",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "building": "yes",
                 "name": "Astra (ТНК)"
             },
@@ -36164,7 +36164,7 @@ var stations = {
             "id": "node/2532628176",
             "properties": {
                 "@id": "node/2532628176",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "name": "Агнкс"
             },
@@ -36181,7 +36181,7 @@ var stations = {
             "id": "node/2532628177",
             "properties": {
                 "@id": "node/2532628177",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "name": "Агнкс"
             },
@@ -36198,7 +36198,7 @@ var stations = {
             "id": "node/2532628178",
             "properties": {
                 "@id": "node/2532628178",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "name": "Агнкс"
             },
@@ -36215,7 +36215,7 @@ var stations = {
             "id": "node/2540242876",
             "properties": {
                 "@id": "node/2540242876",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "Лукойл",
                 "car_wash": "yes",
                 "contact:website": "http://www.lukoil.ru",
@@ -36245,7 +36245,7 @@ var stations = {
             "id": "node/2546169007",
             "properties": {
                 "@id": "node/2546169007",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
                 "fuel:octane_98": "no",
@@ -36264,7 +36264,7 @@ var stations = {
             "id": "node/2548457315",
             "properties": {
                 "@id": "node/2548457315",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -36280,7 +36280,7 @@ var stations = {
             "id": "node/2550152968",
             "properties": {
                 "@id": "node/2550152968",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -36295,7 +36295,7 @@ var stations = {
             "id": "node/2552675981",
             "properties": {
                 "@id": "node/2552675981",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -36311,7 +36311,7 @@ var stations = {
             "id": "node/2554211064",
             "properties": {
                 "@id": "node/2554211064",
-                "state": "alarm",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_92": "yes",
@@ -36331,7 +36331,7 @@ var stations = {
             "id": "node/2568879619",
             "properties": {
                 "@id": "node/2568879619",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -36346,7 +36346,7 @@ var stations = {
             "id": "node/2579012819",
             "properties": {
                 "@id": "node/2579012819",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -36362,7 +36362,7 @@ var stations = {
             "id": "node/2582304235",
             "properties": {
                 "@id": "node/2582304235",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС",
                 "operator": "Тотал-Газ"
             },
@@ -36379,7 +36379,7 @@ var stations = {
             "id": "node/2584868762",
             "properties": {
                 "@id": "node/2584868762",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Морион"
             },
             "geometry": {
@@ -36395,7 +36395,7 @@ var stations = {
             "id": "node/2600889149",
             "properties": {
                 "@id": "node/2600889149",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -36410,7 +36410,7 @@ var stations = {
             "id": "node/2608394863",
             "properties": {
                 "@id": "node/2608394863",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -36426,7 +36426,7 @@ var stations = {
             "id": "node/2612305940",
             "properties": {
                 "@id": "node/2612305940",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -36447,7 +36447,7 @@ var stations = {
             "id": "node/2622190602",
             "properties": {
                 "@id": "node/2622190602",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "contact:fax": "+7 4957870557",
                 "contact:phone": "+7 4957878980",
                 "contact:website": "http://www.tnk-bp.ru",
@@ -36470,7 +36470,7 @@ var stations = {
             "properties": {
                 "@id": "node/2622198134",
                 "alt_name": "АЗС №92",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "contact:phone": "+7 4955569050",
                 "fuel:diesel": "yes",
                 "fuel:octane_80": "yes",
@@ -36493,7 +36493,7 @@ var stations = {
             "id": "node/2628888356",
             "properties": {
                 "@id": "node/2628888356",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
                 "fuel:octane_91": "yes",
@@ -36512,7 +36512,7 @@ var stations = {
             "id": "node/2630012018",
             "properties": {
                 "@id": "node/2630012018",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "BP",
                 "name": "BP",
                 "operator": "BP"
@@ -36532,7 +36532,7 @@ var stations = {
                 "@id": "node/2636676396",
                 "addr:city": "Москва, район Хорошёво-Мнёвники",
                 "addr:street": "3-я Хорошёвская улица",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -36548,7 +36548,7 @@ var stations = {
             "id": "node/2638481295",
             "properties": {
                 "@id": "node/2638481295",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть"
             },
             "geometry": {
@@ -36564,7 +36564,7 @@ var stations = {
             "id": "node/2649407411",
             "properties": {
                 "@id": "node/2649407411",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Роснефть"
             },
             "geometry": {
@@ -36580,7 +36580,7 @@ var stations = {
             "id": "node/2649944842",
             "properties": {
                 "@id": "node/2649944842",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -36596,7 +36596,7 @@ var stations = {
             "id": "node/2655790623",
             "properties": {
                 "@id": "node/2655790623",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Татнефть",
                 "ref": "234",
                 "website": "http://www.azs.tatneft.ru/"
@@ -36614,7 +36614,7 @@ var stations = {
             "id": "node/2670544421",
             "properties": {
                 "@id": "node/2670544421",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "name": "АГЗС"
             },
@@ -36631,7 +36631,7 @@ var stations = {
             "id": "node/2670555295",
             "properties": {
                 "@id": "node/2670555295",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -36647,7 +36647,7 @@ var stations = {
             "id": "node/2671094117",
             "properties": {
                 "@id": "node/2671094117",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "name": "АГЗС"
             },
@@ -36664,7 +36664,7 @@ var stations = {
             "id": "node/2674603072",
             "properties": {
                 "@id": "node/2674603072",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -36683,7 +36683,7 @@ var stations = {
             "id": "node/2676962063",
             "properties": {
                 "@id": "node/2676962063",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -36702,7 +36702,7 @@ var stations = {
             "id": "node/2681755440",
             "properties": {
                 "@id": "node/2681755440",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -36717,7 +36717,7 @@ var stations = {
             "id": "node/2685179963",
             "properties": {
                 "@id": "node/2685179963",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -36732,7 +36732,7 @@ var stations = {
             "id": "node/2691074984",
             "properties": {
                 "@id": "node/2691074984",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -36751,7 +36751,7 @@ var stations = {
             "id": "node/2696462533",
             "properties": {
                 "@id": "node/2696462533",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:biodiesel": "yes",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
@@ -36773,7 +36773,7 @@ var stations = {
             "id": "node/2701027993",
             "properties": {
                 "@id": "node/2701027993",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -36789,7 +36789,7 @@ var stations = {
             "id": "node/2713707189",
             "properties": {
                 "@id": "node/2713707189",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:cng": "yes",
                 "fuel:diesel": "yes",
                 "fuel:e85": "yes",
@@ -36810,7 +36810,7 @@ var stations = {
             "id": "node/2739407792",
             "properties": {
                 "@id": "node/2739407792",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -36825,7 +36825,7 @@ var stations = {
             "id": "node/2744642392",
             "properties": {
                 "@id": "node/2744642392",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС (пропан)"
             },
             "geometry": {
@@ -36841,7 +36841,7 @@ var stations = {
             "id": "node/2744666786",
             "properties": {
                 "@id": "node/2744666786",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС (пропан)"
             },
             "geometry": {
@@ -36857,7 +36857,7 @@ var stations = {
             "id": "node/2753145617",
             "properties": {
                 "@id": "node/2753145617",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -36873,7 +36873,7 @@ var stations = {
             "id": "node/2753736871",
             "properties": {
                 "@id": "node/2753736871",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -36888,7 +36888,7 @@ var stations = {
             "id": "node/2755343163",
             "properties": {
                 "@id": "node/2755343163",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -36904,7 +36904,7 @@ var stations = {
             "id": "node/2755348076",
             "properties": {
                 "@id": "node/2755348076",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -36920,7 +36920,7 @@ var stations = {
             "id": "node/2755355610",
             "properties": {
                 "@id": "node/2755355610",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -36936,7 +36936,7 @@ var stations = {
             "id": "node/2758196659",
             "properties": {
                 "@id": "node/2758196659",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -36951,7 +36951,7 @@ var stations = {
             "id": "node/2782903255",
             "properties": {
                 "@id": "node/2782903255",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes"
             },
             "geometry": {
@@ -36967,7 +36967,7 @@ var stations = {
             "id": "node/2782957515",
             "properties": {
                 "@id": "node/2782957515",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Экспресс-Сервис"
             },
             "geometry": {
@@ -36985,7 +36985,7 @@ var stations = {
                 "@id": "node/2783315818",
                 "addr:housenumber": "14",
                 "addr:street": "1-я улица Энтузиастов",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -37000,7 +37000,7 @@ var stations = {
             "id": "node/2787911994",
             "properties": {
                 "@id": "node/2787911994",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -37019,7 +37019,7 @@ var stations = {
             "id": "node/2789426854",
             "properties": {
                 "@id": "node/2789426854",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "GF"
             },
             "geometry": {
@@ -37035,7 +37035,7 @@ var stations = {
             "id": "node/2789427090",
             "properties": {
                 "@id": "node/2789427090",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "operator": "ТНК"
             },
             "geometry": {
@@ -37051,7 +37051,7 @@ var stations = {
             "id": "node/2790913796",
             "properties": {
                 "@id": "node/2790913796",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:lpg": "yes",
                 "name": "Газ пропан"
             },
@@ -37068,7 +37068,7 @@ var stations = {
             "id": "node/2795803930",
             "properties": {
                 "@id": "node/2795803930",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_92": "yes",
                 "fuel:octane_95": "yes",
@@ -37088,7 +37088,7 @@ var stations = {
             "id": "node/2796494358",
             "properties": {
                 "@id": "node/2796494358",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "yes",
                 "fuel:octane_95": "yes",
@@ -37108,7 +37108,7 @@ var stations = {
             "id": "node/2799555727",
             "properties": {
                 "@id": "node/2799555727",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -37126,7 +37126,7 @@ var stations = {
                 "addr:city": "Москва",
                 "addr:housenumber": "вл34б",
                 "addr:street": "улица Молдагуловой",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Shell"
             },
             "geometry": {
@@ -37147,7 +37147,7 @@ var stations = {
                 "addr:district": "Калининский район",
                 "addr:postcode": "170518",
                 "addr:region": "Тверская область",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "fuel:diesel": "yes",
                 "fuel:octane_91": "no",
                 "fuel:octane_92": "yes",
@@ -37172,7 +37172,7 @@ var stations = {
             "id": "node/2833199609",
             "properties": {
                 "@id": "node/2833199609",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -37188,7 +37188,7 @@ var stations = {
             "properties": {
                 "@id": "node/2854665918",
                 "addr:street": "Талсинская улица",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "brand": "ОАО \"Газпром нефть\"",
                 "name": "ОАО \"Газпром нефть\"",
                 "operator": "ОАО \"Газпром нефть\""
@@ -37206,7 +37206,7 @@ var stations = {
             "id": "node/2859760716",
             "properties": {
                 "@id": "node/2859760716",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "АГЗС"
             },
             "geometry": {
@@ -37222,7 +37222,7 @@ var stations = {
             "id": "node/2862225454",
             "properties": {
                 "@id": "node/2862225454",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "ТНК"
             },
             "geometry": {
@@ -37238,7 +37238,7 @@ var stations = {
             "id": "node/2873623036",
             "properties": {
                 "@id": "node/2873623036",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл"
             },
             "geometry": {
@@ -37254,7 +37254,7 @@ var stations = {
             "id": "node/2879911315",
             "properties": {
                 "@id": "node/2879911315",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -37269,7 +37269,7 @@ var stations = {
             "id": "node/2879914368",
             "properties": {
                 "@id": "node/2879914368",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -37284,7 +37284,7 @@ var stations = {
             "id": "node/2912656492",
             "properties": {
                 "@id": "node/2912656492",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "description": "До 19:00",
                 "name": "ДО 19:00",
                 "opening_hours": "10:00-19:00"
@@ -37302,7 +37302,7 @@ var stations = {
             "id": "node/2923184801",
             "properties": {
                 "@id": "node/2923184801",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
@@ -37317,7 +37317,7 @@ var stations = {
             "id": "node/2926943907",
             "properties": {
                 "@id": "node/2926943907",
-                "state": "normal",
+                "type_sensor": "sensors_traffic", "state": "normal",
                 "name": "Лукойл"
             },
             "geometry": {
@@ -37333,7 +37333,22 @@ var stations = {
             "id": "node/2937925540",
             "properties": {
                 "@id": "node/2937925540",
-                "state": "normal"
+                "type_sensor": "sensors_traffic", "state": "normal"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.5824726,
+                    55.8667281
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "node/2937925540111",
+            "properties": {
+                "@id": "node/2937925540111",
+                "type_sensor": "sensors_video", "state": "normal"
             },
             "geometry": {
                 "type": "Point",
