@@ -99,7 +99,7 @@
                             }
 
                             if (!styles[feature.properties.type_sensor].clustersStatesStyles[feature.properties.state]) {
-                                console.log(feature.properties.state + ' state is not described');
+                                console.log(feature.properties.state + ' state is not described' + 'sensor:' + feature.properties.type_sensor);
                                 continue;
                             }
 

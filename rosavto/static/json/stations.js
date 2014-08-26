@@ -37357,6 +37357,21 @@ var stations = {
                     55.8667281
                 ]
             }
+        },
+        {
+            "type": "Feature",
+            "id": "node/2937925540112",
+            "properties": {
+                "@id": "node/2937925540112",
+                "type_sensor": "sensors_video", "state": "normal"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.5824726,
+                    55.8667281
+                ]
+            }
         }
     ]
 };
