@@ -54,16 +54,16 @@
 
     <script>
         require([
-            'rosavto/Map', // Модуль карты
-            'rosavto/Layers/MarkersStateClusterLayer', // Слой кластеров
-            'rosavto/NgwServiceFacade',
-            'rosavto/LayersInfo',
-            'dojo/query',
-            'dojo/domReady!'],
+                    'rosavto/Map', // Модуль карты
+                    'rosavto/Layers/MarkersStateClusterLayer', // Слой кластеров
+                    'rosavto/NgwServiceFacade',
+                    'rosavto/LayersInfo',
+                    'dojo/query',
+                    'dojo/domReady!'],
                 function (Map, MarkersStateClusterLayer, NgwServiceFacade, LayersInfo, query) {
-                            // Создаем карту
+                    // Создаем карту
                     var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
-                        map = new Map('map', {
+                            map = new Map('map', {
                                 center: [55.7501, 37.6687],
                                 zoom: 7,
                                 zoomControl: true
@@ -118,9 +118,8 @@
                         map.addVectorLayer(clustersLayer);
 
 
-
                         query('#test1').on('click', function () {
-                            map._lmap.setView([ 55.8667281,37.5824726 ], 20);
+                            map._lmap.setView([ 55.8667281, 37.5824726 ], 20);
                         });
 
                         query('#test2').on('click', function () {
@@ -145,10 +144,10 @@
                             testMarker.state = 'inactive';
                             testMarker.setIcon(L.icon(styles[testMarker.type].clustersStatesStyles[testMarker.state]));
                             clustersLayer.addMarker(testMarker);
-                            map._lmap.setView([ 56.0199496,37.8805576 ], 20);
+                            map._lmap.setView([ 56.0199496, 37.8805576 ], 20);
                         });
 
-                        });
+                    });
 
                 });
     </script>
