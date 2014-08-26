@@ -4,7 +4,7 @@ define([
     'dojo/request/xhr'
 ],
     function (declare, lang, xhr) {
-        return declare('rosavto.NgwServiceFacade', null, {
+        return declare('rosavto.AttributesServiceFacade', null, {
             constructor: function (attributesServiceUrlBase, settings) {
                 this._attributesServiceUrlBase = attributesServiceUrlBase;
 
