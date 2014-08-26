@@ -12,7 +12,7 @@ define([
             },
 
             getGeometryByGuid: function (layerId, featureGuid, srs) {
-                var url = 'layer/' + layerId + '/store_api/rosavto/?guid=' + featureGuid;
+                var url = 'geocollection/rosavto?layers=' + layerId + '&guids=' + featureGuid;
 
                 if (srs) {
                     url += '&srs=' + srs;
@@ -83,7 +83,7 @@ define([
                         });
                     }
 
-                    url = 'layer/' + point.layer + '/rosavto/getlrposbyuuid?srs=' + srs;
+                    url = 'layer/' + incidentPoints[0].layer + '/rosavto/getlrposbyuuid?srs=' + srs;
                     return xhr(this.proxy + url, {
                         handleAs: 'json',
                         method: 'POST',
