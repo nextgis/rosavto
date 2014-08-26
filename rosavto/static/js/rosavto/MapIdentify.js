@@ -30,14 +30,15 @@ define([
             },
 
             on: function () {
-                var that = this;
-
-                this.map._lmap.on('click', function (e) {
+                this.map._lmap.on('click', lang.hitch(this, function (e) {
+                    if (this.debug) {
+                        DnD.dragStart = false;
+                    }
                     if (DnD.dragStart === false) {
                         topic.publish('map/identityUi/block');
-                        that.getIdsByClick(e);
+                        this.getIdsByClick(e);
                     }
-                });
+                }));
             },
 
             getIdsByClick: function (e) {
@@ -66,7 +67,7 @@ define([
                         if (identifiedFeatures.count === 0) {
                             topic.publish('map/identityUi/unblock');
                         } else if (identifiedFeatures.count === 1) {
-                            topic.publish('attributes/get', identifiedFeatures.layers[0].layerId, identifiedFeatures.layers[0].featureId);
+                            topic.publish('attributes/get', identifiedFeatures.layers[0].id, identifiedFeatures.layers[0].features[0].id);
                         }
                         else if (identifiedFeatures.count > 1) {
                             this._buildPopup(latlngClick, identifiedFeatures);
