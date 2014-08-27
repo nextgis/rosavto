@@ -12,7 +12,7 @@ class NgwServicesTests(unittest.TestCase):
     #     self.config = path_to_config
 
     def setUp(self):
-        self.ngwUrl = 'http://localhost/'
+        self.ngwUrl = 'http://localhost:6543/'
 
     def test_get_resource_available(self):
         service_url = self.ngwUrl + 'resource/0/child/'
