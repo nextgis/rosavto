@@ -25,7 +25,7 @@ class BusCommunicator(object):
             request = request
         )
         msg = '''<?xml version="1.0" encoding="UTF-8"?>
-        <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/
+        <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
             xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:sv="urn:sm:interaction:v0.2">
             <soap:Header>
                 <wsa:To>%(send_to)s</wsa:To>
@@ -45,19 +45,22 @@ class BusCommunicator(object):
             r = requests.post(self.uri, data=message, headers=self.headers, auth=(self.user, self.password))
 
             if r.status_code != 202:
-                msg = ('Request failed: %s - %s' % (r.status_code, r.text))
+                msg = 'Request failed: %s - %s' % (r.status_code, r.text)
                 raise BusCommunicatorError(msg)
 
 
 if __name__ == "__main__":
 
-    uri = 'http://192.168.255.1:2002/interaction'
-    address = 'urn:sm:gis@rosavtodor'
+    uri = 'http://192.168.255.1:2001/interaction'
     user = 'gis'
     passwd = '!QAZxsw2'
+    
+    logic_addr1 = 'urn:sm:gis@rosavtodor'
+    logic_addr2 = 'urn:sm:gis@uprdor-rus'
+    
 
-    action = 'sm://messages/application/gis/geochanges_fda_to_reg'
+    action = 'sm://messages/application/gis/geochanges_reg_to_fda'
     request = 'listChangesets'
 
-    sender = BusCommunicator(uri, send_to='urn:sm:gis@uprdor-rus', send_from=address, user=user, password=passwd)
+    sender = BusCommunicator(uri, send_to=logic_addr2, send_from=logic_addr1, user=user, password=passwd)
     sender.send_message(request, action)
