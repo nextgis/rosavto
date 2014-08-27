@@ -12,6 +12,8 @@ import shutil
 import logging
 import ConfigParser
 
+from bus_communicator import BusCommunicator, BusCommunicatorError
+
 
 class DumperError(Exception):
     pass
@@ -93,11 +95,18 @@ class Dumper():
         # Dump of shcema will be dumped in files with the prefixes:
         self._schema_name = 'SCHEMA_STRUCTURE_FILE'
 
+    def ask_for_dumps(self):
+        """Initialize process of dump
+        :return:
+        """
+        pass
+
     def dump_table(self, tablename, filename):
         """Dump table into the file
 
         :param tablename: The name of the table that has to be stored in the file
         :param filename: The name of the file
+        :return boolean flag of success
         """
 
         command = self._get_dumper(tablename, filename, compression_level=9, schema_only=False)
@@ -109,8 +118,10 @@ class Dumper():
 
         if stderrdata:
             self.logger.critical("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
+            return False
         else:
             self.logger.info('Dump of "%s.%s" is created' % (self.database, tablename))
+            return True
 
     def dump_schema(self):
         """Dump schema.
@@ -276,14 +287,19 @@ class Dumper():
         :param filename: The name of the file that has to be splitted on chapters
         :param suffix: The suffix of the generated filenames of the chapters
         :param buffer_size: Auxiliary value for size of reading buffer (in bytes)
+        :return list of filenames
         """
         self.logger.info('Splitting file %s into chapters...' % filename)
-        chapter_count = 0
+        chaptername_list = []
         finished = False
         with open(filename, 'rb') as src:
             while True:
-                chapter = open(filename + suffix + '.%04d' % chapter_count, 'wb')
+                chaptername = filename + suffix + '.%06d' % len(chaptername_list)
+                chaptername_list.append(chaptername)
+                chapter = open(chaptername, 'wb')
+
                 written = 0
+
                 while written < self.max_chapter_size:
                     byte_count = min(buffer_size, self.max_chapter_size - written)
                     data = src.read(byte_count)
@@ -295,8 +311,8 @@ class Dumper():
                 chapter.close()
                 if finished:
                     break
-                chapter_count += 1
-        self.logger.info('File %s is divided into %s chapters' % (filename, chapter_count+1))
+        self.logger.info('File %s is divided into %s chapters' % (filename, len(chaptername_list)))
+        return chaptername_list
 
     def _analyze_filename(self, filename):
         """Inverse operation to _tablename_to_filename method.
@@ -335,14 +351,15 @@ class Dumper():
         try:
             assert (tablename is not None and not schema_only) or (tablename is None and schema_only)
         except AssertionError:
-            self.logger.error('Dump of whole schema only or a separate table is allowed.')
+            msg = 'Dump of whole schema only or a separate table is allowed.'
+            self.logger.error(msg)
+            raise DumperError(msg)
 
-        filename = os.path.join(self.dump_path, filename)
         if schema_only:
             dumper = """pg_dump --clean --schema-only --username=%s --host=%s --port=%s --compress=%s --file=%s --format=plain %s  """ % \
                       (self.user, self.host, self.port, 0, filename, self.database)
         else:
-            dumper = """pg_dump --username=%s --host=%s --port=%s --table=%s --compress=%s --file=%s --format=custom --blobs %s  """ % \
+            dumper = """pg_dump --username=%s --host=%s --port=%s --table=%s --compress=%s --file=%s --format=custom --blobs %s""" % \
                       (self.user, self.host, self.port, tablename, compression_level, filename, self.database)
 
         return dumper
