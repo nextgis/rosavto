@@ -1,5 +1,5 @@
 import unittest
-import urllib2, json
+import sys, argparse
 
 from sqlalchemy import engine_from_config
 from pyramid.paster import get_appsettings
@@ -7,9 +7,12 @@ from pyramid.paster import get_appsettings
 from rosavto.model import DBSession
 
 
-class NgwServicesTests(unittest.TestCase):
+class RosavtoDatabaseTests(unittest.TestCase):
+    # def __init__(self, path_to_config):
+    #     self.config = path_to_config
+
     def setUp(self):
-        settings = get_appsettings('../../production.ini')
+        settings = get_appsettings('production.ini')
         self.engine = engine_from_config(settings, 'sqlalchemy.')
 
     def test_dbsession_configure(self):

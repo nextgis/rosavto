@@ -8,9 +8,11 @@ from rosavto.model import DBSession
 
 
 class NgwServicesTests(unittest.TestCase):
+    # def __init__(self, path_to_config):
+    #     self.config = path_to_config
+
     def setUp(self):
-        settings = get_appsettings('../../production.ini')
-        self.ngwUrl = settings['proxy_ngw']
+        self.ngwUrl = 'http://localhost/'
 
     def test_get_resource_available(self):
         service_url = self.ngwUrl + 'resource/0/child/'
