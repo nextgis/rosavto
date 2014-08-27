@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import unittest
 
 import os
@@ -113,8 +116,17 @@ class NgwServicesTests(unittest.TestCase):
             for filename in names:
                 os.unlink(filename)
 
-
-
+    # Не покрытые тестами функции. Написать тесты.
+    def get_outdated_tables(self): pass
+    def join_files(self): pass
+    def restore_schema(self): pass
+    def restore_table(self): pass
+    def restore(self): pass
+    def split_file(self): pass
+    def _analyze_filename(self): pass
+    def _is_file_outdated(self): pass
+    def _get_restorer(self): pass
+    def _tablename_to_filename(self): pass
 
 if __name__ == '__main__':
     suite = unittest.makeSuite(NgwServicesTests, 'test')

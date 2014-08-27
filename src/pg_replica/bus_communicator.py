@@ -40,13 +40,12 @@ class BusCommunicator(object):
         return msg
 
     def send_message(self, request, action):
-            message = self._message(request, action)
-            print message
-            r = requests.post(self.uri, data=message, headers=self.headers, auth=(self.user, self.password))
+        message = self._message(request, action)
+        r = requests.post(self.uri, data=message, headers=self.headers, auth=(self.user, self.password))
 
-            if r.status_code != 202:
-                msg = 'Request failed: %s - %s' % (r.status_code, r.text)
-                raise BusCommunicatorError(msg)
+        if r.status_code != 202:
+            msg = 'Request failed: %s - %s' % (r.status_code, r.text)
+            raise BusCommunicatorError(msg)
 
 
 if __name__ == "__main__":

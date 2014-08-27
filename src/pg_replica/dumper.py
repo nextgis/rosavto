@@ -30,7 +30,7 @@ class Dumper():
         formatter = logging.Formatter('%(asctime)s %(name)s: %(levelname)s: %(message)s', datefmt='%b %d %H:%M:%S')
 
         ch = logging.StreamHandler()
-        ch.setLevel(logging.DEBUG)
+        ch.setLevel(logging.WARN)
         ch.setFormatter(formatter)
         self.logger.addHandler(ch)
 
@@ -95,8 +95,9 @@ class Dumper():
         # Dump of shcema will be dumped in files with the prefixes:
         self._schema_name = 'SCHEMA_STRUCTURE_FILE'
 
-    def ask_for_dumps(self):
-        """Initialize process of dump
+    def ask_for_dump(self, table):
+        """Initialize process of dump:
+
         :return:
         """
         pass
@@ -111,7 +112,7 @@ class Dumper():
 
         command = self._get_dumper(tablename, filename, compression_level=9, schema_only=False)
 
-        self.logger.info('Dump of "%s.%s" is starting: %s' % (self.database, tablename, command))
+        self.logger.debug('Dump of "%s.%s" is starting: %s' % (self.database, tablename, command))
 
         proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         (stdoutdata, stderrdata)  = proc.communicate()
@@ -130,7 +131,7 @@ class Dumper():
         """
         filename = self._tablename_to_filename(self._schema_name)
         command = self._get_dumper(tablename=None, filename=filename, schema_only=True)
-        self.logger.info('Dump of shema "%s" is starting: %s' % (self.database, command))
+        self.logger.debug('Dump of shema "%s" is starting: %s' % (self.database, command))
 
         proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         (stdoutdata, stderrdata)  = proc.communicate()
@@ -151,14 +152,14 @@ class Dumper():
         """
 
         if remove_original and not split_files:
-            msg = 'You mast have a copy of the dump files before removing the ogiginals. Set split_files=True or remove_originals=False.'
+            msg = 'You must have a copy of the dump files before removing the ogiginals. Set split_files=True or remove_originals=False.'
             self.logger.error(msg)
             raise DumperError(msg)
 
         tables = self.get_outdated_tables()
         for table in self.tables:
             if table not in tables:
-                self.logger.info('Dump of "%s.%s" is skiped: the current dumpfile is not outdated' % (self.database, table))
+                self.logger.debug('Dump of "%s.%s" is skiped: the current dumpfile is not outdated' % (self.database, table))
 
         # Assume the schema is constant. So comment the lines:
         # filename = self.dump_schema()
@@ -173,7 +174,7 @@ class Dumper():
             if split_files:
                 self.split_file(filename)
                 if remove_original:
-                    self.logger.info('Remove original dump file: %s', filename)
+                    self.logger.debug('Remove original dump file: %s', filename)
                     os.unlink(filename)
 
         return dumps
@@ -221,7 +222,7 @@ class Dumper():
         :param remove_parts: boolean value. It indicates to remove or not the chapters after the joining
         """
         chapter_list = self.get_chapter_list(prefix)
-        self.logger.info('Start joining of files %s into one file %s' % (', '.join(chapter_list), prefix))
+        self.logger.debug('Start joining of files %s into one file %s' % (', '.join(chapter_list), prefix))
         with open(prefix, 'wb') as destination:
             for chapter in chapter_list:
                 shutil.copyfileobj(open(chapter, 'rb'), destination)
@@ -229,14 +230,14 @@ class Dumper():
         if remove_parts:
             for chapter in chapter_list:
                 os.unlink(chapter)
-                self.logger.info('Remove file %s', chapter)
+                self.logger.debug('Remove file %s', chapter)
 
     def restore_schema(self, filename):
         filename = os.path.join(self.dump_path, filename)
         command = """psql --host=%s --port=%s --username=%s --dbname=%s --file=%s """ % \
                    (self.host, self.port, self.user, self.copy_to_database, filename)
 
-        self.logger.info('Restoring from dump file %s: %s' % (filename, command))
+        self.logger.debug('Restoring from dump file %s: %s' % (filename, command))
 
         proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         (stdoutdata, stderrdata)  = proc.communicate()
@@ -252,7 +253,7 @@ class Dumper():
         :param filename: The name of the dumpfile file
         """
         command = self._get_restorer(filename)
-        self.logger.info('Restoring from dump file %s: %s' % (filename, command))
+        self.logger.debug('Restoring from dump file %s: %s' % (filename, command))
 
         proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
         (stdoutdata, stderrdata)  = proc.communicate()
@@ -289,7 +290,7 @@ class Dumper():
         :param buffer_size: Auxiliary value for size of reading buffer (in bytes)
         :return list of filenames
         """
-        self.logger.info('Splitting file %s into chapters...' % filename)
+        self.logger.debug('Splitting file %s into chapters...' % filename)
         chaptername_list = []
         finished = False
         with open(filename, 'rb') as src:
@@ -311,7 +312,7 @@ class Dumper():
                 chapter.close()
                 if finished:
                     break
-        self.logger.info('File %s is divided into %s chapters' % (filename, len(chaptername_list)))
+        self.logger.debug('File %s is divided into %s chapters' % (filename, len(chaptername_list)))
         return chaptername_list
 
     def _analyze_filename(self, filename):
@@ -323,7 +324,7 @@ class Dumper():
                  match the pattern, return None
         """
 
-        # filename mast be smth like: 'TABLENAME_YYYMMDDHHMMSS.fullcopy'
+        # filename must be smth like: 'TABLENAME_YYYMMDDHHMMSS.fullcopy'
         pattern = r".+_[0-9]{14}\.fullcopy$"
         if not re.match(pattern, filename):
             return None
