@@ -8,6 +8,7 @@ import time
 import re
 import glob
 import shutil
+import base64
 
 import logging
 import ConfigParser
@@ -55,15 +56,18 @@ class Dumper():
             self.outdate_interval = config.get('fulldump', 'outdate_interval')  # Hours
             self.outdate_interval = float(self.outdate_interval) * 3600         # Seconds
 
-            self.copy_to_host = config.get('fulldump', 'copy_to_host')
-            self.copy_to_database = config.get('fulldump', 'copy_to_database')
-            self.copy_to_port = config.get('fulldump', 'copy_to_port')
-
             self.tables = config.get('fulldump', 'tables_for_dump')
             self.tables = [t.strip() for t in self.tables.split(',')]
 
             self.max_chapter_size = config.get('fulldump', 'chapter_size')
             self.max_chapter_size = int(self.max_chapter_size)
+
+            # Bus
+            self.bus_uri = config.get('bus', 'uri')
+            self.bus_user = config.get('bus', 'user')
+            self.bus_passwd = config.get('bus', 'password')
+            self.bus_addr = config.get('bus', 'address')
+            self.bus_default_peer = config.get('bus', 'default_peer')
 
             # Paths
             self.dump_path = config.get('paths', 'dump')
@@ -96,52 +100,18 @@ class Dumper():
         self._schema_name = 'SCHEMA_STRUCTURE_FILE'
 
     def ask_for_dump(self, table):
-        """Initialize process of dump:
-
-        :return:
+        """Initialize process of dump: send message
         """
-        pass
+        sender = BusCommunicator(self.bus_uri,
+                                 self.bus_default_peer,
+                                 self.bus_addr,
+                                 self.bus_user,
+                                 self.bus_passwd)
 
-    def dump_table(self, tablename, filename):
-        """Dump table into the file
-
-        :param tablename: The name of the table that has to be stored in the file
-        :param filename: The name of the file
-        :return boolean flag of success
-        """
-
-        command = self._get_dumper(tablename, filename, compression_level=9, schema_only=False)
-
-        self.logger.debug('Dump of "%s.%s" is starting: %s' % (self.database, tablename, command))
-
-        proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-        (stdoutdata, stderrdata)  = proc.communicate()
-
-        if stderrdata:
-            self.logger.critical("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
-            return False
-        else:
-            self.logger.info('Dump of "%s.%s" is created' % (self.database, tablename))
-            return True
-
-    def dump_schema(self):
-        """Dump schema.
-
-        :return: Name of the dump file.
-        """
-        filename = self._tablename_to_filename(self._schema_name)
-        command = self._get_dumper(tablename=None, filename=filename, schema_only=True)
-        self.logger.debug('Dump of shema "%s" is starting: %s' % (self.database, command))
-
-        proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-        (stdoutdata, stderrdata)  = proc.communicate()
-
-        if stderrdata:
-            self.logger.critical("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
-        else:
-            self.logger.info('Dump of schema "%s" is created' % (self.database, ))
-
-        return filename
+        action = 'sm://messages/application/gis/geochanges_full_copy'
+        request = 'dumpTable'
+        addition = '<tbl>%s</tbl>' % table
+        sender.send_message(request, action, addition_info=addition)
 
     def dump(self, split_files=False, remove_original=False):
         """Dump all tables, specified in the config file (see self.tables)
@@ -161,23 +131,42 @@ class Dumper():
             if table not in tables:
                 self.logger.debug('Dump of "%s.%s" is skiped: the current dumpfile is not outdated' % (self.database, table))
 
-        # Assume the schema is constant. So comment the lines:
-        # filename = self.dump_schema()
-        # dumps = [filename]  # List of created dump files
-
         dumps = []      # List of created dump files
 
         for table in tables:
             filename = self._tablename_to_filename(table)
             dumps.append(filename)
-            self.dump_table(table, filename)
+            self._create_dumpfile(table, filename)
             if split_files:
-                self.split_file(filename)
+                self._split_file(filename)
                 if remove_original:
                     self.logger.debug('Remove original dump file: %s', filename)
                     os.unlink(filename)
 
         return dumps
+
+    def dump_table(self, tablename):
+
+        filename = self._tablename_to_filename(tablename)
+        self._create_dumpfile(tablename, filename)
+        chapternames = self._split_file(filename)
+        chapter_count = len(chapternames)
+
+        action = 'sm://messages/application/gis/geochanges_full_copy'
+        request = 'dumpTable'
+        sender = BusCommunicator(self.bus_uri,
+                                 self.bus_default_peer,
+                                 self.bus_addr,
+                                 self.bus_user,
+                                 self.bus_passwd)
+
+        for part_number, name in enumerate(chapternames):
+            data = '<data>%s</data>' % self._file_to_base64(name)
+            total = '<total>%s</total>' % chapter_count
+            part_name = '<name>%s</name>' % name
+            part = '<part>%s</part>' % part_number
+            addition = '\n'.join([data, total, part_name, part])
+            sender.send_message(request, action, addition_info=addition)
 
     def get_chapter_list(self, prefix):
         """Return list of files that contain chapters of dump file
@@ -185,7 +174,7 @@ class Dumper():
         :param prefix: The beginning of the file name
         :return: list of the files ordered literally
         """
-        prefix = prefix + ".part."
+        prefix = prefix + ".part.*"
         return sorted(glob.glob(prefix))
 
     def get_file_list(self, prefix):
@@ -215,38 +204,6 @@ class Dumper():
 
         return outdated_files
 
-    def join_files(self, prefix, remove_parts=False):
-        """Create full dump file from chapters. It's inverse operation to self.split_file method.
-
-        :param prefix: The beginning of the file name
-        :param remove_parts: boolean value. It indicates to remove or not the chapters after the joining
-        """
-        chapter_list = self.get_chapter_list(prefix)
-        self.logger.debug('Start joining of files %s into one file %s' % (', '.join(chapter_list), prefix))
-        with open(prefix, 'wb') as destination:
-            for chapter in chapter_list:
-                shutil.copyfileobj(open(chapter, 'rb'), destination)
-        self.logger.info('File %s is created' % prefix)
-        if remove_parts:
-            for chapter in chapter_list:
-                os.unlink(chapter)
-                self.logger.debug('Remove file %s', chapter)
-
-    def restore_schema(self, filename):
-        filename = os.path.join(self.dump_path, filename)
-        command = """psql --host=%s --port=%s --username=%s --dbname=%s --file=%s """ % \
-                   (self.host, self.port, self.user, self.copy_to_database, filename)
-
-        self.logger.debug('Restoring from dump file %s: %s' % (filename, command))
-
-        proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-        (stdoutdata, stderrdata)  = proc.communicate()
-
-        if stderrdata:
-            self.logger.error("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
-        else:
-            self.logger.info('Dump of file %s is restored' % (filename, ))
-
     def restore_table(self, filename):
         """Restore table from dump file
 
@@ -264,16 +221,6 @@ class Dumper():
             self.logger.info('Dump of file %s is restored' % (filename, ))
 
     def restore(self):
-
-        # The code finds the last schema and restores it.
-        # But we assume the scheme is not changed, so the code is commented
-        # schema_dumps = self.get_file_list(self._schema_name)
-        # if not schema_dumps:
-        #     msg = "Can't find dumps of the schema."
-        #     self.logger.error(msg)
-        #     raise DumperError(msg)
-        # self.restore_schema(schema_dumps[-1])
-
         for tablename in self.tables:
             dumps = self.get_file_list(tablename)
             if not dumps:
@@ -282,7 +229,25 @@ class Dumper():
                 raise DumperError(msg)
             dumper.restore_table(dumps[-1])     # Restore the last dump
 
-    def split_file(self, filename, suffix='.part', buffer_size=4*1024):
+    def _join_files(self, prefix, remove_parts=False):
+        """Create full dump file from chapters. It's inverse operation to self._split_file method.
+
+        :param prefix: The beginning of the file name
+        :param remove_parts: boolean value. It indicates to remove or not the chapters after the joining
+        """
+        prefix = os.path.join(self.dump_path, prefix)
+        chapter_list = self.get_chapter_list(prefix)
+        self.logger.debug('Start joining of files %s into one file %s' % (', '.join(chapter_list), prefix))
+        with open(prefix, 'wb') as destination:
+            for chapter in chapter_list:
+                shutil.copyfileobj(open(chapter, 'rb'), destination)
+        self.logger.info('File %s is created' % prefix)
+        if remove_parts:
+            for chapter in chapter_list:
+                os.unlink(chapter)
+                self.logger.debug('Remove file %s', chapter)
+
+    def _split_file(self, filename, suffix='.part', buffer_size=4*1024):
         """Split file into pieces (chapters) of given size and store them in files
 
         :param filename: The name of the file that has to be splitted on chapters
@@ -339,6 +304,50 @@ class Dumper():
         )
         return result
 
+    def _create_dumpfile(self, tablename, filename):
+        """Dump table into the file
+
+        :param tablename: The name of the table that has to be stored in the file
+        :param filename: The name of the file
+        :return boolean flag of success
+        """
+
+        command = self._get_dumper(tablename, filename, compression_level=9, schema_only=False)
+
+        self.logger.debug('Dump of "%s.%s" is starting: %s' % (self.database, tablename, command))
+
+        proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+        (stdoutdata, stderrdata)  = proc.communicate()
+
+        if stderrdata:
+            self.logger.critical("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
+            return False
+        else:
+            self.logger.info('Dump of "%s.%s" is created' % (self.database, tablename))
+            return True
+
+    def _base64_to_file(self, data, filename):
+        """Decode data from base64 format and save the result
+
+        :param data:     The string in base64 format
+        :param filename: The name of the file
+        """
+        data = base64.b64decode(data)
+        with open(filename, 'w') as f:
+            f.write(data)
+
+    def _file_to_base64(self, filename):
+        """Encode file in base64
+
+        :param filename: The name of the file
+        :return string of encoded file
+        """
+        with open(filename) as f:
+            encoded = base64.b64encode(f.read())
+
+        return encoded
+
+
     def _get_dumper(self, tablename, filename, compression_level=0, schema_only=False):
         """Return string representation of dump command. Use pg_dump as the dumping machine.
         see `pg_dump --help` for details of the parameters
@@ -387,7 +396,7 @@ class Dumper():
         """
         filename = os.path.join(self.dump_path, filename)
         restorer = """pg_restore --clean --host=%s --port=%s --username=%s --dbname=%s %s """ % \
-                   (self.copy_to_host, self.copy_to_port, self.user, self.copy_to_database, filename)
+                   (self.host, self.port, self.user, self.database, filename)
         return restorer
 
     def _tablename_to_filename(self, tablename):

@@ -5,6 +5,8 @@ import unittest
 
 import os
 import shutil
+import random
+import string
 
 from src.pg_replica.dumper import Dumper, DumperError
 
@@ -38,10 +40,10 @@ class NgwServicesTests(unittest.TestCase):
         # check crucial parameters
         self.assertTrue(len(self.dumper.tables) > 0)
 
-    def test_dump_table_schema(self):
+    def test_create_dumpfile(self):
         non_existed_table_name = 'the_table_does_not_exist'
         self.assertFalse(
-            self.dumper.dump_table(non_existed_table_name, self.tmp_filename_with_path))
+            self.dumper._create_dumpfile(non_existed_table_name, self.tmp_filename_with_path))
 
         self.assertTrue(not os.path.isfile(self.tmp_filename_with_path) or
                         os.path.getsize(self.tmp_filename_with_path) == 0)
@@ -51,16 +53,11 @@ class NgwServicesTests(unittest.TestCase):
         tablename = self.dumper.tables[0]
         try:
             self.assertTrue(
-                self.dumper.dump_table(tablename, self.tmp_filename_with_path))
+                self.dumper._create_dumpfile(tablename, self.tmp_filename_with_path))
             self.assertTrue(os.path.isfile(self.tmp_filename_with_path))
             self.assertTrue(os.path.getsize(self.tmp_filename_with_path) > 0)
         finally:
             self._drop_tmp_file()
-
-        # dump schema:
-        schema_filename = self.dumper.dump_schema()
-        self.assertTrue(os.path.isfile(schema_filename))
-        self.assertTrue(os.path.getsize(schema_filename) > 0)
 
     def test_dump(self):
         current_files = set(
@@ -116,13 +113,52 @@ class NgwServicesTests(unittest.TestCase):
             for filename in names:
                 os.unlink(filename)
 
+    def test_base64_coding(self):
+        """Test for _file_to_base64 and _base64_to_file"""
+
+        data = self.dumper._file_to_base64(CONFIG_FILE)
+        self.dumper._base64_to_file(data, self.tmp_filename_with_path)
+        with open(self.tmp_filename_with_path, 'r') as f:
+            received = f.readlines()
+        with open(CONFIG_FILE, 'r') as f:
+            expected = f.readlines()
+        self._drop_tmp_file()
+
+        self.assertEquals(expected, received)
+
+    def test_split_join(self):
+        """Test for _split_file and _join_files"""
+
+        # Create file and fill it by random numbers
+        N = 10000
+        data = ''.join(
+            random.choice(string.ascii_uppercase + string.digits) for _ in range(N)
+        )
+        with open(self.tmp_filename_with_path, 'w') as f:
+            f.write(data)
+
+        limit = 203      # Маленькое число, чтобы наплодить много файликов
+        self.dumper.max_chapter_size = limit
+        files = self.dumper._split_file(self.tmp_filename_with_path)
+        self._drop_tmp_file()
+
+        # Check the file is sliced,
+        self.assertTrue(len(files) > 0)
+        for f in files[:-1]:
+            self.assertTrue(os.path.isfile(f))
+            self.assertEqual(os.path.getsize(f), limit)
+        self.assertLessEqual(os.path.getsize(files[-1]), limit)
+
+        # Check split/join didn't corrupt the data
+        self.dumper._join_files(self.tmp_filename)
+        with open(self.tmp_filename_with_path, 'r') as f:
+            received = f.read()
+        self.assertEquals(data, received)
+
     # Не покрытые тестами функции. Написать тесты.
     def get_outdated_tables(self): pass
-    def join_files(self): pass
-    def restore_schema(self): pass
     def restore_table(self): pass
     def restore(self): pass
-    def split_file(self): pass
     def _analyze_filename(self): pass
     def _is_file_outdated(self): pass
     def _get_restorer(self): pass

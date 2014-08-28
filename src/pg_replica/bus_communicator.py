@@ -16,13 +16,14 @@ class BusCommunicator(object):
         self.password = password
         self.headers = {'content-type': 'text/xml', 'Accept': 'text/xml'}
 
-    def _message(self, request, action):
+    def _message(self, request, action, addition_info):
         params = dict(
             send_to = self.send_to,
             send_from = self.senf_from,
             id = uuid.uuid4(),
             action = action,
-            request = request
+            request = request,
+            addition = addition_info
         )
         msg = '''<?xml version="1.0" encoding="UTF-8"?>
         <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
@@ -35,12 +36,14 @@ class BusCommunicator(object):
             </soap:Header>
             <soap:Body>
                 <request>%(request)s</request>
+                %(addition)s
             </soap:Body>
         </soap:Envelope>''' % params
         return msg
 
-    def send_message(self, request, action):
-        message = self._message(request, action)
+    def send_message(self, request, action, addition_info=''):
+        message = self._message(request, action, addition_info)
+
         r = requests.post(self.uri, data=message, headers=self.headers, auth=(self.user, self.password))
 
         if r.status_code != 202:
