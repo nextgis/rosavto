@@ -76,6 +76,8 @@ if __name__ == '__main__':
             cmd = 'changeset-process-list'
         elif req.text == 'dumpTablePart':
             cmd = 'fulldump-get-table'
+        elif req.text == 'dumpTableRequest':
+            cmd = 'fulldump-dump-table'
     else:
         if body.find('chn') is not None:
             cmd = 'changeset-save'
