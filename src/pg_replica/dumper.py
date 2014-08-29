@@ -148,15 +148,8 @@ class Dumper():
             self.logger.error("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
         else:
             self.logger.info('Dump of file %s is restored' % (filename, ))
-
-    def restore(self):
-        for tablename in self.tables:
-            dumps = self.get_file_list(tablename)
-            if not dumps:
-                msg = "Can't find dumps of table %s" % (tablename, )
-                self.logger.error(msg)
-                raise DumperError(msg)
-            dumper.restore_table(dumps[-1])     # Restore the last dump
+            filename = os.path.join(self.dump_path, filename)
+            os.unlink(filename)
 
     def join_files(self, prefix, remove_parts=False):
         """Create full dump file from chapters. It's inverse operation to self._split_file method.
