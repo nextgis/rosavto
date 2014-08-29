@@ -138,11 +138,9 @@ class NgwServicesTests(unittest.TestCase):
 
     # Не покрытые тестами функции. Написать тесты.
     def dump_table(self):   pass
-    def get_outdated_tables(self): pass
     def restore_table(self): pass
     def restore(self): pass
     def _analyze_filename(self): pass
-    def _is_file_outdated(self): pass
     def _get_restorer(self): pass
     def _tablename_to_filename(self): pass
 

@@ -133,24 +133,6 @@ class Dumper():
         pattern = os.path.join(self.dump_path, prefix)
         return sorted(glob.glob(pattern+"*"))
 
-    def get_outdated_tables(self):
-        """Create list of tables for dump.
-        Find dumpfiles, compare their dates with self.outdate_interval
-
-        :return: list of tablenames
-        """
-        outdated_files = []
-        for tablename in self.tables:
-            dumps = self.get_file_list(tablename)
-            if not dumps:
-                outdated_files.append(tablename)
-            else:
-                name = dumps[-1]
-                if self._is_file_outdated(name):
-                    outdated_files.append(tablename)
-
-        return outdated_files
-
     def restore_table(self, filename):
         """Restore table from dump file
 
@@ -313,19 +295,6 @@ class Dumper():
                      (self.host, self.user, self.database, filename, tablename)
 
         return dumper
-
-    def _is_file_outdated(self, filename):
-        """Check is dump of a table oudtated or not
-
-        :param filename: The name of the file
-        :return: boolean value
-        """
-        fileinfo = self._analyze_filename(filename)
-        if not fileinfo:   # The file is not dump file
-            return False
-        stump = fileinfo['time']
-        current_time = time.time()
-        return (current_time - stump > self.outdate_interval)
 
     def _get_restorer(self, filename):
         """Return string representation of dump restoring command. Use pg_restore.
