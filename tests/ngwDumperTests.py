@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 import unittest
 
 import os
@@ -11,11 +12,17 @@ import string
 from src.pg_replica.dumper import Dumper, DumperError
 
 CONFIG_FILE = 'data/pg_replica.conf'
+LOGFILE = 'data/tmp_log'
+DUMPDIR = 'data/dumps'
 
 
 class NgwServicesTests(unittest.TestCase):
     def setUp(self):
         self.dumper = Dumper(CONFIG_FILE)
+        # reset paths
+        self.dumper._set_logfile_name(LOGFILE)
+        self.dumper._set_dump_path(DUMPDIR)
+
         self.tmp_filename = 'file_for_store_temp_data'
         self.tmp_path = self.dumper.dump_path
         self.tmp_filename_with_path = \
@@ -59,39 +66,13 @@ class NgwServicesTests(unittest.TestCase):
         finally:
             self._drop_tmp_file()
 
-    def test_dump(self):
-        current_files = set(
-            [f for f in os.listdir(self.tmp_path)
-                    if os.isfile(os.path.join(self.tmp_path, f))]
-        )
-        self.dumper.dump()
-        all_files = set(
-            [f for f in os.listdir(self.tmp_path)
-                    if os.path.isfile(os.path.join(self.tmp_path, f))]
-        )
-
-        new_files = all_files - current_files
-        self.assertTrue(len(new_files) > 0)     # Dumps are created
-        for filename in new_files:
-            full_name = os.path.join(self.tmp_path, filename)
-            self.assertTrue(os.path.getsize(full_name) > 0)      # The dump is not empty
-
-        self.assertRaises(DumperError, self.dumper.dump,
-                          split_files=False, remove_original=True)
-
     def test_get_dumper(self):
         # Username and other parameters are stored in CONFIG_FILE
         # Changes of the file must be propagated in the test
 
-        expected = """pg_dump --username=klsvd --host=192.168.250.106 --port=5432 --table=AAA --compress=0 --file=DDD --format=custom --blobs rosavto"""
-        received = self.dumper._get_dumper('AAA', 'DDD', schema_only=False)
+        expected = """pg_dump  --host=192.168.250.101 --username=voltron --dbname=rosavto --file=DDD --clean --blobs --table=AAA --format=plain"""
+        received = self.dumper._get_dumper('AAA', 'DDD')
         self.assertEquals(expected.strip(), received.strip())
-
-        expected = """pg_dump --clean --schema-only --username=klsvd --host=192.168.250.106 --port=5432 --compress=0 --file=DDD --format=plain rosavto"""
-        received = self.dumper._get_dumper(None, 'DDD', schema_only=True)
-        self.assertEquals(expected.strip(), received.strip())
-
-        self.assertRaises(DumperError, self.dumper._get_dumper, tablename='A', filename='B', schema_only=True)
 
     def test_get_file_list(self):
         # create several files and try to find them
@@ -114,10 +95,10 @@ class NgwServicesTests(unittest.TestCase):
                 os.unlink(filename)
 
     def test_base64_coding(self):
-        """Test for _file_to_base64 and _base64_to_file"""
+        """Test for _file_to_base64 and base64_to_file"""
 
         data = self.dumper._file_to_base64(CONFIG_FILE)
-        self.dumper._base64_to_file(data, self.tmp_filename_with_path)
+        self.dumper.base64_to_file(data, self.tmp_filename_with_path)
         with open(self.tmp_filename_with_path, 'r') as f:
             received = f.readlines()
         with open(CONFIG_FILE, 'r') as f:
@@ -127,7 +108,7 @@ class NgwServicesTests(unittest.TestCase):
         self.assertEquals(expected, received)
 
     def test_split_join(self):
-        """Test for _split_file and _join_files"""
+        """Test for _split_file and join_files"""
 
         # Create file and fill it by random numbers
         N = 10000
@@ -150,12 +131,13 @@ class NgwServicesTests(unittest.TestCase):
         self.assertLessEqual(os.path.getsize(files[-1]), limit)
 
         # Check split/join didn't corrupt the data
-        self.dumper._join_files(self.tmp_filename)
+        self.dumper.join_files(self.tmp_filename)
         with open(self.tmp_filename_with_path, 'r') as f:
             received = f.read()
         self.assertEquals(data, received)
 
     # Не покрытые тестами функции. Написать тесты.
+    def dump_table(self):   pass
     def get_outdated_tables(self): pass
     def restore_table(self): pass
     def restore(self): pass
