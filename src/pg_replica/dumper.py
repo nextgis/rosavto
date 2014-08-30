@@ -280,8 +280,6 @@ class Dumper():
         :return: string of the dump command
         """
         filename = os.path.join(self.dump_path, filename)
-        restorer = """pg_restore --clean --host=%s --port=%s --username=%s --dbname=%s %s """ % \
-                   (self.host, self.port, self.user, self.database, filename)
         restorer = """psql "host=%s user=%s dbname=%s" --file=%s""" % \
                    (self.host, self.user, self.database, filename)
         return restorer
