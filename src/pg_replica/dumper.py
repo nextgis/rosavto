@@ -5,10 +5,10 @@ import os
 import subprocess
 import datetime
 import time
-import re
 import glob
 import shutil
 import base64
+import bz2
 
 import logging
 import ConfigParser
@@ -134,11 +134,16 @@ class Dumper():
         return sorted(glob.glob(pattern+"*"))
 
     def restore_table(self, filename):
-        """Restore table from dump file
+        """Decompress dumpfile and restore the table from the file
 
         :param filename: The name of the dumpfile file
         """
-        command = self._get_restorer(filename)
+        tmp_file = filename + '.tmp'
+        with bz2.BZ2File(filename, 'r') as input:
+            with open(tmp_file, 'w') as output:
+                shutil.copyfileobj(input, output)
+
+        command = self._get_restorer(tm_file)
         self.logger.debug('Restoring from dump file %s: %s' % (filename, command))
 
         proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -148,7 +153,8 @@ class Dumper():
             self.logger.error("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
         else:
             self.logger.info('Dump of file %s is restored' % (filename, ))
-            filename = os.path.join(self.dump_path, filename)
+            tmp_file = os.path.join(self.dump_path, tmp_file)
+            os.unlink(tmp_file)
             os.unlink(filename)
 
     def join_files(self, prefix, remove_parts=False):
@@ -209,30 +215,6 @@ class Dumper():
         self.logger.debug('File %s is divided into %s chapters' % (filename, len(chaptername_list)))
         return chaptername_list
 
-    def _analyze_filename(self, filename):
-        """Inverse operation to _tablename_to_filename method.
-        Returns info about the tablename and date of the creation extracted from the filename.
-
-        :param filename: The name of the file
-        :return: dict of the 'tablename', 'time' and their values. If the file name does not
-                 match the pattern, return None
-        """
-
-        # filename must be smth like: 'TABLENAME_YYYMMDDHHMMSS.fullcopy'
-        pattern = r".+_[0-9]{14}\.fullcopy$"
-        if not re.match(pattern, filename):
-            return None
-
-        dateval = filename[-23:-9]
-        date = time.strptime(dateval, '%Y%m%d%H%M%S')
-        stump = time.mktime(date)
-
-        result = dict(
-            tablename = filename[0:-24],
-            time = stump
-        )
-        return result
-
     def _create_dumpfile(self, tablename, filename):
         """Dump table into the file
 
@@ -240,20 +222,30 @@ class Dumper():
         :param filename: The name of the file
         :return boolean flag of success
         """
+        try:
+            tmp_file = filename + '.tmp'
+            command = self._get_dumper(tablename, tmp_file)
 
-        command = self._get_dumper(tablename, filename)
+            self.logger.debug('Dump of "%s.%s" is starting: %s' % (self.database, tablename, command))
 
-        self.logger.debug('Dump of "%s.%s" is starting: %s' % (self.database, tablename, command))
+            proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+            (stdoutdata, stderrdata)  = proc.communicate()
 
-        proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-        (stdoutdata, stderrdata)  = proc.communicate()
+            if stderrdata:
+                self.logger.critical("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
+                result =  False
+            else:
+                self.logger.info('Dump of "%s.%s" is created' % (self.database, tablename))
+                # compress the file and drop temp files
+                with open(tmp_file, 'rb') as input:
+                    with bz2.BZ2File(filename, 'wb', compresslevel=9) as output:
+                        shutil.copyfileobj(input, output)
+                result =  True
+        finally:    # Delete temp file
+            if os.path.isfile(tmp_file):
+                os.unlink(tmp_file)
 
-        if stderrdata:
-            self.logger.critical("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
-            return False
-        else:
-            self.logger.info('Dump of "%s.%s" is created' % (self.database, tablename))
-            return True
+        return result
 
     def base64_to_file(self, data, filename):
         """Decode data from base64 format and save the result
