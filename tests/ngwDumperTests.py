@@ -40,6 +40,15 @@ class NgwServicesTests(unittest.TestCase):
         if os.path.isfile(self.tmp_filename_with_path):
             os.unlink(self.tmp_filename_with_path)
 
+    def _create_rnd_file(self):
+        # Create file and fill it by random numbers
+        N = 10000
+        data = ''.join(
+            random.choice(string.ascii_uppercase + string.digits) for _ in range(N)
+        )
+        with open(self.tmp_filename_with_path, 'w') as f:
+            f.write(data)
+
     def test_init(self):
         # check directory for dumps is created
         self.assertTrue(os.path.isdir(self.dumper.dump_path))
@@ -110,13 +119,9 @@ class NgwServicesTests(unittest.TestCase):
     def test_split_join(self):
         """Test for _split_file and join_files"""
 
-        # Create file and fill it by random numbers
-        N = 10000
-        data = ''.join(
-            random.choice(string.ascii_uppercase + string.digits) for _ in range(N)
-        )
-        with open(self.tmp_filename_with_path, 'w') as f:
-            f.write(data)
+        self._create_rnd_file()
+        with open(self.tmp_filename_with_path, 'r') as f:
+            expected = f.read()
 
         limit = 203      # Маленькое число, чтобы наплодить много файликов
         self.dumper.max_chapter_size = limit
@@ -134,7 +139,22 @@ class NgwServicesTests(unittest.TestCase):
         self.dumper.join_files(self.tmp_filename)
         with open(self.tmp_filename_with_path, 'r') as f:
             received = f.read()
-        self.assertEquals(data, received)
+        self.assertEquals(expected, received)
+
+    def test_compressing(self):
+
+        self._create_rnd_file()
+        with open(self.tmp_filename_with_path, 'r') as f:
+            expected = f.read()
+
+        self.dumper._compressfile(self.tmp_filename_with_path)
+        self.dumper._decompressfile(self.tmp_filename_with_path)
+
+        with open(self.tmp_filename_with_path, 'r') as f:
+            received = f.read()
+
+        self.assertEquals(expected, received)
+
 
     # Не покрытые тестами функции. Написать тесты.
     def dump_table(self):   pass

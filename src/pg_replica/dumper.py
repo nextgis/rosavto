@@ -138,12 +138,9 @@ class Dumper():
 
         :param filename: The name of the dumpfile file
         """
-        tmp_file = filename + '.tmp'
-        with bz2.BZ2File(filename, 'r') as input:
-            with open(tmp_file, 'w') as output:
-                shutil.copyfileobj(input, output)
+        self._decompressfile(filename)
 
-        command = self._get_restorer(tm_file)
+        command = self._get_restorer(filename)
         self.logger.debug('Restoring from dump file %s: %s' % (filename, command))
 
         proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -153,8 +150,6 @@ class Dumper():
             self.logger.error("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
         else:
             self.logger.info('Dump of file %s is restored' % (filename, ))
-            tmp_file = os.path.join(self.dump_path, tmp_file)
-            os.unlink(tmp_file)
             os.unlink(filename)
 
     def join_files(self, prefix, remove_parts=False):
@@ -222,28 +217,24 @@ class Dumper():
         :param filename: The name of the file
         :return boolean flag of success
         """
+        result =  False
+        command = self._get_dumper(tablename, filename)
+
+        self.logger.debug('Dump of "%s.%s" is starting: %s' % (self.database, tablename, command))
+
+        proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+        (stdoutdata, stderrdata)  = proc.communicate()
+
+        if stderrdata:
+            self.logger.critical("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
+        else:
+            self.logger.info('Dump of "%s.%s" is created' % (self.database, tablename))
+
         try:
-            tmp_file = filename + '.tmp'
-            command = self._get_dumper(tablename, tmp_file)
-
-            self.logger.debug('Dump of "%s.%s" is starting: %s' % (self.database, tablename, command))
-
-            proc = subprocess.Popen(command, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-            (stdoutdata, stderrdata)  = proc.communicate()
-
-            if stderrdata:
-                self.logger.critical("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
-                result =  False
-            else:
-                self.logger.info('Dump of "%s.%s" is created' % (self.database, tablename))
-                # compress the file and drop temp files
-                with open(tmp_file, 'rb') as input:
-                    with bz2.BZ2File(filename, 'wb', compresslevel=9) as output:
-                        shutil.copyfileobj(input, output)
-                result =  True
-        finally:    # Delete temp file
-            if os.path.isfile(tmp_file):
-                os.unlink(tmp_file)
+            self._compressfile(filename)
+            result = True
+        except:
+            result = False
 
         return result
 
@@ -323,6 +314,43 @@ class Dumper():
         ch.setLevel(logging.DEBUG)
         ch.setFormatter(formatter)
         self.logger.addHandler(ch)
+
+    def _compressfile(self, filename):
+        """Compress file
+
+        :param filename: The name of the file
+        """
+        tmp_file = filename + '.tmp'
+        try:
+            # The file can be large, so use shutil
+            with open(filename, 'rb') as input:
+                with bz2.BZ2File(tmp_file, 'wb', compresslevel=9) as output:
+                    shutil.copyfileobj(input, output)
+
+            os.unlink(filename)
+            shutil.copyfile(tmp_file, filename)
+        finally:
+            if os.path.isfile(tmp_file):
+                os.unlink(tmp_file)
+
+    def _decompressfile(self, filename):
+        """Compress file
+
+        :param filename: The name of the file
+        """
+        tmp_file = filename + '.tmp'
+        try:
+            # The file can be large, so use shutil
+            with bz2.BZ2File(filename, 'rb') as input:
+                with open(tmp_file, 'wb') as output:
+                    shutil.copyfileobj(input, output)
+
+            os.unlink(filename)
+            shutil.copyfile(tmp_file, filename)
+        finally:
+            if os.path.isfile(tmp_file):
+                os.unlink(tmp_file)
+
 
 
 if __name__ == "__main__":
