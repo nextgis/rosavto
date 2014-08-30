@@ -138,7 +138,7 @@ class Dumper():
 
         :param filename: The name of the dumpfile file
         """
-        self._decompressfile(filename)
+        self._decompressfile(os.path.join(self.dump_path, filename))
 
         command = self._get_restorer(filename)
         self.logger.debug('Restoring from dump file %s: %s' % (filename, command))
@@ -150,7 +150,7 @@ class Dumper():
             self.logger.error("The command '%s' returns the error: %s" % (command, stderrdata.strip()))
         else:
             self.logger.info('Dump of file %s is restored' % (filename, ))
-            os.unlink(filename)
+            os.unlink(os.path.join(self.dump_path, filename))
 
     def join_files(self, prefix, remove_parts=False):
         """Create full dump file from chapters. It's inverse operation to self._split_file method.

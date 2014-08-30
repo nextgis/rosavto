@@ -11,6 +11,7 @@ import string
 
 from src.pg_replica.dumper import Dumper, DumperError
 
+
 CONFIG_FILE = 'data/pg_replica.conf'
 LOGFILE = 'data/tmp_log'
 DUMPDIR = 'data/dumps'
@@ -48,6 +49,8 @@ class NgwServicesTests(unittest.TestCase):
         )
         with open(self.tmp_filename_with_path, 'w') as f:
             f.write(data)
+
+        return data
 
     def test_init(self):
         # check directory for dumps is created
@@ -119,9 +122,7 @@ class NgwServicesTests(unittest.TestCase):
     def test_split_join(self):
         """Test for _split_file and join_files"""
 
-        self._create_rnd_file()
-        with open(self.tmp_filename_with_path, 'r') as f:
-            expected = f.read()
+        expected = self._create_rnd_file()
 
         limit = 203      # Маленькое число, чтобы наплодить много файликов
         self.dumper.max_chapter_size = limit
@@ -143,9 +144,7 @@ class NgwServicesTests(unittest.TestCase):
 
     def test_compressing(self):
 
-        self._create_rnd_file()
-        with open(self.tmp_filename_with_path, 'r') as f:
-            expected = f.read()
+        expected = self._create_rnd_file()
 
         self.dumper._compressfile(self.tmp_filename_with_path)
         self.dumper._decompressfile(self.tmp_filename_with_path)
