@@ -74,6 +74,10 @@ if __name__ == '__main__':
             cmd = 'changeset-send'
         elif req.text == 'listing':
             cmd = 'changeset-process-list'
+        elif req.text == 'triggersInfo':
+            cmd = 'triggers-toggle'
+        elif req.text == 'triggersInfoRequest':
+            cmd = 'triggers-info'
         elif req.text == 'dumpTablePart':
             cmd = 'fulldump-get-table'
         elif req.text == 'dumpTableRequest':

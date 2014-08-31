@@ -167,6 +167,14 @@ class PgDB:
         attrs = c.fetchall()
         return attrs
 
+    def is_trigger_exist(self, table):
+        c = self.con.cursor()
+        trigger_name = table + '_rep'
+        sql = "select tgenabled from pg_trigger where tgname='%s' " % \
+              self._quote_str(trigger_name)
+        self._exec_sql(c, sql)
+        return c.fetchone() is not None
+
     def is_trigger_disabled(self, table):
         c = self.con.cursor()
         trigger_name = table + '_rep'
