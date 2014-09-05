@@ -1,20 +1,20 @@
 define([
-    'dojo/_base/declare',
-    'dojo/_base/array',
-    'dojo/_base/lang',
-    'dojo',
-    'dojo/html',
-    'dojo/topic',
-    'dojo/request/xhr',
-    'dojo/Deferred',
-    'dojo/DeferredList',
-    'rosavto/MapIdentify',
-    'rosavto/NgwServiceFacade',
-    'rosavto/ParametersVerification',
-    'rosavto/Loader',
-    'rosavto/Layers/StyledGeoJsonLayer',
-    'leaflet/leaflet'
-],
+        'dojo/_base/declare',
+        'dojo/_base/array',
+        'dojo/_base/lang',
+        'dojo',
+        'dojo/html',
+        'dojo/topic',
+        'dojo/request/xhr',
+        'dojo/Deferred',
+        'dojo/DeferredList',
+        'rosavto/MapIdentify',
+        'rosavto/NgwServiceFacade',
+        'rosavto/ParametersVerification',
+        'rosavto/Loader',
+        'rosavto/Layers/StyledGeoJsonLayer',
+        'leaflet/leaflet'
+    ],
     function (declare, array, lang, dojo, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade, ParametersVerification, Loader, StyledGeoJsonLayer, L) {
         return declare('rosavto.AttributeGetter', [Loader, ParametersVerification], {
             _cardInner: null,
@@ -44,14 +44,15 @@ define([
             },
 
             subscribe: function () {
-                topic.subscribe('attributes/get', lang.hitch(this, function (layerId, featureId) {
-                    var updateAttributesBlock = this.updateAttributes(featureId),
-                        updateGeometry = this.updateGeometry(layerId, featureId),
-                        dl = new DeferredList([updateAttributesBlock, updateGeometry]);
+                topic.subscribe('attributes/get', lang.hitch(this, function (feature, fieldIdentify) {
+//                    var updateAttributesBlock = this.updateAttributes(feature.properties[fieldIdentify]);
 
-                    dl.then(function () {
-                        topic.publish('map/identityUi/unblock');
-                    });
+                    this.updateGeometry(feature)
+                    topic.publish('map/identityUi/unblock');
+
+//                    updateAttributesBlock.then(function () {
+//                        topic.publish('map/identityUi/unblock');
+//                    });
                 }));
 
                 topic.subscribe('map/identityUi/block', lang.hitch(this, function () {
@@ -66,14 +67,14 @@ define([
             },
 
             updateAttributes: function (featureId) {
-                var deferred = new Deferred();
-
-                this.attributesServiceFacade.getAttributesByGuid(featureId, 'Monitoring.fireMapObjectSelected').then(lang.hitch(this, function (content) {
-                    this._updateAttributesHtmlBlock(content);
-                    deferred.resolve();
-                }));
-
-                return deferred;
+//                var deferred = new Deferred();
+//
+//                this.attributesServiceFacade.getAttributesByGuid(featureId, 'Monitoring.fireMapObjectSelected').then(lang.hitch(this, function (content) {
+//                    this._updateAttributesHtmlBlock(content);
+//                    deferred.resolve();
+//                }));
+//
+//                return deferred;
             },
 
             _updateAttributesHtmlBlock: function (content) {
@@ -82,17 +83,11 @@ define([
             },
 
             _styledGeoJsonLayer: null,
-            updateGeometry: function (layerId, featureId) {
-                var deferred = new Deferred();
-
-
-                this.ngwServiceFacade.getGeometryByGuid(layerId, featureId, 4326).then(lang.hitch(this, function (feature) {
-                    this._styledGeoJsonLayer.clearLayers();
-                    this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObjectByDefaultProperties(feature).getBounds());
-                    deferred.resolve();
-                }));
-
-                return deferred;
+            updateGeometry: function (feature) {
+                var style;
+                this._styledGeoJsonLayer.clearLayers();
+                style = this.mapIdentify.layersInfo.getStyleByLayerId(feature.properties.__layer__);
+                this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObjectByDefaultProperties(feature).getBounds());
             },
 
             selectObject: function (layerId, featureId) {

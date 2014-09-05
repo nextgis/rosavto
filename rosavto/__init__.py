@@ -3,6 +3,7 @@ from sqlalchemy import engine_from_config
 
 from rosavto.model import Base, DBSession
 
+
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
@@ -19,7 +20,7 @@ def main(global_config, **settings):
     config.add_route('wms', '/wms')
     config.add_route('realtime', '/realtime')
     config.add_route('attributes', '/attributes')
-    config.add_route('attributes_html', '/attributes/html/{id}')
+    config.add_route('attributes_html', '/gis/card')
     config.add_route('incident', '/incident')
     config.add_route('center', '/center')
     config.add_route('routing_sample', '/routing_sample')

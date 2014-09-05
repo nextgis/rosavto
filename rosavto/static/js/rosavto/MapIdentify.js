@@ -1,18 +1,18 @@
 define([
-    'dojo/_base/declare',
-    'dojo/_base/array',
-    'dojo/_base/lang',
-    'dojo/query',
-    'dojo/on',
-    'dojo/dom-attr',
-    'dojo/request/xhr',
-    'dojo/topic',
-    'mustache/mustache',
-    'rosavto/ParametersVerification',
-    'leaflet/leaflet',
-    'dojo/NodeList-traverse',
-    'centreit/DragAndDrop'
-],
+        'dojo/_base/declare',
+        'dojo/_base/array',
+        'dojo/_base/lang',
+        'dojo/query',
+        'dojo/on',
+        'dojo/dom-attr',
+        'dojo/request/xhr',
+        'dojo/topic',
+        'mustache/mustache',
+        'rosavto/ParametersVerification',
+        'leaflet/leaflet',
+        'dojo/NodeList-traverse',
+        'centreit/DragAndDrop'
+    ],
     function (declare, array, lang, query, on, domAttr, xhr, topic, mustache, ParametersVerification, L, DnD) {
 
         return declare('rosavto.MapIdentify', [ParametersVerification], {
@@ -41,40 +41,57 @@ define([
                 }));
             },
 
+            geometryTypesRank: {
+                'POINT': 0,
+                'MULTIPOINT': 1,
+                'LINESTRING': 2,
+                'MULTILINESTRING': 3,
+                'POLYGON': 4,
+                'MULTIPOLYGON': 5
+            },
+
+
             getIdsByClick: function (e) {
                 var map = this.map._lmap,
-                    latlngClick = e.latlng;
+                    zoom = map.getZoom(),
+                    latlngClick = e.latlng,
+                    featuresCount;
 
                 return this.layersInfo.getLayersIdByStyles(this.map.getVisibleNgwLayers()).then(lang.hitch(this, function (layersId) {
-                    var url = this.urlNgw + 'feature_layer/identify',
-                        zoom = map.getZoom(),
-                        point = map.project([e.latlng.lat, e.latlng.lng], zoom),
-                        pointBottomLeft = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x - 10, point.y - 10), zoom)),
-                        pointTopRight = L.CRS.EPSG3857.project(map.unproject(new L.Point(point.x + 10, point.y + 10), zoom)),
-                        wktBounds;
-
-                    wktBounds = 'POLYGON((' + pointBottomLeft.x + ' ' + pointBottomLeft.y + ', ' +
-                        pointBottomLeft.x + ' ' + pointTopRight.y + ', ' +
-                        pointTopRight.x + ' ' + pointTopRight.y + ', ' +
-                        pointTopRight.x + ' ' + pointBottomLeft.y + ', ' +
-                        pointBottomLeft.x + ' ' + pointBottomLeft.y + '))';
-
-                    this.ngwServiceFacade.identifyFeaturesByLayers(layersId, wktBounds, 3857).then(lang.hitch(this, function (ngwFeatures) {
-                        var identifiedFeatures;
-
-                        identifiedFeatures = this._parseNgwFeatures(ngwFeatures);
-
-                        if (identifiedFeatures.count === 0) {
-                            topic.publish('map/identityUi/unblock');
-                        } else if (identifiedFeatures.count === 1) {
-                            topic.publish('attributes/get', identifiedFeatures.layers[0].id, identifiedFeatures.layers[0].features[0].id);
-                        }
-                        else if (identifiedFeatures.count > 1) {
-                            this._buildPopup(latlngClick, identifiedFeatures);
-                        }
-                    }));
+                    this.ngwServiceFacade.identifyGeoFeaturesByLayers(layersId, zoom, [e.latlng.lng, e.latlng.lat])
+                        .then(lang.hitch(this, function (geoJsonFeatures) {
+                                featuresCount = geoJsonFeatures.features.length;
+                                if (featuresCount === 0) {
+                                    topic.publish('map/identityUi/unblock');
+                                } else if (featuresCount === 1) {
+                                    topic.publish('attributes/get', geoJsonFeatures.features[0], this.fieldIdentify);
+                                }
+                                else if (featuresCount > 1) {
+                                    topic.publish('attributes/get',
+                                        this._getSignificantFeature(geoJsonFeatures.features),
+                                        this.fieldIdentify);
+                                }
+                            }
+                        ));
                 }));
             },
+
+
+            _getSignificantFeature: function (features) {
+                var significantFeature;
+                array.forEach(features, lang.hitch(this, function (feature) {
+                    if (significantFeature) {
+                        if (this.geometryTypesRank[feature.geometry.type.toUpperCase()] <
+                                this.geometryTypesRank[significantFeature.geometry.type.toUpperCase()]) {
+                            significantFeature = feature;
+                        }
+                    } else {
+                        significantFeature = feature;
+                    }
+                }));
+                return significantFeature;
+            },
+
 
             _parseNgwFeatures: function (ngwFeatures) {
                 var layersByType = {

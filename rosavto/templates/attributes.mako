@@ -25,7 +25,7 @@
 
                 function (Map, LayersInfo, MapIdentify, AttributeGetter, AttributesServiceFacade, NgwServiceFacade) {
                     var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
-                            attributesBaseUrl = application_root + '/cit/',
+                            attributesBaseUrl = '/',
                             attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl),
                             map = new Map('map', {
                                 center: [55.529, 37.584],
@@ -45,42 +45,40 @@
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
-                    mapIdentify = new MapIdentify({
-                        map: map,
-                        ngwServiceFacade: ngwServiceFacade,
-                        layersInfo: layersInfo,
-                        fieldIdentify: 'uniq_uid'
-                    });
-                    mapIdentify.on();
+                    layersInfo.fillLayersInfo().then(function (store) {
+                        mapIdentify = new MapIdentify({
+                            map: map,
+                            ngwServiceFacade: ngwServiceFacade,
+                            layersInfo: layersInfo,
+                            fieldIdentify: 'uniq_uid',
+                            debug: true
+                        });
+                        mapIdentify.on();
 
-                    attributeGetter = new AttributeGetter({
-                        map: map,
-                        ngwServiceFacade: ngwServiceFacade,
-                        attributesServiceFacade: attributesServiceFacade,
-                        mapIdentify: mapIdentify,
-                        cardInnerId: 'attributes',
-                        cardBodyId: 'attributes',
-                        stylesSettings: {
-                            fields: {
-                                id: 'uniq_uid',
-                                type: 'type_name'
-                            },
-                            styles: {
-                                'Метео': {
-                                    point: {className: 'meteo-a'},
-                                    line: {opacity: 0.5, weight: 15, color: '#FF0000'}
+                        attributeGetter = new AttributeGetter({
+                            map: map,
+                            ngwServiceFacade: ngwServiceFacade,
+                            attributesServiceFacade: attributesServiceFacade,
+                            mapIdentify: mapIdentify,
+                            cardInnerId: 'attributes',
+                            cardBodyId: 'attributes',
+                            stylesSettings: {
+                                fields: {
+                                    id: 'uniq_uid',
+                                    type: 'type_name'
                                 },
-                                'Видео': {
-                                    point: {className: 'camera-a'},
-                                    line: {opacity: 0.5, weight: 15, color: '#1E00FF'}
+                                styles: {
+                                    'Метео': {
+                                        point: {className: 'meteo-a'},
+                                        line: {opacity: 0.5, weight: 15, color: '#FF0000'}
+                                    },
+                                    'Видео': {
+                                        point: {className: 'camera-a'},
+                                        line: {opacity: 0.5, weight: 15, color: '#1E00FF'}
+                                    }
                                 }
                             }
-                        }
-                    });
-
-                    layersInfo.fillLayersInfo().then(function (store) {
-                        console.log(layersInfo.getListLayers());
-                        console.log(layersInfo.getLayerById(5));
+                        });
                     });
                 });
     </script>

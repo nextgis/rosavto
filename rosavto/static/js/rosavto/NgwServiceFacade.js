@@ -1,9 +1,10 @@
 define([
-    'dojo/_base/declare',
-    'dojo/_base/lang',
-    'dojo/request/xhr'
-],
-    function (declare, lang, xhr) {
+        'dojo/_base/declare',
+        'dojo/_base/lang',
+        'dojo/request/xhr',
+        'dojo/date/locale'
+    ],
+    function (declare, lang, xhr, dateLocal) {
         return declare('rosavto.NgwServiceFacade', null, {
             constructor: function (ngwUrlBase, settings) {
                 this._ngwUrlBase = ngwUrlBase;
@@ -39,6 +40,29 @@ define([
                     handleAs: 'json',
                     method: 'POST',
                     data: JSON.stringify(params)
+                });
+            },
+
+
+            identifyGeoFeaturesByLayers: function (layers, zoom, latlng, tolerance, datetime) {
+                if (!tolerance) {
+                    tolerance = 10;
+                }
+
+                if (!datetime) {
+                    datetime = dateLocal.format(new Date(), {datePattern: "yyyy-MM-dd", selector: "date"});
+                }
+
+                return xhr(this._ngwUrlBase + 'geocollection/rosavto', {
+                    handleAs: 'json',
+                    method: 'GET',
+                    query: {
+                        layers: layers.join(','),
+                        zoom: zoom,
+                        tolerance: tolerance,
+                        datetime: datetime,
+                        point: latlng.join(',')
+                    }
                 });
             },
 
