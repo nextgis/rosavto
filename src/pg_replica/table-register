@@ -9,7 +9,7 @@ from stat import S_ISREG, ST_CTIME, ST_MODE
 import time
 import uuid
 import base64
-import argparse
+import optparse
 import datetime
 import logging
 import requests
@@ -33,10 +33,9 @@ if __name__ == '__main__':
 
     logger.addHandler(ch)
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('table_name', help='table to be registered.')
-    args = parser.parse_args()
-    table_name = args.table_name
+    parser = optparse.OptionParser()
+    opts, args = parser.parse_args()
+    table_name = args[0]
 
     config_name = '/etc/pg_replica.conf'
     if not os.path.isfile(config_name):

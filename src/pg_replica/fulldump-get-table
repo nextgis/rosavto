@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+'''Получить часть дампа, закодированного в xml, извлечь его и сохранить в файл.
+Если полученная часть -- последняя, то собрать все части в один итоговый файл и
+запустить процесс восстановления таблицы из этого дампа.
+'''
+
+import argparse
+import xml.etree.ElementTree as et
+import os
+
+from dumper import Dumper, DumperError
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('query', help='query file')
+    args = parser.parse_args()
+    query_file = args.query
+
+    tree = et.parse(query_file)
+    root = tree.getroot()
+    header = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Header')
+    sender = header.find('{http://www.w3.org/2005/08/addressing}From')
+    peer = sender.find('{http://www.w3.org/2005/08/addressing}Address').text
+    action = header.find('{http://www.w3.org/2005/08/addressing}Action').text
+    body = root.find('{http://schemas.xmlsoap.org/soap/envelope/}Body')
+
+    data = body.find('data').text
+    total = body.find('total').text
+    part = body.find('part').text
+    name = body.find('name').text
+
+    dumper = Dumper(config_name='/etc/pg_replica.conf')
+
+    # Save received data to the file and check if all parts are received.
+    name = os.path.join(dumper.dump_path, os.path.basename(name))
+    dumper.base64_to_file(data, name)
+    fullname = dumper.chapter_name_to_filename(name)
+    pattern = fullname + '.part.'
+    received_parts =  dumper.get_file_list(pattern)
+
+    if len(received_parts) == int(total):
+        dumper.join_files(fullname, remove_parts=True)
+        dumper.restore_table(fullname)

@@ -8,21 +8,21 @@ class BusCommunicatorError(Exception):
     pass
 
 class BusCommunicator(object):
-    def __init__(self, uri, send_to, send_from, user, password):
+    def __init__(self, uri, send_from, user, password):
         self.uri = uri
-        self.send_to = send_to
         self.senf_from = send_from
         self.user = user
         self.password = password
         self.headers = {'content-type': 'text/xml', 'Accept': 'text/xml'}
 
-    def _message(self, request, action):
+    def _message(self, send_to, request, action, addition_info):
         params = dict(
-            send_to = self.send_to,
+            send_to = send_to,
             send_from = self.senf_from,
             id = uuid.uuid4(),
             action = action,
-            request = request
+            request = request,
+            addition = addition_info
         )
         msg = '''<?xml version="1.0" encoding="UTF-8"?>
         <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
@@ -35,18 +35,19 @@ class BusCommunicator(object):
             </soap:Header>
             <soap:Body>
                 <request>%(request)s</request>
+                %(addition)s
             </soap:Body>
         </soap:Envelope>''' % params
         return msg
 
-    def send_message(self, request, action):
-            message = self._message(request, action)
-            print message
-            r = requests.post(self.uri, data=message, headers=self.headers, auth=(self.user, self.password))
+    def send_message(self, send_to, request, action, addition_info=''):
+        message = self._message(send_to, request, action, addition_info)
 
-            if r.status_code != 202:
-                msg = 'Request failed: %s - %s' % (r.status_code, r.text)
-                raise BusCommunicatorError(msg)
+        r = requests.post(self.uri, data=message, headers=self.headers, auth=(self.user, self.password))
+
+        if r.status_code != 202:
+            msg = 'Request failed: %s - %s' % (r.status_code, r.text)
+            raise BusCommunicatorError(msg)
 
 
 if __name__ == "__main__":
@@ -62,5 +63,5 @@ if __name__ == "__main__":
     action = 'sm://messages/application/gis/geochanges_reg_to_fda'
     request = 'listChangesets'
 
-    sender = BusCommunicator(uri, send_to=logic_addr2, send_from=logic_addr1, user=user, password=passwd)
-    sender.send_message(request, action)
+    sender = BusCommunicator(uri, send_from=logic_addr1, user=user, password=passwd)
+    sender.send_message(logic_addr2, request, action)
