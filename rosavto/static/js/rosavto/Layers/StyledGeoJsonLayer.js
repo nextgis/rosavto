@@ -131,6 +131,21 @@ define([
                         break;
                 }
             }
+        },
+
+        addType: function (type, style) {
+            if (style['point'] && style['line']) {
+                this.options.styles[type] = style;
+            } else {
+                throw new Error('StyledGeoJsonLayer: added style is not contained "point" or "line" property');
+            }
+
+            return this;
+        },
+
+        clearTypes: function () {
+            this.options.styles = {};
+            return this;
         }
     });
 });
