@@ -44,6 +44,11 @@ def routing_sample(request):
     return {}
 
 
+@view_config(route_name='routing_chainage_sample', renderer='routing_chainage.mako')
+def routing_chainage_sample(request):
+    return {}
+
+
 @view_config(route_name='incident', renderer='incident.mako')
 def incident(request):
     return {}

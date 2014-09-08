@@ -164,6 +164,18 @@ define([
                     url += '&bar_x=' + barrier_point.lng + '&bar_y=' + barrier_point.lat;
 
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
+            },
+
+            getRouteByChainage: function (idLayer, guid, first, last) {
+                var url = 'layer/' + idLayer + '/rosavto/getroutebychainage?guid=' + guid + '&first=' + first + '&last=' + last;
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
+            },
+
+            getWaySublineByChainage: function (idLayer, guid, first, last) {
+                url = 'layer/' + idLayer + '/rosavto/getlrsublinebyuuid?guid=' + guid +
+                    '&first=' + first + '&last=' + last + '&step=1000';
+
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
             }
         });
     });
