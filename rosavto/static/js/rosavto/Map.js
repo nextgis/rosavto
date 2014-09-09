@@ -132,7 +132,7 @@ define([
         },
 
         addOsmTileLayer: function () {
-            var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            var osmUrl = Monitoring.tileUrl,
                 settingsOsmLayer = {
                     attribution: 'Map data © OpenStreetMap contributors'
                 };
@@ -162,13 +162,16 @@ define([
                 }));
         },
 
-        addGeoJsonLayer: function (keyname, name, geoJsonLayer) {
+        addGeoJsonLayer: function (keyname, name, geoJsonLayer, disable) {
+            disable = disable || false;
             geoJsonLayer.keyname = keyname;
-            storage.then(lang.hitch(this, function (provider) {
-                if (provider.get('mapLayerVisibility-' + geoJsonLayer.keyname) !== false) {
-                    this._lmap.addLayer(geoJsonLayer);
-                }
-            }));
+            if (!disable) {
+                storage.then(lang.hitch(this, function (provider) {
+                    if (provider.get('mapLayerVisibility-' + geoJsonLayer.keyname) !== false) {
+                        this._lmap.addLayer(geoJsonLayer);
+                    }
+                }));
+            }
             this._overlaylayers[name] = geoJsonLayer;
             if (this._legend) {
                 this._legend.addOverlay(geoJsonLayer, name);
