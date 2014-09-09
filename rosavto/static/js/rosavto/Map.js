@@ -33,8 +33,6 @@ define([
 
             this.buildLoader(domNode);
 
-            this.addOsmTileLayer();
-
             storage.then(lang.hitch(this, function (provider) {
                 var zoom = provider.get('zoom'), center = provider.get('center');
                 if (center) {
