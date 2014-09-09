@@ -310,68 +310,84 @@
     <pre>
         Код для добавления слоя с маршрутом между заданными точками, с точкой ограничения:
         <code class="javascript">
-require(['rosavto/Map', 'dojo/domReady!'], function (Map) {
-        //---- Задаем точки начала, назначения и барьера (можно указывать примерно в районе дороги)
-        var startPoint = L.latLng(55.885548, 38.783279);
-        var endPoint = L.latLng(57.635199, 40.386479);
-        var barrierPoint = L.latLng(56.969893, 39.203637);
+require([
+            'rosavto/Map',
+            'rosavto/NgwServiceFacade',
+            'dojo/domReady!'
+        ], function (Map, NgwServiceFacade) {
 
-        //создаем маркеры
-        var startIcon = L.icon( {iconUrl:   "${request.static_url('rosavto:static/start-point.png')}",
-                                 iconSize:  [32, 37],
-                                 iconAnchor:[16, 36],
-                                 popupAnchor:  [0, -35]
-                                 });
-        var finishIcon = L.icon( {iconUrl: "${request.static_url('rosavto:static/finish-point.png')}",
-                                 iconSize:  [32, 37],
-                                 iconAnchor:[16, 36],
-                                 popupAnchor:  [0, -35]
-                                 });
-        var barIcon = L.icon( {iconUrl: "${request.static_url('rosavto:static/barrier-point.png')}",
-                                 iconSize:  [32, 37],
-                                 iconAnchor:[16, 36],
-                                 popupAnchor:  [0, -35]
-                                 });
+            //---- Задаем точки начала, назначения и барьера (можно указывать примерно в районе дороги)
+            var startPoint = L.latLng(55.885548, 38.783279);
+            var endPoint = L.latLng(57.635199, 40.386479);
+            var barrierPoint = L.latLng(56.969893, 39.203637);
+            var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl);
 
-        //---- Карта с маршрутом без ограничения
-        var map = new Map('map', {
+            //создаем маркеры
+            var startIcon = L.icon({iconUrl: "${request.static_url('rosavto:static/start-point.png')}",
+                iconSize: [32, 37],
+                iconAnchor: [16, 36],
+                popupAnchor: [0, -35]
+            });
+            var finishIcon = L.icon({iconUrl: "${request.static_url('rosavto:static/finish-point.png')}",
+                iconSize: [32, 37],
+                iconAnchor: [16, 36],
+                popupAnchor: [0, -35]
+            });
+            var barIcon = L.icon({iconUrl: "${request.static_url('rosavto:static/barrier-point.png')}",
+                iconSize: [32, 37],
+                iconAnchor: [16, 36],
+                popupAnchor: [0, -35]
+            });
+
+            //---- Карта с маршрутом без ограничения
+            var map = new Map('map', {
                 center: [57, 38],
                 zoom: 7,
                 zoomControl: true,
                 legend: true
             });
 
-        //добавляем точки старта и финиша на карту
-        L.marker(startPoint, {icon: startIcon}).addTo(map.getLMap()).bindPopup('Start point');
-        L.marker(endPoint, {icon: finishIcon}).addTo(map.getLMap()).bindPopup('End point');
+            //добавляем точки старта и финиша на карту
+            L.marker(startPoint, {icon: startIcon}).addTo(map.getLMap()).bindPopup('Start point');
+            L.marker(endPoint, {icon: finishIcon}).addTo(map.getLMap()).bindPopup('End point');
 
-        //формируем урл запроса для маршрутизатора (from_x, from_y, to_x, to_y - обязательные; bar_x, bar_y - опц.)
-        var rUrl = '/routing?from_x='+startPoint.lng+'&from_y='+startPoint.lat+
-                    '&to_x='+endPoint.lng+'&to_y='+endPoint.lat;
-        //добавляем результат на карту
-        map.addGeoJsonLayer('Маршрут', rUrl, {color:'#FF0000', opacity: 0.7 });
+            //получаем маршрут и добавляем результат на карту
+            var route_data = ngwServiceFacade.getRouteByCoord(startPoint, endPoint);
+            route_data.then(function (geoJson) {
+                    if (geoJson.features) {
+                        var layer = L.geoJson(geoJson.features, {
+                            style: {color: '#FF0000', opacity: 0.7 }
+                        });
+                        map.addGeoJsonLayer('Маршрут', layer);
+                    }
+                });
 
-        //---- Карта с маршрутом с ограничением
-        var map2 = new Map('map2', {
+            //---- Карта с маршрутом с ограничением
+            var map2 = new Map('map2', {
                 center: [57, 38],
                 zoom: 7,
                 zoomControl: true,
                 legend: true
             });
 
-        //добавляем точки старта, финиша и ограничения на карту
-        L.marker(startPoint, {icon: startIcon}).addTo(map2.getLMap()).bindPopup('Start point');
-        L.marker(endPoint, {icon: finishIcon}).addTo(map2.getLMap()).bindPopup('End point');
-        L.marker(barrierPoint, {icon: barIcon}).addTo(map2.getLMap()).bindPopup('Restriction point').openPopup();
+            //добавляем точки старта, финиша и ограничения на карту
+            L.marker(startPoint, {icon: startIcon}).addTo(map2.getLMap()).bindPopup('Start point');
+            L.marker(endPoint, {icon: finishIcon}).addTo(map2.getLMap()).bindPopup('End point');
+            L.marker(barrierPoint, {icon: barIcon}).addTo(map2.getLMap()).bindPopup('Restriction point').openPopup();
 
-        //формируем урл запроса для маршрутизатора (from_x, from_y, to_x, to_y - обязательные; bar_x, bar_y - опц.)
-        rUrl = '/routing?from_x=' + startPoint.lng + '&from_y=' + startPoint.lat +
-               '&to_x=' + endPoint.lng + '&to_y=' + endPoint.lat +
-               '&bar_x=' + barrierPoint.lng + '&bar_y=' + barrierPoint.lat;
-        //добавляем результат на карту
-        map2.addGeoJsonLayer('Маршрут c ограничением', rUrl, {color:'#FF0000', opacity: 0.7 });
-    });
+
+            //получаем маршрут объезда и добавляем результат на карту
+            var route_data = ngwServiceFacade.getRouteByCoord(startPoint, endPoint, barrierPoint);
+            route_data.then(function (geoJson) {
+                    if (geoJson.features) {
+                        var layer = L.geoJson(geoJson.features, {
+                            style: {color: '#FF0000', opacity: 0.7 }
+                        });
+                        map2.addGeoJsonLayer('Маршрут c ограничением', layer);
+                    }
+                });
+
+        });
         </code>
     </pre>
-
 </div>
