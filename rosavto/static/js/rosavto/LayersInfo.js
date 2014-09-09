@@ -104,7 +104,7 @@ define([
                     }
                 }
 
-                if (!parent) {
+                if (!parent && resourceType !== 'baselayers') {
                     this.store.put({id: resource.id, res: resource, type: resourceType, keyname: resource.keyname});
                     return true;
                 }

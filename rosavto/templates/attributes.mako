@@ -79,6 +79,8 @@
                                 }
                             }
                         });
+
+                        map.addBaseLayers(layersInfo.getBaseLayers());
                     });
                 });
     </script>
