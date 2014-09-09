@@ -28,9 +28,10 @@
         require([
             'rosavto/Map',
             'rosavto/NgwServiceFacade',
+            'rosavto/LayersInfo',
             'dojo/query',
             'dojo/domReady!'
-        ], function (Map, NgwServiceFacade, query) {
+        ], function (Map, NgwServiceFacade, LayersInfo, query) {
             //---- common
             var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl);
 
@@ -39,6 +40,12 @@
                 zoom: 7,
                 zoomControl: true,
                 legend: true
+            });
+
+            var layersInfo = new LayersInfo(ngwServiceFacade);
+            layersInfo.fillLayersInfo().then(function (store) {
+                var baseLayers = layersInfo.getBaseLayers();
+                map.addBaseLayers(baseLayers);
             });
 
             var chainage_lyr = L.geoJson( [], {
@@ -88,7 +95,7 @@
                         map.getLMap().fitBounds(chainage_lyr.getBounds().extend(route_lyr.getBounds()));
                     }
                 });
-            })
+            });
         });
     </script>
 </%block>

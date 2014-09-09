@@ -17,8 +17,9 @@
         require([
             'rosavto/Map',
             'rosavto/NgwServiceFacade',
+            'rosavto/LayersInfo',
             'dojo/domReady!'
-        ], function (Map, NgwServiceFacade) {
+        ], function (Map, NgwServiceFacade, LayersInfo) {
             //---- common
             var startPoint = L.latLng(55.885548, 38.783279);
             var endPoint = L.latLng(57.635199, 40.386479);
@@ -55,13 +56,13 @@
 
             var route_data = ngwServiceFacade.getRouteByCoord(startPoint, endPoint);
             route_data.then(function (geoJson) {
-                    if (geoJson.features) {
-                        var layer = L.geoJson(geoJson.features, {
-                            style: {color: '#FF0000', opacity: 0.7 }
-                        });
-                        map.addGeoJsonLayer('Маршрут', layer);
-                    }
-                });
+                if (geoJson.features) {
+                    var layer = L.geoJson(geoJson.features, {
+                        style: {color: '#FF0000', opacity: 0.7 }
+                    });
+                    map.addGeoJsonLayer('Маршрут', layer);
+                }
+            });
 
             //---- map with restriction
             var map2 = new Map('map2', {
@@ -71,19 +72,26 @@
                 legend: true
             });
 
+            var layersInfo = new LayersInfo(ngwServiceFacade);
+            layersInfo.fillLayersInfo().then(function (store) {
+                var baseLayers = layersInfo.getBaseLayers();
+                map.addBaseLayers(baseLayers);
+                map2.addBaseLayers(baseLayers);
+            });
+
             L.marker(startPoint, {icon: startIcon}).addTo(map2.getLMap()).bindPopup('Start point');
             L.marker(endPoint, {icon: finishIcon}).addTo(map2.getLMap()).bindPopup('End point');
             L.marker(barrierPoint, {icon: barIcon}).addTo(map2.getLMap()).bindPopup('Restriction point').openPopup();
 
             var route_data = ngwServiceFacade.getRouteByCoord(startPoint, endPoint, barrierPoint);
             route_data.then(function (geoJson) {
-                    if (geoJson.features) {
-                        var layer = L.geoJson(geoJson.features, {
-                            style: {color: '#FF0000', opacity: 0.7 }
-                        });
-                        map2.addGeoJsonLayer('Маршрут c ограничением', layer);
-                    }
-                });
+                if (geoJson.features) {
+                    var layer = L.geoJson(geoJson.features, {
+                        style: {color: '#FF0000', opacity: 0.7 }
+                    });
+                    map2.addGeoJsonLayer('Маршрут c ограничением', layer);
+                }
+            });
 
         });
     </script>

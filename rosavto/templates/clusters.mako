@@ -11,19 +11,24 @@
     </br>
     <button id="test3" style="margin: 3px; background-color: gainsboro;">Создать объект со статусом "внимание"</button>
     </br>
-    <button id="test4" style="margin: 3px; background-color: gainsboro;">Создать объект со статусом "не активен"</button>
+    <button id="test4" style="margin: 3px; background-color: gainsboro;">Создать объект со статусом "не активен"
+    </button>
     </br>
 </div>
 
 <pre>
-    <p>Код для построения слоя кластеров с учетом состояния отдельных объектов с комментариями <a href="${request.route_url('code') + '#clusters'}">здесь</a>. Исходный код этой страницы также содержит комментарии.</p>
+    <p>Код для построения слоя кластеров с учетом состояния отдельных объектов с комментариями <a
+            href="${request.route_url('code') + '#clusters'}">здесь</a>. Исходный код этой страницы также содержит
+        комментарии.</p>
 </pre>
 
 <%block name="inlineScripts">
     <script src="${request.static_url('rosavto:static/json/stations.js')}"></script>
 
-    <link rel="stylesheet" href="${request.static_url('rosavto:static/js/leaflet/leaflet.markercluster/MarkerCluster.css')}" />
-    <link rel="stylesheet" href="${request.static_url('rosavto:static/js/leaflet/leaflet.markercluster/MarkerCluster.Default.css')}" />
+    <link rel="stylesheet"
+          href="${request.static_url('rosavto:static/js/leaflet/leaflet.markercluster/MarkerCluster.css')}"/>
+    <link rel="stylesheet"
+          href="${request.static_url('rosavto:static/js/leaflet/leaflet.markercluster/MarkerCluster.Default.css')}"/>
 
     <style>
         img.leaflet-marker-icon {
@@ -87,6 +92,13 @@
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
                     layersInfo.fillLayersInfo().then(function (store) {
+                        map.addBaseLayers(layersInfo.getBaseLayers());
+                        map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4);
+                        map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 51);
+                        map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50);
+                        map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43);
+                        map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53);
+
                         var styles = layersInfo.getStylesByLayersKeynames(['sensors_video', 'sensors_traffic']);
 
                         // Перебираем заправки из geojson файла
