@@ -1,3 +1,0 @@
-http://grass.osgeo.org/grass64/manuals/lrs.html
-http://postgis.net/docs/manual-2.1/reference.html#Linear_Referencing
-http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Linear%20referencing%20datasets%20in%20ArcGIS
