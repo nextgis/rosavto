@@ -84,10 +84,13 @@ define([
 
             _styledGeoJsonLayer: null,
             updateGeometry: function (feature) {
-                var style;
-                this._styledGeoJsonLayer.clearLayers();
-                style = this.mapIdentify.layersInfo.getStyleByLayerId(feature.properties.__layer__);
-                this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObjectByDefaultProperties(feature).getBounds());
+                var style = this.mapIdentify.layersInfo.getStyleByLayerId(feature.properties.__layer__);
+                if (style && style.selectedObjectStyle) {
+                    this._styledGeoJsonLayer.clearLayers().clearTypes().addType('selected', style.selectedObjectStyle);
+                    this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'selected', 0).getBounds());
+                } else {
+                    console.log('style is not found.');
+                }
             },
 
             selectObject: function (layerId, featureId) {
