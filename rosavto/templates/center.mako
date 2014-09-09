@@ -51,11 +51,11 @@
                             attributeGetter,
                             styledGeoJsonLayer;
 
-                    map.addNgwTileLayer('Тестовые дороги', ngwProxyUrl, 8);
-                    map.addNgwTileLayer('Регионы', ngwProxyUrl, 7);
-                    map.addNgwTileLayer('Нормативные участки дорог', ngwProxyUrl, 10);
-                    map.addNgwTileLayer('Участки подрядных организаций', ngwProxyUrl, 9);
-                    map.addNgwTileLayer('Метеостанции', ngwProxyUrl, 11);
+                    map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4);
+                    map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 51);
+                    map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50);
+                    map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43);
+                    map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53);
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
@@ -107,7 +107,16 @@
                                 });
                     });
 
-
+##                    xhr(ngwProxyUrl + 'resource/0/child/', {handleAs: 'json'}).then(function (resource) {
+##                        var baseLayer;
+##                        if (resource[0].baselayers) {
+##                            for (var i = 0, baseLayersCount = resource[0].baselayers.baselayers.length; i < baseLayersCount; i++) {
+##                                baseLayer = resource[0].baselayers.baselayers[i];
+##                                map.addTileLayer(baseLayer.title, baseLayer.mid);
+##                            }
+##
+##                        }
+##                    });
                 });
     </script>
 </%block>
