@@ -51,35 +51,50 @@
                             attributeGetter,
                             styledGeoJsonLayer;
 
-                    map.addNgwTileLayer('Тестовые дороги', ngwProxyUrl, 8);
-                    map.addNgwTileLayer('Регионы', ngwProxyUrl, 7);
-                    map.addNgwTileLayer('Нормативные участки дорог', ngwProxyUrl, 10);
-                    map.addNgwTileLayer('Участки подрядных организаций', ngwProxyUrl, 9);
-                    map.addNgwTileLayer('Метеостанции', ngwProxyUrl, 11);
-
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
-                    mapIdentify = new MapIdentify({
-                        map: map,
-                        ngwServiceFacade: ngwServiceFacade,
-                        layersInfo: layersInfo,
-                        fieldIdentify: 'uniq_uid'
-                    });
-                    mapIdentify.on();
+                    layersInfo.fillLayersInfo().then(function (store) {
 
-                    attributeGetter = new AttributeGetter({
-                        map: map,
-                        ngwServiceFacade: ngwServiceFacade,
-                        attributesServiceFacade: attributesServiceFacade,
-                        mapIdentify: mapIdentify,
-                        domSelector: '#attributes',
-                        stylesSettings: {
-                            fill: false,
-                            color: '#FF0000',
-                            weight: 2
-                        },
-                        cardInnerId: 'testCardInnerId',
-                        cardBodyId: 'testCardBodyId'
+                        map.addBaseLayers(layersInfo.getBaseLayers());
+                        map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4);
+                        map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 51);
+                        map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50);
+                        map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43);
+                        map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53);
+
+                        mapIdentify = new MapIdentify({
+                            map: map,
+                            ngwServiceFacade: ngwServiceFacade,
+                            layersInfo: layersInfo,
+                            fieldIdentify: 'uniq_uid',
+                            debug: true
+                        });
+                        mapIdentify.on();
+
+                        attributeGetter = new AttributeGetter({
+                            map: map,
+                            ngwServiceFacade: ngwServiceFacade,
+                            attributesServiceFacade: attributesServiceFacade,
+                            mapIdentify: mapIdentify,
+                            cardInnerId: 'attributes',
+                            cardBodyId: 'attributes',
+                            stylesSettings: {
+                                fields: {
+                                    id: 'uniq_uid',
+                                    type: 'type_name'
+                                },
+                                styles: {
+                                    'Метео': {
+                                        point: {className: 'meteo-a'},
+                                        line: {opacity: 0.5, weight: 15, color: '#FF0000'}
+                                    },
+                                    'Видео': {
+                                        point: {className: 'camera-a'},
+                                        line: {opacity: 0.5, weight: 15, color: '#1E00FF'}
+                                    }
+                                }
+                            }
+                        });
                     });
 
                     query('#selectMeteo').on('click', function () {
@@ -106,8 +121,6 @@
                                     map.getLMap().fitBounds(styledGeoJsonLayer.getBounds());
                                 });
                     });
-
-
                 });
     </script>
 </%block>

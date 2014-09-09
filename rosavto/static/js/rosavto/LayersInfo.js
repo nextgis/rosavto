@@ -68,6 +68,8 @@ define([
                             break;
                         case 'mapserver_style':
                             break;
+                        case 'baselayers':
+                            break;
                         default:
                             return false;
                     }
@@ -102,7 +104,7 @@ define([
                     }
                 }
 
-                if (!parent) {
+                if (!parent && resourceType !== 'baselayers') {
                     this.store.put({id: resource.id, res: resource, type: resourceType, keyname: resource.keyname});
                     return true;
                 }
@@ -144,6 +146,12 @@ define([
                             json: json_style
                         });
                         break;
+                    case 'baselayers':
+                        this.store.put({
+                            type: resourceType,
+                            object: resource,
+                            baseLayers: resourceInfoItem.baselayers
+                        });
                     default:
                         return false;
                 }
@@ -357,6 +365,16 @@ define([
                     case 'selected-object-style':
                         jsonStyle.selectedObjectStyle = JSON.parse(valueForParsing);
                         break;
+                }
+            },
+
+            getBaseLayers: function () {
+                var baseLayers = this.store.query({type: 'baselayers'});
+
+                if (baseLayers.length > 0) {
+                    return baseLayers[0];
+                } else {
+                    return null;
                 }
             }
         });

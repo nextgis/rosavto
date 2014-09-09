@@ -155,6 +155,27 @@ define([
                     '&lat=' + lat;
 
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
+            },
+
+            getRouteByCoord: function (start_point, end_point, barrier_point) {
+                var url = '/rosavto/getroute?from_x=' + start_point.lng + '&from_y=' + start_point.lat +
+                    '&to_x=' + end_point.lng + '&to_y=' + end_point.lat;
+                if (typeof barrier_point != 'undefined')
+                    url += '&bar_x=' + barrier_point.lng + '&bar_y=' + barrier_point.lat;
+
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
+            },
+
+            getRouteByChainage: function (idLayer, guid, first, last) {
+                var url = 'layer/' + idLayer + '/rosavto/getroutebychainage?guid=' + guid + '&first=' + first + '&last=' + last;
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
+            },
+
+            getWaySublineByChainage: function (idLayer, guid, first, last) {
+                url = 'layer/' + idLayer + '/rosavto/getlrsublinebyuuid?guid=' + guid +
+                    '&first=' + first + '&last=' + last + '&step=1000';
+
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
             }
         });
     });

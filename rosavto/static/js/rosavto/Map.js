@@ -2,11 +2,12 @@ define([
     'dojo/query',
     'dojo/_base/declare',
     'dojo/_base/lang',
+    'dojo/_base/array',
     'dojo/request/xhr',
     'rosavto/Loader',
     'leaflet/leaflet',
     'centreit/StorageProvider'
-], function (query, declare, lang, xhr, Loader, L, storage) {
+], function (query, declare, lang, array, xhr, Loader, L, storage) {
     return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
@@ -32,8 +33,6 @@ define([
             }
 
             this.buildLoader(domNode);
-
-            this.addOsmTileLayer();
 
             storage.then(lang.hitch(this, function (provider) {
                 var zoom = provider.get('zoom'), center = provider.get('center');
@@ -129,6 +128,22 @@ define([
                 };
 
             this.addTileLayer('Openstreetmap', osmUrl, settingsOsmLayer);
+        },
+
+        addBaseLayers: function (baseLayers) {
+            if (!baseLayers.baseLayers || !baseLayers.baseLayers.default_layer) {
+                return false;
+            }
+
+            var url;
+
+            array.forEach(baseLayers.baseLayers.baselayers, lang.hitch(this, function (baseLayer) {
+                url = baseLayer.url;
+                if (url && url.indexOf('{x}') > -1) {
+                    url = url.replace(/\$/g, '');
+                    this.addTileLayer(baseLayer.title, url);
+                }
+             }));
         },
 
         createGeoJsonLayer: function (name, url, style) {

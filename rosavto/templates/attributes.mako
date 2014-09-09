@@ -15,13 +15,13 @@
 <%block name="inlineScripts">
     <script>
         require([
-            'rosavto/Map',
-            'rosavto/LayersInfo',
-            'rosavto/MapIdentify',
-            'rosavto/AttributeGetter',
-            'rosavto/AttributesServiceFacade',
-            'rosavto/NgwServiceFacade',
-            'dojo/domReady!'],
+                    'rosavto/Map',
+                    'rosavto/LayersInfo',
+                    'rosavto/MapIdentify',
+                    'rosavto/AttributeGetter',
+                    'rosavto/AttributesServiceFacade',
+                    'rosavto/NgwServiceFacade',
+                    'dojo/domReady!'],
 
                 function (Map, LayersInfo, MapIdentify, AttributeGetter, AttributesServiceFacade, NgwServiceFacade) {
                     var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
@@ -37,15 +37,16 @@
                             mapIdentify,
                             attributeGetter;
 
-                    map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4);
-                    map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 51);
-                    map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50);
-                    map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43);
-                    map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53);
-
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
                     layersInfo.fillLayersInfo().then(function (store) {
+                        map.addBaseLayers(layersInfo.getBaseLayers());
+                        map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4);
+                        map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 51);
+                        map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50);
+                        map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43);
+                        map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53);
+
                         mapIdentify = new MapIdentify({
                             map: map,
                             ngwServiceFacade: ngwServiceFacade,

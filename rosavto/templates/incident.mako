@@ -3,7 +3,8 @@
 <%block name="title">Происшествия</%block>
 
 <select id="roadsSelector" name="road1" data-dojo-type="dijit/form/Select">
-    <option value="{65de3f89-c234-44c5-867d-fd8961eb8644}">М-10 "Россия" Москва-Тверь-Великий Новгород-Санкт-Петербург</option>
+    <option value="{65de3f89-c234-44c5-867d-fd8961eb8644}">М-10 "Россия" Москва-Тверь-Великий Новгород-Санкт-Петербург
+    </option>
     <option value="{11b970fb-a9a8-474b-92cd-b0aa6a7f2d28}">А-147 Джубга-Сочи-граница с Республикой Абхазия</option>
 </select>
 </br>
@@ -37,8 +38,9 @@
     <div style="width:49%; float:right;">
         <div id="map2"></div>
         <div>
-##            Происшествия:
-            <br/>
+            ##            Происшествия:
+                        <br/>
+
             <div id="incidentsList"></div>
         </div>
     </div>
@@ -50,19 +52,20 @@
 <%block name="inlineScripts">
     <script>
         require([
-            'dojo/DeferredList',
-            'dojo/query',
-            'dojo/_base/array',
-            'dojo/html',
-            'rosavto/Map',
-            'rosavto/NgwServiceFacade',
-            'rosavto/Layers/StyledGeoJsonLayer',
-            'rosavto/controls/L.Control.IncidentEditor',
-            'dojo/parser',
-            'dijit/form/Select',
-            'dojo/domReady!'],
+                    'dojo/DeferredList',
+                    'dojo/query',
+                    'dojo/_base/array',
+                    'dojo/html',
+                    'rosavto/Map',
+                    'rosavto/NgwServiceFacade',
+                    'rosavto/LayersInfo',
+                    'rosavto/Layers/StyledGeoJsonLayer',
+                    'rosavto/controls/L.Control.IncidentEditor',
+                    'dojo/parser',
+                    'dijit/form/Select',
+                    'dojo/domReady!'],
 
-                function (DeferredList, query, array, html, Map, NgwServiceFacade, StyledGeoJsonLayer, IncidentEditor, parser, Select) {
+                function (DeferredList, query, array, html, Map, NgwServiceFacade, LayersInfo, StyledGeoJsonLayer, IncidentEditor, parser, Select) {
                     parser.parse();
 
                     var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
@@ -78,12 +81,19 @@
                                 zoomControl: true,
                                 legend: true
                             }),
+                            layersInfo,
                             styles,
                             getIncident1, getIncident2, getIncident3,
                             layer;
 
-                    map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
-                    map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
+                    layersInfo = new LayersInfo(ngwServiceFacade);
+                    layersInfo.fillLayersInfo().then(function (store) {
+                        var baseLayers = layersInfo.getBaseLayers();
+                        map.addBaseLayers(baseLayers);
+                        map2.addBaseLayers(baseLayers);
+                        map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
+                        map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
+                    });
 
                     styles = {
                         accident: {
