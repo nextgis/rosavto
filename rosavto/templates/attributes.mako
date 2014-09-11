@@ -3,10 +3,31 @@
 <%block name="title">Аттрибуты</%block>
 
 <div class="code-description">
-    <p>Для получения сведений о атрибутах объекта кликните по объекту на карте. Если в области клика будет несколько
-        объектов - выберите нужный.</p>
+    <p>Для получения сведений о атрибутах объекта кликните по объекту на карте.</p>
 
-    <p>Код с комментариями <a href="${request.route_url('code') + '#attributesCode'}">здесь</a></p>
+    <ul class="layersStatus">
+        <li>
+            Загрузка слоев
+        </li>
+        <li id="dep">
+            <span></span>Сеть дорог ДЕП
+        </li>
+        <li id="fed">
+            <span></span>Сеть федеральных дорог
+        </li>
+        <li id="reg">
+            <span></span>Сеть региональных дорог
+        </li>
+        <li id="obd">
+            <span></span>Объезды
+        </li>
+        <li id="datch">
+            <span></span>Датчики
+        </li>
+
+    </ul>
+
+
 </div>
 
 <div id="map"></div>
@@ -15,6 +36,7 @@
 <%block name="inlineScripts">
     <script>
         require([
+                    'dojo/dom-class',
                     'rosavto/Map',
                     'rosavto/LayersInfo',
                     'rosavto/MapIdentify',
@@ -23,7 +45,7 @@
                     'rosavto/NgwServiceFacade',
                     'dojo/domReady!'],
 
-                function (Map, LayersInfo, MapIdentify, AttributeGetter, AttributesServiceFacade, NgwServiceFacade) {
+                function (domClass, Map, LayersInfo, MapIdentify, AttributeGetter, AttributesServiceFacade, NgwServiceFacade) {
                     var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
                             attributesBaseUrl = '/',
                             attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl),
@@ -41,11 +63,45 @@
 
                     layersInfo.fillLayersInfo().then(function (store) {
                         map.addBaseLayers(layersInfo.getBaseLayers());
-                        map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4);
-                        map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 51);
-                        map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50);
-                        map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43);
-                        map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53);
+                        map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4, null, {
+                            loading: function () {
+                                domClass.add('dep', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('dep', 'loading');
+                            }});
+
+                        map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 51, null, {
+                            loading: function () {
+                                domClass.add('fed', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('fed', 'loading');
+                            }});
+
+                        map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50, null, {
+                            loading: function () {
+                                domClass.add('reg', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('reg', 'loading');
+                            }});
+
+                        map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43, null, {
+                            loading: function () {
+                                domClass.add('obd', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('obd', 'loading');
+                            }});
+
+                        map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53, null, {
+                            loading: function () {
+                                domClass.add('datch', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('datch', 'loading');
+                            }});
 
                         mapIdentify = new MapIdentify({
                             map: map,

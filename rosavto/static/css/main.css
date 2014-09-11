@@ -89,3 +89,27 @@ div.leaflet-marker-icon.camera-a {
     padding: 2px;
     border: 1px solid lightgray;
 }
+
+
+ul.layersStatus {
+    list-style: none;
+}
+
+ul.layersStatus li span {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
+}
+
+ul.layersStatus li {
+    font-weight: normal;
+}
+
+ul.layersStatus li.loading {
+    font-weight: bold;
+}
+
+ul.layersStatus li.loading span {
+    background-image: url('images/ajax-loader.gif');
+}

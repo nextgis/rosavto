@@ -103,10 +103,22 @@ define([
                 this._legend.addBaseLayer(tileLayer, name);
         },
 
-        addNgwTileLayer: function (name, ngwUrl, idStyle, settings) {
+        addNgwTileLayer: function (name, ngwUrl, idStyle, settings, callbacks) {
             var ngwTilesUrl = ngwUrl + 'resource/' + idStyle + '/tms?z={z}&x={x}&y={y}',
                 ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
             ngwTileLayer._ngwStyleId = idStyle;
+
+            if (callbacks && callbacks.loaded) {
+                ngwTileLayer.on('load', function () {
+                    callbacks.loaded.call();
+                });
+            }
+
+            if (callbacks && callbacks.loading) {
+                ngwTileLayer.on('loading', function () {
+                    callbacks.loading.call();
+                });
+            }
 
             storage.then(lang.hitch(this, function (provider) {
                 if (provider.get('mapLayerVisibility-' + ngwTileLayer._ngwStyleId) === true) {
