@@ -1,1 +1,0 @@
-﻿SELECT * FROM ng_getlrdist('thematic.parts', 37.33, 55.79);
