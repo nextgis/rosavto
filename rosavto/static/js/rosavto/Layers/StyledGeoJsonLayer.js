@@ -69,7 +69,8 @@ define([
 
             var type = feature.properties.__type,
                 style,
-                marker;
+                marker,
+                pointStyle;
 
             if (!this.options.styles[type]) {
                 console.log('StyledGeoJsonLayer: "' + type + '" type is not found into styles');
@@ -78,12 +79,21 @@ define([
 
             style = this.options.styles[type];
 
+            pointStyle = style.point || null;
+            if (pointStyle) {
+                if (!pointStyle.type) {
+                    throw new Error('Point style is not contained "type" property :' + pointStyle);
+                }
+                if (pointStyle.type === 'icon') {
+                    return L.marker(latlng, {
+                        icon: L.icon(pointStyle)
+                    });
+                } else if (pointStyle.type === 'div') {
+                    return L.marker(latlng, {
+                        icon: L.divIcon(pointStyle)
+                    });
+                }
 
-            if (style.point) {
-                marker = L.marker(latlng, {
-                    icon: L.divIcon(style.point)
-                });
-                return marker;
             } else {
                 return new L.Marker(latlng);
             }
