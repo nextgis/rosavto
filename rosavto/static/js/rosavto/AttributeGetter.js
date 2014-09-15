@@ -85,7 +85,7 @@ define([
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('selected', style.selectedObjectStyle);
                     this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'selected', 0).getBounds());
                 } else {
-                    console.log('style is not found.');
+                    console.log('selected-object-style style is not defined for layer ' + feature.properties.__layer__);
                 }
             },
 
