@@ -130,7 +130,7 @@ define([
                     case 'mapserver_style':
                         this._validateParentLayer(parent);
                         xml_style = xmlParser.parse(resourceInfoItem.mapserver_style.xml);
-                        json_style = this._parseXmlStyle(xml_style);
+                        json_style = this._parseXmlStyle(xml_style, resource.id);
                         resourceSaved = parent.styles[parent.styles.push({
                             id: resource.id,
                             res: resource,
@@ -326,7 +326,7 @@ define([
                 return style && style.json ? style.json : null;
             },
 
-            _parseXmlStyle: function (xmlStyle) {
+            _parseXmlStyle: function (xmlStyle, resourceId) {
                 var metadataItems = query('metadata item', xmlStyle),
                     jsonStyle = null,
                     parsedMetadataItem;
@@ -338,7 +338,7 @@ define([
                         if (!jsonStyle) {
                             jsonStyle = {};
                         }
-                        this._fillJsonStyle(parsedMetadataItem, jsonStyle);
+                        this._fillJsonStyle(parsedMetadataItem, jsonStyle, resourceId);
                     }));
                 }
 
@@ -352,7 +352,7 @@ define([
                 }
             },
 
-            _fillJsonStyle: function (parsedMetadataItem, jsonStyle) {
+            _fillJsonStyle: function (parsedMetadataItem, jsonStyle, resourceId) {
                 if (!parsedMetadataItem.value) {
                     return false;
                 }
@@ -360,10 +360,20 @@ define([
                 var valueForParsing = parsedMetadataItem.value.replace(/'/g, '"');
                 switch (parsedMetadataItem.key) {
                     case 'clusters-states-styles':
-                        jsonStyle.clustersStatesStyles = JSON.parse(valueForParsing);
+                        try {
+                            jsonStyle.clustersStatesStyles = JSON.parse(valueForParsing);
+                        } catch (err) {
+                            console.log('LayerId: ' + resourceId + ', Parsing json clusters-states-styles error:' + err.message);
+                            console.log({valueForParsing: valueForParsing});
+                        }
                         break;
                     case 'selected-object-style':
-                        jsonStyle.selectedObjectStyle = JSON.parse(valueForParsing);
+                        try {
+                            jsonStyle.selectedObjectStyle = JSON.parse(valueForParsing);
+                        } catch (err) {
+                            console.log('LayerId: ' + resourceId + ', Parsing json selected-object-style error:' + err.message);
+                            console.log({valueForParsing: valueForParsing});
+                        }
                         break;
                 }
             },
