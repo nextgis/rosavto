@@ -85,11 +85,11 @@
                                 },
                                 styles: {
                                     'Метео': {
-                                        point: {className: 'meteo-a'},
+                                        point: {type: 'div', className: 'meteo-a'},
                                         line: {opacity: 0.5, weight: 15, color: '#FF0000'}
                                     },
                                     'Видео': {
-                                        point: {className: 'camera-a'},
+                                        point: {type: 'div', className: 'camera-a'},
                                         line: {opacity: 0.5, weight: 15, color: '#1E00FF'}
                                     }
                                 }
@@ -98,7 +98,7 @@
                     });
 
                     query('#selectMeteo').on('click', function () {
-                        attributeGetter.selectObject(18, 'd2f77a8b-48b8-46bc-9fc4-adc42caa4fad');
+                        attributeGetter.selectObject(13, 'd7706f69-a9b8-412d-a0fb-841bfdda3378');
                     });
 
                     query('#selectRoads').on('click', function () {
@@ -109,7 +109,7 @@
                                     } else {
                                         styledGeoJsonLayer = new StyledGeoJsonLayer(null, {styles: {default: {
                                             position: 'front',
-                                            point: {className: 'accident'},
+                                            point: {type: 'div', className: 'accident'},
                                             line: {opacity: 0.8, weight: 5, color: '#FF0000'}
                                         }}});
                                         map._lmap.addLayer(styledGeoJsonLayer);
