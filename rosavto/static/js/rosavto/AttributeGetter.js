@@ -45,14 +45,10 @@ define([
 
             subscribe: function () {
                 topic.subscribe('attributes/get', lang.hitch(this, function (feature, fieldIdentify) {
-//                    var updateAttributesBlock = this.updateAttributes(feature.properties[fieldIdentify]);
-
-                    this.updateGeometry(feature)
-                    topic.publish('map/identityUi/unblock');
-
-//                    updateAttributesBlock.then(function () {
-//                        topic.publish('map/identityUi/unblock');
-//                    });
+                    this.updateGeometry(feature);
+                    this.updateAttributes(feature.properties[fieldIdentify]).then(function () {
+                        topic.publish('map/identityUi/unblock');
+                    });
                 }));
 
                 topic.subscribe('map/identityUi/block', lang.hitch(this, function () {
@@ -67,14 +63,14 @@ define([
             },
 
             updateAttributes: function (featureId) {
-//                var deferred = new Deferred();
-//
-//                this.attributesServiceFacade.getAttributesByGuid(featureId, 'Monitoring.fireMapObjectSelected').then(lang.hitch(this, function (content) {
-//                    this._updateAttributesHtmlBlock(content);
-//                    deferred.resolve();
-//                }));
-//
-//                return deferred;
+                var deferred = new Deferred();
+
+                this.attributesServiceFacade.getAttributesByGuid(featureId, 'Monitoring.fireMapObjectSelected').then(lang.hitch(this, function (content) {
+                    this._updateAttributesHtmlBlock(content);
+                    deferred.resolve();
+                }));
+
+                return deferred;
             },
 
             _updateAttributesHtmlBlock: function (content) {
@@ -95,7 +91,17 @@ define([
 
             selectObject: function (layerId, featureId) {
                 topic.publish('map/identityUi/block');
-                topic.publish('attributes/get', layerId, featureId);
+                this.ngwServiceFacade.getGeometriesByGuids([layerId], [featureId])
+                    .then(lang.hitch(this, function (geoJson) {
+                        var countFeatures = geoJson.features.length,
+                            feature;
+                        if (countFeatures > 0) {
+                            feature = geoJson.features[0];
+                            feature.properties.__layer__ = layerId;
+                            this.updateGeometry(feature);
+                        }
+                        topic.publish('map/identityUi/unblock');
+                    }));
             }
         });
     });
