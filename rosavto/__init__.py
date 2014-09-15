@@ -26,6 +26,7 @@ def main(global_config, **settings):
     config.add_route('routing_sample', '/routing_sample')
     config.add_route('routing_chainage_sample', '/routing_chainage_sample')
     config.add_route('code', '/code')
+    config.add_route('time', '/time')
     config.add_route('clusters', '/clusters')
 
     # proxies url

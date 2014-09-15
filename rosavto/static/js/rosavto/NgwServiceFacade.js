@@ -22,6 +22,22 @@ define([
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET'});
             },
 
+            getGeometriesByGuids: function (layersId, guids, datetime) {
+                var url = 'geocollection/rosavto';
+
+                datetime = datetime ? this.formatDateTime(datetime) : this.formatDateTime(new Date());
+
+                return xhr(this._ngwUrlBase + url, {
+                    handleAs: 'json',
+                    method: 'GET',
+                    query: {
+                        layers: layersId.join(','),
+                        guids: guids.join(','),
+                        datetime: datetime
+                    }
+                });
+            },
+
             identifyFeaturesByLayers: function (layersIds, wktBounds, srs) {
                 var url = 'feature_layer/identify',
                     params;
@@ -49,9 +65,7 @@ define([
                     tolerance = 10;
                 }
 
-                if (!datetime) {
-                    datetime = dateLocal.format(new Date(), {datePattern: "yyyy-MM-dd", selector: "date"});
-                }
+                datetime = datetime ? this.formatDateTime(datetime) : this.formatDateTime(new Date());
 
                 return xhr(this._ngwUrlBase + 'geocollection/rosavto', {
                     handleAs: 'json',
@@ -66,6 +80,9 @@ define([
                 });
             },
 
+            formatDateTime: function (dateTime) {
+                return dateTime.toISOString();
+            },
 
             getResourceInfo: function (idResource) {
                 var url = 'resource/' + idResource + '/child/';

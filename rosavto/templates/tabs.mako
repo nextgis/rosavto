@@ -13,6 +13,7 @@
     ('routing_sample', u'Маршруты'),
     ('routing_chainage_sample', u'Маршруты по пикетажу'),
     ('clusters', u'Кластеры с состояниями'),
+    ('time', u'Время'),
     ('code', u'Код')
 ]
 %>

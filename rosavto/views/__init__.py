@@ -67,6 +67,10 @@ def code(request):
 def clusters(request):
     return {}
 
+@view_config(route_name='time', renderer='time.mako')
+def time(request):
+    return {}
+
 
 @view_config(route_name='attributes_html', renderer='string')
 def get_html_attributes(request):
