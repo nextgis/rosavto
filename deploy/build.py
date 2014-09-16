@@ -17,7 +17,7 @@ args = vars(parser.parse_args())
 release_number = args['release']
 print 'BUILD: building release {0}'.format(release_number)
 
-release_version_regex = ur'V\d.\d.\d'
+release_version_regex = ur'V\d.\d.\d.\d'
 
 path_to_release_folder = '/home/cloud/projects/gis/V{0}/'.format(release_number)
 
