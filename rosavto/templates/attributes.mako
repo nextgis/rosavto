@@ -24,7 +24,9 @@
         <li id="datch">
             <span></span>Датчики
         </li>
-
+        <li id="regions">
+            <span></span>Регионы
+        </li>
     </ul>
 
 
@@ -61,6 +63,7 @@
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
+                    map.showLoader();
                     layersInfo.fillLayersInfo().then(function (store) {
                         map.addBaseLayers(layersInfo.getBaseLayers());
                         map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4, null, {
@@ -103,6 +106,16 @@
                                 domClass.remove('datch', 'loading');
                             }});
 
+                        map.addNgwTileLayer('Регионы', ngwUrlForTiles, 36, null, {
+                            loading: function () {
+                                domClass.add('regions', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('regions', 'loading');
+                            }});
+
+                        map.hideLoader();
+
                         mapIdentify = new MapIdentify({
                             map: map,
                             ngwServiceFacade: ngwServiceFacade,
@@ -116,22 +129,19 @@
                             map: map,
                             ngwServiceFacade: ngwServiceFacade,
                             attributesServiceFacade: attributesServiceFacade,
+                            getHistDate: function () {
+                                return new Date();
+                            },
                             mapIdentify: mapIdentify,
-                            cardInnerId: 'attributes',
-                            cardBodyId: 'attributes',
-                            stylesSettings: {
+                            defaultStylesSettings: {
                                 fields: {
                                     id: 'uniq_uid',
                                     type: 'type_name'
                                 },
-                                styles: {
-                                    'Метео': {
-                                        point: {className: 'meteo-a'},
+                                style: {
+                                    'default': {
+                                        point: {},
                                         line: {opacity: 0.5, weight: 15, color: '#FF0000'}
-                                    },
-                                    'Видео': {
-                                        point: {className: 'camera-a'},
-                                        line: {opacity: 0.5, weight: 15, color: '#1E00FF'}
                                     }
                                 }
                             }
