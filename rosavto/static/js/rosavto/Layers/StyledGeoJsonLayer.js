@@ -92,6 +92,8 @@ define([
                     return L.marker(latlng, {
                         icon: L.divIcon(pointStyle)
                     });
+                } else {
+                    return L.marker(latlng);
                 }
 
             } else {
@@ -144,7 +146,7 @@ define([
         },
 
         addType: function (type, style) {
-            if (style['point'] && style['line']) {
+            if (style['point'] || style['line']) {
                 this.options.styles[type] = style;
             } else {
                 throw new Error('StyledGeoJsonLayer: added style is not contained "point" or "line" property');
