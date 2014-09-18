@@ -16,7 +16,17 @@
         var application_root = '${request.application_url}',
             ngwUrlForTiles = '${request.registry.settings['proxy_ngw']}',
             ngwProxyUrl = application_root + '/ngw/',
-            Monitoring = { contextPath: '/monitoring-web/' },
+            Monitoring = {
+                contextPath: '/monitoring-web/',
+                getApplication: function () {
+                    return {
+                        fireEvent: function (event, featureId, histDate) {
+                            console.log('Monitoring event was fired.');
+                        }
+                    }
+                }
+
+            },
 
             // Dojo's config
             dojoConfig = {
