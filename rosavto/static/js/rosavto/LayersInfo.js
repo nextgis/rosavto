@@ -300,6 +300,28 @@ define([
                 return stylesDict;
             },
 
+            getClusterStyleByLayerKeyname: function (keyname) {
+                var layerResource,
+                    layersResources = this.store.query(function (res) {
+                    return res.keyname === keyname;
+                });
+
+                if (layersResources.length > 0) {
+                    layerResource = layersResources[0];
+                    if (layerResource.link && layerResource.object && layerResource.object.styles &&
+                        lang.isArray(layerResource.object.styles) && layerResource.object.styles.length > 0) {
+                        style = layerResource.object.styles[0];
+                    } else if (layerResource.styles && lang.isArray(layerResource.styles) &&
+                        layerResource.styles.length > 0) {
+                        style = layerResource.styles[0];
+                    } else {
+                        style = null;
+                    }
+                }
+
+                return style && style.json && style.json.clustersStatesStyles ? style.json.clustersStatesStyles : null
+            },
+
             getStyleByLayerId: function (layerId) {
                 var layerResource,
                     style,
