@@ -186,15 +186,31 @@ define([
                 this._legend.addOverlay(geoJsonLayer, name);
         },
 
+        addStorageGeoJsonLayer: function (keyname, name, geoJsonLayer, disable) {
+            disable = disable || false;
+            geoJsonLayer.keyname = keyname;
+            if (!disable) {
+                storage.then(lang.hitch(this, function (provider) {
+                    if (provider.get('mapLayerVisibility-' + geoJsonLayer.keyname) !== false) {
+                        this._lmap.addLayer(geoJsonLayer);
+                    }
+                }));
+            }
+            this._overlaylayers[name] = geoJsonLayer;
+            if (this._legend) {
+                this._legend.addOverlay(geoJsonLayer, name);
+            }
+        },
+
         onMapLayerAdded: function (layer) {
             storage.then(function (provider) {
-                provider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, true);
+                provider.put('mapLayerVisibility-' + layer.layer.keyname, true);
             });
         },
 
         onMapLayerRemoved: function (layer) {
             storage.then(function (provider) {
-                provider.put('mapLayerVisibility-' + layer.layer._ngwStyleId, false);
+                provider.put('mapLayerVisibility-' + layer.layer.keyname, false);
             });
         },
 
