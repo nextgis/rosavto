@@ -71,6 +71,9 @@ def clusters(request):
 def time(request):
     return {}
 
+@view_config(route_name='sensors', renderer='sensors.mako')
+def sensors(request):
+    return {}
 
 @view_config(route_name='attributes_html', renderer='string')
 def get_html_attributes(request):

@@ -14,6 +14,7 @@
     ('routing_chainage_sample', u'Маршруты по пикетажу'),
     ('clusters', u'Кластеры с состояниями'),
     ('time', u'Время'),
+    ('sensors', u'Датчики'),
     ('code', u'Код')
 ]
 %>
