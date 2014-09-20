@@ -44,7 +44,11 @@ define([
         },
 
         _legendBindEvents: function () {
-            query(this._legend._overlaysList).on('click', lang.hitch(this, function () {
+            this._lmap.on('overlayadd', lang.hitch(this, function (e) {
+                this._updateActiveNgwLayers();
+            }));
+
+            this._lmap.on('overlayremove', lang.hitch(this, function (e) {
                 this._updateActiveNgwLayers();
             }));
         },
@@ -155,28 +159,28 @@ define([
                     url = url.replace(/\$/g, '');
                     this.addTileLayer(baseLayer.title, url);
                 }
-             }));
+            }));
         },
 
         createGeoJsonLayer: function (name, url, style) {
             xhr(application_root + url, {
                 handleAs: 'json'
             }).then(lang.hitch(this, function (geoJson) {
-                    if (geoJson.features) {
-                        var layer = L.geoJson(geoJson.features, {
-                            style: style,
-                            pointToLayer: function (feature, latlng) {
-                                return L.circle(latlng, 25, style);
-                            }
-                        });
+                if (geoJson.features) {
+                    var layer = L.geoJson(geoJson.features, {
+                        style: style,
+                        pointToLayer: function (feature, latlng) {
+                            return L.circle(latlng, 25, style);
+                        }
+                    });
 
-                        layer.addTo(this._lmap);
+                    layer.addTo(this._lmap);
 
-                        this._overlaylayers[name] = layer;
-                        if (this._legend)
-                            this._legend.addOverlay(layer, name);
-                    }
-                }));
+                    this._overlaylayers[name] = layer;
+                    if (this._legend)
+                        this._legend.addOverlay(layer, name);
+                }
+            }));
         },
 
         addGeoJsonLayer: function (name, geoJsonLayer) {
@@ -232,17 +236,17 @@ define([
             xhr(application_root + url + id, {
                 handleAs: 'json'
             }).then(lang.hitch(this, function (geoJson) {
-                    if (geoJson.features) {
-                        var layer = new L.geoJson(geoJson.features, {
-                            onEachFeature: function (feature, layer) {
-                                if (isPopup) {
-                                    layer.bindPopup('id: ' + feature.id);
-                                }
+                if (geoJson.features) {
+                    var layer = new L.geoJson(geoJson.features, {
+                        onEachFeature: function (feature, layer) {
+                            if (isPopup) {
+                                layer.bindPopup('id: ' + feature.id);
                             }
-                        });
-                        this._lmap.addLayer(layer);
-                    }
-                }));
+                        }
+                    });
+                    this._lmap.addLayer(layer);
+                }
+            }));
         },
 
         _customizableGeoJsonLayer: null,
