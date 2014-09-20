@@ -55,22 +55,13 @@ define([
 
         _visibleNgwLayers: [],
         _updateActiveNgwLayers: function () {
-            var layerLeafletId,
-                layer;
-
             this._visibleNgwLayers = [];
 
-            for (layerLeafletId in this._legend._layers) {
-                if (this._legend._layers.hasOwnProperty(layerLeafletId)) {
-                    layer = this._legend._layers[layerLeafletId].layer;
-
-                    if (layer._ngwStyleId) {
-                        if (this._lmap.hasLayer(layer)) {
-                            this._visibleNgwLayers.push(layer._ngwStyleId);
-                        }
-                    }
+            this._lmap.eachLayer(function (layer) {
+                if (layer._ngwStyleId) {
+                    this._visibleNgwLayers.push(layer._ngwStyleId);
                 }
-            }
+            }, this);
         },
 
         getVisibleNgwLayers: function () {
