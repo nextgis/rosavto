@@ -69,7 +69,6 @@ define([
 
             var type = feature.properties.__type,
                 style,
-                marker,
                 pointStyle;
 
             if (!this.options.styles[type]) {
