@@ -59,7 +59,12 @@ define([
             },
 
             updateGeometry: function (feature) {
-                var style = this.mapIdentify.layersInfo.getStyleByLayerId(feature.properties.__layer__);
+                var style;
+
+                if (feature.properties.__layer__) {
+                    style = this.mapIdentify.layersInfo.getStyleByLayerId(feature.properties.__layer__);
+                }
+
                 if (style && style.selectedObjectStyle) {
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('selected', style.selectedObjectStyle);
                     this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'selected', 0).getBounds());
