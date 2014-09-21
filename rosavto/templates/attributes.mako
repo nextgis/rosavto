@@ -144,7 +144,8 @@
                                         line: {opacity: 0.5, weight: 15, color: '#FF0000'}
                                     }
                                 }
-                            }
+                            },
+                            debug: true
                         });
                     });
                 });

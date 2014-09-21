@@ -71,7 +71,9 @@ define([
                 } else {
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('default', this.defaultStylesSettings.style['default']);
                     this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'default', 0).getBounds());
-                    console.log('selected-object-style style is not defined for layer ' + feature.properties.__layer__);
+                    if (this.debug) {
+                        console.log('selected-object-style style is not defined for layer ' + feature.properties.__layer__);
+                    }
                 }
             },
 
