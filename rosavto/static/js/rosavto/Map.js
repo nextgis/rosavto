@@ -29,7 +29,6 @@ define([
 
             if (settings.legend) {
                 this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
-                this._legendBindEvents();
             }
 
             this.buildLoader(domNode);
@@ -43,29 +42,16 @@ define([
 
         },
 
-        _legendBindEvents: function () {
-            this._lmap.on('overlayadd', lang.hitch(this, function (e) {
-                this._updateActiveNgwLayers();
-            }));
-
-            this._lmap.on('overlayremove', lang.hitch(this, function (e) {
-                this._updateActiveNgwLayers();
-            }));
-        },
-
-        _visibleNgwLayers: [],
-        _updateActiveNgwLayers: function () {
-            this._visibleNgwLayers = [];
+        getVisibleNgwLayers: function () {
+            var visibleNgwLayers = [];
 
             this._lmap.eachLayer(function (layer) {
                 if (layer._ngwStyleId) {
-                    this._visibleNgwLayers.push(layer._ngwStyleId);
+                    visibleNgwLayers.push(layer._ngwStyleId);
                 }
             }, this);
-        },
 
-        getVisibleNgwLayers: function () {
-            return this._visibleNgwLayers;
+            return visibleNgwLayers;
         },
 
         getLMap: function () {
@@ -98,10 +84,31 @@ define([
                 this._legend.addBaseLayer(tileLayer, name);
         },
 
+        addNgwTileLayerWithKeyname: function (keyname, name, ngwUrl, idStyle, settings, callbacks) {
+            this.addNgwTileLayer({
+                keyname: keyname,
+                name: name
+            }, ngwUrl, idStyle, settings, callbacks);
+        },
+
+
         addNgwTileLayer: function (name, ngwUrl, idStyle, settings, callbacks) {
             var ngwTilesUrl = ngwUrl + 'resource/' + idStyle + '/tms?z={z}&x={x}&y={y}',
                 ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
+
             ngwTileLayer._ngwStyleId = idStyle;
+
+            if (typeof name !== 'string') {
+                ngwTileLayer.keyname = name.keyname;
+
+                storage.then(lang.hitch(this, function (provider) {
+                    if (provider.get('mapLayerVisibility-' + ngwTileLayer.keyname) === true) {
+                        this._lmap.addLayer(ngwTileLayer);
+                    }
+                }));
+
+                name = name.name;
+            }
 
             if (callbacks && callbacks.loaded) {
                 ngwTileLayer.on('load', function () {
@@ -115,17 +122,10 @@ define([
                 });
             }
 
-            storage.then(lang.hitch(this, function (provider) {
-                if (provider.get('mapLayerVisibility-' + ngwTileLayer._ngwStyleId) === true) {
-                    this._lmap.addLayer(ngwTileLayer);
-                }
-            }));
-
             this._overlaylayers[name] = ngwTileLayer;
             if (this._legend) {
                 this._legend.addOverlay(ngwTileLayer, name);
             }
-            this._visibleNgwLayers.push(ngwTileLayer._ngwStyleId);
         },
 
         addOsmTileLayer: function () {
