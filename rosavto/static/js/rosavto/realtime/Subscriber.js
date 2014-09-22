@@ -23,12 +23,13 @@ define([
 
         _subscription: null,
         subscribe: function () {
+            var that = this;
             StompClient.connect().then(lang.hitch(this, function (client) {
-                this.unsubscribe();
-                this._subscription = client.subscribe(
-                        this.subscribeUrl + uuid.generateRandomUuid(),
-                    this.parseMessage,
-                    this.getHeaders()
+                that.unsubscribe();
+                that._subscription = client.subscribe(
+                        that.subscribeUrl + uuid.generateRandomUuid(),
+                    lang.hitch(this, that.parseMessage),
+                    that.getHeaders()
                 );
             }));
         },
