@@ -35,6 +35,9 @@ define([
                         DnD.dragStart = false;
                     }
                     if (DnD.dragStart === false) {
+                        if (this.map.getVisibleNgwLayers().length < 1) {
+                            return false;
+                        }
                         topic.publish('map/identityUi/block');
                         this.getIdsByClick(e);
                     }
