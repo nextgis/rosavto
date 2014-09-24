@@ -87,12 +87,16 @@
                             layer;
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
+                    map.showLoader();
+                    map2.showLoader();
                     layersInfo.fillLayersInfo().then(function (store) {
                         var baseLayers = layersInfo.getBaseLayers();
                         map.addBaseLayers(baseLayers);
                         map2.addBaseLayers(baseLayers);
                         map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
                         map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
+                        map.hideLoader();
+                        map2.hideLoader();
                     });
 
                     styles = {

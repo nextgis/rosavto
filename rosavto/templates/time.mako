@@ -48,7 +48,7 @@
                             styledGeoJsonLayer;
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
-
+                    map.showLoader();
                     layersInfo.fillLayersInfo().then(function (store) {
                         map.addBaseLayers(layersInfo.getBaseLayers());
                         map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4);
@@ -63,6 +63,7 @@
                             line: {opacity: 0.8, weight: 5, color: '#FF0000'}
                         }}});
                         map.addVectorLayer(styledGeoJsonLayer, 'Датчики-вектор');
+                        map.hideLoader();
                     });
 
 
@@ -84,14 +85,14 @@
 
                     var changeTime = function (newTime) {
                         var time = newTime,
-                                    date = registry.byId('dateWidget').value,
-                                    selectedDateTime = registry.byId('selectedDateTime');
-                            console.log(newTime);
-                            time.setYear(date.getFullYear());
-                            time.setMonth(date.getMonth());
-                            time.setDate(date.getDate());
-                            selectedDateTime.set('value', ngwServiceFacade.formatDateTime(new Date(time)));
-                            selectedDateTime.date = time;
+                                date = registry.byId('dateWidget').value,
+                                selectedDateTime = registry.byId('selectedDateTime');
+                        console.log(newTime);
+                        time.setYear(date.getFullYear());
+                        time.setMonth(date.getMonth());
+                        time.setDate(date.getDate());
+                        selectedDateTime.set('value', ngwServiceFacade.formatDateTime(new Date(time)));
+                        selectedDateTime.date = time;
                     };
 
                     timeWidget = new TimeTextBox({
@@ -142,7 +143,7 @@
                         label: "Подсветить объекты",
                         onClick: function () {
                             var guids = registry.byId('guids').value.split(','),
-                                dateTime = registry.byId('selectedDateTime').date;
+                                    dateTime = registry.byId('selectedDateTime').date;
                             rebuildPoints(dateTime, guids);
                         }
                     }, "selectObj").startup();

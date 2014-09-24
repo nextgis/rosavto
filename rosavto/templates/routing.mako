@@ -51,19 +51,6 @@
                 legend: true
             });
 
-            L.marker(startPoint, {icon: startIcon}).addTo(map.getLMap()).bindPopup('Start point');
-            L.marker(endPoint, {icon: finishIcon}).addTo(map.getLMap()).bindPopup('End point');
-
-            var route_data = ngwServiceFacade.getRouteByCoord(startPoint, endPoint);
-            route_data.then(function (geoJson) {
-                if (geoJson.features) {
-                    var layer = L.geoJson(geoJson.features, {
-                        style: {color: '#FF0000', opacity: 0.7 }
-                    });
-                    map.addGeoJsonLayer('Маршрут', layer);
-                }
-            });
-
             //---- map with restriction
             var map2 = new Map('map2', {
                 center: [57, 38],
@@ -73,25 +60,44 @@
             });
 
             var layersInfo = new LayersInfo(ngwServiceFacade);
+            map.showLoader();
+            map2.showLoader();
             layersInfo.fillLayersInfo().then(function (store) {
                 var baseLayers = layersInfo.getBaseLayers();
                 map.addBaseLayers(baseLayers);
                 map2.addBaseLayers(baseLayers);
+                map.hideLoader();
+                map2.hideLoader();
+
+
+                L.marker(startPoint, {icon: startIcon}).addTo(map.getLMap()).bindPopup('Start point');
+                L.marker(endPoint, {icon: finishIcon}).addTo(map.getLMap()).bindPopup('End point');
+
+                var route_data = ngwServiceFacade.getRouteByCoord(startPoint, endPoint);
+                route_data.then(function (geoJson) {
+                    if (geoJson.features) {
+                        var layer = L.geoJson(geoJson.features, {
+                            style: {color: '#FF0000', opacity: 0.7 }
+                        });
+                        map.addGeoJsonLayer('Маршрут', layer);
+                    }
+                });
+
+                L.marker(startPoint, {icon: startIcon}).addTo(map2.getLMap()).bindPopup('Start point');
+                L.marker(endPoint, {icon: finishIcon}).addTo(map2.getLMap()).bindPopup('End point');
+                L.marker(barrierPoint, {icon: barIcon}).addTo(map2.getLMap()).bindPopup('Restriction point').openPopup();
+
+                var route_data = ngwServiceFacade.getRouteByCoord(startPoint, endPoint, barrierPoint);
+                route_data.then(function (geoJson) {
+                    if (geoJson.features) {
+                        var layer = L.geoJson(geoJson.features, {
+                            style: {color: '#FF0000', opacity: 0.7 }
+                        });
+                        map2.addGeoJsonLayer('Маршрут c ограничением', layer);
+                    }
+                });
             });
 
-            L.marker(startPoint, {icon: startIcon}).addTo(map2.getLMap()).bindPopup('Start point');
-            L.marker(endPoint, {icon: finishIcon}).addTo(map2.getLMap()).bindPopup('End point');
-            L.marker(barrierPoint, {icon: barIcon}).addTo(map2.getLMap()).bindPopup('Restriction point').openPopup();
-
-            var route_data = ngwServiceFacade.getRouteByCoord(startPoint, endPoint, barrierPoint);
-            route_data.then(function (geoJson) {
-                if (geoJson.features) {
-                    var layer = L.geoJson(geoJson.features, {
-                        style: {color: '#FF0000', opacity: 0.7 }
-                    });
-                    map2.addGeoJsonLayer('Маршрут c ограничением', layer);
-                }
-            });
 
         });
     </script>

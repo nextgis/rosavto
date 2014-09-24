@@ -4,7 +4,7 @@
     <title><%block name="title"/></title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css"/>
+    <link rel="stylesheet" href="${request.static_url('rosavto:static/js/leaflet/leaflet.css')}"/>
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/kube.min.css')}"/>
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/widget.css')}"/>
 

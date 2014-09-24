@@ -53,6 +53,7 @@
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
+                    map.showLoader();
                     layersInfo.fillLayersInfo().then(function (store) {
 
                         map.addBaseLayers(layersInfo.getBaseLayers());
@@ -61,7 +62,7 @@
                         map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50);
                         map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43);
                         map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53);
-
+                        map.hideLoader();
                         mapIdentify = new MapIdentify({
                             map: map,
                             ngwServiceFacade: ngwServiceFacade,
