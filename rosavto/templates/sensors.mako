@@ -59,13 +59,20 @@
                             clusters: ['GRAY', 'GREEN', 'YELLOW', 'RED'],
                             layersStyles: {
                                 'Video': layersInfo.getClusterStyleByLayerKeyname('sensors_video'),
-                                'Traffic': layersInfo.getClusterStyleByLayerKeyname('sensors_video'),
-                                'Meteo': layersInfo.getClusterStyleByLayerKeyname('sensors_video')
+                                'Traffic': layersInfo.getClusterStyleByLayerKeyname('sensors_traffic'),
+                                'Meteo': layersInfo.getClusterStyleByLayerKeyname('sensors_meteo')
+                            },
+                            sensorsSubscribesUrl: {
+                                'Meteo': '/app/subscribe/meteoStations/',
+                                'Traffic': '/app/subscribe/trafficStations/'
+                            },
+                            getHistDate: function () {
+                                return new Date();
                             }
                         }), lmap = map.getLMap();
 
                         lmap.addLayer(sensorLayer);
-                        sensorLayer.activateLayers({'Meteo': [], 'Video': [], 'Traffic': []});
+                        sensorLayer.activateLayers({'Meteo': ['TemperatureAir', 'TemperatureRoad'], 'Video': [], 'Traffic': ['AverageSpeed', 'Amount']});
                     });
                 });
     </script>

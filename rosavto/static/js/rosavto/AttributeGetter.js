@@ -67,6 +67,7 @@ define([
 
                 if (style && style.selectedObjectStyle) {
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('selected', style.selectedObjectStyle);
+
                     this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'selected', 0).getBounds());
                 } else {
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('default', this.defaultStylesSettings.style['default']);

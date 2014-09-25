@@ -91,10 +91,7 @@ define([
                     return L.marker(latlng, {
                         icon: L.divIcon(pointStyle)
                     });
-                } else {
-                    return L.marker(latlng);
                 }
-
             } else {
                 return new L.Marker(latlng);
             }

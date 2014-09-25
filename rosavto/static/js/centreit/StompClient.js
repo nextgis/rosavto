@@ -75,7 +75,7 @@ define([
                         me.client.disconnect();
                     }
                     me.client = client;
-                    object.forIn(this.subscriptions, function (subscription, id) {
+                    object.forIn(this.subscriptions, lang.hitch(this, function (subscription, id) {
                         if (subscription.headers) {
                             delete subscription.headers.id;
                         }
@@ -83,7 +83,7 @@ define([
                             subscription.headers === void(0) ? null : subscription.headers);
                         subscription.result.id = newResult.id;
                         subscription.result.unsubscribe = lang.hitch(me, lang.partial(me.unsubscribe, newResult.id));
-                    });
+                    }));
                 }
 
             }

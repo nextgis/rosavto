@@ -1,0 +1,14 @@
+<div id="{{guid}}" class="sensorsPopup">
+    <table>
+        {{#sensors}}
+        </tr>
+            {{#values}}
+            <td>
+                <div class="background {{alarmState}}"></div>
+                <div class="icon-sensor {{type}}"></div>
+            </td>
+            {{/values}}
+        </tr>
+        {{/sensors}}
+    </table>
+</div>

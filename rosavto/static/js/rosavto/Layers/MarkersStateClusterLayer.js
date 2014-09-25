@@ -2,8 +2,9 @@ define([
     'dojo/_base/declare',
     'dojo/_base/lang',
     'dojo/_base/array',
+    'dojo/topic',
     'leaflet/leaflet'
-], function (declare, lang, array, L) {
+], function (declare, lang, array, topic, L) {
     return declare('rosavto.MarkersStateClusterLayer', [L.MarkerClusterGroup], {
         _layer: null,
         _states: {

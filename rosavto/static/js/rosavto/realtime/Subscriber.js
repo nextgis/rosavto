@@ -29,7 +29,7 @@ define([
                 that._subscription = client.subscribe(
                         that.subscribeUrl + uuid.generateRandomUuid(),
                     lang.hitch(this, that.parseMessage),
-                    that.getHeaders()
+                    that.getHeaders(that)
                 );
             }));
         },
