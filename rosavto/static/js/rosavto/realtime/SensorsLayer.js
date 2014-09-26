@@ -172,10 +172,7 @@ define([
         },
 
         _getHeadersForLayers: function (subscriber) {
-            var bounds = this._map.getBounds(),
-            // Добавляем к видимой области слоя по 10% с каждой стороны
-                widthDelta = (bounds.getEast() - bounds.getWest()) * 0.1,
-                heightDelta = (bounds.getNorth() - bounds.getSouth()) * 0.1;
+            var bounds = this._map.getBounds();
 
             return {
                 'LatitudeFrom': bounds.getSouth(),
