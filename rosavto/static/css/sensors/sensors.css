@@ -109,7 +109,7 @@ img.leaflet-marker-icon {
     background-color: rgba(96, 96, 96, 0.75);
 }
 
-.sensor {
+div.leaflet-marker-icon.sensor {
     background: url('../images/sensors-states.png');
     width: 44px !important;
     height: 44px !important;
