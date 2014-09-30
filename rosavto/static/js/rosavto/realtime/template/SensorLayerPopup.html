@@ -3,9 +3,9 @@
         {{#sensors}}
         </tr>
             {{#values}}
-            <td>
-                <div class="background {{alarmState}}"></div>
-                <div class="icon-sensor {{type}}"></div>
+            <td class="{{.}}">
+                <div class="background"></div>
+                <div class="icon-sensor"></div>
             </td>
             {{/values}}
         </tr>

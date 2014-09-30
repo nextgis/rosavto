@@ -72,7 +72,13 @@
                         }), lmap = map.getLMap();
 
                         lmap.addLayer(sensorLayer);
-                        sensorLayer.activateLayers({'Meteo': ['TemperatureAir', 'TemperatureRoad'], 'Video': [], 'Traffic': ['AverageSpeed', 'Amount']});
+                        sensorLayer.activateLayers({
+                            'Meteo': ['TemperatureAir', 'TemperatureRoad', 'TemperatureUnderRoad', 'WindVelocity', 'WindGusts',
+                                'WindDirection', 'PrecipitationCode', 'Cloudiness', 'AirPlessure', 'LayerType', 'ReagentAmount', 'ViewDistance',
+                                'Humidity', 'AdhesionCoefficient'],
+                            'Video': [],
+                            'Traffic': ['AverageSpeed', 'Amount', 'Trucks']
+                        });
                     });
                 });
     </script>

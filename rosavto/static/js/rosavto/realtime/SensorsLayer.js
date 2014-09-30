@@ -1,5 +1,7 @@
 define([
     'dojo/_base/declare',
+    'dojo/query',
+    'dojo/dom',
     'dojo/_base/lang',
     'dojo/_base/array',
     'dojox/lang/functional/object',
@@ -9,7 +11,7 @@ define([
     'rosavto/realtime/Subscriber',
     'rosavto/Layers/MarkersStateClusterLayer',
     'rosavto/ParametersVerification'
-], function (declare, lang, array, funcObject, topic, domClass, mustache, Subscriber, MarkersStateClusterLayer, ParametersVerification) {
+], function (declare, query, dom, lang, array, funcObject, topic, domClass, mustache, Subscriber, MarkersStateClusterLayer, ParametersVerification) {
     return declare('rosavto.SensorsLayer', [MarkersStateClusterLayer, ParametersVerification], {
 
         constructor: function (settings) {
@@ -284,12 +286,20 @@ define([
         },
 
         _popupsLayer: L.featureGroup(null),
+        _popupTemplate: '<div id="{{guid}}" class="sensorsPopup"> <table> {{#sensors}} </tr> {{#values}} <td class="{{.}}"> <div class="background"></div> <div class="icon-sensor"></div> </td> {{/values}} </tr> {{/sensors}} </table></div>',
         _buildPopups: function (json) {
             var sensorsJsonData,
-                sensorsData,
+                sensorsStatesData,
+                sensorsValuesData,
                 stationGuid,
                 markerStation,
-                popup, contentPopup;
+                htmlPopup,
+                contentPopup,
+                sensorTdHtml;
+
+            if (this._isEmpty(this._markersWithPopupById)) {
+                return false;
+            }
 
             if (json && json.body) {
                 console.log(JSON.parse(json.body));
@@ -297,32 +307,71 @@ define([
                 sensorsJsonData = JSON.parse(json.body)[0];
 
                 if (sensorsJsonData.kind === 'Signal') {
-                    sensorsData = sensorsJsonData.data;
-                    array.forEach(sensorsData, function (stationData) {
+                    sensorsStatesData = sensorsJsonData.data;
+                    array.forEach(sensorsStatesData, function (stationData) {
                         stationGuid = stationData.station;
                         markerStation = this._markersWithPopupById[stationGuid];
-                        contentPopup = mustache.render(this._popupTemplate,
-                            {
-                                guid: stationGuid,
-                                sensors: this._createSensorsArrayForPopup(markerStation, stationData.sensors)
-                            });
-                        popup = L.popup().setLatLng(markerStation.getLatLng()).setContent(contentPopup);
-                        this._popupsLayer.addLayer(popup);
-                        console.log(contentPopup);
+                        if (!markerStation) { return false; }
+                        htmlPopup = this._getHtmlPopup(stationGuid, markerStation);
+                        array.forEach(stationData.sensors, function (sensorValuePair) {
+                            if (!sensorValuePair.alarmState) {
+                                return;
+                            }
+                            sensorTdHtml = query('td.' + sensorValuePair.type + ' div.background', htmlPopup);
+                            if (sensorTdHtml && sensorTdHtml.length === 1) {
+                                domClass.remove(sensorTdHtml[0]);
+                                domClass.add(sensorTdHtml[0], ['background', sensorValuePair.alarmState]);
+                            }
+                        }, this);
+                    }, this);
+                } else if (sensorsJsonData.kind === 'Data') {
+                    sensorsValuesData = sensorsJsonData.data;
+                    array.forEach(sensorsValuesData, function (stationData) {
+                        stationGuid = stationData.station;
+                        markerStation = this._markersWithPopupById[stationGuid];
+                        if (!markerStation) { return false; }
+                        htmlPopup = this._getHtmlPopup(stationGuid, markerStation);
+                        array.forEach(stationData.sensors, function (sensorValuePair) {
+                            if (!sensorValuePair.value) {
+                                return;
+                            }
+                            sensorTdHtml = query('td.' + sensorValuePair.type + ' div.icon-sensor', htmlPopup);
+                            if (sensorTdHtml && sensorTdHtml.length === 1) {
+                                domClass.remove(sensorTdHtml[0]);
+                                domClass.add(sensorTdHtml[0], ['icon-sensor', sensorValuePair.value]);
+                            }
+                        }, this);
                     }, this);
                 }
             }
         },
 
-        _popupTemplate: '<div id="{{guid}}" class="sensorsPopup"><table>{{#sensors}}</tr>{{#values}}<td><div class="background {{alarmState}}"></div><div class="icon-sensor {{type}}"></div></td>{{/values}}</tr>{{/sensors}}</table></div>',
-        _createSensorsArrayForPopup: function (markerStation, sensors) {
-            var sensorsForTemplate = [],
-                sensorsDataBySensorName = {},
-                startIndex, currentTrArray;
+        _getHtmlPopup: function (objectGuid, marker) {
+            var htmlPopup = dom.byId(objectGuid),
+                htmlContent;
 
-            array.forEach(sensors, function (sensor) {
-                sensorsDataBySensorName[sensor.type] = sensor;
-            }, this);
+            if (!htmlPopup) {
+                htmlContent = mustache.render(this._popupTemplate,
+                    {
+                        guid: objectGuid,
+                        sensors: this._createSensorsArrayForPopup(marker)
+                    });
+                this._buildSinglePopup(htmlContent, marker);
+                htmlPopup = dom.byId(objectGuid);
+            }
+
+            return htmlPopup;
+        },
+
+        _buildSinglePopup: function (htmlContent, marker) {
+            var popup = L.popup({offset: L.point(0, -25), autoPan: false}).setLatLng(marker.getLatLng()).setContent(htmlContent);
+            this._popupsLayer.addLayer(popup);
+        },
+
+        _createSensorsArrayForPopup: function (markerStation) {
+            var sensorsForTemplate = [],
+                startIndex,
+                currentTrArray;
 
             startIndex = 0;
             array.forEach(this._activatedSensors[markerStation.type], function (sensor, index) {
@@ -331,7 +380,7 @@ define([
                     sensorsForTemplate.push({values: currentTrArray});
                     startIndex = index;
                 }
-                currentTrArray.push(sensorsDataBySensorName[sensor]);
+                currentTrArray.push(sensor);
             }, this);
 
             return sensorsForTemplate;
@@ -362,21 +411,23 @@ define([
 
         _hookMap: function (map) {
             map.on('moveend zoomend', function () {
-                this._clearAll();
-                this._layersSubsriber.subscribe();
+                this._rebuildLayer();
             }, this);
-            this._clearAll();
-            this._layersSubsriber.subscribe();
+            this._rebuildLayer();
         },
 
         _queueMoveendEvents: [],
         _unhookMap: function (map) {
             map.off('moveend zoomend', function () {
-                this._clearAll();
-                this._layersSubsriber.subscribe();
+                this._rebuildLayer();
             }, this);
             this._layersSubsriber.unsubscribe();
             this._unsubscribeSensorsSubscribes();
+        },
+
+        _rebuildLayer: function () {
+            this._clearAll();
+            this._layersSubsriber.subscribe();
         },
 
         _unsubscribeSensorsSubscribes: function () {
@@ -404,7 +455,8 @@ define([
         },
 
         _isEmpty: function (object) {
-            for (var key in object) {
+            var key;
+            for (key in object) {
                 if (object.hasOwnProperty(key)) {
                     return false;
                 }

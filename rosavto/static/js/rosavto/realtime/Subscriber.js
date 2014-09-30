@@ -24,8 +24,8 @@ define([
         _subscription: null,
         subscribe: function () {
             var that = this;
+            that.unsubscribe();
             StompClient.connect().then(lang.hitch(this, function (client) {
-                that.unsubscribe();
                 that._subscription = client.subscribe(
                         that.subscribeUrl + uuid.generateRandomUuid(),
                     lang.hitch(this, that.parseMessage),

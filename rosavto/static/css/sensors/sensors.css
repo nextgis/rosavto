@@ -4,7 +4,7 @@
 }
 
 #map div.leaflet-popup-content {
-    margin: 5px 10px;
+    margin: 2px 17px 2px 7px;
 }
 
 /*Cluster styles*/
@@ -110,7 +110,7 @@ img.leaflet-marker-icon {
 }
 
 div.leaflet-marker-icon.sensor {
-    background: url('../images/sensors-states.png');
+    background-image: url('../images/sensors-states.png');
     width: 44px !important;
     height: 44px !important;
     margin-left: -22px !important;
@@ -118,51 +118,51 @@ div.leaflet-marker-icon.sensor {
 }
 
 /* meteo styles */
-.meteo-normal {
+.sensor.meteo-normal {
     background-position: 0 0;
 }
 
-.meteo-attention {
+.sensor.meteo-attention {
     background-position: -44px 0;
 }
 
-.meteo-alarm {
+.sensor.meteo-alarm {
     background-position: -88px 0;
 }
 
-.meteo-inactive {
+.sensor.meteo-inactive {
     background-position: -132px 0;
 }
 
-.meteo-failure {
+.sensor.meteo-failure {
     background-position: -176px 0;
 }
 
-.meteo-disabled {
+.sensor.meteo-disabled {
     background-position: -220px 0;
 }
 
-.meteo-normal.selected {
+.sensor.meteo-normal.selected {
     background-position: -264px 0;
 }
 
-.meteo-attention.selected {
+.sensor.meteo-attention.selected {
     background-position: -308px 0;
 }
 
-.meteo-alarm.selected {
+.sensor.meteo-alarm.selected {
     background-position: -352px 0;
 }
 
-.meteo-inactive.selected {
+.sensor.meteo-inactive.selected {
     background-position: -396px 0;
 }
 
-.meteo-failure.selected {
+.sensor.meteo-failure.selected {
     background-position: -400px 0;
 }
 
-.meteo-disabled.selected {
+.sensor.meteo-disabled.selected {
     background-position: -484px 0;
 }
 
@@ -264,11 +264,6 @@ div.leaflet-marker-icon.sensor {
     background-position: -484px 132px;
 }
 
-div.sensorsPopup div.background {
-    width: 18px;
-    height: 18px;
-}
-
 div.sensorsPopup,
 div.sensorsPopup table {
     padding: 0;
@@ -278,6 +273,15 @@ div.sensorsPopup table {
 div.sensorsPopup td {
     padding: 1px;
     margin: 0;
+}
+
+div.sensorsPopup div.background {
+    width: 22px;
+    height: 22px;
+}
+
+div.sensorsPopup div.background {
+    background-color: rgba(255, 255, 255, 0);
 }
 
 div.sensorsPopup div.background.GRAY {
@@ -299,22 +303,34 @@ div.sensorsPopup div.background.YELLOW {
 div.sensorsPopup div.icon-sensor {
     width: 18px;
     height: 18px;
-    margin-top: -18px;
-    background: url('../images/sensors-values.png');
+    margin-top: -20px;
+    margin-left: 2px;
+    background: url('../images/sensors-values.png') 0 -234px;
 }
 
-div.sensorsPopup div.icon-sensor.TemperatureAir {
+/* Meteo sensors*/
+div.sensorsPopup td.TemperatureAir div.icon-sensor {
     background-position: 0 0;
 }
 
-div.sensorsPopup div.icon-sensor.TemperatureRoad {
+div.sensorsPopup td.TemperatureRoad div.icon-sensor {
     background-position: -18px 0;
 }
 
-div.sensorsPopup div.icon-sensor.AverageSpeed {
-    background-position: -180px 0;
+div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionUndefined {
+    background-position: -18px -144px;
 }
 
-div.sensorsPopup div.icon-sensor.Amount {
-    background-position: -198px 0;
+/* Traffic sensors*/
+div.sensorsPopup td.AverageSpeed div.icon-sensor {
+    background-position: 0 -180px;
 }
+
+div.sensorsPopup td.Amount div.icon-sensor {
+    background-position: 0 -198px;
+}
+
+div.sensorsPopup td.Trucks div.icon-sensor {
+    background-position: 0 -216px;
+}
+
