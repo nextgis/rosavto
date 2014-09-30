@@ -317,8 +317,16 @@ div.sensorsPopup td.TemperatureRoad div.icon-sensor {
     background-position: -18px 0;
 }
 
+div.sensorsPopup td.TemperatureUnderRoad div.icon-sensor {
+    background-position: -36px 0;
+}
+
 div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionUndefined {
-    background-position: -18px -144px;
+    background-position: -142px -18px;
+}
+
+div.sensorsPopup td.PrecipitationCode div.icon-sensor.PRECIPITATION_UNDEFINED {
+    background-position: -72px -36px;
 }
 
 /* Traffic sensors*/
