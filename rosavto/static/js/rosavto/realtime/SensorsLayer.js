@@ -81,7 +81,12 @@ define([
         _activatedSensors: null,
         activateLayers: function (layers) {
             var isLayersExists = false,
+                isLayerHooked = this._activatedLayers.length > 0,
                 layer;
+
+            if (!this._map.hasLayer(this._popupsLayer)) {
+                this._map.addLayer(this._popupsLayer);
+            }
 
             this._activatedLayers = [];
             for (layer in layers) {
@@ -93,13 +98,13 @@ define([
 
             this._setActivatedSensors(layers);
 
-            if (isLayersExists) {
+            if (isLayersExists && !isLayerHooked) {
                 this._hookMap(this._map);
-            } else {
+            } else if (isLayersExists && isLayerHooked) {
+                this._rebuildLayer();
+            } else if (!isLayersExists) {
                 this._unhookMap(this._map);
             }
-
-            this._map.addLayer(this._popupsLayer);
         },
 
         _setActivatedSensors: function (layersObject) {
@@ -126,6 +131,7 @@ define([
             } else {
                 this._activatedSensors[layerTypeName] = sensors;
             }
+            this._rebuildLayer();
         },
 
 //        addSensor: function (objectType, sensorName) {
@@ -151,6 +157,7 @@ define([
             if (initialActivatedLayersCount < 1) {
                 this._hookMap(this._map);
             }
+            this._rebuildLayer();
         },
 
         removeLayerType: function (layerTypeName) {
@@ -171,6 +178,7 @@ define([
             if (this._activatedLayers.length < 1) {
                 this._unhookMap(this._map);
             }
+            this._rebuildLayer();
         },
 
         _getHeadersForLayers: function (subscriber) {

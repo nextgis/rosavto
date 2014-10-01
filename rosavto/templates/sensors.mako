@@ -79,7 +79,16 @@
                             'Video': [],
                             'Traffic': ['AverageSpeed', 'Amount', 'Trucks']
                         });
+
+                        setTimeout(function () {
+                            sensorLayer.activateLayers({
+                                'Meteo': ['TemperatureAir', 'TemperatureRoad', 'TemperatureUnderRoad', 'WindVelocity', 'WindGusts',
+                                    'WindDirection', 'PrecipitationCode', 'Cloudiness', 'AirPlessure', 'LayerType', 'ReagentAmount', 'ViewDistance',
+                                    'Humidity', 'AdhesionCoefficient']
+                            });
+                        }, 10000);
                     });
-                });
+                })
+        ;
     </script>
 </%block>

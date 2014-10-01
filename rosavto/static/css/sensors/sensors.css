@@ -321,9 +321,15 @@ div.sensorsPopup td.TemperatureUnderRoad div.icon-sensor {
     background-position: -36px 0;
 }
 
+div.sensorsPopup td.TemperatureUnderRoad div.icon-sensor {
+    background-position: -36px 0;
+}
+
 div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionUndefined {
     background-position: -142px -18px;
 }
+
+
 
 div.sensorsPopup td.PrecipitationCode div.icon-sensor.PRECIPITATION_UNDEFINED {
     background-position: -72px -36px;
@@ -341,4 +347,3 @@ div.sensorsPopup td.Amount div.icon-sensor {
 div.sensorsPopup td.Trucks div.icon-sensor {
     background-position: 0 -216px;
 }
-
