@@ -412,17 +412,13 @@ define([
         },
 
         _hookMap: function (map) {
-            map.on('moveend zoomend', function () {
-                this._rebuildLayer();
-            }, this);
+            map.on('moveend zoomend', this._rebuildLayer, this);
             this._rebuildLayer();
         },
 
         _queueMoveendEvents: [],
         _unhookMap: function (map) {
-            map.off('moveend zoomend', function () {
-                this._rebuildLayer();
-            }, this);
+            map.off('moveend zoomend', this._rebuildLayer, this);
             this._layersSubsriber.unsubscribe();
             this._unsubscribeSensorsSubscribes();
             this._clearAll();
