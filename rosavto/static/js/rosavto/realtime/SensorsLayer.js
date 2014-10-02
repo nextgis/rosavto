@@ -334,13 +334,19 @@ define([
                         }
                         htmlPopup = this._getHtmlPopup(stationGuid, markerStation);
                         array.forEach(stationData.sensors, function (sensorValuePair) {
-                            if (!sensorValuePair.value) {
+                            if (!sensorValuePair.value && sensorValuePair.value !== false) {
                                 return;
                             }
                             sensorTdHtml = query('td.' + sensorValuePair.type + ' div.icon-sensor', htmlPopup);
                             if (sensorTdHtml && sensorTdHtml.length === 1) {
                                 domClass.remove(sensorTdHtml[0]);
-                                domClass.add(sensorTdHtml[0], ['icon-sensor', sensorValuePair.value]);
+                                if (sensorValuePair.value === true) {
+                                    domClass.add(sensorTdHtml[0], ['icon-sensor', 'TRUE']);
+                                } else if (sensorValuePair.value === false) {
+                                    domClass.add(sensorTdHtml[0], ['icon-sensor', 'FALSE']);
+                                } else {
+                                    domClass.add(sensorTdHtml[0], ['icon-sensor', sensorValuePair.value]);
+                                }
                             }
                         }, this);
                     }, this);

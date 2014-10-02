@@ -406,52 +406,52 @@ div.sensorsPopup td.Cloudiness div.icon-sensor.CloudinessCloudy {
 }
 
 div.sensorsPopup td.AirPlessure div.icon-sensor {
-    background-position: 0 -71px
+    background-position: 0 -71px;
 }
 
 div.sensorsPopup td.LayerType div.icon-sensor.LAYER_WATER {
-    background-position: 0px -90px
+    background-position: 0 -90px;
 }
 
 div.sensorsPopup td.LayerType div.icon-sensor.LAYER_WATER_CHEMICALS {
-    background-position: -18px -90px
+    background-position: -18px -90px;
 }
 
 div.sensorsPopup td.LayerType div.icon-sensor.LAYER_FROST {
-    background-position: -36px -90px
+    background-position: -36px -90px;
 }
 
 div.sensorsPopup td.LayerType div.icon-sensor.LAYER_SNOW {
-    background-position: -54px -90px
+    background-position: -54px -90px;
 }
 
 div.sensorsPopup td.LayerType div.icon-sensor.LAYER_ICING {
-    background-position: -72px -90px
+    background-position: -72px -90px;
 }
 
 div.sensorsPopup td.LayerType div.icon-sensor.LAYER_NO,
 div.sensorsPopup td.LayerType div.icon-sensor.LAYER_UNDEFINED {
-    background-position: -90px -90px
+    background-position: -90px -90px;
 }
 
-div.sensorsPopup td.ReagentAmount div.icon-sensor.true {
-    background-position: 0 -108px
+div.sensorsPopup td.ReagentAmount div.icon-sensor.TRUE {
+    background-position: 0 -108px;
 }
 
-div.sensorsPopup td.ReagentAmount div.icon-sensor.false {
-    background-position: -18px -108px
+div.sensorsPopup td.ReagentAmount div.icon-sensor.FALSE {
+    background-position: -18px -108px;
 }
 
 div.sensorsPopup td.ViewDistance div.icon-sensor {
-    background-position: 0 -126px
+    background-position: 0 -126px;
 }
 
 div.sensorsPopup td.Humidity div.icon-sensor {
-    background-position: 0 -144px
+    background-position: 0 -144px;
 }
 
 div.sensorsPopup td.AdhesionCoefficient div.icon-sensor {
-    background-position: 0 -162px
+    background-position: 0 -162px;
 }
 
 /* Traffic sensors*/
