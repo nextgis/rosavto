@@ -113,8 +113,8 @@ div.leaflet-marker-icon.sensor {
     background-image: url('../images/sensors-states.png');
     width: 44px !important;
     height: 44px !important;
-    margin-left: -22px !important;
-    margin-top: -44px !important;
+    /*margin-left: -22px !important;*/
+    margin-top: -27px !important;
 }
 
 /* meteo styles */
@@ -305,34 +305,108 @@ div.sensorsPopup div.icon-sensor {
     height: 18px;
     margin-top: -20px;
     margin-left: 2px;
-    background: url('../images/sensors-values.png') 0 -234px;
+    background: url('../images/sensors-values.png') -70px 0;
 }
 
 /* Meteo sensors*/
-div.sensorsPopup td.TemperatureAir div.icon-sensor {
-    background-position: 0 0;
+div.sensorsPopup td.TemperatureAir div.background.GRAY,
+div.sensorsPopup td.TemperatureRoad div.background.GRAY,
+div.sensorsPopup td.TemperatureUnderRoad div.background.GRAY {
+    background: url('../images/sensors-values.png') -50px 2px;
 }
 
-div.sensorsPopup td.TemperatureRoad div.icon-sensor {
-    background-position: -18px 0;
+div.sensorsPopup td.TemperatureAir div.background.RED,
+div.sensorsPopup td.TemperatureRoad div.background.RED,
+div.sensorsPopup td.TemperatureUnderRoad div.background.RED {
+    background: url('../images/sensors-values.png') -2px 2px;
 }
 
-div.sensorsPopup td.TemperatureUnderRoad div.icon-sensor {
-    background-position: -36px 0;
+div.sensorsPopup td.TemperatureAir div.background.GREEN,
+div.sensorsPopup td.TemperatureRoad div.background.GREEN,
+div.sensorsPopup td.TemperatureUnderRoad div.background.GREEN {
+    background: url('../images/sensors-values.png') -32px 2px;
 }
 
-div.sensorsPopup td.TemperatureUnderRoad div.icon-sensor {
-    background-position: -36px 0;
+div.sensorsPopup td.TemperatureAir div.background.YELLOW,
+div.sensorsPopup td.TemperatureRoad div.background.YELLOW,
+div.sensorsPopup td.TemperatureUnderRoad div.background.YELLOW {
+    background: url('../images/sensors-values.png') -15px 2px;
 }
 
 div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionUndefined {
     background-position: -142px -18px;
 }
 
+div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionNorth {
+    background-position: 0 -18px;
+}
 
+div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionSouth {
+    background-position: -18px -18px;
+}
+
+div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionWest {
+    background-position: -36px -18px;
+}
+
+div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionEast {
+    background-position: -54px -18px;
+}
+
+div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionNorthWest {
+    background-position: -72px -18px;
+}
+
+div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionNorthEast {
+    background-position: -90px -18px;
+}
+
+div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionSouthWest {
+    background-position: -108px -18px;
+}
+
+div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionSouthEast {
+    background-position: -126px -18px;
+}
+
+div.sensorsPopup td.PrecipitationCode div.icon-sensor.PRECIPITATION_RAIN {
+    background-position: 0 -36px;
+}
+
+div.sensorsPopup td.PrecipitationCode div.icon-sensor.PRECIPITATION_SNOW {
+    background-position: -18px -36px;
+}
+
+div.sensorsPopup td.PrecipitationCode div.icon-sensor.PRECIPITATION_RAIN_SNOW {
+    background-position: -36px -36px;
+}
+
+div.sensorsPopup td.PrecipitationCode div.icon-sensor.PRECIPITATION_NO {
+    background-position: -54px -36px;
+}
 
 div.sensorsPopup td.PrecipitationCode div.icon-sensor.PRECIPITATION_UNDEFINED {
     background-position: -72px -36px;
+}
+
+div.sensorsPopup td.Cloudiness div.icon-sensor.CloudinessUndefined {
+    background-position: -54px -54px;
+}
+
+div.sensorsPopup td.Cloudiness div.icon-sensor.CloudinessSunny {
+    background-position: -36px -54px;
+}
+
+div.sensorsPopup td.Cloudiness div.icon-sensor.CloudinessSmallCloudy {
+    background-position: -18px -54px;
+}
+
+div.sensorsPopup td.Cloudiness div.icon-sensor.CloudinessCloudy {
+    background-position: 0 -54px;
+}
+
+div.sensorsPopup td.AirPlessure div.icon-sensor {
+    background-position: -72px 0px;
 }
 
 /* Traffic sensors*/

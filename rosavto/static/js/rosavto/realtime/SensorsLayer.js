@@ -125,39 +125,28 @@ define([
         },
 
         addSensors: function (layerTypeName, sensors) {
-            this.addLayerType(layerTypeName);
+            var isLayerHooked = this._activatedLayers.length > 0;
+
+            this._addLayerType(layerTypeName);
             if (!sensors || sensors.length === 0) {
                 delete this._activatedSensors[layerTypeName];
             } else {
                 this._activatedSensors[layerTypeName] = sensors;
             }
-            this._rebuildLayer();
+
+            if (isLayerHooked) {
+                this._rebuildLayer();
+            } else {
+                this._hookMap(this._map);
+            }
         },
 
-//        addSensor: function (objectType, sensorName) {
-//
-//        },
-//
-//        removeSensors: function (objectType, sensors) {
-//
-//        },
-//
-//        removeSensor: function (objectType, sensorName) {
-//
-//        },
-
-        addLayerType: function (layerTypeName) {
-            var initialActivatedLayersCount = this._activatedLayers.length,
-                indexLayerType = array.indexOf(this._activatedLayers, layerTypeName);
+        _addLayerType: function (layerTypeName) {
+            var indexLayerType = array.indexOf(this._activatedLayers, layerTypeName);
 
             if (indexLayerType === -1) {
                 this._activatedLayers.push(layerTypeName);
             }
-
-            if (initialActivatedLayersCount < 1) {
-                this._hookMap(this._map);
-            }
-            this._rebuildLayer();
         },
 
         removeLayerType: function (layerTypeName) {
@@ -177,8 +166,9 @@ define([
 
             if (this._activatedLayers.length < 1) {
                 this._unhookMap(this._map);
+            } else {
+                this._rebuildLayer();
             }
-            this._rebuildLayer();
         },
 
         _getHeadersForLayers: function (subscriber) {
@@ -319,7 +309,9 @@ define([
                     array.forEach(sensorsStatesData, function (stationData) {
                         stationGuid = stationData.station;
                         markerStation = this._markersWithPopupById[stationGuid];
-                        if (!markerStation) { return false; }
+                        if (!markerStation) {
+                            return false;
+                        }
                         htmlPopup = this._getHtmlPopup(stationGuid, markerStation);
                         array.forEach(stationData.sensors, function (sensorValuePair) {
                             if (!sensorValuePair.alarmState) {
@@ -337,7 +329,9 @@ define([
                     array.forEach(sensorsValuesData, function (stationData) {
                         stationGuid = stationData.station;
                         markerStation = this._markersWithPopupById[stationGuid];
-                        if (!markerStation) { return false; }
+                        if (!markerStation) {
+                            return false;
+                        }
                         htmlPopup = this._getHtmlPopup(stationGuid, markerStation);
                         array.forEach(stationData.sensors, function (sensorValuePair) {
                             if (!sensorValuePair.value) {
@@ -372,7 +366,7 @@ define([
         },
 
         _buildSinglePopup: function (htmlContent, marker) {
-            var popup = L.popup({offset: L.point(0, -25), autoPan: false}).setLatLng(marker.getLatLng()).setContent(htmlContent);
+            var popup = L.popup({offset: L.point(0, -20), autoPan: false}).setLatLng(marker.getLatLng()).setContent(htmlContent);
             this._popupsLayer.addLayer(popup);
         },
 
@@ -431,6 +425,7 @@ define([
             }, this);
             this._layersSubsriber.unsubscribe();
             this._unsubscribeSensorsSubscribes();
+            this._clearAll();
         },
 
         _rebuildLayer: function () {
