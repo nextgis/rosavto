@@ -301,7 +301,6 @@ define([
                 stationGuid,
                 markerStation,
                 htmlPopup,
-                contentPopup,
                 sensorTdHtml;
 
             if (this._isEmpty(this._markersWithPopupById)) {
