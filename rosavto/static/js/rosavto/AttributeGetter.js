@@ -13,9 +13,9 @@ define([
         'rosavto/ParametersVerification',
         'rosavto/Loader',
         'rosavto/Layers/StyledGeoJsonLayer',
-        'leaflet/leaflet'
+        'rosavto/Constants'
     ],
-    function (declare, array, lang, dojo, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade, ParametersVerification, Loader, StyledGeoJsonLayer, L) {
+    function (declare, array, lang, dojo, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade, ParametersVerification, Loader, StyledGeoJsonLayer, Constants) {
         return declare('rosavto.AttributeGetter', [Loader, ParametersVerification], {
             _styledGeoJsonLayer: null,
 
@@ -32,6 +32,12 @@ define([
 
                 this._styledGeoJsonLayer = new StyledGeoJsonLayer(null, this.defaultStylesSettings);
                 this.map._lmap.addLayer(this._styledGeoJsonLayer);
+
+                topic.subscribe("map/events/select/marker", lang.hitch(this, function (LAYER_TYPE, markerId) {
+                    if (LAYER_TYPE !== Constants.TileLayer && this._styledGeoJsonLayer && this._styledGeoJsonLayer.getLayers().length > 0) {
+                        this._styledGeoJsonLayer.clearLayers().clearTypes();
+                    }
+                }));
 
                 this.subscribe();
             },
@@ -56,6 +62,7 @@ define([
                 if (Monitoring) {
                     Monitoring.getApplication().fireEvent('mapObjectSelected', featureId, this.getHistDate());
                 }
+                topic.publish('map/events/select/marker', Constants.TileLayer);
             },
 
             updateGeometry: function (feature) {

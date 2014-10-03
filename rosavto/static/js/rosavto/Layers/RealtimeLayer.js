@@ -3,6 +3,7 @@ define([
     'dojo/_base/lang',
     "dojo/on",
     'rosavto/Layers/StyledGeoJsonLayer',
+    'rosavto/Constants',
     'centreit/StompClient',
     'centreit/DragAndDrop',
     'dojox/lang/functional/object',
@@ -12,7 +13,7 @@ define([
     'dojo/_base/array',
     'leaflet/leaflet',
     'dojo/topic'
-], function (declare, lang, on, StyledGeoJsonLayer, StompClient, DnD, object, uuid, generateRandomUuid, query, array, L, topic) {
+], function (declare, lang, on, StyledGeoJsonLayer, Constants, StompClient, DnD, object, uuid, generateRandomUuid, query, array, L, topic) {
     var RealtimeLayer = declare('rosavto.RealtimeLayer', [StyledGeoJsonLayer], {
         _debug: false,
         markerZIndexOffset: {
@@ -30,7 +31,7 @@ define([
             var me = this;
 
             //подписка на события выбора объекта на карте (подписан, т.к. требуется снимать выделение с неактивных объектов)
-            topic.subscribe("map/events/select/marker", function (markerId) {
+            topic.subscribe("map/events/select/marker", function (LAYER_TYPE, markerId) {
 
                 //если есть текущий маркер и пришел не наш ID маркера, снимаем выделение
                 if (RealtimeLayer.currentMarkerId !== null && RealtimeLayer.currentMarkerId !== markerId) {
@@ -363,7 +364,7 @@ define([
 
             if (!suppressOpenCard) {
                 RealtimeLayer.currentMarkerClosed = false;
-                topic.publish('map/events/select/marker', marker.markerId);
+                topic.publish('map/events/select/marker', Constants.RealtimeLayer, marker.markerId);
                 Monitoring.getApplication().fireEvent('mapObjectSelected', marker.markerId, histDate);
             }
         },

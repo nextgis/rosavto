@@ -10,8 +10,9 @@ define([
     'mustache/mustache',
     'rosavto/realtime/Subscriber',
     'rosavto/Layers/MarkersStateClusterLayer',
-    'rosavto/ParametersVerification'
-], function (declare, query, dom, lang, array, funcObject, topic, domClass, mustache, Subscriber, MarkersStateClusterLayer, ParametersVerification) {
+    'rosavto/ParametersVerification',
+    'rosavto/Constants'
+], function (declare, query, dom, lang, array, funcObject, topic, domClass, mustache, Subscriber, MarkersStateClusterLayer, ParametersVerification, Constants) {
     return declare('rosavto.SensorsLayer', [MarkersStateClusterLayer, ParametersVerification], {
 
         constructor: function (settings) {
@@ -33,6 +34,12 @@ define([
             this._createSensorsSubscribers(this.sensorsSubscribesUrl);
 
             mustache.parse(this._popupTemplate);
+
+            topic.subscribe("map/events/select/marker", lang.hitch(this, function (LAYER_TYPE, markerId) {
+                if (LAYER_TYPE !== Constants.SensorsLayer && this._markerSelected) {
+                    domClass.remove(this._markerSelected._icon, 'selected');
+                }
+            }));
         },
 
         _sensorsSubscribers: {},
@@ -266,6 +273,8 @@ define([
                 if (Monitoring) {
                     Monitoring.getApplication().fireEvent('mapObjectSelected', this._markerSelected.guid, this.getHistDate());
                 }
+
+                topic.publish('map/events/select/marker', Constants.SensorsLayer, this._markerSelected.guid);
             }, this);
         },
 
