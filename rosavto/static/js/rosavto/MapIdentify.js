@@ -38,7 +38,6 @@ define([
                         if (this.map.getVisibleNgwLayers().length < 1) {
                             return false;
                         }
-                        topic.publish('map/identityUi/block');
                         this.getIdsByClick(e);
                     }
                 }));
@@ -64,9 +63,7 @@ define([
                     this.ngwServiceFacade.identifyGeoFeaturesByLayers(layersId, zoom, [e.latlng.lng, e.latlng.lat])
                         .then(lang.hitch(this, function (geoJsonFeatures) {
                                 featuresCount = geoJsonFeatures.features.length;
-                                if (featuresCount === 0) {
-                                    topic.publish('map/identityUi/unblock');
-                                } else if (featuresCount === 1) {
+                                if (featuresCount === 1) {
                                     topic.publish('attributes/get', geoJsonFeatures.features[0], this.fieldIdentify);
                                 }
                                 else if (featuresCount > 1) {
@@ -215,12 +212,9 @@ define([
                     that.identify(layerId, featureId);
                     map.closePopup(popup);
                 });
-
-                topic.publish('map/identityUi/unblock');
             },
 
             identify: function (layerId, id) {
-                topic.publish('map/identityUi/block');
                 topic.publish('attributes/get', layerId, id);
             }
         });

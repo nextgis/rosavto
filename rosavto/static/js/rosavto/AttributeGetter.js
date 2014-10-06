@@ -33,12 +33,6 @@ define([
                 this._styledGeoJsonLayer = new StyledGeoJsonLayer(null, this.defaultStylesSettings);
                 this.map._lmap.addLayer(this._styledGeoJsonLayer);
 
-                topic.subscribe("map/events/select/marker", lang.hitch(this, function (LAYER_TYPE, markerId) {
-                    if (LAYER_TYPE !== Constants.TileLayer && this._styledGeoJsonLayer && this._styledGeoJsonLayer.getLayers().length > 0) {
-                        this._styledGeoJsonLayer.clearLayers().clearTypes();
-                    }
-                }));
-
                 this.subscribe();
             },
 
@@ -46,15 +40,11 @@ define([
                 topic.subscribe('attributes/get', lang.hitch(this, function (feature, fieldIdentify) {
                     this.updateGeometry(feature);
                     this.updateAttributes(feature.properties[fieldIdentify]);
-                    topic.publish('map/identityUi/unblock');
                 }));
-
-                topic.subscribe('map/identityUi/block', lang.hitch(this, function () {
-                    this.map.showLoader();
-                }));
-
-                topic.subscribe('map/identityUi/unblock', lang.hitch(this, function () {
-                    this.map.hideLoader();
+                topic.subscribe("map/events/select/marker", lang.hitch(this, function (LAYER_TYPE, markerId) {
+                    if (LAYER_TYPE !== Constants.TileLayer && this._styledGeoJsonLayer && this._styledGeoJsonLayer.getLayers().length > 0) {
+                        this._styledGeoJsonLayer.clearLayers().clearTypes();
+                    }
                 }));
             },
 
@@ -86,7 +76,6 @@ define([
             },
 
             selectObject: function (layerId, featureId) {
-                topic.publish('map/identityUi/block');
                 this.ngwServiceFacade.getGeometriesByGuids([layerId], [featureId], this.getHistDate())
                     .then(lang.hitch(this, function (geoJson) {
                         var countFeatures = geoJson.features.length,
@@ -96,7 +85,6 @@ define([
                             feature.properties.__layer__ = layerId;
                             this.updateGeometry(feature);
                         }
-                        topic.publish('map/identityUi/unblock');
                     }));
             }
         });
