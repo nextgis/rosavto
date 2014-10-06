@@ -39,6 +39,10 @@
                                 zoomControl: true,
                                 legend: true
                             }),
+                            attributesBaseUrl = '/',
+                            attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl),
+                            mapIdentify,
+                            attributeGetter,
                             layersInfo,
                             dateWidget, timeWidget,
                             styledGeoJsonLayer;
@@ -53,6 +57,38 @@
                         map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43);
                         map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53);
                         map.hideLoader();
+
+                        mapIdentify = new MapIdentify({
+                            map: map,
+                            ngwServiceFacade: ngwServiceFacade,
+                            layersInfo: layersInfo,
+                            fieldIdentify: 'uniq_uid',
+                            debug: true
+                        });
+                        mapIdentify.on();
+
+                        attributeGetter = new AttributeGetter({
+                            map: map,
+                            ngwServiceFacade: ngwServiceFacade,
+                            attributesServiceFacade: attributesServiceFacade,
+                            getHistDate: function () {
+                                return new Date();
+                            },
+                            mapIdentify: mapIdentify,
+                            defaultStylesSettings: {
+                                fields: {
+                                    id: 'uniq_uid',
+                                    type: 'type_name'
+                                },
+                                style: {
+                                    'default': {
+                                        point: {},
+                                        line: {opacity: 0.5, weight: 15, color: '#FF0000'}
+                                    }
+                                }
+                            },
+                            debug: true
+                        });
 
                         var sensorLayer = new SensorsLayer({
                             objectsSubscribedUrl: '/app/subscribe/map/',
