@@ -1,5 +1,5 @@
 .leaflet-control-easyPrint a {
-    background: #fff url(../images/print.png) no-repeat 5px;
+    background: #fff url(images/print.png) no-repeat 5px;
     background-size: 16px 16px;
     display: block;
 }
