@@ -1,0 +1,4 @@
+div.leaflet-control-container div.leaflet-control-layers-overlays,
+div.leaflet-control-container div.leaflet-control-layers-separator {
+    display: none;
+}
