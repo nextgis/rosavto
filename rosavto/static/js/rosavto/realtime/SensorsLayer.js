@@ -219,7 +219,6 @@ define([
 
                     if (markerSelectedExist && !isSelectedFound && markerSelected.guid === sensor.guid) {
                         newMarker = this._createSensorMarker(sensor);
-                        this.addMarker(newMarker);
                         this._markerSelected = newMarker;
                         if (this._markerSelected._icon) {
                             domClass.add(this._markerSelected._icon, 'selected');
@@ -230,7 +229,6 @@ define([
                     }
 
                     newMarker = this._createSensorMarker(sensor);
-                    this.addMarker(newMarker);
                     this._markers[newMarker.guid] = newMarker;
                 }, this);
             }
@@ -260,8 +258,9 @@ define([
             marker.state = sensor.alarmState;
             marker.type = sensor.type;
             marker.guid = sensor.guid;
-            this._markerBindEvents(marker);
             this._markers[sensor.guid] = marker;
+            this.addMarker(marker);
+            this._markerBindEvents(marker);
             return marker;
         },
 
@@ -269,6 +268,10 @@ define([
             marker.on('click', function (e) {
                 this._selectMarker(e.target);
             }, this);
+
+            if (!marker._icon) {
+                return false;
+            }
 
             on(marker._icon, 'mousedown', lang.hitch(this, function (e) {
                 if (e.which === 1) {
