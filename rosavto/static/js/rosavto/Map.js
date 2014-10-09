@@ -6,8 +6,11 @@ define([
     'dojo/request/xhr',
     'rosavto/Loader',
     'leaflet/leaflet',
-    'centreit/StorageProvider'
-], function (query, declare, lang, array, xhr, Loader, L, storage) {
+    'centreit/StorageProvider',
+    'dojo/topic',
+    'dojox/lang/functional/object',
+    'rosavto/EasyPrint'
+], function (query, declare, lang, array, xhr, Loader, L, storage, topic, object, EasyPrint) {
     return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
@@ -38,6 +41,35 @@ define([
                 if (center) {
                     this._lmap.setView(center, zoom, {reset: true});
                 }
+            }));
+
+            var component = this;
+            topic.subscribe("map/coordinates/restore", function () {
+                component._lmap.setView([arguments[0].lat, arguments[0].lon], arguments[0].zoom, {reset: true});
+            });
+            topic.publish("map/created", {created: true});
+
+            topic.subscribe("map/historyDate/change", function () {
+                component.historyDate=arguments[0];
+                object.forIn(component._lmap._layers, function (layer, key) {
+                    if (layer.options && layer.options.subscribeUrl){
+                        if (component.historyDate){
+                            layer.options.historyDate = component.historyDate;
+                        }else{
+                            layer.options.historyDate = null;
+                        }
+                    }
+                }, this);
+                component._lmap.fire('moveend');  //событие, что перемещения на карте выполнены, т.е. даты для отображения во всех слоях проставлены
+            });
+
+            new EasyPrint();
+            L.easyPrint().addTo(this._lmap);
+        },
+
+        _legendBindEvents: function () {
+            query(this._legend._overlaysList).on('click', lang.hitch(this, function () {
+                this._updateActiveNgwLayers();
             }));
 
         },
