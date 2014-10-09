@@ -1,5 +1,6 @@
 define([
     'dojo/_base/declare',
+    'dojo/on',
     'dojo/query',
     'dojo/dom',
     'dojo/_base/lang',
@@ -11,8 +12,9 @@ define([
     'rosavto/realtime/Subscriber',
     'rosavto/Layers/MarkersStateClusterLayer',
     'rosavto/ParametersVerification',
-    'rosavto/Constants'
-], function (declare, query, dom, lang, array, funcObject, topic, domClass, mustache, Subscriber, MarkersStateClusterLayer, ParametersVerification, Constants) {
+    'rosavto/Constants',
+    'centreit/DragAndDrop'
+], function (declare, on, query, dom, lang, array, funcObject, topic, domClass, mustache, Subscriber, MarkersStateClusterLayer, ParametersVerification, Constants, DnD) {
     return declare('rosavto.SensorsLayer', [MarkersStateClusterLayer, ParametersVerification], {
 
         constructor: function (settings) {
@@ -265,18 +267,46 @@ define([
 
         _markerBindEvents: function (marker) {
             marker.on('click', function (e) {
-                if (this._markerSelected && this._markerSelected._icon) {
-                    domClass.remove(this._markerSelected._icon, 'selected');
-                }
-                this._markerSelected = e.target;
-                domClass.add(this._markerSelected._icon, 'selected');
-
-                if (Monitoring) {
-                    Monitoring.getApplication().fireEvent('mapObjectSelected', this._markerSelected.guid, this.getHistDate());
-                }
-
-                topic.publish('map/events/select/marker', Constants.SensorsLayer, this._markerSelected.guid);
+                this._selectMarker(e.target);
             }, this);
+
+            on(marker._icon, 'mousedown', lang.hitch(this, function (e) {
+                if (e.which === 1) {
+                    DnD.onDragStart(e.target, {
+                        objectGuid: marker.guid,
+                        type: marker.type,
+                        historyDate: this.getHistDate()
+                    });
+                    e.stopPropagation();
+                }
+            }));
+
+            on(marker._icon, 'mouseup', lang.hitch(this, function (e) {
+
+                if (e.which === 1) {
+                    if (DnD.dragStart === false) {
+                        this._selectMarker(marker);
+                    } else {
+                        if (DnD.dragElement) {
+                            DnD.dragElement.remove();
+                        }
+                    }
+                }
+            }));
+        },
+
+        _selectMarker: function (markerSelected) {
+            if (this._markerSelected && this._markerSelected._icon) {
+                domClass.remove(this._markerSelected._icon, 'selected');
+            }
+            this._markerSelected = markerSelected;
+            domClass.add(this._markerSelected._icon, 'selected');
+
+            if (Monitoring) {
+                Monitoring.getApplication().fireEvent('mapObjectSelected', this._markerSelected.guid, this.getHistDate());
+            }
+
+            topic.publish('map/events/select/marker', Constants.SensorsLayer, this._markerSelected.guid);
         },
 
         _markersWithPopup: {},
