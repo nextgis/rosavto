@@ -1,0 +1,26 @@
+.leaflet-control-easyPrint a {
+    background: #fff url(../images/print.png) no-repeat 5px;
+    background-size: 16px 16px;
+    display: block;
+}
+
+@media print {
+    .noprint {
+        display:none !important;
+    }
+
+    .pprint {
+        left: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    .leaflet-control-easyPrint-button {
+        display: none !important;
+    }
+
+    div.leaflet-marker-icon {
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+    }
+}
