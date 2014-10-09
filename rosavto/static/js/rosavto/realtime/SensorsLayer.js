@@ -43,6 +43,22 @@ define([
                     this._markerSelected = null;
                 }
             }));
+
+            this._onSpiderfyBindEvents();
+        },
+
+        _onSpiderfyBindEvents: function () {
+            var markerId, markers, marker;
+
+            this.on('spiderfied', function (e) {
+                markers = e.target._markers;
+                for (markerId in markers) {
+                    if (markers.hasOwnProperty(markerId)) {
+                        marker = markers[markerId];
+                        this._onDndEvent(marker);
+                    }
+                }
+            }, this);
         },
 
         _sensorsSubscribers: {},
@@ -269,10 +285,12 @@ define([
                 this._selectMarker(e.target);
             }, this);
 
-            if (!marker._icon) {
-                return false;
+            if (marker._icon) {
+                this._onDndEvent(marker);
             }
+        },
 
+        _onDndEvent: function (marker) {
             on(marker._icon, 'mousedown', lang.hitch(this, function (e) {
                 if (e.which === 1) {
                     DnD.onDragStart(e.target, {
