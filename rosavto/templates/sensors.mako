@@ -37,7 +37,8 @@
                                 center: [55.529, 37.584],
                                 zoom: 7,
                                 zoomControl: true,
-                                legend: true
+                                legend: true,
+                                easyPrint: false
                             }),
                             attributesBaseUrl = '/',
                             attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl),
@@ -116,13 +117,13 @@
                             'Traffic': ['AverageSpeed', 'Amount', 'Trucks']
                         });
 
-                        setTimeout(function () {
-                            sensorLayer.activateLayers({
-                                'Meteo': ['TemperatureAir', 'TemperatureRoad', 'TemperatureUnderRoad', 'WindVelocity', 'WindGusts',
-                                    'WindDirection', 'PrecipitationCode', 'Cloudiness', 'AirPlessure', 'LayerType', 'ReagentAmount', 'ViewDistance',
-                                    'Humidity', 'AdhesionCoefficient']
-                            });
-                        }, 10000);
+##                        setTimeout(function () {
+##                            sensorLayer.activateLayers({
+##                                'Meteo': ['TemperatureAir', 'TemperatureRoad', 'TemperatureUnderRoad', 'WindVelocity', 'WindGusts',
+##                                    'WindDirection', 'PrecipitationCode', 'Cloudiness', 'AirPlessure', 'LayerType', 'ReagentAmount', 'ViewDistance',
+##                                    'Humidity', 'AdhesionCoefficient']
+##                            });
+##                        }, 10000);
                     });
                 })
         ;

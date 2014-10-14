@@ -13,7 +13,8 @@
         require(['rosavto/Map', 'rosavto/Layers/RealtimeLayer', 'dojo/domReady!'], function (Map, RealtimeLayer) {
             var map = new Map('map', {
                         center: [59.3441, 31.2633],
-                        zoom: 13
+                        zoom: 13,
+                        easyPrint: false
                     }),
                     getGuid = function () {
                         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

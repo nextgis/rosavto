@@ -71,7 +71,8 @@
                             map = new Map('map', {
                                 center: [55.7501, 37.6687],
                                 zoom: 7,
-                                zoomControl: true
+                                zoomControl: true,
+                                easyPrint: false
                             }),
 
                             // Описываем возможные значения состояний

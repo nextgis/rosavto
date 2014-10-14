@@ -41,7 +41,8 @@
                                 center: [55.7501, 37.6687],
                                 zoom: 10,
                                 zoomControl: true,
-                                legend: true
+                                legend: true,
+                                easyPrint: false
                             }),
                             layersInfo;
 

@@ -48,7 +48,8 @@
                 center: [57, 38],
                 zoom: 7,
                 zoomControl: true,
-                legend: true
+                legend: true,
+                easyPrint: false
             });
 
             //---- map with restriction
@@ -56,7 +57,8 @@
                 center: [57, 38],
                 zoom: 7,
                 zoomControl: true,
-                legend: true
+                legend: true,
+                easyPrint: false
             });
 
             var layersInfo = new LayersInfo(ngwServiceFacade);
