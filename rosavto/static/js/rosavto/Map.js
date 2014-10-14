@@ -63,8 +63,10 @@ define([
                 component._lmap.fire('moveend');  //событие, что перемещения на карте выполнены, т.е. даты для отображения во всех слоях проставлены
             });
 
-            new EasyPrint();
-            L.easyPrint().addTo(this._lmap);
+            if (settings.easyPrint || settings.easyPrint === 'undefined') {
+                new EasyPrint();
+                L.easyPrint().addTo(this._lmap);
+            }
         },
 
         _legendBindEvents: function () {

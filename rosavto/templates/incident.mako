@@ -73,13 +73,15 @@
                                 center: [56.0369, 35.8788],
                                 zoom: 16,
                                 zoomControl: true,
-                                legend: true
+                                legend: true,
+                                easyPrint: false
                             }),
                             map2 = new Map('map2', {
                                 center: [56.0369, 35.8788],
                                 zoom: 16,
                                 zoomControl: true,
-                                legend: true
+                                legend: true,
+                                easyPrint: false
                             }),
                             layersInfo,
                             styles,
