@@ -466,3 +466,60 @@ div.sensorsPopup td.Amount div.icon-sensor {
 div.sensorsPopup td.Trucks div.icon-sensor {
     background-position: 0 -216px;
 }
+
+/* incidents styles */
+div.leaflet-marker-icon.crash-incident {
+    background-image: url('../images/incidents/142.png');
+}
+
+div.leaflet-marker-icon.crash-incident:hover, div.leaflet-marker-icon.crash-incident.pressed {
+    background-image: url('../images/incidents/142_s.png');
+}
+
+div.leaflet-marker-icon.accident {
+    background-image: url('../images/incidents/160.png');
+}
+
+div.leaflet-marker-icon.accident:hover, div.leaflet-marker-icon.accident.pressed {
+    background-image: url('../images/incidents/160_s.png');
+}
+
+div.leaflet-marker-icon.fire-incident {
+    background-image: url('../images/incidents/159.png');
+}
+
+div.leaflet-marker-icon.fire-incident:hover, div.leaflet-marker-icon.fire-incident.pressed {
+    background-image: url('../images/incidents/159_s.png');
+}
+
+div.leaflet-marker-icon.meteo-incident {
+    background-image: url('../images/incidents/149.png');
+}
+
+div.leaflet-marker-icon.meteo-incident:hover, div.leaflet-marker-icon.meteo-incident.pressed {
+    background-image: url('../images/incidents/149_s.png');
+}
+
+div.leaflet-marker-icon.terror-incident {
+    background-image: url('../images/incidents/158.png');
+}
+
+div.leaflet-marker-icon.terror-incident:hover, div.leaflet-marker-icon.terror-incident.pressed {
+    background-image: url('../images/incidents/158_s.png');
+}
+
+div.leaflet-marker-icon.traffic-jam {
+    background-image: url('../images/incidents/161.png');
+}
+
+div.leaflet-marker-icon.traffic-jam:hover, div.leaflet-marker-icon.traffic-jam.pressed {
+    background-image: url('../images/incidents/161_s.png');
+}
+
+div.leaflet-marker-icon.needs-clarification-incident {
+    background-image: url('../images/incidents/162.png');
+}
+
+div.leaflet-marker-icon.needs-clarification-incident:hover, div.leaflet-marker-icon.needs-clarification-incident.pressed {
+    background-image: url('../images/incidents/162_s.png');
+}
