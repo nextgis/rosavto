@@ -552,3 +552,23 @@ div.leaflet-marker-icon.obj.nuclear-power-station-s {
 div.leaflet-marker-icon.obj.hydro-power-plants-s {
     background-image: url('../../icons/layers/112_s.png');
 }
+
+div.leaflet-marker-icon.obj.isso-s {
+    background-image: url('../../icons/layers/141_s.png');
+}
+
+div.leaflet-marker-icon.obj.service-object-s {
+    background-image: url('../../icons/layers/135_s.png');
+}
+
+div.leaflet-marker-icon.obj.kilometer-posts-s {
+    background-image: url('../../icons/layers/140_s.png');
+}
+
+div.leaflet-marker-icon.obj.critical-facilities-s {
+    background-image: url('../../icons/layers/109_s.png');
+}
+
+div.leaflet-marker-icon.obj.is-s {
+    background-image: url('../../icons/layers/113_s.png');
+}
