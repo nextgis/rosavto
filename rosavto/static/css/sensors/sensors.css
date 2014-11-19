@@ -534,3 +534,21 @@ div.leaflet-marker-icon.needs-clarification-incident {
 div.leaflet-marker-icon.needs-clarification-incident:hover, div.leaflet-marker-icon.needs-clarification-incident.pressed {
     background-image: url('../images/incidents/162-a.png');
 }
+
+/* selected objects styles */
+div.leaflet-marker-icon.obj {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+div.leaflet-marker-icon.obj.chemical-plants-s {
+    background-image: url('../../icons/layers/114_s.png');
+}
+
+div.leaflet-marker-icon.obj.nuclear-power-station-s {
+    background-image: url('../../icons/layers/111_s.png');
+}
+
+div.leaflet-marker-icon.obj.reservoirs-s {
+    background-image: url('../../icons/layers/111_s.png');
+}
