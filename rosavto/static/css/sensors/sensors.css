@@ -468,6 +468,17 @@ div.sensorsPopup td.Trucks div.icon-sensor {
 }
 
 /* incidents styles */
+div.leaflet-marker-icon.crash-incident,
+div.leaflet-marker-icon.accident,
+div.leaflet-marker-icon.fire-incident,
+div.leaflet-marker-icon.meteo-incident,
+div.leaflet-marker-icon.terror-incident,
+div.leaflet-marker-icon.traffic-jam,
+div.leaflet-marker-icon.needs-clarification-incident {
+    width: 40px;
+    height: 40px;
+}
+
 div.leaflet-marker-icon.crash-incident {
     background-image: url('../images/incidents/142.png');
 }
