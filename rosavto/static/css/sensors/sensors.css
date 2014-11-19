@@ -475,8 +475,8 @@ div.leaflet-marker-icon.meteo-incident,
 div.leaflet-marker-icon.terror-incident,
 div.leaflet-marker-icon.traffic-jam,
 div.leaflet-marker-icon.needs-clarification-incident {
-    width: 40px;
-    height: 40px;
+    width: 40px !important;
+    height: 40px !important;
 }
 
 div.leaflet-marker-icon.crash-incident {
@@ -484,7 +484,7 @@ div.leaflet-marker-icon.crash-incident {
 }
 
 div.leaflet-marker-icon.crash-incident:hover, div.leaflet-marker-icon.crash-incident.pressed {
-    background-image: url('../images/incidents/142_s.png');
+    background-image: url('../images/incidents/142-a.png');
 }
 
 div.leaflet-marker-icon.accident {
@@ -492,7 +492,7 @@ div.leaflet-marker-icon.accident {
 }
 
 div.leaflet-marker-icon.accident:hover, div.leaflet-marker-icon.accident.pressed {
-    background-image: url('../images/incidents/160_s.png');
+    background-image: url('../images/incidents/160-a.png');
 }
 
 div.leaflet-marker-icon.fire-incident {
@@ -500,7 +500,7 @@ div.leaflet-marker-icon.fire-incident {
 }
 
 div.leaflet-marker-icon.fire-incident:hover, div.leaflet-marker-icon.fire-incident.pressed {
-    background-image: url('../images/incidents/159_s.png');
+    background-image: url('../images/incidents/159-a.png');
 }
 
 div.leaflet-marker-icon.meteo-incident {
@@ -508,7 +508,7 @@ div.leaflet-marker-icon.meteo-incident {
 }
 
 div.leaflet-marker-icon.meteo-incident:hover, div.leaflet-marker-icon.meteo-incident.pressed {
-    background-image: url('../images/incidents/149_s.png');
+    background-image: url('../images/incidents/149-a.png');
 }
 
 div.leaflet-marker-icon.terror-incident {
@@ -516,7 +516,7 @@ div.leaflet-marker-icon.terror-incident {
 }
 
 div.leaflet-marker-icon.terror-incident:hover, div.leaflet-marker-icon.terror-incident.pressed {
-    background-image: url('../images/incidents/158_s.png');
+    background-image: url('../images/incidents/158-a.png');
 }
 
 div.leaflet-marker-icon.traffic-jam {
@@ -524,7 +524,7 @@ div.leaflet-marker-icon.traffic-jam {
 }
 
 div.leaflet-marker-icon.traffic-jam:hover, div.leaflet-marker-icon.traffic-jam.pressed {
-    background-image: url('../images/incidents/161_s.png');
+    background-image: url('../images/incidents/161-a.png');
 }
 
 div.leaflet-marker-icon.needs-clarification-incident {
@@ -532,5 +532,5 @@ div.leaflet-marker-icon.needs-clarification-incident {
 }
 
 div.leaflet-marker-icon.needs-clarification-incident:hover, div.leaflet-marker-icon.needs-clarification-incident.pressed {
-    background-image: url('../images/incidents/162_s.png');
+    background-image: url('../images/incidents/162-a.png');
 }
