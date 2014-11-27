@@ -37,6 +37,18 @@
 
 <%block name="inlineScripts">
     <script>
+
+        Monitoring = {
+            getApplication: function () {
+                return {
+                    fireEvent: function (type, featureId, datetime) {
+                        var el = document.getElementById('attributes');
+                        el.innerHTML = featureId;
+                    }
+                }
+            }
+        };
+
         require([
                     'dojo/dom-class',
                     'rosavto/Map',
