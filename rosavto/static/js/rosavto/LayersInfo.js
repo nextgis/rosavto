@@ -397,6 +397,14 @@ define([
                             console.log({valueForParsing: valueForParsing});
                         }
                         break;
+                    case 'object-style':
+                        try {
+                            jsonStyle.objectStyle = JSON.parse(valueForParsing);
+                        } catch (err) {
+                            console.log('LayerId: ' + resourceId + ', Parsing json object-style error:' + err.message);
+                            console.log({valueForParsing: valueForParsing});
+                        }
+                        break;
                 }
             },
 
