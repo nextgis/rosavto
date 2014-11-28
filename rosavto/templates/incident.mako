@@ -12,10 +12,7 @@
 </br>
 <button id="test2" style="margin: 3px; background-color: gainsboro;">Создать: Занос А-147 77+376 - 80+570</button>
 </br>
-<button id="test3" style="margin: 3px; background-color: gainsboro;">Отобразить: Метеостанция М-10 «Россия» 614 + 870
-</button>
-</br>
-<button id="test4" style="margin: 3px; background-color: gainsboro;">Отобразить: ПУИДД М-10 «Россия» 614 + 880
+<button id="test3" style="margin: 3px; background-color: gainsboro;">Отобразить: Метеостанция (614+870) + ПУИДД (641+880)
 </button>
 
 
@@ -168,205 +165,178 @@
         }
     </style>
     <script>
-    require([
-                'dojo/DeferredList',
-                'dojo/query',
-                'dojo/_base/array',
-                'dojo/html',
-                'rosavto/Map',
-                'rosavto/NgwServiceFacade',
-                'rosavto/LayersInfo',
-                'rosavto/Layers/StyledGeoJsonLayer',
-                'rosavto/controls/L.Control.IncidentEditor',
-                'dojo/parser',
-                'dijit/form/Select',
-                'dojo/domReady!'],
+        require([
+                    'dojo/DeferredList',
+                    'dojo/query',
+                    'dojo/_base/array',
+                    'dojo/html',
+                    'dojo/promise/all',
+                    'rosavto/Map',
+                    'rosavto/NgwServiceFacade',
+                    'rosavto/LayersInfo',
+                    'rosavto/Layers/StyledGeoJsonLayer',
+                    'rosavto/controls/L.Control.IncidentEditor',
+                    'dojo/parser',
+                    'dijit/form/Select',
+                    'dojo/domReady!'],
 
-            function (DeferredList, query, array, html, Map, NgwServiceFacade, LayersInfo, StyledGeoJsonLayer, IncidentEditor, parser, Select) {
-                parser.parse();
+                function (DeferredList, query, array, html, promiseAll, Map, NgwServiceFacade, LayersInfo, StyledGeoJsonLayer, IncidentEditor, parser, Select) {
+                    parser.parse();
 
-                var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
-                        map = new Map('map', {
-                            center: [59.34601, 31.23893],
-                            zoom: 16,
-                            zoomControl: true,
-                            legend: true,
-                            easyPrint: false
-                        }),
-                        map2 = new Map('map2', {
-                            center: [59.34601, 31.23893],
-                            zoom: 16,
-                            zoomControl: true,
-                            legend: true,
-                            easyPrint: false
-                        }),
-                        layersInfo,
-                        styles,
-                        getIncident1, getIncident2, getIncident3,
-                        layer;
+                    var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
+                            map = new Map('map', {
+                                center: [59.34601, 31.23893],
+                                zoom: 16,
+                                zoomControl: true,
+                                legend: true,
+                                easyPrint: false
+                            }),
+                            map2 = new Map('map2', {
+                                center: [59.34601, 31.23893],
+                                zoom: 16,
+                                zoomControl: true,
+                                legend: true,
+                                easyPrint: false
+                            }),
+                            layersInfo,
+                            styles,
+                            getIncident1, getIncident2, getIncident3,
+                            layer;
 
-                layersInfo = new LayersInfo(ngwServiceFacade);
-                map.showLoader();
-                map2.showLoader();
-                layersInfo.fillLayersInfo().then(function (store) {
-                    var baseLayers = layersInfo.getBaseLayers();
-                    map.addBaseLayers(baseLayers);
-                    map2.addBaseLayers(baseLayers);
-                    map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
-                    map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
-                    map.hideLoader();
-                    map2.hideLoader();
+                    layersInfo = new LayersInfo(ngwServiceFacade);
+                    map.showLoader();
+                    map2.showLoader();
+                    layersInfo.fillLayersInfo().then(function (store) {
+                        var baseLayers = layersInfo.getBaseLayers();
+                        map.addBaseLayers(baseLayers);
+                        map2.addBaseLayers(baseLayers);
+                        map.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
+                        map2.addNgwTileLayer('Тестовые дороги', ngwUrlForTiles, 46);
+                        map.hideLoader();
+                        map2.hideLoader();
 
-                    styles = {
-                        accident: {
-                            position: 'front',
-                            point: {type: 'div', className: 'accident'},
-                            line: {opacity: 0.8, weight: 5, color: '#FF0000'}
-                        },
-                        snow: {
-                            position: 'back',
-                            point: {type: 'div', className: 'snow'},
-                            line: {opacity: 0.5, weight: 15, color: '#0040FF'}
-                        },
-                        meteo: layersInfo.getStylesByLayersKeynames(['sensors_meteo'])['sensors_meteo']['objectStyle'],
-                        puid: layersInfo.getStylesByLayersKeynames(['sensors_traffic'])['sensors_traffic']['objectStyle']
-                    };
+                        styles = {
+                            accident: {
+                                position: 'front',
+                                point: {type: 'div', className: 'accident'},
+                                line: {opacity: 0.8, weight: 5, color: '#FF0000'}
+                            },
+                            snow: {
+                                position: 'back',
+                                point: {type: 'div', className: 'snow'},
+                                line: {opacity: 0.5, weight: 15, color: '#0040FF'}
+                            },
+                            meteo: layersInfo.getStylesByLayersKeynames(['sensors_meteo'])['sensors_meteo']['objectStyle'],
+                            puid: layersInfo.getStylesByLayersKeynames(['sensors_traffic'])['sensors_traffic']['objectStyle']
+                        };
 
-                    layer = new StyledGeoJsonLayer(null, {
-                        callbackClick: function (id, feature) {
-                            alert(feature.properties.__type);
-                        },
-                        styles: styles
-                    });
+                        layer = new StyledGeoJsonLayer(null, {
+                            callbackClick: function (id, feature) {
+                                alert(feature.properties.__type);
+                            },
+                            styles: styles
+                        });
 
-                    map2.addGeoJsonLayer('Происшествия', layer);
+                        map2.addGeoJsonLayer('Происшествия', layer);
 
-                    var editorInfo = query('#editorInfo')[0];
+                        var editorInfo = query('#editorInfo')[0];
 
-                    var incidentEditor = new L.Control.IncidentEditor({
-                        ngwServiceFacade: ngwServiceFacade,
-                        map: map,
-                        idLayer: 17,
-                        roadGuid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
-                        modes: ['point', 'line'],
-                        activeMode: 'point',
-                        callbackDistanceChange: function (distances) {
-                            html.set(editorInfo, JSON.stringify(distances));
-                        }
-                    });
-
-                    map.getLMap().addControl(incidentEditor);
-
-                    query('#getGeoJson').on('click', function () {
-                        alert(JSON.stringify(incidentEditor.getGeoJsonData()));
-                    });
-
-                    var getSelectedType = function (id) {
-                        var selectedType;
-                        array.forEach(dijit.byId(id).getOptions(), function (opt, i) {
-                            if (opt.selected) {
-                                selectedType = opt.value;
+                        var incidentEditor = new L.Control.IncidentEditor({
+                            ngwServiceFacade: ngwServiceFacade,
+                            map: map,
+                            idLayer: 17,
+                            roadGuid: '4886ad28-7b11-9eba-5c9d-a4ecfd608099',
+                            modes: ['point', 'line'],
+                            activeMode: 'point',
+                            callbackDistanceChange: function (distances) {
+                                html.set(editorInfo, JSON.stringify(distances));
                             }
                         });
-                        return selectedType;
-                    };
 
-                    query('#create').on('click', function () {
-                        var geoJson = incidentEditor.getGeoJsonData();
+                        map.getLMap().addControl(incidentEditor);
 
-                        if (geoJson) {
-                            var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-                                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                                return v.toString(16);
+                        query('#getGeoJson').on('click', function () {
+                            alert(JSON.stringify(incidentEditor.getGeoJsonData()));
+                        });
+
+                        var getSelectedType = function (id) {
+                            var selectedType;
+                            array.forEach(dijit.byId(id).getOptions(), function (opt, i) {
+                                if (opt.selected) {
+                                    selectedType = opt.value;
+                                }
+                            });
+                            return selectedType;
+                        };
+
+                        query('#create').on('click', function () {
+                            var geoJson = incidentEditor.getGeoJsonData();
+
+                            if (geoJson) {
+                                var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                                    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                                    return v.toString(16);
+                                });
+
+                                layer.addObject(geoJson, getSelectedType("typesSelector"), guid);
+                                map2.getLMap().fitBounds(layer.getBounds());
+                                incidentEditor.erase();
+                            }
+                        });
+
+                        query('#center').on('click', function () {
+                            incidentEditor.centerByObject(23, '{1437e736-974f-462a-86f8-85f0910089f0}', 3000);
+                        });
+
+                        var roadsSelector = dijit.byId('roadsSelector');
+
+                        roadsSelector.on('change', function (roadGuid) {
+                            incidentEditor.centerByObject(14, roadGuid, 3000);
+                            incidentEditor.setRoadGuid(roadGuid);
+                        });
+
+                        query('#test1').on('click', function () {
+                            incidentEditor.setRoadGuid('{65de3f89-c234-44c5-867d-fd8961eb8644}');
+                            incidentEditor.createMarkersByDistance([
+                                {km: 614, m: 870}
+                            ]);
+                        });
+
+                        query('#test2').on('click', function () {
+                            incidentEditor.setMode('line');
+                            incidentEditor.setRoadGuid('{11b970fb-a9a8-474b-92cd-b0aa6a7f2d28}');
+                            incidentEditor.createMarkersByDistance([
+                                {km: 77, m: 376},
+                                {km: 80, m: 570}
+                            ]);
+                        });
+
+                        query('#test3').on('click', function () {
+                            var meteo = ngwServiceFacade.getIncident([
+                                            {
+                                                layer: layersInfo.getLayersIdByKeynames(['lineref'])[0],
+                                                guid: '{65de3f89-c234-44c5-867d-fd8961eb8644}',
+                                                distance: {km: 614, m: 880}
+                                            }]),
+                                    traffic = ngwServiceFacade.getIncident(
+                                            [{
+                                                layer: layersInfo.getLayersIdByKeynames(['lineref'])[0],
+                                                guid: '{65de3f89-c234-44c5-867d-fd8961eb8644}',
+                                                distance: {km: 614, m: 870}
+                                            }]);
+
+                            promiseAll(
+                                {meteo: meteo, traffic: traffic}
+                            ).then(function (data) {
+                                    layer.addObject({type:"Feature",properties:{},geometry: data.meteo.geometry}, 'meteo', '1');
+                                    layer.addObject({type:"Feature",properties:{},geometry: data.traffic.geometry}, 'puid', '2');
+                                    map2.getLMap().fitBounds(layer.getBounds());
                             });
 
-                            layer.addObject(geoJson, getSelectedType("typesSelector"), guid);
-                            map2.getLMap().fitBounds(layer.getBounds());
-                            incidentEditor.erase();
-                        }
+                        });
                     });
 
-                    query('#center').on('click', function () {
-                        incidentEditor.centerByObject(23, '{1437e736-974f-462a-86f8-85f0910089f0}', 3000);
-                    });
 
-                    var roadsSelector = dijit.byId('roadsSelector');
-
-                    roadsSelector.on('change', function (roadGuid) {
-                        incidentEditor.centerByObject(14, roadGuid, 3000);
-                        incidentEditor.setRoadGuid(roadGuid);
-                    });
-
-                    query('#test1').on('click', function () {
-                        incidentEditor.setRoadGuid('{65de3f89-c234-44c5-867d-fd8961eb8644}');
-                        incidentEditor.createMarkersByDistance([
-                            {km: 614, m: 870}
-                        ]);
-                    });
-
-                    query('#test2').on('click', function () {
-                        incidentEditor.setMode('line');
-                        incidentEditor.setRoadGuid('{11b970fb-a9a8-474b-92cd-b0aa6a7f2d28}');
-                        incidentEditor.createMarkersByDistance([
-                            {km: 77, m: 376},
-                            {km: 80, m: 570}
-                        ]);
-                    });
-
-                    query('#test3').on('click', function () {
-                        incidentEditor.setRoadGuid('{65de3f89-c234-44c5-867d-fd8961eb8644}');
-
-                        incidentEditor.options.callbackDistanceChange = function () {
-                            var geoJson = incidentEditor.getGeoJsonData();
-
-                            if (geoJson) {
-                                var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-                                    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                                    return v.toString(16);
-                                });
-
-                                layer.addObject(geoJson, 'meteo', guid);
-                                map2.getLMap().fitBounds(layer.getBounds());
-                                incidentEditor.erase();
-                            }
-                            incidentEditor.options.callbackDistanceChange = function (data) {
-                                console.log('IncidentEditor: ' + JSON.stringify(data));
-                            };
-                        };
-
-                        incidentEditor.createMarkersByDistance([
-                            {km: 614, m: 870}
-                        ]);
-                    });
-
-                    query('#test4').on('click', function () {
-                        incidentEditor.setRoadGuid('{65de3f89-c234-44c5-867d-fd8961eb8644}');
-
-                        incidentEditor.options.callbackDistanceChange = function () {
-                            var geoJson = incidentEditor.getGeoJsonData();
-
-                            if (geoJson) {
-                                var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-                                    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                                    return v.toString(16);
-                                });
-
-                                layer.addObject(geoJson, 'puid', guid);
-                                map2.getLMap().fitBounds(layer.getBounds());
-                                incidentEditor.erase();
-                            }
-                            incidentEditor.options.callbackDistanceChange = function (data) {
-                                console.log('IncidentEditor: ' + JSON.stringify(data));
-                            };
-                        };
-
-                        incidentEditor.createMarkersByDistance([
-                            {km: 614, m: 880}
-                        ]);
-                    });
                 });
-
-
-            });
     </script>
 </%block>
