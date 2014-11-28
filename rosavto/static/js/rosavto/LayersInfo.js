@@ -185,6 +185,21 @@ define([
                 }
             },
 
+            getLayersIdByKeynames: function (keynames) {
+                var ids = [];
+
+                if (lang.isArray(keynames)) {
+                    array.forEach(keynames, lang.hitch(this, function (keyname) {
+                        var resourceLayer = this.store.query({keyname: keyname});
+                        if (resourceLayer.length > 0) {
+                            ids.push(resourceLayer[0].id);
+                        }
+                    }));
+                }
+
+                return ids;
+            },
+
             _getLayersIdByStyles: function (idStyles) {
                 var ids = [];
 
