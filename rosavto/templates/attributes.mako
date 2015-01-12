@@ -36,6 +36,9 @@
         <li  id="reservoir">
             <span></span>Водохранилища
         </li>
+        <li  id="mchs">
+            <span></span>Пункты МЧС
+        </li>
     </ul>
 
 
@@ -159,6 +162,14 @@
                             },
                             loaded: function () {
                                 domClass.remove('reservoir', 'loading');
+                            }});
+
+                        map.addNgwTileLayer('Пункты МЧС', ngwUrlForTiles, 97, null, {
+                            loading: function () {
+                                domClass.add('mchs', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('mchs', 'loading');
                             }});
 
                         map.hideLoader();
