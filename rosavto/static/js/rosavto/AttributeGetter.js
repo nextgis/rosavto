@@ -41,7 +41,7 @@ define([
                     this.updateGeometry(feature);
                     this.updateAttributes(feature.properties[fieldIdentify]);
                 }));
-                topic.subscribe("map/events/select/marker", lang.hitch(this, function (LAYER_TYPE, markerId) {
+                topic.subscribe('map/events/select/marker', lang.hitch(this, function (LAYER_TYPE, markerId) {
                     if (LAYER_TYPE !== Constants.TileLayer && this._styledGeoJsonLayer && this._styledGeoJsonLayer.getLayers().length > 0) {
                         this._styledGeoJsonLayer.clearLayers().clearTypes();
                     }
