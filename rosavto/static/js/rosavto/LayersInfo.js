@@ -394,7 +394,8 @@ define([
                     return false;
                 }
 
-                var valueForParsing = parsedMetadataItem.value.replace(/'/g, '"');
+                var valueForParsing = parsedMetadataItem.value.replace(/'/g, '"'),
+                    selectedObjectStyleGroupValue;
                 switch (parsedMetadataItem.key) {
                     case 'clusters-states-styles':
                         try {
@@ -411,6 +412,18 @@ define([
                             console.log('LayerId: ' + resourceId + ', Parsing json selected-object-style error:' + err.message);
                             console.log({valueForParsing: valueForParsing});
                         }
+                        break;
+                    case 'selected-object-style-group':
+                            if (!jsonStyle.selectedObjectStyleGroup) {
+                                jsonStyle.selectedObjectStyleGroup = [];
+                            }
+                        try {   
+                            jsonStyle.selectedObjectStyleGroup.push(JSON.parse(valueForParsing));
+                        } catch (err) {
+                            console.log('LayerId: ' + resourceId + ', Parsing json selected-object-style-group error:' + err.message);
+                            console.log({valueForParsing: valueForParsing});
+                        }
+                        
                         break;
                     case 'object-style':
                         try {
