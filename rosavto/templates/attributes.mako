@@ -27,6 +27,15 @@
         <li id="regions">
             <span></span>Регионы
         </li>
+        <li id="services">
+            <span></span>Объекты сервиса
+        </li>
+        <li  id="pp">
+            <span></span>Производственные площадки (пескобазы, теплые стоянки)
+        </li>
+        <li  id="reservoir">
+            <span></span>Водохранилища
+        </li>
     </ul>
 
 
@@ -36,6 +45,7 @@
 <div id="attributes">Здесь будут атрибуты выбранного обекта</div>
 
 <%block name="inlineScripts">
+    <link rel="stylesheet" href="${request.static_url('rosavto:static/css/sensors/sensors.css')}"/>
     <script>
 
         Monitoring = {
@@ -125,6 +135,30 @@
                             },
                             loaded: function () {
                                 domClass.remove('regions', 'loading');
+                            }});
+
+                        map.addNgwTileLayer('Объекты сервиса', ngwUrlForTiles, 80, null, {
+                            loading: function () {
+                                domClass.add('services', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('services', 'loading');
+                            }});
+
+                        map.addNgwTileLayer('Производственные площадки (пескобазы, теплые стоянки)', ngwUrlForTiles, 83, null, {
+                            loading: function () {
+                                domClass.add('pp', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('pp', 'loading');
+                            }});
+
+                        map.addNgwTileLayer('Водохранилища', ngwUrlForTiles, 57, null, {
+                            loading: function () {
+                                domClass.add('reservoir', 'loading');
+                            },
+                            loaded: function () {
+                                domClass.remove('reservoir', 'loading');
                             }});
 
                         map.hideLoader();
