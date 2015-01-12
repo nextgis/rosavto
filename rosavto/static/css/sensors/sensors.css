@@ -572,3 +572,47 @@ div.leaflet-marker-icon.obj.critical-facilities-s {
 div.leaflet-marker-icon.obj.is-s {
     background-image: url('../../icons/layers/113_s.png');
 }
+
+div.leaflet-marker-icon.obj.pp {
+    background-image: url('../../icons/layers/139_s.png');
+}
+
+div.leaflet-marker-icon.obj.service1 {
+    background-image: url('../../icons/layers/135_s.png');
+}
+
+div.leaflet-marker-icon.obj.service2 {
+    background-image: url('../../icons/layers/128_s.png');
+}
+
+div.leaflet-marker-icon.obj.service3 {
+    background-image: url('../../icons/layers/115_s.png');
+}
+
+div.leaflet-marker-icon.obj.service4 {
+    background-image: url('../../icons/layers/131_s.png');
+}
+
+div.leaflet-marker-icon.obj.service5 {
+    background-image: url('../../icons/layers/115_s.png');
+}
+
+div.leaflet-marker-icon.obj.service6 {
+    background-image: url('../../icons/layers/128_s.png');
+}
+
+div.leaflet-marker-icon.obj.service7 {
+    background-image: url('../../icons/layers/138_s.png');
+}
+
+div.leaflet-marker-icon.obj.service8 {
+    background-image: url('../../icons/layers/125_s.png');
+}
+
+div.leaflet-marker-icon.obj.service9 {
+    background-image: url('../../icons/layers/127_s.png');
+}
+
+div.leaflet-marker-icon.obj.service10 {
+    background-image: url('../../icons/layers/123_s.png');
+}
