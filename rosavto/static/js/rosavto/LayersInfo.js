@@ -217,8 +217,7 @@ define([
                     return false;
                 }
 
-                var valueForParsing = parsedMetadataItem.value.replace(/'/g, '"'),
-                    selectedObjectStyleGroupValue;
+                var valueForParsing = parsedMetadataItem.value.replace(/'/g, '"');
                 switch (parsedMetadataItem.key) {
                     case 'clusters-states-styles':
                         try {
