@@ -56,7 +56,8 @@ define([
             },
 
             updateGeometry: function (feature) {
-                var style;
+                var style,
+                    selectedObjectGroup;
 
                 if (feature.properties.__layer__) {
                     style = this.mapIdentify.layersInfo.getStyleByLayerId(feature.properties.__layer__);
@@ -64,9 +65,16 @@ define([
 
                 if (style && style.selectedObjectStyle) {
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('selected', style.selectedObjectStyle);
-
                     this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'selected', 0).getBounds());
-                } else {
+                } else if (style.selectedObjectStyleGroup) {
+                    selectedObjectGroup = style.selectedObjectStyleGroup[feature.properties[style.selectedObjectStyleGroup._fieldType]];
+                    if (!selectedObjectGroup) {
+                        console.log('selectedObjectStyleGroup is not found: type "' + feature.properties[style.selectedObjectStyleGroup._fieldType] + '"');
+                    }
+                    this._styledGeoJsonLayer.clearLayers().clearTypes().addType('selected', selectedObjectGroup);
+                    this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'selected', 0).getBounds());
+                }
+                else {
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('default', this.defaultStylesSettings.style['default']);
                     this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'default', 0).getBounds());
                     if (this.debug) {

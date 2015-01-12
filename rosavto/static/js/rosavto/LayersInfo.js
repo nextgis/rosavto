@@ -114,7 +114,11 @@ define([
                         if (parent.type === 'resource_group') {
                             this._validateParentResourceGroup(parent);
                         }
-                        resourceSaved = parent.groups[parent.groups.push({id: resource.id, res: resource, type: resourceType}) - 1];
+                        resourceSaved = parent.groups[parent.groups.push({
+                            id: resource.id,
+                            res: resource,
+                            type: resourceType
+                        }) - 1];
                         this.store.put({id: resource.id, object: resourceSaved, type: resourceType, link: 'yes'});
                         break;
                     case 'postgis_layer':
@@ -124,8 +128,19 @@ define([
                         resource.geometry_type = resourceInfoItem.postgis_layer && resourceInfoItem.postgis_layer.geometry_type ?
                             resourceInfoItem.postgis_layer.geometry_type :
                             null;
-                        resourceSaved = parent.layers[parent.layers.push({id: resource.id, res: resource, type: resourceType, keyname: resource.keyname}) - 1];
-                        this.store.put({id: resource.id, object: resourceSaved, type: resourceType, keyname: resource.keyname, link: 'yes'});
+                        resourceSaved = parent.layers[parent.layers.push({
+                            id: resource.id,
+                            res: resource,
+                            type: resourceType,
+                            keyname: resource.keyname
+                        }) - 1];
+                        this.store.put({
+                            id: resource.id,
+                            object: resourceSaved,
+                            type: resourceType,
+                            keyname: resource.keyname,
+                            link: 'yes'
+                        });
                         break;
                     case 'mapserver_style':
                         this._validateParentLayer(parent);
@@ -136,7 +151,8 @@ define([
                             res: resource,
                             type: resourceType,
                             xml: xml_style,
-                            json: json_style}) - 1];
+                            json: json_style
+                        }) - 1];
                         this.store.put({
                             id: resource.id,
                             object: resourceSaved,
@@ -318,8 +334,8 @@ define([
             getClusterStyleByLayerKeyname: function (keyname) {
                 var layerResource,
                     layersResources = this.store.query(function (res) {
-                    return res.keyname === keyname;
-                });
+                        return res.keyname === keyname;
+                    });
 
                 if (layersResources.length > 0) {
                     layerResource = layersResources[0];
@@ -414,16 +430,13 @@ define([
                         }
                         break;
                     case 'selected-object-style-group':
-                            if (!jsonStyle.selectedObjectStyleGroup) {
-                                jsonStyle.selectedObjectStyleGroup = [];
-                            }
-                        try {   
-                            jsonStyle.selectedObjectStyleGroup.push(JSON.parse(valueForParsing));
-                        } catch (err) {
-                            console.log('LayerId: ' + resourceId + ', Parsing json selected-object-style-group error:' + err.message);
-                            console.log({valueForParsing: valueForParsing});
+                        this.handleSelectedObjectStyleGroup(valueForParsing, jsonStyle, resourceId);
+                        break;
+                    case '_field':
+                        if (!jsonStyle.selectedObjectStyleGroup) {
+                            jsonStyle.selectedObjectStyleGroup = {};
                         }
-                        
+                        jsonStyle.selectedObjectStyleGroup._fieldType = valueForParsing;
                         break;
                     case 'object-style':
                         try {
@@ -434,6 +447,25 @@ define([
                         }
                         break;
                 }
+            },
+
+            handleSelectedObjectStyleGroup: function (itemValueString, jsonStyle, resourceId) {
+                var json;
+
+                try {
+                    json = JSON.parse(itemValueString);
+                } catch (err) {
+                    console.log('LayerId: ' + resourceId + ', Parsing json selected-object-style-group error:' + err.message);
+                    console.log({key: itemValueString});
+                    console.log({valueForParsing: itemValueString});
+                    return false;
+                }
+
+                if (!jsonStyle.selectedObjectStyleGroup) {
+                    jsonStyle.selectedObjectStyleGroup = {};
+                }
+
+                jsonStyle.selectedObjectStyleGroup[json['_groupType']] = json;
             },
 
             getBaseLayers: function () {
