@@ -186,6 +186,95 @@ define([
                 }
             },
 
+            _parseXmlStyle: function (xmlStyle, resourceId) {
+                var metadataItems = query('metadata item', xmlStyle),
+                    jsonStyle = null,
+                    parsedMetadataItem;
+
+                if (metadataItems.length > 0) {
+                    array.forEach(metadataItems, lang.hitch(this, function (metadataItem) {
+                        parsedMetadataItem = this._parseMetadataItem(metadataItem);
+
+                        if (!jsonStyle) {
+                            jsonStyle = {};
+                        }
+                        this._fillJsonStyle(parsedMetadataItem, jsonStyle, resourceId);
+                    }));
+                }
+
+                return jsonStyle;
+            },
+
+            _parseMetadataItem: function (metadataItem) {
+                return {
+                    key: attr.get(metadataItem, 'key'),
+                    value: attr.get(metadataItem, 'value')
+                }
+            },
+
+            _fillJsonStyle: function (parsedMetadataItem, jsonStyle, resourceId) {
+                if (!parsedMetadataItem.value) {
+                    return false;
+                }
+
+                var valueForParsing = parsedMetadataItem.value.replace(/'/g, '"'),
+                    selectedObjectStyleGroupValue;
+                switch (parsedMetadataItem.key) {
+                    case 'clusters-states-styles':
+                        try {
+                            jsonStyle.clustersStatesStyles = JSON.parse(valueForParsing);
+                        } catch (err) {
+                            console.log('LayerId: ' + resourceId + ', Parsing json clusters-states-styles error:' + err.message);
+                            console.log({valueForParsing: valueForParsing});
+                        }
+                        break;
+                    case 'selected-object-style':
+                        try {
+                            jsonStyle.selectedObjectStyle = JSON.parse(valueForParsing);
+                        } catch (err) {
+                            console.log('LayerId: ' + resourceId + ', Parsing json selected-object-style error:' + err.message);
+                            console.log({valueForParsing: valueForParsing});
+                        }
+                        break;
+                    case 'selected-object-style-group':
+                        this.handleSelectedObjectStyleGroup(valueForParsing, jsonStyle, resourceId);
+                        break;
+                    case '_field':
+                        if (!jsonStyle.selectedObjectStyleGroup) {
+                            jsonStyle.selectedObjectStyleGroup = {};
+                        }
+                        jsonStyle.selectedObjectStyleGroup._fieldType = valueForParsing;
+                        break;
+                    case 'object-style':
+                        try {
+                            jsonStyle.objectStyle = JSON.parse(valueForParsing);
+                        } catch (err) {
+                            console.log('LayerId: ' + resourceId + ', Parsing json object-style error:' + err.message);
+                            console.log({valueForParsing: valueForParsing});
+                        }
+                        break;
+                }
+            },
+
+            handleSelectedObjectStyleGroup: function (itemValueString, jsonStyle, resourceId) {
+                var json;
+
+                try {
+                    json = JSON.parse(itemValueString);
+                } catch (err) {
+                    console.log('LayerId: ' + resourceId + ', Parsing json selected-object-style-group error:' + err.message);
+                    console.log({key: itemValueString});
+                    console.log({valueForParsing: itemValueString});
+                    return false;
+                }
+
+                if (!jsonStyle.selectedObjectStyleGroup) {
+                    jsonStyle.selectedObjectStyleGroup = {};
+                }
+
+                jsonStyle.selectedObjectStyleGroup[json['_groupType']] = json;
+            },
+
             getLayersIdByStyles: function (idStyles) {
                 var that = this,
                     def;
@@ -377,95 +466,6 @@ define([
                 }
 
                 return style && style.json ? style.json : null;
-            },
-
-            _parseXmlStyle: function (xmlStyle, resourceId) {
-                var metadataItems = query('metadata item', xmlStyle),
-                    jsonStyle = null,
-                    parsedMetadataItem;
-
-                if (metadataItems.length > 0) {
-                    array.forEach(metadataItems, lang.hitch(this, function (metadataItem) {
-                        parsedMetadataItem = this._parseMetadataItem(metadataItem);
-
-                        if (!jsonStyle) {
-                            jsonStyle = {};
-                        }
-                        this._fillJsonStyle(parsedMetadataItem, jsonStyle, resourceId);
-                    }));
-                }
-
-                return jsonStyle;
-            },
-
-            _parseMetadataItem: function (metadataItem) {
-                return {
-                    key: attr.get(metadataItem, 'key'),
-                    value: attr.get(metadataItem, 'value')
-                }
-            },
-
-            _fillJsonStyle: function (parsedMetadataItem, jsonStyle, resourceId) {
-                if (!parsedMetadataItem.value) {
-                    return false;
-                }
-
-                var valueForParsing = parsedMetadataItem.value.replace(/'/g, '"'),
-                    selectedObjectStyleGroupValue;
-                switch (parsedMetadataItem.key) {
-                    case 'clusters-states-styles':
-                        try {
-                            jsonStyle.clustersStatesStyles = JSON.parse(valueForParsing);
-                        } catch (err) {
-                            console.log('LayerId: ' + resourceId + ', Parsing json clusters-states-styles error:' + err.message);
-                            console.log({valueForParsing: valueForParsing});
-                        }
-                        break;
-                    case 'selected-object-style':
-                        try {
-                            jsonStyle.selectedObjectStyle = JSON.parse(valueForParsing);
-                        } catch (err) {
-                            console.log('LayerId: ' + resourceId + ', Parsing json selected-object-style error:' + err.message);
-                            console.log({valueForParsing: valueForParsing});
-                        }
-                        break;
-                    case 'selected-object-style-group':
-                        this.handleSelectedObjectStyleGroup(valueForParsing, jsonStyle, resourceId);
-                        break;
-                    case '_field':
-                        if (!jsonStyle.selectedObjectStyleGroup) {
-                            jsonStyle.selectedObjectStyleGroup = {};
-                        }
-                        jsonStyle.selectedObjectStyleGroup._fieldType = valueForParsing;
-                        break;
-                    case 'object-style':
-                        try {
-                            jsonStyle.objectStyle = JSON.parse(valueForParsing);
-                        } catch (err) {
-                            console.log('LayerId: ' + resourceId + ', Parsing json object-style error:' + err.message);
-                            console.log({valueForParsing: valueForParsing});
-                        }
-                        break;
-                }
-            },
-
-            handleSelectedObjectStyleGroup: function (itemValueString, jsonStyle, resourceId) {
-                var json;
-
-                try {
-                    json = JSON.parse(itemValueString);
-                } catch (err) {
-                    console.log('LayerId: ' + resourceId + ', Parsing json selected-object-style-group error:' + err.message);
-                    console.log({key: itemValueString});
-                    console.log({valueForParsing: itemValueString});
-                    return false;
-                }
-
-                if (!jsonStyle.selectedObjectStyleGroup) {
-                    jsonStyle.selectedObjectStyleGroup = {};
-                }
-
-                jsonStyle.selectedObjectStyleGroup[json['_groupType']] = json;
             },
 
             getBaseLayers: function () {
