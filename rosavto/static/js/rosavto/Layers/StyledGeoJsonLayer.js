@@ -87,6 +87,8 @@ define([
                     return L.marker(latlng, {
                         icon: L.icon(pointStyle)
                     });
+                } else if (pointStyle.type === 'circle' && pointStyle.radius && pointStyle.style) {
+                    return L.circle(latlng, pointStyle.radius, pointStyle.style);
                 } else if (pointStyle.type === 'div') {
                     return L.marker(latlng, {
                         icon: L.divIcon(pointStyle)
