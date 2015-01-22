@@ -84,12 +84,12 @@
     line-height: 30px;
 }
 
-img.leaflet-marker-icon {
-    width: 44px !important;
-    height: 44px !important;
-    margin-left: -22px !important;
-    margin-top: -22px !important;
-}
+/*img.leaflet-marker-icon {*/
+    /*width: 44px !important;*/
+    /*height: 44px !important;*/
+    /*margin-left: -22px !important;*/
+    /*margin-top: -22px !important;*/
+/*}*/
 
 .marker-cluster-RED {
     background-color: rgba(240, 12, 12, 0.6);
