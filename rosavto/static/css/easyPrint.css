@@ -18,9 +18,4 @@
     .leaflet-control-easyPrint-button {
         display: none !important;
     }
-
-    div.leaflet-marker-icon {
-        background-repeat: no-repeat !important;
-        background-position: center center !important;
-    }
 }
