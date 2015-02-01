@@ -18,7 +18,6 @@ define([
     return declare('rosavto.SensorsLayer', [MarkersStateClusterLayer, ParametersVerification], {
 
         constructor: function (settings) {
-            var self = this;
 
             this.verificateRequiredParameters(settings, [
                 'objectsSubscribedUrl',
@@ -222,6 +221,9 @@ define([
 
             if (json && json.body) {
                 sensorsObjects = JSON.parse(json.body);
+                if (this._debug) {
+                    console.log(sensorsObjects);
+                }
                 array.forEach(sensorsObjects, function (sensor) {
                     if (!sensor.latitude || !sensor.latitude) {
                         console.log('sensor "' + sensor.guid + '" is not have coordinates');
