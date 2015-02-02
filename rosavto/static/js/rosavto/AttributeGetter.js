@@ -63,7 +63,13 @@ define([
                     style = this.mapIdentify.layersInfo.getStyleByLayerId(feature.properties.__layer__);
                 }
 
-                if (style && style['selectedObjectStyle']) {
+                if (!style) {
+                    this._styledGeoJsonLayer.clearLayers().clearTypes().addType('default', this.defaultStylesSettings.style['default']);
+                    this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'default', 0).getBounds());
+                    if (this.debug) {
+                        console.log('selected-object-style style is not defined for layer ' + feature.properties.__layer__);
+                    }
+                } else if (style['selectedObjectStyle']) {
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('selected', style.selectedObjectStyle);
                     this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'selected', 0).getBounds());
                 } else if (style['selectedObjectStyleGroup']) {
@@ -73,13 +79,6 @@ define([
                     }
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('selected', selectedObjectGroup);
                     this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'selected', 0).getBounds());
-                }
-                else {
-                    this._styledGeoJsonLayer.clearLayers().clearTypes().addType('default', this.defaultStylesSettings.style['default']);
-                    this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'default', 0).getBounds());
-                    if (this.debug) {
-                        console.log('selected-object-style style is not defined for layer ' + feature.properties.__layer__);
-                    }
                 }
             },
 
