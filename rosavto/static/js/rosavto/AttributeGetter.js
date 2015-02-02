@@ -63,10 +63,10 @@ define([
                     style = this.mapIdentify.layersInfo.getStyleByLayerId(feature.properties.__layer__);
                 }
 
-                if (style && style.selectedObjectStyle) {
+                if (style && style['selectedObjectStyle']) {
                     this._styledGeoJsonLayer.clearLayers().clearTypes().addType('selected', style.selectedObjectStyle);
                     this.map._lmap.fitBounds(this._styledGeoJsonLayer.addObject(feature, 'selected', 0).getBounds());
-                } else if (style.selectedObjectStyleGroup) {
+                } else if (style['selectedObjectStyleGroup']) {
                     selectedObjectGroup = style.selectedObjectStyleGroup[feature.properties[style.selectedObjectStyleGroup._fieldType]];
                     if (!selectedObjectGroup) {
                         console.log('selectedObjectStyleGroup is not found: type "' + feature.properties[style.selectedObjectStyleGroup._fieldType] + '"');
