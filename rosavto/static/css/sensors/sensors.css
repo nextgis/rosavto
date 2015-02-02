@@ -110,7 +110,8 @@
 }
 
 div.leaflet-marker-icon.sensor {
-    background: url('../images/sensors-states.png') no-repeat;
+    background-image: url('../images/sensors-states.png');
+    background-repeat: no-repeat;
     width: 44px !important;
     height: 44px !important;
     /*margin-left: -22px !important;*/
