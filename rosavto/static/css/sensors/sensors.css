@@ -319,14 +319,7 @@ div.sensorsPopup td.Temperature div.sensor {
 div.sensorsPopup td.Temperature div.sensor div.background {
     width: 100%;
     height: 100%;
-}
-
-div.sensorsPopup td.Temperature div.TemperatureAir {
-
-}
-
-div.sensorsPopup td.Temperature div.TemperatureAir div.GRAY {
-
+    background-color: #E4E2E2;
 }
 
 div.sensorsPopup td.Temperature div.TemperatureAir div.background.GRAY,
