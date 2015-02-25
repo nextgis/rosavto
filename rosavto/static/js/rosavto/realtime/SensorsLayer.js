@@ -11,12 +11,11 @@ define([
     'mustache/mustache',
     'rosavto/realtime/Subscriber',
     'rosavto/Layers/MarkersStateClusterLayer',
-    'dojo/text!./template/SensorLayerPopup.html',
     'rosavto/ParametersVerification',
     'rosavto/Constants',
     'centreit/DragAndDrop'
 ], function (declare, on, query, dom, lang, array, funcObject, topic, domClass, mustache, Subscriber,
-             MarkersStateClusterLayer, SensorLayerPopup,
+             MarkersStateClusterLayer,
              ParametersVerification, Constants, DnD) {
     return declare('rosavto.SensorsLayer', [MarkersStateClusterLayer, ParametersVerification], {
 
