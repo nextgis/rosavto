@@ -350,7 +350,7 @@ define([
         },
 
         _popupsLayer: L.featureGroup(null),
-        _popupTemplate: SensorLayerPopup,
+        _popupTemplate: '<div id={{guid}} class=sensorsPopup><table>{{#sensors}}<tr>{{#values}} {{#is_temp}}<td class=Temperature>{{#sensor}}<div class="{{.}} sensor"><div class=background></div></div>{{/sensor}}{{/is_temp}} {{^is_temp}}<td class={{sensor}}><div class=background></div><div class=icon-sensor></div>{{/is_temp}} {{/values}}{{/sensors}}</table></div>',
         _buildPopups: function (json) {
             var sensorsJsonData,
                 sensorsStatesData,
