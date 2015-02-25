@@ -310,28 +310,47 @@ div.sensorsPopup div.icon-sensor {
 }
 
 /* Meteo sensors*/
-div.sensorsPopup td.TemperatureAir div.background.GRAY,
-div.sensorsPopup td.TemperatureRoad div.background.GRAY,
-div.sensorsPopup td.TemperatureUnderRoad div.background.GRAY {
-    background: url('../images/sensors-values.png') -50px 2px;
+div.sensorsPopup td.Temperature div.sensor {
+    width: 18px;
+    height: 5px;
+    margin: 1px 1px 1px 2px;
 }
 
-div.sensorsPopup td.TemperatureAir div.background.RED,
-div.sensorsPopup td.TemperatureRoad div.background.RED,
-div.sensorsPopup td.TemperatureUnderRoad div.background.RED {
-    background: url('../images/sensors-values.png') -2px 2px;
+div.sensorsPopup td.Temperature div.sensor div.background {
+    width: 100%;
+    height: 100%;
 }
 
-div.sensorsPopup td.TemperatureAir div.background.GREEN,
-div.sensorsPopup td.TemperatureRoad div.background.GREEN,
-div.sensorsPopup td.TemperatureUnderRoad div.background.GREEN {
-    background: url('../images/sensors-values.png') -32px 2px;
+div.sensorsPopup td.Temperature div.TemperatureAir {
+
 }
 
-div.sensorsPopup td.TemperatureAir div.background.YELLOW,
-div.sensorsPopup td.TemperatureRoad div.background.YELLOW,
-div.sensorsPopup td.TemperatureUnderRoad div.background.YELLOW {
-    background: url('../images/sensors-values.png') -15px 2px;
+div.sensorsPopup td.Temperature div.TemperatureAir div.GRAY {
+
+}
+
+div.sensorsPopup td.Temperature div.TemperatureAir div.background.GRAY,
+div.sensorsPopup td.Temperature div.TemperatureRoad div.background.GRAY,
+div.sensorsPopup td.Temperature div.TemperatureUnderRoad div.background.GRAY {
+    background-color: #808080;
+}
+
+div.sensorsPopup td.Temperature div.TemperatureAir div.background.RED,
+div.sensorsPopup td.Temperature div.TemperatureRoad div.background.RED,
+div.sensorsPopup td.Temperature div.TemperatureUnderRoad div.background.RED {
+    background-color: red;
+}
+
+div.sensorsPopup td.Temperature div.TemperatureAir div.background.GREEN,
+div.sensorsPopup td.Temperature div.TemperatureRoad div.background.GREEN,
+div.sensorsPopup td.Temperature div.TemperatureUnderRoad div.background.GREEN {
+    background-color: green;
+}
+
+div.sensorsPopup td.Temperature div.TemperatureAir div.background.YELLOW,
+div.sensorsPopup td.Temperature div.TemperatureRoad div.background.YELLOW,
+div.sensorsPopup td.Temperature div.TemperatureUnderRoad div.background.YELLOW {
+    background-color: #ffff00;
 }
 
 div.sensorsPopup td.WindDirection div.icon-sensor.WindDirectionUndefined {

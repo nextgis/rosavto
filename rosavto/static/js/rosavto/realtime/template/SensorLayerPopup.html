@@ -1,12 +1,24 @@
 <div id="{{guid}}" class="sensorsPopup">
     <table>
         {{#sensors}}
-        </tr>
+        <tr>
             {{#values}}
-            <td class="{{.}}">
-                <div class="background"></div>
-                <div class="icon-sensor"></div>
-            </td>
+                {{#is_temp}}
+                    <td class="Temperature">
+                        {{#sensor}}
+                            <div class="{{.}} sensor">
+                                <div class="background"></div>
+                            </div>
+                        {{/sensor}}
+                    </td>
+                {{/is_temp}}
+
+                {{^is_temp}}
+                    <td class="{{sensor}}">
+                        <div class="background"></div>
+                        <div class="icon-sensor"></div>
+                    </td>
+                {{/is_temp}}
             {{/values}}
         </tr>
         {{/sensors}}

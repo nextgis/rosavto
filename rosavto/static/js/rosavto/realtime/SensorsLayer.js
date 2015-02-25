@@ -11,10 +11,13 @@ define([
     'mustache/mustache',
     'rosavto/realtime/Subscriber',
     'rosavto/Layers/MarkersStateClusterLayer',
+    'dojo/text!./template/SensorLayerPopup.html',
     'rosavto/ParametersVerification',
     'rosavto/Constants',
     'centreit/DragAndDrop'
-], function (declare, on, query, dom, lang, array, funcObject, topic, domClass, mustache, Subscriber, MarkersStateClusterLayer, ParametersVerification, Constants, DnD) {
+], function (declare, on, query, dom, lang, array, funcObject, topic, domClass, mustache, Subscriber,
+             MarkersStateClusterLayer, SensorLayerPopup,
+             ParametersVerification, Constants, DnD) {
     return declare('rosavto.SensorsLayer', [MarkersStateClusterLayer, ParametersVerification], {
 
         constructor: function (settings) {
@@ -347,7 +350,7 @@ define([
         },
 
         _popupsLayer: L.featureGroup(null),
-        _popupTemplate: '<div id="{{guid}}" class="sensorsPopup"> <table> {{#sensors}} </tr> {{#values}} <td class="{{.}}"> <div class="background"></div> <div class="icon-sensor"></div> </td> {{/values}} </tr> {{/sensors}} </table></div>',
+        _popupTemplate: SensorLayerPopup,
         _buildPopups: function (json) {
             var sensorsJsonData,
                 sensorsStatesData,
@@ -362,8 +365,6 @@ define([
             }
 
             if (json && json.body) {
-                console.log(JSON.parse(json.body));
-
                 sensorsJsonData = JSON.parse(json.body)[0];
 
                 if (sensorsJsonData.kind === 'Signal') {
@@ -379,7 +380,10 @@ define([
                             if (!sensorValuePair.alarmState) {
                                 return;
                             }
-                            sensorTdHtml = query('td.' + sensorValuePair.type + ' div.background', htmlPopup);
+                            var isTemperature = this._temperatureSensors.hasOwnProperty(sensorValuePair.type);
+                            sensorTdHtml = isTemperature ?
+                                query('td.Temperature div.' + sensorValuePair.type + ' div.background', htmlPopup) :
+                                query('td.' + sensorValuePair.type + ' div.background', htmlPopup);
                             if (sensorTdHtml && sensorTdHtml.length === 1) {
                                 domClass.remove(sensorTdHtml[0]);
                                 domClass.add(sensorTdHtml[0], ['background', sensorValuePair.alarmState]);
@@ -440,20 +444,61 @@ define([
 
         _createSensorsArrayForPopup: function (markerStation) {
             var sensorsForTemplate = [],
-                startIndex,
-                currentTrArray;
+                startIndex = 0,
+                currentIndex = 0,
+                currentTrArray = [],
+                temperaturesArray = this._createTemperaturesSensorsForPopup(markerStation);
 
-            startIndex = 0;
+            sensorsForTemplate.push({ values: currentTrArray });
+
+            if (temperaturesArray) {
+                currentTrArray.push({
+                    is_temp: true,
+                    sensor: temperaturesArray
+                });
+                currentIndex++;
+            }
+
             array.forEach(this._activatedSensors[markerStation.type], function (sensor, index) {
-                if (index === 0 || (index - startIndex) === 4) {
-                    currentTrArray = [];
-                    sensorsForTemplate.push({values: currentTrArray});
-                    startIndex = index;
+                if (this._temperatureSensors.hasOwnProperty(sensor)) {
+                    return;
                 }
-                currentTrArray.push(sensor);
+
+                if ((currentIndex - startIndex) === 4) {
+                    currentTrArray = [];
+                    sensorsForTemplate.push({ values: currentTrArray });
+                    startIndex = currentIndex;
+                }
+
+                currentTrArray.push({
+                    is_temp: false,
+                    sensor: sensor
+                });
+
+                currentIndex++;
             }, this);
 
             return sensorsForTemplate;
+        },
+
+        _temperatureSensors: {
+            TemperatureAir: 0,
+            TemperatureRoad: 1,
+            TemperatureUnderRoad: 2
+        },
+
+        _createTemperaturesSensorsForPopup: function (markerStation) {
+            var isTemperatureSensorsExist = false,
+                temperaturesArray = [false,false,false];
+
+            array.forEach(this._activatedSensors[markerStation.type], function (sensor, index) {
+                if (this._temperatureSensors.hasOwnProperty(sensor)) {
+                    isTemperatureSensorsExist = true;
+                    temperaturesArray[this._temperatureSensors[sensor]] = sensor;
+                }
+            }, this);
+
+            return isTemperatureSensorsExist ? temperaturesArray : false;
         },
 
         _isNewSetData: false,

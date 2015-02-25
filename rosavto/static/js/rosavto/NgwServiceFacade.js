@@ -90,7 +90,6 @@ define([
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET'});
             },
 
-
             getIncident: function (incidentPoints, srs) {
                 var countsPoints = incidentPoints.length,
                     url,
@@ -136,7 +135,6 @@ define([
                 }
             },
 
-
             _calculateDistanceInMeters: function (point) {
                 var distance = 0;
                 if (point.distance['km']) {
@@ -147,7 +145,6 @@ define([
                 }
                 return distance;
             },
-
 
             getIncidentLine: function (guid, pointStart, pointFinish, srs) {
                 var url;
@@ -164,7 +161,6 @@ define([
 
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
             },
-
 
             getPointProjection: function (idLayer, guid, lat, lon) {
                 var url = 'layer/' + idLayer + '/rosavto/getlrdistbyuuid?guid=' + guid +
