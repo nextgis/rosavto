@@ -109,19 +109,18 @@
                         }), lmap = map.getLMap();
 
                         lmap.addLayer(sensorLayer);
-                        sensorLayer.activateLayers({
-                            'Meteo': ['TemperatureAir', 'TemperatureRoad', 'TemperatureUnderRoad', 'WindVelocity', 'WindGusts',
-                                'WindDirection', 'PrecipitationCode', 'Cloudiness', 'AirPlessure', 'LayerType', 'ReagentAmount', 'ViewDistance',
-                                'Humidity', 'AdhesionCoefficient'],
-                            'Video': [],
-                            'Traffic': ['AverageSpeed', 'Amount', 'Trucks']
-                        });
 
-                        setTimeout(function () {
-                            sensorLayer.activateLayers({
-                                'Meteo': []
-                            });
-                        }, 15000);
+##                        meteo sensors:
+##                        'TemperatureAir', 'TemperatureRoad', 'TemperatureUnderRoad', 'WindVelocity', 'WindGusts',
+##                        'WindDirection', 'PrecipitationCode', 'Cloudiness', 'AirPlessure', 'LayerType', 'ReagentAmount', 'ViewDistance',
+##                        'Humidity', 'AdhesionCoefficient'
+
+##                        Traffic sensors:
+##                            'AverageSpeed', 'Amount', 'Trucks'
+
+                        sensorLayer.activateLayers({
+                            'Meteo': []
+                        });
                     });
                 })
         ;
