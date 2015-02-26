@@ -12,7 +12,7 @@
 <%block name="inlineScripts">
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/sensors/sensors.css')}"/>
     <script>
-        Monitoring.contextPath = 'http://192.168.255.1:2012/monitoring-web/';
+        Monitoring.contextPath = 'http://192.168.255.1:2013/monitoring-web/';
         require([
                     'dojo/parser',
                     'dijit/form/DateTextBox',
@@ -117,13 +117,11 @@
                             'Traffic': ['AverageSpeed', 'Amount', 'Trucks']
                         });
 
-##                        setTimeout(function () {
-##                            sensorLayer.activateLayers({
-##                                'Meteo': ['TemperatureAir', 'TemperatureRoad', 'TemperatureUnderRoad', 'WindVelocity', 'WindGusts',
-##                                    'WindDirection', 'PrecipitationCode', 'Cloudiness', 'AirPlessure', 'LayerType', 'ReagentAmount', 'ViewDistance',
-##                                    'Humidity', 'AdhesionCoefficient']
-##                            });
-##                        }, 10000);
+                        setTimeout(function () {
+                            sensorLayer.activateLayers({
+                                'Meteo': []
+                            });
+                        }, 15000);
                     });
                 })
         ;
