@@ -18,6 +18,7 @@ define([
         _legend: null,
         _incidentLayer: null,
         _ngwServiceFacade: null,
+        _layersByKeyname: {},
 
         constructor: function (domNode, settings, ngwServiceFacade) {
             this._ngwServiceFacade = ngwServiceFacade;
@@ -26,8 +27,8 @@ define([
             }
 
             this._lmap = new L.Map(domNode, settings);
-            this._lmap.on('layeradd', this.onMapLayerAdded);
-            this._lmap.on('layerremove', this.onMapLayerRemoved);
+            this._lmap.on('layeradd', lang.hitch(this, function (layer) { this.onMapLayerAdded(layer);} ));
+            this._lmap.on('layerremove', lang.hitch(this, function (layer) { this.onMapLayerRemoved(layer);} ));
             this._lmap.on('moveend', this.onMapMoveEnd);
 
             if (settings.legend) {
@@ -50,12 +51,12 @@ define([
             topic.publish("map/created", {created: true});
 
             topic.subscribe("map/historyDate/change", function () {
-                component.historyDate=arguments[0];
+                component.historyDate = arguments[0];
                 object.forIn(component._lmap._layers, function (layer, key) {
-                    if (layer.options && layer.options.subscribeUrl){
-                        if (component.historyDate){
+                    if (layer.options && layer.options.subscribeUrl) {
+                        if (component.historyDate) {
                             layer.options.historyDate = component.historyDate;
-                        }else{
+                        } else {
                             layer.options.historyDate = null;
                         }
                     }
@@ -232,12 +233,18 @@ define([
         },
 
         onMapLayerAdded: function (layer) {
+            if (layer.layer.keyname) {
+                this._layersByKeyname[layer.layer.keyname] = layer;
+            }
             storage.then(function (provider) {
                 provider.put('mapLayerVisibility-' + layer.layer.keyname, true);
             });
         },
 
         onMapLayerRemoved: function (layer) {
+            if (layer.layer.keyname) {
+                delete this._layersByKeyname[layer.layer.keyname];
+            }
             storage.then(function (provider) {
                 provider.put('mapLayerVisibility-' + layer.layer.keyname, false);
             });
@@ -308,8 +315,10 @@ define([
                 return false;
 
             this._customizableGeoJsonLayer.addData(data);
+        },
+
+        selectObject: function (keynameLayer, guid) {
+
         }
-
-
     });
 });
