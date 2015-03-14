@@ -75,6 +75,10 @@ def time(request):
 def sensors(request):
     return {}
 
+@view_config(route_name='object_selector', renderer='object_selector.mako')
+def object_selector(request):
+    return {}
+
 @view_config(route_name='attributes_html', renderer='string')
 def get_html_attributes(request):
     random_file = path.join(path.dirname(__file__), 'attr/{0}.html'.format(str(random.randint(1, 3))))

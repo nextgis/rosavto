@@ -29,6 +29,7 @@ def main(global_config, **settings):
     config.add_route('time', '/time')
     config.add_route('clusters', '/clusters')
     config.add_route('sensors', '/sensors')
+    config.add_route('object_selector', '/object_selector')
 
     # proxies url
     config.add_route('proxy_ngw', '/ngw/*target_url')
