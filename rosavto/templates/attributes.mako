@@ -40,8 +40,6 @@
             <span></span>Пункты МЧС
         </li>
     </ul>
-
-
 </div>
 
 <div id="map"></div>
@@ -91,80 +89,72 @@
 
                     map.showLoader();
                     layersInfo.fillLayersInfo().then(function (store) {
+                        var layersByKeyname = layersInfo.getLayersDictByKeyname();
                         map.addBaseLayers(layersInfo.getBaseLayers());
-                        map.addNgwTileLayer('Сеть дорог ДЕП', ngwUrlForTiles, 4, null, {
+                        map.addNgwTileLayerWithKeyname('roads_dep', 'Сеть дорог ДЕП', ngwUrlForTiles, layersByKeyname['roads_dep'].style_id, null, {
                             loading: function () {
                                 domClass.add('dep', 'loading');
                             },
                             loaded: function () {
                                 domClass.remove('dep', 'loading');
                             }});
-
-                        map.addNgwTileLayer('Сеть федеральных дорог', ngwUrlForTiles, 51, null, {
+                        map.addNgwTileLayerWithKeyname('roads', 'Сеть федеральных дорог', ngwUrlForTiles, layersByKeyname['roads'].style_id, null, {
                             loading: function () {
                                 domClass.add('fed', 'loading');
                             },
                             loaded: function () {
                                 domClass.remove('fed', 'loading');
                             }});
-
-                        map.addNgwTileLayer('Сеть региональных дорог', ngwUrlForTiles, 50, null, {
+                        map.addNgwTileLayerWithKeyname('roads_regional', 'Сеть региональных дорог', ngwUrlForTiles, layersByKeyname['roads_regional'].style_id, null, {
                             loading: function () {
                                 domClass.add('reg', 'loading');
                             },
                             loaded: function () {
                                 domClass.remove('reg', 'loading');
                             }});
-
-                        map.addNgwTileLayer('Объезды', ngwUrlForTiles, 43, null, {
+                        map.addNgwTileLayerWithKeyname('detour', 'Объезды', ngwUrlForTiles, layersByKeyname['detour'].style_id, null, {
                             loading: function () {
                                 domClass.add('obd', 'loading');
                             },
                             loaded: function () {
                                 domClass.remove('obd', 'loading');
                             }});
-
-                        map.addNgwTileLayer('Датчики', ngwUrlForTiles, 53, null, {
+                        map.addNgwTileLayerWithKeyname('sensors_meteo', 'Датчики', ngwUrlForTiles, layersByKeyname['sensors_meteo'].style_id, null, {
                             loading: function () {
                                 domClass.add('datch', 'loading');
                             },
                             loaded: function () {
                                 domClass.remove('datch', 'loading');
                             }});
-
-                        map.addNgwTileLayer('Регионы', ngwUrlForTiles, 36, null, {
+                        map.addNgwTileLayerWithKeyname('regions', 'Регионы', ngwUrlForTiles, layersByKeyname['regions'].style_id, null, {
                             loading: function () {
                                 domClass.add('regions', 'loading');
                             },
                             loaded: function () {
                                 domClass.remove('regions', 'loading');
                             }});
-
-                        map.addNgwTileLayer('Объекты сервиса', ngwUrlForTiles, 80, null, {
+                        map.addNgwTileLayerWithKeyname('service', 'Объекты сервиса', ngwUrlForTiles, layersByKeyname['service'].style_id, null, {
                             loading: function () {
                                 domClass.add('services', 'loading');
                             },
                             loaded: function () {
                                 domClass.remove('services', 'loading');
                             }});
-
-                        map.addNgwTileLayer('Производственные площадки (пескобазы, теплые стоянки)', ngwUrlForTiles, 83, null, {
+                        map.addNgwTileLayerWithKeyname('productions', 'Производственные площадки (пескобазы, теплые стоянки)', ngwUrlForTiles, layersByKeyname['productions'].style_id, null, {
                             loading: function () {
                                 domClass.add('pp', 'loading');
                             },
                             loaded: function () {
                                 domClass.remove('pp', 'loading');
                             }});
-
-                        map.addNgwTileLayer('Водохранилища', ngwUrlForTiles, 57, null, {
+                        map.addNgwTileLayerWithKeyname('reservoir', 'Водохранилища', ngwUrlForTiles, layersByKeyname['reservoir'].style_id, null, {
                             loading: function () {
                                 domClass.add('reservoir', 'loading');
                             },
                             loaded: function () {
                                 domClass.remove('reservoir', 'loading');
                             }});
-
-                        map.addNgwTileLayer('Пункты МЧС', ngwUrlForTiles, 97, null, {
+                        map.addNgwTileLayerWithKeyname('emergency_posts', 'Пункты МЧС', ngwUrlForTiles, layersByKeyname['emergency_posts'].style_id, null, {
                             loading: function () {
                                 domClass.add('mchs', 'loading');
                             },
