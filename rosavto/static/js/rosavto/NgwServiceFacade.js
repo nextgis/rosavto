@@ -185,10 +185,15 @@ define([
             },
 
             getWaySublineByChainage: function (idLayer, guid, first, last) {
-                url = 'layer/' + idLayer + '/rosavto/getlrsublinebyuuid?guid=' + guid +
+                var url = 'layer/' + idLayer + '/rosavto/getlrsublinebyuuid?guid=' + guid +
                     '&first=' + first + '&last=' + last + '&step=1000';
 
                 return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET', data: {url: this._ngwUrlBase + url}});
+            },
+
+            getObjectsFromLayer: function (layerId) {
+                var url = 'resource/' + layerId + '/store/';
+                return xhr(this._ngwUrlBase + url, {handleAs: 'json', method: 'GET'});
             }
         });
     });
