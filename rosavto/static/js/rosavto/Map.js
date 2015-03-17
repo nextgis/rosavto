@@ -9,8 +9,9 @@ define([
     'centreit/StorageProvider',
     'dojo/topic',
     'dojox/lang/functional/object',
-    'rosavto/EasyPrint'
-], function (query, declare, lang, array, xhr, Loader, L, storage, topic, object, EasyPrint) {
+    'rosavto/EasyPrint',
+    'rosavto/Constants'
+], function (query, declare, lang, array, xhr, Loader, L, storage, topic, object, EasyPrint, Constants) {
     return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
@@ -27,7 +28,9 @@ define([
             }
 
             this._lmap = new L.Map(domNode, settings);
-            this._lmap.on('layeradd', lang.hitch(this, function (layer) { this.onMapLayerAdded(layer);} ));
+            this._lmap.on('layeradd', lang.hitch(this, function (layer) {
+                this.onMapLayerAdded(layer);}
+            ));
             this._lmap.on('layerremove', lang.hitch(this, function (layer) { this.onMapLayerRemoved(layer);} ));
             this._lmap.on('moveend', this.onMapMoveEnd);
 
@@ -131,6 +134,7 @@ define([
             var ngwTilesUrl = ngwUrl + 'resource/' + idStyle + '/tms?z={z}&x={x}&y={y}',
                 ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
 
+            ngwTileLayer._layerType = Constants.TileLayer;
             ngwTileLayer._ngwStyleId = idStyle;
 
             if (typeof name !== 'string') {
@@ -209,8 +213,11 @@ define([
             }));
         },
 
-        addGeoJsonLayer: function (name, geoJsonLayer) {
-            geoJsonLayer.addTo(this._lmap);
+        addGeoJsonLayer: function (name, geoJsonLayer, keyname) {
+            if (keyname) {
+                geoJsonLayer.keyname = keyname;
+            }
+            this._lmap.addLayer(geoJsonLayer);
             this._overlaylayers[name] = geoJsonLayer;
             if (this._legend)
                 this._legend.addOverlay(geoJsonLayer, name);
