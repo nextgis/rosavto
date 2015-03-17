@@ -49,7 +49,12 @@ define([
 
             var component = this;
             topic.subscribe("map/coordinates/restore", function () {
-                component._lmap.setView([arguments[0].lat, arguments[0].lon], arguments[0].zoom, {reset: true});
+                if (!arguments || !arguments[0] || !arguments[0].lat || !arguments[0].lon || !arguments[0].zoom) {
+                    component._lmap.setView(['55.7325', '37.6529'], 10, {reset: true});
+                } else {
+                    component._lmap.setView([arguments[0].lat, arguments[0].lon], arguments[0].zoom, {reset: true});
+                }
+
             });
             topic.publish("map/created", {created: true});
 
