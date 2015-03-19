@@ -39,7 +39,7 @@ define([
             },
 
             identifyFeaturesByLayers: function (layersIds, wktBounds, srs) {
-                var url = 'feature_layer/identify',
+                var url = 'geocollection/rosavto?',
                     params;
 
                 if (!srs) {
@@ -47,15 +47,15 @@ define([
                 }
 
                 params = {
-                    layers: layersIds,
+                    layers: layersIds.join(','),
                     srs: srs,
-                    geom: wktBounds
+                    bbox: wktBounds.join(',')
                 };
 
                 return xhr(this._ngwUrlBase + url, {
                     handleAs: 'json',
-                    method: 'POST',
-                    data: JSON.stringify(params)
+                    method: 'GET',
+                    query: params
                 });
             },
 
