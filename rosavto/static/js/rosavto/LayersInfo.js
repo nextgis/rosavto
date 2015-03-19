@@ -370,6 +370,19 @@ define([
                 return listLayers;
             },
 
+            getLayersDictByKeyname: function () {
+                var layers = this.getListLayers(),
+                    dict = {};
+
+                array.forEach(layers, function (layer) {
+                    if (layer.keyname) {
+                        dict[layer.keyname] = layer;
+                    }
+                });
+
+                return dict;
+            },
+
             getStyles: function () {
                 var resourceLayers = this.store.query({type: 'mapserver_style'}),
                     listLayers = [];
