@@ -80,6 +80,27 @@ define([
                     this.map.getLMap().removeLayer(this._selectedObjectsLayer);
                     this._selectedObjectsLayer = null;
                 }
+            },
+
+            _getNgwTileLayerStyle: function (layerId, featureProperties) {
+                var style = this.mapIdentify.layersInfo.getStyleByLayerId(layerId),
+                    selectedObjectGroupStyle;
+
+                if (!style) {
+                    if (this.debug) {
+                        console.log('ObjectSelector: selected-object-style style is not defined for layer ' + this.layersInfo.getLayerNameByLayerId(layerId));
+                    }
+                    return null;
+                } else if (style['selectedObjectStyle']) {
+                    return style.selectedObjectStyle;
+                } else if (style['selectedObjectStyleGroup']) {
+                    selectedObjectGroupStyle = style.selectedObjectStyleGroup[featureProperties[style.selectedObjectStyleGroup._fieldType]];
+                    if (!selectedObjectGroupStyle) {
+                        console.log('ObjectSelector: selected-object-style-group is not found: type "' +
+                        featureProperties[style.selectedObjectStyleGroup._fieldType] + '"');
+                    }
+                    return selectedObjectGroupStyle;
+                }
             }
         });
     });
