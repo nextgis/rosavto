@@ -26,7 +26,10 @@ define([
                 'getHistDate',
                 'sensorsSubscribesUrl'
             ]);
+
             lang.mixin(this, settings);
+            this._setDefaultKeyname();
+            this._layerType = Constants.SensorsLayer;
 
             this._layersSubsriber = new Subscriber({
                 subscribeUrl: this.objectsSubscribedUrl,
@@ -46,6 +49,12 @@ define([
             }));
 
             this._onSpiderfyBindEvents();
+        },
+
+        _setDefaultKeyname: function () {
+            if (!this.keyname) {
+                this.keyname = 'sensorsLayer';
+            }
         },
 
         _onSpiderfyBindEvents: function () {
@@ -437,7 +446,10 @@ define([
         },
 
         _buildSinglePopup: function (htmlContent, marker) {
-            var popup = L.popup({offset: L.point(0, -20), autoPan: false}).setLatLng(marker.getLatLng()).setContent(htmlContent);
+            var popup = L.popup({
+                offset: L.point(0, -20),
+                autoPan: false
+            }).setLatLng(marker.getLatLng()).setContent(htmlContent);
             this._popupsLayer.addLayer(popup);
         },
 
@@ -448,7 +460,7 @@ define([
                 currentTrArray = [],
                 temperaturesArray = this._createTemperaturesSensorsForPopup(markerStation);
 
-            sensorsForTemplate.push({ values: currentTrArray });
+            sensorsForTemplate.push({values: currentTrArray});
 
             if (temperaturesArray) {
                 currentTrArray.push({
@@ -465,7 +477,7 @@ define([
 
                 if ((currentIndex - startIndex) === 4) {
                     currentTrArray = [];
-                    sensorsForTemplate.push({ values: currentTrArray });
+                    sensorsForTemplate.push({values: currentTrArray});
                     startIndex = currentIndex;
                 }
 
@@ -488,7 +500,7 @@ define([
 
         _createTemperaturesSensorsForPopup: function (markerStation) {
             var isTemperatureSensorsExist = false,
-                temperaturesArray = [false,false,false];
+                temperaturesArray = [false, false, false];
 
             array.forEach(this._activatedSensors[markerStation.type], function (sensor, index) {
                 if (this._temperatureSensors.hasOwnProperty(sensor)) {
