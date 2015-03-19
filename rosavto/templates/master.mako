@@ -17,7 +17,8 @@
             ngwUrlForTiles = '${request.registry.settings['proxy_ngw']}',
             ngwProxyUrl = application_root + '/ngw/',
             Monitoring = {
-                contextPath: '/monitoring-web/',
+                url: '${request.registry.settings['proxy_cit']}monitoring-web',
+                contextPath: '${request.registry.settings['proxy_cit']}monitoring-web/',
                 getApplication: function () {
                     return {
                         fireEvent: function (event, featureId, histDate) {
