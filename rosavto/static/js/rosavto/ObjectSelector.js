@@ -67,6 +67,19 @@ define([
                 } else {
                     throw new Error('ObjectSelector: keynameLayer ' + keynameLayer + ' is not found into visible layers.');
                 }
+            },
+
+            _createSelectedObjectsLayer: function () {
+                this._selectedObjectsLayer = new StyledGeoJsonLayer(null, this.defaultStylesSettings);
+                this.map.getLMap().addLayer(this._styledGeoJsonLayer);
+                this._selectedObjectsLayer.bringToFront();
+            },
+
+            _removeSelectedObjectsLayer: function () {
+                if (this._selectedObjectsLayer) {
+                    this.map.getLMap().removeLayer(this._selectedObjectsLayer);
+                    this._selectedObjectsLayer = null;
+                }
             }
         });
     });
