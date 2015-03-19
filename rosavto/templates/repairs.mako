@@ -1,15 +1,8 @@
 <%inherit file="master.mako"/>
 
-<%block name="title">Программное выделение пиктограмм</%block>
+<%block name="title">Слой ремонтов</%block>
 
 <div class="code-description">
-    <a href="https://github.com/nextgis/rosavto/issues/20">Описание issue</a>
-    <p>
-        <label data-layer-keyname="-1" id="layerName">Выберите слой на карте</label>
-
-        <select id="objectsSelect">
-        </select>
-    </p>
 </div>
 
 <div id="map"></div>
