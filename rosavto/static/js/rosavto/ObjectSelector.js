@@ -24,8 +24,6 @@ define([
                 this.verificateRequiredParameters(settings, [
                     'map',
                     'ngwServiceFacade',
-                    'mapIdentify',
-                    'attributeGetter',
                     'layersInfo',
                     'defaultStylesSettings'
                 ]);
@@ -46,7 +44,7 @@ define([
                             throw new Error('ObjectSelector: object with guid "' + guid +
                             '" on layer"' + keynameLayer + '" is not found.');
                         }
-                        topic.publish('attributes/get', geometry.features[0], this.mapIdentify.fieldIdentify);
+                        this._renderMarkerSelected(geometry.features[0]);
                     }));
                 }
 
@@ -61,6 +59,10 @@ define([
                 }
             },
 
+            selectObjectByFeature: function (feature) {
+                this._renderMarkerSelected(feature);
+            },
+
             getLayerVisibleByKeyname: function (keynameLayer) {
                 if (this.map._layersByKeyname[keynameLayer]) {
                     return this.map._layersByKeyname[keynameLayer];
@@ -71,7 +73,7 @@ define([
 
             _createSelectedObjectsLayer: function () {
                 this._selectedObjectsLayer = new StyledGeoJsonLayer(null, this.defaultStylesSettings);
-                this.map.getLMap().addLayer(this._styledGeoJsonLayer);
+                this.map.getLMap().addLayer(this._selectedObjectsLayer);
                 this._selectedObjectsLayer.bringToFront();
             },
 
@@ -82,8 +84,26 @@ define([
                 }
             },
 
+            _renderMarkerSelected: function (feature) {
+                var layerId = feature.properties.__layer__,
+                    style = this._getNgwTileLayerStyle(layerId, feature.properties);
+
+                this._createSelectedObjectsLayer();
+
+                if (style) {
+                    this._addSelectedStyle(style);
+                    this.map.getLMap().fitBounds(this._selectedObjectsLayer.addObject(feature, 'selected', 0).getBounds());
+                } else {
+                    this.map.getLMap().fitBounds(this._selectedObjectsLayer.addObject(feature, 'default', 0).getBounds());
+                }
+            },
+
+            _addSelectedStyle: function (style) {
+                this._selectedObjectsLayer.addType('selected', style);
+            },
+
             _getNgwTileLayerStyle: function (layerId, featureProperties) {
-                var style = this.mapIdentify.layersInfo.getStyleByLayerId(layerId),
+                var style = this.layersInfo.getStyleByLayerId(layerId),
                     selectedObjectGroupStyle;
 
                 if (!style) {
