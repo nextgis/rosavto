@@ -125,6 +125,10 @@
                             // Данные на вход
                             // guids: строка, массив вида '["535a698c-9d2c-4429-a847-db6a4642737f","d70b3a9f-e43b-42db-87ba-aff19a31caca"]'
                             // time: то, что вернет функция getCurrentTime
+                            // Формат возвращаемых данных:
+                            // словарь, где ключи guid'ы объектов, значения - статусы
+                            // пример:
+                            // {"535a698c-9d2c-4429-a847-db6a4642737f": {status: "before"}, "d70b3a9f-e43b-42db-87ba-aff19a31caca": {status: "after"}}
                             getRepairsStatusUrl: '${request.route_url('repairs_status')}',
 
                             // функция, возвращающая текущее время из машины времени
