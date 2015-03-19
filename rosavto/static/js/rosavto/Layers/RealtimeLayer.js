@@ -26,6 +26,7 @@ define([
         _ngwServiceFacade: null,
         // конструктор realtime-слоя
         constructor: function() {
+            this._layerType = Constants.RealtimeLayer;
             // добавляем слой в массив всех realtime-слоёв
             RealtimeLayer.layers.push(this);
 
