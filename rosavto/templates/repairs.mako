@@ -100,10 +100,15 @@
                             debug: true
                         });
 
+                        // Создаем слой ремонтов
+                        // Подключаем из rosavto/Layers/RepairsLayer
                         var l = new RepairsLayer(null, {
                             ngwServiceFacade: ngwServiceFacade,
                             layersInfo: layersInfo,
                             map: map,
+                            // Определяем стили для статусов, которые вернет П-М сервис
+                            // В примере предполагается, что статусы называются
+                            // 'before' и 'after'
                             styles: {
                                 'before': {
                                     point: {'type': 'circle', 'radius': 3, 'style': {'opacity': 1, 'fillOpacity': 1, 'weight': 1, 'color': '#730000', 'fillColor': '#C92626'}},
@@ -114,10 +119,23 @@
                                     line: {opacity: 0.5, weight: 3, color: '#00D600'}
                                 }
                             },
+
+                            // Адрес сервиса П-М, который вернет статусы
+                            // Сервис принимает запросы POST типа
+                            // Данные на вход
+                            // guids: строка, массив вида '["535a698c-9d2c-4429-a847-db6a4642737f","d70b3a9f-e43b-42db-87ba-aff19a31caca"]'
+                            // time: то, что вернет функция getCurrentTime
                             getRepairsStatusUrl: '${request.route_url('repairs_status')}',
+
+                            // функция, возвращающая текущее время из машины времени
+                            // должна быть реализована на стороне П-М
                             getCurrentTime: function () {
                                 return '';
                             },
+
+                            // Метка отладки
+                            // Если включена, то будут выводиться в консоль значения GUID
+                            // которые вернуло ГИС, но сервис П-М не нашел статус
                             debug: true
                         });
                         map.addVectorLayer(l, 'Ремонты');
