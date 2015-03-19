@@ -180,7 +180,8 @@
                     'dijit/form/Select',
                     'dojo/domReady!'],
 
-                function (DeferredList, query, array, html, promiseAll, Map, NgwServiceFacade, LayersInfo, StyledGeoJsonLayer, IncidentEditor, parser, Select) {
+                function (DeferredList, query, array, html, promiseAll, Map, NgwServiceFacade, LayersInfo,
+                          StyledGeoJsonLayer, IncidentEditor, parser, Select) {
                     parser.parse();
 
                     var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
@@ -226,8 +227,10 @@
                                 point: {type: 'div', className: 'snow'},
                                 line: {opacity: 0.5, weight: 15, color: '#0040FF'}
                             },
-                            meteo: layersInfo.getStylesByLayersKeynames(['sensors_meteo'])['sensors_meteo']['objectStyle'],
-                            puid: layersInfo.getStylesByLayersKeynames(['sensors_traffic'])['sensors_traffic']['objectStyle']
+                            meteo: layersInfo.getStylesByLayersKeynames(['sensors_meteo'])
+                                    ['sensors_meteo']['objectStyle'],
+                            puid: layersInfo.getStylesByLayersKeynames(['sensors_traffic'])
+                                    ['sensors_traffic']['objectStyle']
                         };
 
                         layer = new StyledGeoJsonLayer(null, {
@@ -328,15 +331,14 @@
                             promiseAll(
                                 {meteo: meteo, traffic: traffic}
                             ).then(function (data) {
-                                    layer.addObject({type:"Feature",properties:{},geometry: data.meteo.geometry}, 'meteo', '1');
-                                    layer.addObject({type:"Feature",properties:{},geometry: data.traffic.geometry}, 'puid', '2');
+                                    layer.addObject({type:"Feature",properties:{},geometry: data.meteo.geometry},
+                                            'meteo', '1');
+                                    layer.addObject({type:"Feature",properties:{},geometry: data.traffic.geometry},
+                                            'puid', '2');
                                     map2.getLMap().fitBounds(layer.getBounds());
                             });
-
                         });
                     });
-
-
                 });
     </script>
 </%block>
