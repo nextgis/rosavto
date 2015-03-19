@@ -30,6 +30,8 @@ def main(global_config, **settings):
     config.add_route('clusters', '/clusters')
     config.add_route('sensors', '/sensors')
     config.add_route('object_selector', '/object_selector')
+    config.add_route('repairs', '/repairs')
+    config.add_route('repairs_status', '/repairs/status')
 
     # proxies url
     config.add_route('proxy_ngw', '/ngw/*target_url')

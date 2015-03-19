@@ -8,6 +8,7 @@
     ('wms', u'WMS'),
     ('realtime', u'Realtime'),
     ('attributes', u'Аттрибуты'),
+    ('object_selector', u'Выбор'),
     ('center', u'Центрирование'),
     ('incident', u'Происшествия'),
     ('routing_sample', u'Маршруты'),
@@ -15,6 +16,7 @@
     ('clusters', u'Кластеры с состояниями'),
     ('time', u'Время'),
     ('sensors', u'Датчики'),
+    ('repairs', u'Ремонты'),
     ('code', u'Код')
 ]
 %>
