@@ -45,6 +45,7 @@ define([
                             '" on layer"' + keynameLayer + '" is not found.');
                         }
                         this._renderMarkerSelected(geometry.features[0]);
+                        this._fireAfterSelect(guid, keynameLayer, Constants.TileLayer);
                     }));
                 }
 
@@ -68,6 +69,12 @@ define([
                     return this.map._layersByKeyname[keynameLayer];
                 } else {
                     throw new Error('ObjectSelector: keynameLayer ' + keynameLayer + ' is not found into visible layers.');
+                }
+            },
+
+            _fireAfterSelect: function (guid, keynameLayer, layerType) {
+                if (this.afterSelect && typeof(this.afterSelect) === 'function') {
+                    this.afterSelect.call(undefined, guid, keynameLayer, layerType);
                 }
             },
 
