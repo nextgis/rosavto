@@ -74,6 +74,29 @@
                         });
                         mapIdentify.on();
 
+                        objectSelector = new ObjectSelector({
+                            map: map,
+                            ngwServiceFacade: ngwServiceFacade,
+                            layersInfo: layersInfo,
+                            afterSelect: function (guid, keynameLayer, layerType) {
+                                if (Monitoring) {
+                                    Monitoring.getApplication().fireEvent('mapObjectSelected', guid, new Date());
+                                }
+                            },
+                            defaultStylesSettings: {
+                                fields: {
+                                    id: 'uniq_uid',
+                                    type: 'type_name'
+                                },
+                                styles: {
+                                    'default': {
+                                        point: {},
+                                        line: {opacity: 0.5, weight: 15, color: '#FF0000'}
+                                    }
+                                }
+                            }
+                        });
+
                         attributeGetter = new AttributeGetter({
                             map: map,
                             ngwServiceFacade: ngwServiceFacade,
@@ -82,12 +105,13 @@
                                 return new Date();
                             },
                             mapIdentify: mapIdentify,
+                            objectSelector: objectSelector,
                             defaultStylesSettings: {
                                 fields: {
                                     id: 'uniq_uid',
                                     type: 'type_name'
                                 },
-                                style: {
+                                styles: {
                                     'default': {
                                         point: {},
                                         line: {opacity: 0.5, weight: 15, color: '#FF0000'}
@@ -95,26 +119,6 @@
                                 }
                             },
                             debug: true
-                        });
-
-                        objectSelector = new ObjectSelector({
-                            map: map,
-                            ngwServiceFacade: ngwServiceFacade,
-                            mapIdentify: mapIdentify,
-                            attributeGetter: attributeGetter,
-                            layersInfo: layersInfo,
-                            defaultStylesSettings: {
-                                fields: {
-                                    id: 'uniq_uid',
-                                    type: 'type_name'
-                                },
-                                style: {
-                                    'default': {
-                                        point: {},
-                                        line: {opacity: 0.5, weight: 15, color: '#FF0000'}
-                                    }
-                                }
-                            }
                         });
 
                         var objectsSelect = new Select({
