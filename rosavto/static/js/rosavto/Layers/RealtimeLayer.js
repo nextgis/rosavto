@@ -13,7 +13,7 @@ define([
     'dojo/_base/array',
     'leaflet/leaflet',
     'dojo/topic'
-], function(declare, lang, on, StyledGeoJsonLayer, Constants, StompClient, DnD, object, uuid, generateRandomUuid, query, array, L, topic) {
+], function (declare, lang, on, StyledGeoJsonLayer, Constants, StompClient, DnD, object, uuid, generateRandomUuid, query, array, L, topic) {
     var RealtimeLayer = declare('rosavto.RealtimeLayer', [StyledGeoJsonLayer], {
         _debug: false,
         markerZIndexOffset: {
@@ -25,13 +25,13 @@ define([
         },
         _ngwServiceFacade: null,
         // конструктор realtime-слоя
-        constructor: function() {
+        constructor: function () {
             this._layerType = Constants.RealtimeLayer;
             // добавляем слой в массив всех realtime-слоёв
             RealtimeLayer.layers.push(this);
 
             //подписка на события выбора объекта на карте (подписан, т.к. требуется снимать выделение с неактивных объектов)
-            topic.subscribe('map/events/select/marker', lang.hitch(this, function(LAYER_TYPE, markerId) {
+            topic.subscribe('map/events/select/marker', lang.hitch(this, function (LAYER_TYPE, markerId) {
 
                 //если есть текущий маркер и пришел не наш ID маркера, снимаем выделение
                 if (LAYER_TYPE !== Constants.RealtimeLayer) {
@@ -47,29 +47,36 @@ define([
             }));
 
         },
-        _setDebug: function(debug) {
+
+        _setDebug: function (debug) {
             this._debug = debug;
         },
-        onAdd: function(map) {
+
+        onAdd: function (map) {
             StyledGeoJsonLayer.prototype.onAdd.call(this, map);
             this._hookMap(map);
         },
-        onRemove: function(map) {
+
+        onRemove: function (map) {
             this._unhookMap(map);
             StyledGeoJsonLayer.prototype.onRemove.call(this, map);
         },
-        _hookMap: function(map) {
+
+        _hookMap: function (map) {
             map.on('moveend zoomend', this._resubscribe, this);
             this._resubscribe();
         },
-        _unhookMap: function(map) {
+
+        _unhookMap: function (map) {
             map.off('moveend zoomend', this._resubscribe, this);
             this._unsubscribeForRealtimeLayer();
         },
-        _resubscribe: function() {
+
+        _resubscribe: function () {
             this._subscribeForRealtimeLayer(lang.hitch(this, this.parseMessage));
         },
-        parseMessage: function(message) {
+
+        parseMessage: function (message) {
             var body = JSON.parse(message.body);
 
             if (this._debug) {
@@ -82,26 +89,28 @@ define([
                 this.processMessage(body);
             }
         },
-        processInitialData: function(messages) {
+
+        processInitialData: function (messages) {
             var layerIdMap = {};
-            object.forIn(this.layersById, function(value, key) {
+            object.forIn(this.layersById, function (value, key) {
                 layerIdMap[key] = 0;
             }, this);
-            array.forEach(messages, function(message) {
+            array.forEach(messages, function (message) {
                 this.processMessage(message);
                 delete layerIdMap[message.guid];
                 var guidTemplate = message.guid + '-';
-                object.forIn(layerIdMap, function(value, key) {
+                object.forIn(layerIdMap, function (value, key) {
                     if (key && key.indexOf(guidTemplate) == 0) {
                         delete layerIdMap[key];
                     }
                 });
             }, this);
-            object.forIn(layerIdMap, function(value, key) {
+            object.forIn(layerIdMap, function (value, key) {
                 this.removeObject(key);
             }, this);
         },
-        processMessage: function(message) {
+
+        processMessage: function (message) {
             if (message.geoJson && message.geoJson !== null) {
                 this.clearGeoJsonElements(message.guid);
                 this.addGeoJsonElements(message);
@@ -119,11 +128,12 @@ define([
                 }
             }
         },
+
         //Список добавляемых объектов по geoJson
-        getJsonElementArray: function(mainGuid, geoJson, type) {
+        getJsonElementArray: function (mainGuid, geoJson, type) {
             var geoJsonArray = [];
             if (geoJson.features) {
-                array.forEach(geoJson.features, function(element) {
+                array.forEach(geoJson.features, function (element) {
                     geoJsonArray.push({mainGuid: mainGuid, geoJson: element, type: type});
                 });
             } else {
@@ -131,11 +141,12 @@ define([
             }
             return geoJsonArray;
         },
+
         //Список добавляемых объектов из dependence
-        getJsonDependentElementArray: function(message) {
+        getJsonDependentElementArray: function (message) {
             var geoJsonArray = [];
             if (message.dependentElements) {
-                array.forEach(message.dependentElements, function(element) {
+                array.forEach(message.dependentElements, function (element) {
                     if (element.geoJson != null) {
                         geoJsonArray = geoJsonArray.concat(this.getJsonElementArray(message.guid, element.geoJson, element.type));
                     }
@@ -143,7 +154,8 @@ define([
             }
             return geoJsonArray;
         },
-        addGeoJsonElements: function(message) {
+
+        addGeoJsonElements: function (message) {
             var geoJsonElementArray = [];
             if (message.geoJson) {
                 geoJsonElementArray = geoJsonElementArray.concat(this.getJsonElementArray(message.guid, message.geoJson, message.type));
@@ -151,23 +163,24 @@ define([
             if (message.dependentElements) {
                 geoJsonElementArray = geoJsonElementArray.concat(this.getJsonDependentElementArray(message));
             }
-            array.forEach(geoJsonElementArray, function(element, index) {
+            array.forEach(geoJsonElementArray, function (element, index) {
                 this._addGeoJsonElement(element.mainGuid, index, element.geoJson, element.type);
             }, this);
         },
-        _addGeoJsonElement: function(mainGuid, index, geoJson, type) {
+
+        _addGeoJsonElement: function (mainGuid, index, geoJson, type) {
             var realtimeLayer = this;
             if (geoJson.geometry && geoJson.properties) {
                 var incidentGuid = mainGuid + '-' + index;
                 var incident = this.addObject(geoJson, type, incidentGuid);
                 if (incidentGuid === RealtimeLayer.currentMarkerId &&
-                        incident.layersById[incidentGuid].feature.geometry.type == 'Point') { //если данный элемент выделен, то мы должны добавить css = 'pressed'
+                    incident.layersById[incidentGuid].feature.geometry.type == 'Point') { //если данный элемент выделен, то мы должны добавить css = 'pressed'
 
                     incident.layersById[incidentGuid].setIcon(L.divIcon({
                         className: incident.options.styles[type]['point'].className + ' pressed'
                     }));
                 }
-                on(incident.layersById[incidentGuid], 'click', function() {
+                on(incident.layersById[incidentGuid], 'click', function () {
                     var m = incident.layersById[incidentGuid];
                     m.markerId = incidentGuid;
                     if (this.feature.geometry.type === 'Point') {
@@ -184,15 +197,17 @@ define([
                 });
             }
         },
-        clearGeoJsonElements: function(guid) {
+
+        clearGeoJsonElements: function (guid) {
             var guidTemplate = guid + '-';
-            object.forIn(this.layersById, function(value, key) {
+            object.forIn(this.layersById, function (value, key) {
                 if (key && key.indexOf(guidTemplate) == 0) {
                     this.removeObject(key);
                 }
             }, this);
         },
-        renderMarker: function(markerId, latlng, type, alarmState) {
+
+        renderMarker: function (markerId, latlng, type, alarmState) {
             var pointStyle = alarmState || 'point';
             var marker;
 
@@ -210,7 +225,7 @@ define([
                     var me = this;
                     marker._icon.isSubscribeOnMouseEvents = true;
 
-                    on(marker._icon, 'mousedown', function(e) {
+                    on(marker._icon, 'mousedown', function (e) {
 
                         if (e.which === 1) {
                             DnD.onDragStart(e.target, {
@@ -222,7 +237,7 @@ define([
                         }
                     });
 
-                    on(marker._icon, 'mouseup', function(e) {
+                    on(marker._icon, 'mouseup', function (e) {
 
                         if (e.which === 1) {
                             if (DnD.dragStart === false) {
@@ -258,7 +273,7 @@ define([
                     //Чтобы маркер не подписывался многократно на события мыши при возникновении событий карты moveend/zoomend
                     marker._icon.isSubscribeOnMouseEvents = true;
 
-                    on(marker._icon, 'mousedown', function(e) {
+                    on(marker._icon, 'mousedown', function (e) {
 
                         if (e.which === 1) {
                             DnD.onDragStart(e.target, {
@@ -270,7 +285,7 @@ define([
                         }
                     });
 
-                    on(marker._icon, 'mouseup', function(e) {
+                    on(marker._icon, 'mouseup', function (e) {
 
                         if (e.which === 1) {
                             if (DnD.dragStart === false) {
@@ -294,14 +309,15 @@ define([
                 this.selectMarker(marker, type, RealtimeLayer.currentMarkerClosed);
             }
         },
-        resetZIndex: function(marker) {
+
+        resetZIndex: function (marker) {
             if (marker instanceof L.Marker) {
                 if (marker.options.alarmState) {
                     marker.setZIndexOffset(this.markerZIndexOffset[marker.options.alarmState]);
                 } else {
                     marker.setZIndexOffset(this.markerZIndexOffset.GREEN);
                 }
-                marker._setPos = function(pos) {
+                marker._setPos = function (pos) {
                     L.DomUtil.setPosition(this._icon, pos);
 
                     if (this._shadow) {
@@ -316,8 +332,9 @@ define([
                 marker._resetZIndex();
             }
         },
+
         // функция для выделения маркера
-        selectMarker: function(marker, type, suppressOpenCard) {
+        selectMarker: function (marker, type, suppressOpenCard) {
 
             query('.pressed').removeClass('pressed');
             var pointStyleCurrent = 'point';
@@ -337,7 +354,7 @@ define([
             marker.setZIndexOffset(this.markerZIndexOffset.CURRENT); // выводим элемент как текущий
             // возвращаем предыдущий выбранный элемент на тот z-уровень, где ему положено находиться
             if (RealtimeLayer.currentMarkerId && RealtimeLayer.currentMarkerId !== marker.markerId) {
-                RealtimeLayer.layers.every(function(layer) {
+                RealtimeLayer.layers.every(function (layer) {
                     var oldCurrentMarker = layer.layersById[RealtimeLayer.currentMarkerId];
                     if (oldCurrentMarker) {
                         if (oldCurrentMarker) {
@@ -363,13 +380,15 @@ define([
                 Monitoring.getApplication().fireEvent('mapObjectSelected', marker.markerId, histDate);
             }
         },
-        deleteMarker: function(markerId) {
+
+        deleteMarker: function (markerId) {
             if (this.layersById[markerId]) {
                 this.removeLayer(this.layersById[markerId]);
                 delete this.layersById[markerId];
             }
         },
-        renderBacklightLine: function(body) {
+
+        renderBacklightLine: function (body) {
             //передаем сервису координаты для расчета построения линии
             if (body.roadId && body.roadMeter) {
                 var line = this.layersById[body.guid];
@@ -387,14 +406,15 @@ define([
                 this.deleteLine(body.guid);
             }
         },
-        drawLine: function(body) {
+
+        drawLine: function (body) {
             var indent = 2;
             var me = this;
             var xhr = this.options._ngwServiceFacade.getIncidentLine('{' + body.roadId + '}',
-                    {distance: {km: (body.roadMeter / 1000) - indent, m: body.roadMeter % 1000}},
-            {distance: {km: (body.roadMeter / 1000) + indent, m: body.roadMeter % 1000}}
+                {distance: {km: (body.roadMeter / 1000) - indent, m: body.roadMeter % 1000}},
+                {distance: {km: (body.roadMeter / 1000) + indent, m: body.roadMeter % 1000}}
             );
-            xhr.then(lang.hitch(this, function(lineGeoJson) {
+            xhr.then(lang.hitch(this, function (lineGeoJson) {
                 var jsonLayer = L.geoJson(lineGeoJson, {
                     style: this.options.styles[body.type][body.alarmState].line,
                     alarmState: body.alarmState
@@ -405,7 +425,7 @@ define([
                 else
                     jsonLayer.bringToBack(); //остальное позади
                 this.layersById[body.guid] = jsonLayer;
-                jsonLayer.on('click', function() {
+                jsonLayer.on('click', function () {
                     var histDate = null;
                     if (me.options) {
                         histDate = me.options.historyDate;
@@ -414,17 +434,19 @@ define([
                 }, this);
             }));
         },
-        deleteLine: function(lineId) {
+
+        deleteLine: function (lineId) {
             if (this.layersById[lineId]) {
                 this.removeLayer(this.layersById[lineId]);
                 delete this.layersById[lineId];
             }
         },
-        drawTrajectory: function(guid, coord, lineOption, pointOption) {
+
+        drawTrajectory: function (guid, coord, lineOption, pointOption) {
             if (!this.layersById[guid]) {
                 var latlng = [];
                 var me = this;
-                array.forEach(coord, function(c) {
+                array.forEach(coord, function (c) {
                     if (c.longitude || c.latitude) {
                         latlng.push({lon: c.longitude, lat: c.latitude});
                     } else {
@@ -434,17 +456,18 @@ define([
                 var polyline = L.polyline(latlng, lineOption);
                 me.layersById[guid] = polyline;
                 me.addLayer(polyline);
-                array.forEach(latlng, function(ll, index) {
+                array.forEach(latlng, function (ll, index) {
                     var circle = L.circleMarker(ll, pointOption);
                     me.layersById[guid + '-' + index] = circle;
                     me.addLayer(circle);
                 });
             }
         },
-        removeTrajectory: function(guid) {
+
+        removeTrajectory: function (guid) {
             var guidTemplate = guid + '-';
             var me = this;
-            object.forIn(this.layersById, function(value, key) {
+            object.forIn(this.layersById, function (value, key) {
                 if (key && key.indexOf(guidTemplate) == 0) {
                     me.removeLayer(me.layersById[key]);
                     delete me.layersById[key];
@@ -455,9 +478,10 @@ define([
                 delete this.layersById[guid];
             }
         },
+
         _lastMapBounds: null,
         _subscription: null,
-        _subscribeForRealtimeLayer: function(callback) {
+        _subscribeForRealtimeLayer: function (callback) {
             var bounds = this._map.getBounds();
 
             // Добавляем к видимой области слоя по 10% с каждой стороны
@@ -477,7 +501,7 @@ define([
             }
 
             if (this.options.subscribeUrl) {
-                StompClient.connect().then(lang.hitch(this, function(client) {
+                StompClient.connect().then(lang.hitch(this, function (client) {
                     this._unsubscribeForRealtimeLayer();
                     this._subscription = client.subscribe(this.options.subscribeUrl + uuid.generateRandomUuid(), callback, headers);
                 }));
@@ -485,7 +509,7 @@ define([
 
             if (this.options.trajectory && this.options.trajectory.clientSubscribeUrl) {
                 var me = this;
-                topic.subscribe(this.options.trajectory.clientSubscribeUrl, function(guid, trackOption) {
+                topic.subscribe(this.options.trajectory.clientSubscribeUrl, function (guid, trackOption) {
                     if (trackOption.isActive) {
                         if (RealtimeLayer.currentTrack && RealtimeLayer.currentTrack != guid) {
                             var oldLatlngs = me.layersById[RealtimeLayer.currentTrack]._latlngs;
@@ -507,7 +531,8 @@ define([
                 });
             }
         },
-        _unsubscribeForRealtimeLayer: function() {
+
+        _unsubscribeForRealtimeLayer: function () {
             if (this._subscription) {
                 this._subscription.unsubscribe();
                 this._subscription = null;
