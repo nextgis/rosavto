@@ -100,12 +100,12 @@ define([
             },
 
             _createSelectedObjectsLayer: function () {
-                if (!this._selectedObjectsLayer) {
+                if (this._selectedObjectsLayer) {
+                    this._selectedObjectsLayer.clearLayers();
+                } else {
                     this._selectedObjectsLayer = new StyledGeoJsonLayer(null, this.defaultStylesSettings);
                     this._bindSelectedObjectsLayerEvents();
                     this.map.getLMap().addLayer(this._selectedObjectsLayer);
-                } else {
-                    this._selectedObjectsLayer.clearLayers();
                 }
 
                 this._selectedObjectsLayer.bringToFront();
