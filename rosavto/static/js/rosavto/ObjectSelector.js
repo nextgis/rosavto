@@ -2,7 +2,7 @@ define([
         'dojo/_base/declare',
         'dojo/_base/array',
         'dojo/_base/lang',
-        'dojo',
+        'dojo/on',
         'dojo/html',
         'dojo/topic',
         'dojo/request/xhr',
@@ -15,7 +15,7 @@ define([
         'rosavto/Layers/StyledGeoJsonLayer',
         'rosavto/Constants'
     ],
-    function (declare, array, lang, dojo, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade,
+    function (declare, array, lang, on, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade,
               ParametersVerification, Loader, StyledGeoJsonLayer, Constants) {
         return declare('rosavto.ObjectSelector', [Loader, ParametersVerification], {
             _selectedObjectsLayer: null,
@@ -68,7 +68,21 @@ define([
             addObjectByMarker: function (guid, layerType, marker) {
                 this._createSelectedObjectsLayer();
                 this._selectedObjectsLayer.addLayer(marker);
+                this._bindDndEventMarker(marker);
                 this._fireAfterSelect(guid, layerType);
+            },
+
+            _bindDndEventMarker: function (marker) {
+                on(marker._icon, 'mousedown', lang.hitch(this, function (e) {
+                    if (e.which === 1) {
+                        DnD.onDragStart(e.target, {
+                            objectGuid: marker.guid,
+                            type: marker.type,
+                            historyDate: this.getHistDate()
+                        });
+                        e.stopPropagation();
+                    }
+                }));
             },
 
             getLayerVisibleByKeyname: function (keynameLayer) {
