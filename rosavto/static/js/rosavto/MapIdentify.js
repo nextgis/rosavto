@@ -9,17 +9,25 @@ define([
         'dojo/topic',
         'mustache/mustache',
         'rosavto/ParametersVerification',
+        'rosavto/Constants',
         'leaflet/leaflet',
         'dojo/NodeList-traverse',
         'centreit/DragAndDrop'
     ],
-    function (declare, array, lang, query, on, domAttr, xhr, topic, mustache, ParametersVerification, L, DnD) {
+    function (declare, array, lang, query, on, domAttr, xhr, topic, mustache,
+              ParametersVerification, Constants, L, DnD) {
 
         return declare('rosavto.MapIdentify', [ParametersVerification], {
             template: '<div id="{{id}}" class="layers-selector">{{#layers}}<p>{{name}}</p><ul data-layer-id="{{id}}">{{#features}}<li data-id="{{id}}"><a href="javascript:void(0)">{{label}}</a></li>{{/features}}</ul>{{/layers}}</div>',
 
             constructor: function (settings) {
-                this.verificateRequiredParameters(settings, ['map', 'ngwServiceFacade', 'layersInfo', 'fieldIdentify']);
+                this.verificateRequiredParameters(settings, [
+                    'map',
+                    'ngwServiceFacade',
+                    'layersInfo',
+                    'fieldIdentify',
+                    'objectSelector'
+                ]);
                 lang.mixin(this, settings);
 
                 mustache.parse(this.template);
@@ -56,20 +64,24 @@ define([
             getIdsByClick: function (e) {
                 var map = this.map._lmap,
                     zoom = map.getZoom(),
-                    latlngClick = e.latlng,
+                    feature,
                     featuresCount;
 
                 return this.layersInfo.getLayersIdByStyles(this.map.getVisibleNgwLayers()).then(lang.hitch(this, function (layersId) {
                     this.ngwServiceFacade.identifyGeoFeaturesByLayers(layersId, zoom, [e.latlng.lng, e.latlng.lat])
                         .then(lang.hitch(this, function (geoJsonFeatures) {
                                 featuresCount = geoJsonFeatures.features.length;
+                                feature = null;
                                 if (featuresCount === 1) {
-                                    topic.publish('attributes/get', geoJsonFeatures.features[0], this.fieldIdentify);
+                                    feature = geoJsonFeatures.features[0];
                                 }
                                 else if (featuresCount > 1) {
-                                    topic.publish('attributes/get',
-                                        this._getSignificantFeature(geoJsonFeatures.features),
-                                        this.fieldIdentify);
+                                    feature = this._getSignificantFeature(geoJsonFeatures.features);
+                                }
+
+                                if (feature) {
+                                    this.objectSelector.selectObjectByFeature(
+                                        feature.properties[this.fieldIdentify], feature, Constants.TileLayer);
                                 }
                             }
                         ));
