@@ -45,7 +45,7 @@ define([
                             '" on layer"' + keynameLayer + '" is not found.');
                         }
                         this._renderMarkerSelected(geometry.features[0]);
-                        this._fireAfterSelect(guid, keynameLayer, Constants.TileLayer);
+                        this._fireAfterSelect(guid, Constants.TileLayer);
                     }));
                 }
 
@@ -60,8 +60,15 @@ define([
                 }
             },
 
-            selectObjectByFeature: function (feature) {
+            selectObjectByFeature: function (guid, feature, layerType) {
                 this._renderMarkerSelected(feature);
+                this._fireAfterSelect(guid, layerType);
+            },
+
+            addObjectByMarker: function (guid, layerType, marker) {
+                this._createSelectedObjectsLayer();
+                this._selectedObjectsLayer.addLayer(marker);
+                this._fireAfterSelect(guid, layerType);
             },
 
             getLayerVisibleByKeyname: function (keynameLayer) {
@@ -79,9 +86,25 @@ define([
             },
 
             _createSelectedObjectsLayer: function () {
-                this._selectedObjectsLayer = new StyledGeoJsonLayer(null, this.defaultStylesSettings);
-                this.map.getLMap().addLayer(this._selectedObjectsLayer);
+                if (!this._selectedObjectsLayer) {
+                    this._selectedObjectsLayer = new StyledGeoJsonLayer(null, this.defaultStylesSettings);
+                    this._bindSelectedObjectsLayerEvents();
+                    this.map.getLMap().addLayer(this._selectedObjectsLayer);
+                } else {
+                    this._selectedObjectsLayer.clearLayers();
+                }
+
                 this._selectedObjectsLayer.bringToFront();
+            },
+
+            _bindSelectedObjectsLayerEvents: function () {
+                if (!this._selectedObjectsLayer) {
+                    throw new Error('ObjectSelector: _selectedObjectsLayer is not created.');
+                }
+                this._selectedObjectsLayer.on('click', function (e, e1) {
+                    console.log(e);
+                    console.log(e1);
+                });
             },
 
             _removeSelectedObjectsLayer: function () {
