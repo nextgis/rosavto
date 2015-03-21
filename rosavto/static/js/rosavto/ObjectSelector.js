@@ -38,15 +38,7 @@ define([
                 }
 
                 if (layer._layerType === Constants.TileLayer) {
-                    var layerId = this.layersInfo.getLayersIdByKeynames([keynameLayer])[0];
-                    this.ngwServiceFacade.getGeometryByGuid(layerId, guid).then(lang.hitch(this, function (geometry) {
-                        if (!geometry.features || geometry.features.length < 1) {
-                            throw new Error('ObjectSelector: object with guid "' + guid +
-                            '" on layer"' + keynameLayer + '" is not found.');
-                        }
-                        this._renderMarkerSelected(geometry.features[0]);
-                        this._fireAfterSelect(guid, Constants.TileLayer);
-                    }));
+                    this.selectObjectOnTileLayer(guid, keynameLayer);
                 }
 
                 if (layer._layerType === Constants.RealtimeLayer) {
@@ -58,6 +50,18 @@ define([
                 if (layer._layerType === Constants.SensorsLayer) {
 
                 }
+            },
+
+            selectObjectOnTileLayer: function (guid, keynameLayer) {
+                var layerId = this.layersInfo.getLayersIdByKeynames([keynameLayer])[0];
+                this.ngwServiceFacade.getGeometryByGuid(layerId, guid).then(lang.hitch(this, function (geometry) {
+                    if (!geometry.features || geometry.features.length < 1) {
+                        throw new Error('ObjectSelector: object with guid "' + guid +
+                        '" on layer"' + keynameLayer + '" is not found.');
+                    }
+                    this._renderMarkerSelected(geometry.features[0]);
+                    this._fireAfterSelect(guid, Constants.TileLayer);
+                }));
             },
 
             selectObjectByFeature: function (guid, feature, layerType) {
