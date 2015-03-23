@@ -24,6 +24,7 @@ define([
             CURRENT: 1004
         },
         _ngwServiceFacade: null,
+
         // конструктор realtime-слоя
         constructor: function () {
             this._layerType = Constants.RealtimeLayer;
@@ -31,20 +32,20 @@ define([
             RealtimeLayer.layers.push(this);
 
             //подписка на события выбора объекта на карте (подписан, т.к. требуется снимать выделение с неактивных объектов)
-            topic.subscribe('map/events/select/marker', lang.hitch(this, function (LAYER_TYPE, markerId) {
-
-                //если есть текущий маркер и пришел не наш ID маркера, снимаем выделение
-                if (LAYER_TYPE !== Constants.RealtimeLayer) {
-                    if (RealtimeLayer.currentMarkerId !== null && RealtimeLayer.currentMarkerId !== markerId) {
-                        //больше нет текущего маркера
-                        RealtimeLayer.currentMarkerId = null;
-                        RealtimeLayer.markerToSelectId = null;
-
-                        //снимаем css выделение    
-                        query('.pressed').removeClass('pressed');
-                    }
-                }
-            }));
+            //topic.subscribe('map/events/select/marker', lang.hitch(this, function (LAYER_TYPE, markerId) {
+            //
+            //    //если есть текущий маркер и пришел не наш ID маркера, снимаем выделение
+            //    if (LAYER_TYPE !== Constants.RealtimeLayer) {
+            //        if (RealtimeLayer.currentMarkerId !== null && RealtimeLayer.currentMarkerId !== markerId) {
+            //            //больше нет текущего маркера
+            //            RealtimeLayer.currentMarkerId = null;
+            //            RealtimeLayer.markerToSelectId = null;
+            //
+            //            //снимаем css выделение
+            //            query('.pressed').removeClass('pressed');
+            //        }
+            //    }
+            //}));
 
         },
 
@@ -336,49 +337,9 @@ define([
         // функция для выделения маркера
         selectMarker: function (marker, type, suppressOpenCard) {
 
-            query('.pressed').removeClass('pressed');
-            var pointStyleCurrent = 'point';
-            if (this.layersById[marker.markerId].options.alarmState) {
-                pointStyleCurrent = this.layersById[marker.markerId].options.alarmState;
-            }
-            if (this.options.styles[type][pointStyleCurrent]) {
-                marker.setIcon(L.divIcon({
-                    className: this.options.styles[type][pointStyleCurrent].className + ' pressed'
-                }));
-            } else {
-                marker.setIcon(L.divIcon({
-                    className: this.options.styles[type].className + ' pressed'
-                }));
-            }
-
-            marker.setZIndexOffset(this.markerZIndexOffset.CURRENT); // выводим элемент как текущий
-            // возвращаем предыдущий выбранный элемент на тот z-уровень, где ему положено находиться
-            if (RealtimeLayer.currentMarkerId && RealtimeLayer.currentMarkerId !== marker.markerId) {
-                RealtimeLayer.layers.every(function (layer) {
-                    var oldCurrentMarker = layer.layersById[RealtimeLayer.currentMarkerId];
-                    if (oldCurrentMarker) {
-                        if (oldCurrentMarker) {
-                            if (oldCurrentMarker._icon) {
-                                layer.resetZIndex(oldCurrentMarker);
-                            }
-                        }
-                        return false;
-                    }
-                    return true;
-                });
-            }
-
-            RealtimeLayer.currentMarkerId = marker.markerId;
-            var histDate = null;
-            if (this.options) {
-                histDate = this.options.historyDate;
-            }
-
-            if (!suppressOpenCard) {
-                RealtimeLayer.currentMarkerClosed = false;
-                topic.publish('map/events/select/marker', Constants.RealtimeLayer, marker.markerId);
-                Monitoring.getApplication().fireEvent('mapObjectSelected', marker.markerId, histDate);
-            }
+            var markerSelectedCloned = new L.Marker(marker._latlng, marker.options);
+            markerSelectedCloned.options.icon.options.className += ' pressed';
+            this.options.objectSelector.addObjectByMarker(marker.markerId, Constants.RealtimeLayer, markerSelectedCloned);
         },
 
         deleteMarker: function (markerId) {
