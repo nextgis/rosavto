@@ -134,7 +134,6 @@ define([
             }, ngwUrl, idStyle, settings, callbacks);
         },
 
-
         addNgwTileLayer: function (name, ngwUrl, idStyle, settings, callbacks) {
             var ngwTilesUrl = ngwUrl + 'resource/' + idStyle + '/tms?z={z}&x={x}&y={y}',
                 ngwTileLayer = new L.TileLayer(ngwTilesUrl, settings);
@@ -244,12 +243,17 @@ define([
             }
         },
 
-        onMapLayerAdded: function (layer) {
-            if (layer.layer.keyname) {
-                this._layersByKeyname[layer.layer.keyname] = layer;
+        onMapLayerAdded: function (layerAddedObject) {
+            var layer = layerAddedObject.layer;
+
+            if (!layer.keyname) {
+                return false;
             }
+
+            this._layersByKeyname[layer.keyname] = layer;
+
             storage.then(function (provider) {
-                provider.put('mapLayerVisibility-' + layer.layer.keyname, true);
+                provider.put('mapLayerVisibility-' + layer.keyname, true);
             });
         },
 
