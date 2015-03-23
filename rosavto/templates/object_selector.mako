@@ -17,6 +17,7 @@
 <%block name="inlineScripts">
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/sensors/sensors.css')}"/>
     <script>
+        document.objectSelectorGlobal = null;
         require([
                     'dojo/parser',
                     'dijit/form/Select',
@@ -65,20 +66,16 @@
                         map.addNgwTileLayerWithKeyname('service', 'Объекты сервиса', ngwUrlForTiles, layersByKeyname['service'].style_id, null);
                         map.hideLoader();
 
-                        mapIdentify = new MapIdentify({
-                            map: map,
-                            ngwServiceFacade: ngwServiceFacade,
-                            layersInfo: layersInfo,
-                            fieldIdentify: 'uniq_uid',
-                            debug: true
-                        });
-                        mapIdentify.on();
-
                         objectSelector = new ObjectSelector({
                             map: map,
                             ngwServiceFacade: ngwServiceFacade,
                             layersInfo: layersInfo,
-                            afterSelect: function (guid, keynameLayer, layerType) {
+                            getHistDate: function () {
+                                return '';
+                            },
+                            afterSelect: function (guid, layerType) {
+                                console.log(guid);
+                                console.log(layerType);
                                 if (Monitoring) {
                                     Monitoring.getApplication().fireEvent('mapObjectSelected', guid, new Date());
                                 }
@@ -97,28 +94,51 @@
                             }
                         });
 
-                        attributeGetter = new AttributeGetter({
+                        document.objectSelectorGlobal = objectSelector;
+
+                        mapIdentify = new MapIdentify({
                             map: map,
                             ngwServiceFacade: ngwServiceFacade,
-                            attributesServiceFacade: attributesServiceFacade,
+                            layersInfo: layersInfo,
+                            objectSelector: objectSelector,
+                            fieldIdentify: 'uniq_uid',
+                            debug: true
+                        });
+                        mapIdentify.on();
+
+                        var sensorLayer = new SensorsLayer({
+                            objectSelector: objectSelector,
+                            objectsSubscribedUrl: '/app/subscribe/map/',
+                            clusters: ['GRAY', 'GREEN', 'YELLOW', 'RED'],
+                            layersStyles: {
+                                'Video': layersInfo.getClusterStyleByLayerKeyname('sensors_video'),
+                                'Traffic': layersInfo.getClusterStyleByLayerKeyname('sensors_traffic'),
+                                'Meteo': layersInfo.getClusterStyleByLayerKeyname('sensors_meteo')
+                            },
+                            sensorsSubscribesUrl: {
+                                'Meteo': '/app/subscribe/meteoStations/',
+                                'Traffic': '/app/subscribe/trafficStations/'
+                            },
+                            sensors: {
+                                'Meteo': []
+                            },
                             getHistDate: function () {
                                 return new Date();
-                            },
-                            mapIdentify: mapIdentify,
-                            objectSelector: objectSelector,
-                            defaultStylesSettings: {
-                                fields: {
-                                    id: 'uniq_uid',
-                                    type: 'type_name'
-                                },
-                                styles: {
-                                    'default': {
-                                        point: {},
-                                        line: {opacity: 0.5, weight: 15, color: '#FF0000'}
-                                    }
-                                }
-                            },
-                            debug: true
+                            }
+                        }), lmap = map.getLMap();
+
+                        lmap.addLayer(sensorLayer);
+
+##                        meteo sensors:
+##                        'TemperatureAir', 'TemperatureRoad', 'TemperatureUnderRoad', 'WindVelocity', 'WindGusts',
+##                        'WindDirection', 'PrecipitationCode', 'Cloudiness', 'AirPlessure', 'LayerType', 'ReagentAmount', 'ViewDistance',
+##                        'Humidity', 'AdhesionCoefficient'
+
+##                        Traffic sensors:
+##                            'AverageSpeed', 'Amount', 'Trucks'
+
+                        sensorLayer.activateLayers({
+                            'Meteo': []
                         });
 
                         var objectsSelect = new Select({
