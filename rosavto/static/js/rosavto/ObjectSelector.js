@@ -32,7 +32,7 @@ define([
             },
 
             selectObject: function (keynameLayer, guid) {
-                var layer = this.getLayerVisibleByKeyname(keynameLayer);
+                var layer = this._getLayerVisibleByKeyname(keynameLayer);
 
                 if (!layer._layerType) {
                     throw new Error('ObjectSelector: Layer "' + keynameLayer + '" is not contained "_layerType" properties.');
@@ -44,6 +44,7 @@ define([
 
                 if (layer._layerType === Constants.RealtimeLayer) {
                     if (layer.layersById && layer.layersById[guid]) {
+                        layer._selectMarker(layer.layersById[guid]);
                     }
                 }
 
@@ -83,6 +84,11 @@ define([
                 this._fireAfterSelect(guid, layerType);
             },
 
+            clearSelectedObject: function () {
+                this._unbindEvents();
+                this._selectedObjectsLayer.clearLayers();
+            },
+
             _mousedownHandler: null,
             _bindDndEventMarker: function (marker) {
                 this._mousedownHandler = on(marker._icon, 'mousedown', lang.hitch(this, function (e) {
@@ -95,9 +101,10 @@ define([
                         e.stopPropagation();
                     }
                 }));
+                this.map.getLMap().on('click', lang.hitch(this, this.clearSelectedObject));
             },
 
-            getLayerVisibleByKeyname: function (keynameLayer) {
+            _getLayerVisibleByKeyname: function (keynameLayer) {
                 if (this.map._layersByKeyname[keynameLayer]) {
                     return this.map._layersByKeyname[keynameLayer];
                 } else {
@@ -113,7 +120,7 @@ define([
 
             _createSelectedObjectsLayer: function () {
                 if (this._selectedObjectsLayer) {
-                    this._selectedObjectsLayer.clearLayers();
+                    this.clearSelectedObject();
                 } else {
                     this._selectedObjectsLayer = new StyledGeoJsonLayer(null, this.defaultStylesSettings);
                     this._bindSelectedObjectsLayerEvents();
@@ -127,10 +134,10 @@ define([
                 if (!this._selectedObjectsLayer) {
                     throw new Error('ObjectSelector: _selectedObjectsLayer is not created.');
                 }
-                this._selectedObjectsLayer.on('click', function (e, e1) {
-                    console.log(e);
-                    console.log(e1);
-                });
+
+                this._selectedObjectsLayer.on('click', lang.hitch(this, function () {
+                    this.clearSelectedObject();
+                }));
             },
 
             _removeSelectedObjectsLayer: function () {
@@ -142,6 +149,7 @@ define([
 
             _unbindEvents: function () {
                 if (this._mousedownHandler) this._mousedownHandler.remove();
+                this.map.getLMap().off('click', lang.hitch(this, this.clearSelectedObject));
             },
 
             _renderMarkerSelected: function (feature) {
