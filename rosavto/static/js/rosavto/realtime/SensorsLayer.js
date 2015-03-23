@@ -24,7 +24,8 @@ define([
             this.verificateRequiredParameters(settings, [
                 'objectsSubscribedUrl',
                 'getHistDate',
-                'sensorsSubscribesUrl'
+                'sensorsSubscribesUrl',
+                'objectSelector'
             ]);
 
             lang.mixin(this, settings);
@@ -316,7 +317,6 @@ define([
             }));
 
             on(marker._icon, 'mouseup', lang.hitch(this, function (e) {
-
                 if (e.which === 1) {
                     if (DnD.dragStart === false) {
                         this._selectMarker(marker);
@@ -330,17 +330,9 @@ define([
         },
 
         _selectMarker: function (markerSelected) {
-            if (this._markerSelected && this._markerSelected._icon) {
-                domClass.remove(this._markerSelected._icon, 'selected');
-            }
-            this._markerSelected = markerSelected;
-            domClass.add(this._markerSelected._icon, 'selected');
-
-            if (Monitoring) {
-                Monitoring.getApplication().fireEvent('mapObjectSelected', this._markerSelected.guid, this.getHistDate());
-            }
-
-            topic.publish('map/events/select/marker', Constants.SensorsLayer, this._markerSelected.guid);
+            var markerSelectedCloned = new L.Marker(markerSelected._latlng, markerSelected.options);
+            markerSelectedCloned.options.icon.options.className += ' selected';
+            this.objectSelector.addObjectByMarker(markerSelected.guid, Constants.SensorsLayer, markerSelectedCloned);
         },
 
         _markersWithPopup: {},

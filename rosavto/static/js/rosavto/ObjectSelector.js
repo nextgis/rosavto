@@ -8,6 +8,7 @@ define([
         'dojo/request/xhr',
         'dojo/Deferred',
         'dojo/DeferredList',
+        'centreit/DragAndDrop',
         'rosavto/MapIdentify',
         'rosavto/NgwServiceFacade',
         'rosavto/ParametersVerification',
@@ -15,7 +16,7 @@ define([
         'rosavto/Layers/StyledGeoJsonLayer',
         'rosavto/Constants'
     ],
-    function (declare, array, lang, on, html, topic, xhr, Deferred, DeferredList, MapIdentify, NgwServiceFacade,
+    function (declare, array, lang, on, html, topic, xhr, Deferred, DeferredList, DnD, MapIdentify, NgwServiceFacade,
               ParametersVerification, Loader, StyledGeoJsonLayer, Constants) {
         return declare('rosavto.ObjectSelector', [Loader, ParametersVerification], {
             _selectedObjectsLayer: null,
@@ -43,12 +44,16 @@ define([
 
                 if (layer._layerType === Constants.RealtimeLayer) {
                     if (layer.layersById && layer.layersById[guid]) {
-
                     }
                 }
 
                 if (layer._layerType === Constants.SensorsLayer) {
-
+                    if (layer._markers) {
+                        var markerFound = layer._markers[guid];
+                        if (markerFound) {
+                            layer._selectMarker(markerFound);
+                        }
+                    }
                 }
             },
 
@@ -72,17 +77,20 @@ define([
             addObjectByMarker: function (guid, layerType, marker) {
                 this._createSelectedObjectsLayer();
                 this._selectedObjectsLayer.addLayer(marker);
+                marker.setZIndexOffset(9999);
                 this._bindDndEventMarker(marker);
+                this.map.getLMap().fitBounds(this._selectedObjectsLayer.getBounds());
                 this._fireAfterSelect(guid, layerType);
             },
 
+            _mousedownHandler: null,
             _bindDndEventMarker: function (marker) {
-                on(marker._icon, 'mousedown', lang.hitch(this, function (e) {
+                this._mousedownHandler = on(marker._icon, 'mousedown', lang.hitch(this, function (e) {
                     if (e.which === 1) {
                         DnD.onDragStart(e.target, {
                             objectGuid: marker.guid,
                             type: marker.type,
-                            historyDate: this.getHistDate()
+                            historyDate: this.getHistDate.call(undefined)
                         });
                         e.stopPropagation();
                     }
@@ -130,6 +138,10 @@ define([
                     this.map.getLMap().removeLayer(this._selectedObjectsLayer);
                     this._selectedObjectsLayer = null;
                 }
+            },
+
+            _unbindEvents: function () {
+                if (this._mousedownHandler) this._mousedownHandler.remove();
             },
 
             _renderMarkerSelected: function (feature) {
