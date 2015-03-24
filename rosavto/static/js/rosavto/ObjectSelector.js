@@ -101,7 +101,7 @@ define([
                         e.stopPropagation();
                     }
                 }));
-                this.map.getLMap().on('click', lang.hitch(this, this.clearSelectedObject));
+                this.map.getLMap().on('click', this.clearSelectedObject, this);
             },
 
             _getLayerVisibleByKeyname: function (keynameLayer) {
@@ -149,7 +149,7 @@ define([
 
             _unbindEvents: function () {
                 if (this._mousedownHandler) this._mousedownHandler.remove();
-                this.map.getLMap().off('click', lang.hitch(this, this.clearSelectedObject));
+                this.map.getLMap().off('click', this.clearSelectedObject, this);
             },
 
             _renderMarkerSelected: function (feature) {
