@@ -53,7 +53,7 @@ define([
                         handleAs: 'json',
                         method: 'POST',
                         data: {
-                            guids: JSON.stringify(guids),
+                            guids: guids.join(','),
                             time: this.options.getCurrentTime.call(undefined)
                         }
                     }).then(lang.hitch(this, function (repairsStatuses) {

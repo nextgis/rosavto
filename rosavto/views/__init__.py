@@ -88,7 +88,7 @@ def repairs(request):
 @view_config(route_name='repairs_status', renderer='json')
 def repairs_status(request):
     import random
-    guids = json.loads(request.POST.get('guids'))
+    guids = request.POST.get('guids').split(',')
     time = request.POST.get('guids')
 
     result = {}
