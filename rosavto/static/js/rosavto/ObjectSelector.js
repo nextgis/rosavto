@@ -29,6 +29,13 @@ define([
                     'defaultStylesSettings'
                 ]);
                 lang.mixin(this, settings);
+                this.bindEvents();
+            },
+
+            bindEvents: function () {
+                topic.subscribe('object/select', lang.hitch(this, function (keynameLayer, guid) {
+                    this.selectObject(keynameLayer, guid);
+                }));
             },
 
             selectObject: function (keynameLayer, guid) {
