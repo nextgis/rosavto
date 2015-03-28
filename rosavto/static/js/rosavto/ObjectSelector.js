@@ -38,36 +38,33 @@ define([
                 }));
             },
 
-            selectObject: function (keynameLayer, guid) {
-                var layer = this._getLayerVisibleByKeyname(keynameLayer);
+            selectObject: function (guid, layerType) {
 
-                if (!layer._layerType) {
-                    throw new Error('ObjectSelector: Layer "' + keynameLayer + '" is not contained "_layerType" properties.');
+                if (layerType === Constants.TileLayer) {
+                    this.selectObjectOnTileLayer(guid);
                 }
 
-                if (layer._layerType === Constants.TileLayer) {
-                    this.selectObjectOnTileLayer(guid, keynameLayer);
-                }
-
-                if (layer._layerType === Constants.RealtimeLayer) {
+                if (layerType === Constants.RealtimeLayer) {
                     if (layer.layersById && layer.layersById[guid]) {
                         layer._selectMarker(layer.layersById[guid]);
                     }
                 }
 
-                if (layer._layerType === Constants.SensorsLayer) {
+                if (layerType === Constants.SensorsLayer) {
+                    var layer = this._getLayerVisibleByKeyname('sensorsLayer');
                     if (layer._markers) {
                         var markerFound = layer._markers[guid];
                         if (markerFound) {
                             layer._selectMarker(markerFound);
+                        } else {
+
                         }
                     }
                 }
             },
 
-            selectObjectOnTileLayer: function (guid, keynameLayer) {
-                var layerId = this.layersInfo.getLayersIdByKeynames([keynameLayer])[0];
-                this.ngwServiceFacade.getGeometryByGuid(layerId, guid).then(lang.hitch(this, function (geometry) {
+            selectObjectOnTileLayer: function (guid) {
+                this.ngwServiceFacade.getGeometriesByGuids(null, [guid]).then(lang.hitch(this, function (geometry) {
                     if (!geometry.features || geometry.features.length < 1) {
                         throw new Error('ObjectSelector: object with guid "' + guid +
                         '" on layer"' + keynameLayer + '" is not found.');
