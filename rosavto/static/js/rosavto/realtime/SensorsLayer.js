@@ -10,12 +10,13 @@ define([
     'dojo/dom-class',
     'mustache/mustache',
     'rosavto/realtime/Subscriber',
+    'rosavto/NgwServiceFacade',
     'rosavto/Layers/MarkersStateClusterLayer',
     'rosavto/ParametersVerification',
     'rosavto/Constants',
     'centreit/DragAndDrop'
-], function (declare, on, query, dom, lang, array, funcObject, topic, domClass, mustache, Subscriber,
-             MarkersStateClusterLayer,
+], function (declare, on, query, dom, lang, array, funcObject, topic, domClass, mustache,
+             Subscriber, NgwServiceFacade, MarkersStateClusterLayer,
              ParametersVerification, Constants, DnD) {
     return declare('rosavto.SensorsLayer', [MarkersStateClusterLayer, ParametersVerification], {
 
@@ -25,7 +26,9 @@ define([
                 'objectsSubscribedUrl',
                 'getHistDate',
                 'sensorsSubscribesUrl',
-                'objectSelector'
+                'objectSelector',
+                'ngwServiceFacade',
+                'ngwLayersKeynames'
             ]);
 
             lang.mixin(this, settings);
@@ -335,6 +338,13 @@ define([
             this.objectSelector.addObjectByMarker(markerSelected.guid, Constants.SensorsLayer, markerSelectedCloned);
         },
 
+        findObject: function (guid) {
+            this.ngwServiceFacade.getGeometriesByGuids(this.ngwLayersKeynames, guid)
+                .then(lang.hitch(this, function (foundObject) {
+
+                }));
+        },
+
         _markersWithPopup: {},
         _markersWithPopupById: {},
         _oneMarkerCreated: function (marker) {
@@ -524,7 +534,7 @@ define([
 
         onRemove: function (map) {
             this._unhookMap(map);
-            MarkersStateClusterLayer.prototype.onRemove.call(this, map);
+            //MarkersStateClusterLayer.prototype.onRemove.call(this, map);
         },
 
         _hookMap: function (map) {
