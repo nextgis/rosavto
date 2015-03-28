@@ -23,18 +23,20 @@ define([
             },
 
             getGeometriesByGuids: function (layersId, guids, datetime) {
-                var url = 'geocollection/rosavto';
+                var url = 'geocollection/rosavto',
+                    params = {};
 
-                datetime = datetime ? this.formatDateTime(datetime) : this.formatDateTime(new Date());
+                params.datetime = datetime ? this.formatDateTime(datetime) : this.formatDateTime(new Date());
+                params.guids = guids.join(',');
+
+                if (layersId) {
+                    params.layers = layersId.join(',');
+                }
 
                 return xhr(this._ngwUrlBase + url, {
                     handleAs: 'json',
                     method: 'GET',
-                    query: {
-                        layers: layersId.join(','),
-                        guids: guids.join(','),
-                        datetime: datetime
-                    }
+                    query: params
                 });
             },
 
