@@ -57,7 +57,7 @@ define([
                         if (markerFound) {
                             layer._selectMarker(markerFound);
                         } else {
-
+                            this.zoomToObject(guid, layer.ngwLayersKeynames);
                         }
                     }
                 }
@@ -71,6 +71,20 @@ define([
                     }
                     this._renderMarkerSelected(geometry.features[0]);
                     this._fireAfterSelect(guid, Constants.TileLayer);
+                }));
+            },
+
+            zoomToObject: function (guid, keynameLayers) {
+                var layersId = this.layersInfo.getLayersIdByKeynames(keynameLayers);
+
+                this.ngwServiceFacade.getGeometriesByGuids(layersId, [guid]).then(lang.hitch(this, function (geometry) {
+                    if (!geometry.features || geometry.features.length < 1) {
+                        throw new Error('ObjectSelector: object with guid is not found.');
+                    }
+
+                    this._createSelectedObjectsLayer();
+                    this.map.getLMap().removeLayer(this._selectedObjectsLayer);
+                    this.map.getLMap().fitBounds(this._selectedObjectsLayer.addObject(geometry.features[0], 'empty', 0).getBounds());
                 }));
             },
 
