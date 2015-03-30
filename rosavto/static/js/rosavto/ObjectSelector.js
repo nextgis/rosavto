@@ -33,21 +33,19 @@ define([
             },
 
             bindEvents: function () {
-                topic.subscribe('object/select', lang.hitch(this, function (keynameLayer, guid) {
-                    this.selectObject(keynameLayer, guid);
+                topic.subscribe('object/select', lang.hitch(this, function (guid, layerType, keyname) {
+                    this.selectObject(guid, layerType, keyname);
                 }));
             },
 
-            selectObject: function (guid, layerType) {
+            selectObject: function (guid, layerType, keyname) {
 
                 if (layerType === Constants.TileLayer) {
                     this.selectObjectOnTileLayer(guid);
                 }
 
                 if (layerType === Constants.RealtimeLayer) {
-                    if (layer.layersById && layer.layersById[guid]) {
-                        layer._selectMarker(layer.layersById[guid]);
-                    }
+                    // todo: need implement logic for RealtimeLayer
                 }
 
                 if (layerType === Constants.SensorsLayer) {
@@ -96,7 +94,7 @@ define([
             addObjectByMarker: function (guid, layerType, marker) {
                 this._createSelectedObjectsLayer();
                 this._selectedObjectsLayer.addLayer(marker);
-                marker.setZIndexOffset(9999);
+                marker.setZIndexOffset(999999);
                 this._bindDndEventMarker(marker);
                 this.map.getLMap().fitBounds(this._selectedObjectsLayer.getBounds());
                 this._fireAfterSelect(guid, layerType);
