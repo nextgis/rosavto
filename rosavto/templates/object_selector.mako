@@ -6,9 +6,11 @@
     <a href="https://github.com/nextgis/rosavto/issues/20">Описание issue</a>
     <p>
         <label data-layer-keyname="-1" id="layerName">Выберите слой на карте</label>
-
-        <select id="objectsSelect">
-        </select>
+        <select id="objectsSelect"></select>
+    </p>
+    <p>
+        <label data-layer-keyname="-1" id="layerName">Объекты сенсорного слоя</label>
+        <select id="objectsSelectSensor"></select>
     </p>
 </div>
 
@@ -41,17 +43,15 @@
                           Constants) {
                     var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
                             attributesBaseUrl = '/',
-                            attributesServiceFacade = new AttributesServiceFacade(attributesBaseUrl),
                             map = new Map('map', {
                                 center: [55.529, 37.584],
-                                zoom: 7,
+                                zoom: 10,
                                 zoomControl: true,
                                 legend: true,
                                 easyPrint: false
                             }),
                             layersInfo,
                             mapIdentify,
-                            attributeGetter,
                             objectSelector;
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
@@ -109,7 +109,9 @@
                         var sensorLayer = new SensorsLayer({
                             objectSelector: objectSelector,
                             objectsSubscribedUrl: '/app/subscribe/map/',
+                            ngwServiceFacade: ngwServiceFacade,
                             clusters: ['GRAY', 'GREEN', 'YELLOW', 'RED'],
+                            ngwLayersKeynames:['sensors_video', 'sensors_meteo', 'sensors_traffic'],
                             layersStyles: {
                                 'Video': layersInfo.getClusterStyleByLayerKeyname('sensors_video'),
                                 'Traffic': layersInfo.getClusterStyleByLayerKeyname('sensors_traffic'),
@@ -127,15 +129,9 @@
                             }
                         }), lmap = map.getLMap();
 
+                        document.sensorLayer = sensorLayer;
+
                         lmap.addLayer(sensorLayer);
-
-##                        meteo sensors:
-##                        'TemperatureAir', 'TemperatureRoad', 'TemperatureUnderRoad', 'WindVelocity', 'WindGusts',
-##                        'WindDirection', 'PrecipitationCode', 'Cloudiness', 'AirPlessure', 'LayerType', 'ReagentAmount', 'ViewDistance',
-##                        'Humidity', 'AdhesionCoefficient'
-
-##                        Traffic sensors:
-##                            'AverageSpeed', 'Amount', 'Trucks'
 
                         sensorLayer.activateLayers({
                             'Meteo': []
@@ -165,14 +161,16 @@
                             }
 
                             var keyname = document.getElementById('layerName').getAttribute('data-layer-keyname');
-                            objectSelector.selectObject(keyname, value);
+                            objectSelector.selectObject(value, Constants.TileLayer);
                         });
 
                         map.getLMap().on('layeradd', lang.hitch(this, function (layer) {
                             var keyname = layer.layer.keyname;
 
                             if (keyname && layer.layer._layerType === Constants.TileLayer) {
-                                    ngwServiceFacade.getObjectsFromLayer(layersByKeyname[keyname].layer_id).then(function (objects) {
+                                    var bounds = map.getLMap().getBounds(),
+                                        extent = [bounds._southWest.lng, bounds._southWest.lat, bounds._northEast.lng, bounds._northEast.lat];
+                                    ngwServiceFacade.identifyFeaturesByLayers([layersByKeyname[keyname].layer_id], extent).then(function (result) {
                                     document.getElementById('layerName').innerHTML = layersByKeyname[keyname].display_name;
                                     document.getElementById('layerName').setAttribute('data-layer-keyname', keyname);
                                     objectsSelect.removeOption(objectsSelect.getOptions());
@@ -185,9 +183,9 @@
                                     for (var i = 0, l = 10; i < l; i++) {
                                         objectsSelect.addOption({
                                             disabled:false,
-                                            label:objects[i].uniq_uid,
+                                            label:result.features[i].properties.uniq_uid,
                                             selected:false,
-                                            value:objects[i].uniq_uid
+                                            value:result.features[i].properties.uniq_uid
                                         });
                                     }
                                 });
@@ -213,6 +211,51 @@
                                     value:-1
                                 });
                         } ));
+
+                        var objectsSelectSensor = new Select({
+                            id: 'objectsSelectSensor',
+                            value: new Date(),
+                            onChange: function () {
+
+                            }
+                        }, 'objectsSelectSensor');
+                        objectsSelectSensor.startup();
+
+                        objectsSelectSensor.addOption({
+                            disabled:false,
+                            label:'Загрузка...',
+                            selected:true,
+                            value:-1
+                        });
+
+                        var fillSensorsGuid = function () {
+                            if (Object.keys(sensorLayer._markers).length > 10) {
+                                objectsSelectSensor.removeOption(objectsSelectSensor.getOptions());
+                                objectsSelectSensor.addOption({
+                                        disabled:false,
+                                        label:'Выберите объект',
+                                        selected:true,
+                                        value:-1
+                                    });
+                                var limit = 0;
+                                for (var guid in sensorLayer._markers) {
+                                    limit++;
+                                    if (limit === 10) break;
+                                    objectsSelectSensor.addOption({
+                                        disabled:false,
+                                        label: guid,
+                                        selected:false,
+                                        value: guid
+                                    });
+                                }
+                                return false;
+                            }
+                            setTimeout(fillSensorsGuid, 5000);
+                        };
+
+                        fillSensorsGuid();
+
+                        map.on('');
                     });
 
                 });
