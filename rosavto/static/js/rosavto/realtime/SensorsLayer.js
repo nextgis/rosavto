@@ -266,6 +266,17 @@ define([
                 }, this);
             }
 
+            if (this._map.getZoom() === this._map.getMaxZoom()) {
+                var gridClustered = this._gridClusters[this._map.getZoom()]._grid;
+                array.forEach(funcObject.values(gridClustered), function (cell) {
+                    array.forEach(funcObject.values(cell), function (objectsList) {
+                        array.forEach(objectsList, function (cluster) {
+                            cluster.spiderfy();
+                        }, this);
+                    }, this);
+                }, this);
+            }
+
             var gridUnclustered = this._gridUnclustered[this._map.getZoom()]._grid;
             array.forEach(funcObject.values(gridUnclustered), function (cell) {
                 array.forEach(funcObject.values(cell), function (objectsList) {
