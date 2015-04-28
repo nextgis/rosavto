@@ -1,14 +1,14 @@
-1. Create cloud user  
+### Create cloud user  
 'useradd cloud -m  
 passwd cloud'
 
-2. Add cloud user to sudo  
+### Add cloud user to sudo  
 `sudo visudo`
 
 Add the line:  
 `cloud ALL=(ALL:ALL) ALL`
 
-3. Install nginx. 
+### Install nginx. 
 Create file:
 `sudo vim /etc/yum.repos.d/nginx.repo`
 
@@ -25,13 +25,13 @@ Update yum
 Install nginx  
 `sudo yum install nginx`
 
-4. Install PostreSQL 9.4 for CentOS 6.x 64-bit, instructions here - http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21CentOS6pgdg
+### Install PostreSQL 9.4 for CentOS 6.x 64-bit, instructions here - http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21CentOS6pgdg
 
-5. Restore database
+### Restore database
 `sudo -s -u postgres
 psql -f NAME.backup postgres`
 
-6. Install python 2.7
+### Install python 2.7
 Instruction is available here - http://bicofino.io/blog/2014/01/16/installing-python-2-dot-7-6-on-centos-6-dot-5/
 
 After need to create symbolic links to new python tools:
@@ -39,23 +39,23 @@ After need to create symbolic links to new python tools:
 sudo cp /usr/local/bin/pip /usr/bin/pip2.7
 sudo cp /usr/local/bin/virtualenv /usr/bin/virtualenv2.7`
 
-6. Create virtualenv for deploy
+### Create virtualenv for deploy
 `cd /home/cloud/projects/
 virtualenv2.7 env`
 
-8. Install svn client
+### Install svn client
 `sudo yum install mod_dav_svn subversion
 cd /home/cloud/projects/
 svn co URL_GIS_REPO`
 
 URL_GIS_REPO - `https://xxxxxxx.xx/svn/project/Builds/gis` for example 
 
-9. Create widgets and ngw directories
+### Create widgets and ngw directories
 `mkdir /home/cloud/projects/widgets
 ln -s /home/cloud/projects/gis/V1.5.1.7/widgets /home/cloud/projects/widgets/rosavto
 mkdir /home/cloud/projects/ngw
 mkdir /home/cloud/projects/ngw/nextgisweb_rosavto`
 
-10. Install psycopg2
+### Install psycopg2
 sudo yum install python-devel postgresql-devel
 
