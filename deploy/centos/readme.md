@@ -31,3 +31,12 @@ Install nginx
 sudo -s -u postgres
 psql -f NAME.backup postgres
 
+6. Install python 2.7
+Instruction is available here - http://bicofino.io/blog/2014/01/16/installing-python-2-dot-7-6-on-centos-6-dot-5/
+
+After need to create symbolic links to new python tools:
+sudo cp /usr/local/bin/python2.7 /usr/bin/python2.7
+sudo cp /usr/local/bin/pip /usr/bin/pip2.7
+sudo cp /usr/local/bin/virtualenv /usr/bin/virtualenv2.7
+
+
