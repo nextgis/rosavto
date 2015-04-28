@@ -1,6 +1,6 @@
 ### Create cloud user  
-'useradd cloud -m  
-passwd cloud'
+`useradd cloud -m  
+passwd cloud`
 
 ### Add cloud user to sudo  
 `sudo visudo`
@@ -25,7 +25,8 @@ Update yum
 Install nginx  
 `sudo yum install nginx`
 
-### Install PostreSQL 9.4 for CentOS 6.x 64-bit, instructions here - http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21CentOS6pgdg
+### Install PostreSQL 9.4
+for CentOS 6.x 64-bit, instructions here - http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21CentOS6pgdg
 
 ### Restore database
 `sudo -s -u postgres
@@ -57,5 +58,5 @@ mkdir /home/cloud/projects/ngw
 mkdir /home/cloud/projects/ngw/nextgisweb_rosavto`
 
 ### Install psycopg2
-sudo yum install python-devel postgresql-devel
+`sudo yum install python-devel postgresql-devel`
 
