@@ -33,6 +33,10 @@ for CentOS 6.x 64-bit, instructions here - http://trac.osgeo.org/postgis/wiki/Us
 psql -f NAME.backup postgres`
 
 ### Install python 2.7
+Install packages:
+`sudo yum groupinstall "Development tools"
+sudo yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel`
+
 Instruction is available here - http://bicofino.io/blog/2014/01/16/installing-python-2-dot-7-6-on-centos-6-dot-5/
 
 After need to create symbolic links to new python tools:
