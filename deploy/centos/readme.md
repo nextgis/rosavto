@@ -1,6 +1,6 @@
 ### Create cloud user  
-`useradd cloud -m  
-passwd cloud`
+```useradd cloud -m  
+passwd cloud```
 
 ### Add cloud user to sudo  
 `sudo visudo`
