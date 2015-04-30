@@ -9,9 +9,14 @@ import os.path as path
 from pyramid.view import view_config
 
 
-@view_config(route_name='map', renderer='map.mako')
-def map(request):
+@view_config(route_name='index', renderer='index.mako')
+def index(request):
     return {}
+
+
+# @view_config(route_name='map', renderer='map.mako')
+# def map(request):
+#     return {}
 
 
 @view_config(route_name='layer', renderer='layer.mako')

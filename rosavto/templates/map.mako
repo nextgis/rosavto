@@ -1,4 +1,4 @@
-<%inherit file="master.mako"/>
+<%inherit _file="master.mako"/>
 
 <%block name="title">Карта</%block>
 
