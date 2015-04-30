@@ -1,28 +1,8 @@
-html {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    margin: 4px;
-}
-
 #map, #map2 {
     margin: 3px 0;
+    width: 100%;
     height: 500px;
-}
-
-pre, code {
-    font-size: 100%;
-    line-height: normal;
-}
-
-div.code-description {
-    margin: 5px;
-}
-
-div.code-description a {
-    font-weight: bold;
+    position: relative;
 }
 
 div.leaflet-marker-icon.machine,
