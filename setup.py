@@ -20,7 +20,8 @@ requires = [
     'shapely',
     'geoalchemy2',
     'flup',
-    'cornice'
+    'tornado',
+    'sockjs-tornado'
 ]
 
 setup(name='rosavto',
