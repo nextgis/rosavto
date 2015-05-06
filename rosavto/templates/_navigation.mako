@@ -1,7 +1,7 @@
 ## -*- coding: utf-8 -*-
 
 <%
-    from rosavto import navigation
+    from rosavto.navigation import pages as navigation
 %>
 
 <header>
@@ -12,7 +12,7 @@
     </div>
     <ul id="nav-mobile" class="side-nav fixed">
         <li class="logo">
-            <a id="logo-container" href="/" class="brand-logo">
+            <a id="logo-container" href="/" class="brand-logo" title="На главную">
                 <img height="100%" src="${request.static_url('rosavto:static/images/250x250_icon_x_clr_white.png')}"/>
             </a>
         </li>
@@ -29,7 +29,7 @@
                 <li class="no-padding">
                     <ul class="collapsible collapsible-accordion">
                         <li class="bold">
-                            <a class="collapsible-header ${'active' if is_parent_active else ''} waves-effect waves-teal">
+                            <a title="${nav[2]}" class="collapsible-header ${'active' if is_parent_active else ''} waves-effect waves-teal">
                                 ${nav[1]}
                             </a>
                             <div class="collapsible-body">
@@ -37,6 +37,7 @@
                                     % for child_nav in nav[3]:
                                         <li bold ${'active' if request.matched_route.name == child_nav[0] else ''}>
                                             <a href="${request.route_url(child_nav[0])}"
+                                               title="${nav[2]}"
                                                class="waves-effect waves-teal">${child_nav[1]}</a>
                                         </li>
                                     % endfor
@@ -47,7 +48,7 @@
                 </li>
             %else:
                 <li class="bold ${'active' if request.matched_route.name == nav[0] else ''}">
-                    <a href="${request.route_url(nav[0])}" class="waves-effect waves-teal">${nav[1]}</a>
+                    <a href="${request.route_url(nav[0])}" title="${nav[2]}" class="waves-effect waves-teal">${nav[1]}</a>
                 </li>
             % endif
         % endfor
