@@ -9,9 +9,7 @@ import os.path as path
 from pyramid.view import view_config
 
 
-@view_config(route_name='index', renderer='index.mako')
-def index(request):
-    return {}
+
 
 
 # @view_config(route_name='map', renderer='map.mako')
@@ -26,11 +24,6 @@ def layer(request):
 
 @view_config(route_name='marker', renderer='marker.mako')
 def marker(request):
-    return {}
-
-
-@view_config(route_name='wms', renderer='wms.mako')
-def wms(request):
     return {}
 
 

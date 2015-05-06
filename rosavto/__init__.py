@@ -1,17 +1,7 @@
-## -*- coding: utf-8 -*-
-
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
 from rosavto.model import Base, DBSession
-
-navigation = [
-    ('index', u'Главная', u'На главную'),
-    ('', u'Общие', u'Общие компоненты', [
-        ('wms', u'WMS', u'WMS слой')
-    ]),
-
-]
 
 
 def main(global_config, **settings):
@@ -25,9 +15,12 @@ def main(global_config, **settings):
     config.include("cornice")
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('index', '/')
+    config.add_route('wms', '/wms')
+    config.add_route('base_layers', '/base_layers')
+    config.add_route('layers', '/layers')
+
     config.add_route('layer', '/layer')
     config.add_route('marker', '/marker')
-    config.add_route('wms', '/wms')
     config.add_route('realtime', '/realtime')
     config.add_route('attributes', '/attributes')
     config.add_route('attributes_html', '/gis/card')
