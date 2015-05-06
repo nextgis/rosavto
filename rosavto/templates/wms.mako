@@ -4,39 +4,46 @@
 
 <div class="row">
     <div class="section col s12 m9 l10">
-        <div id="description" class="row scrollspy">
+        <div id="nav_description" class="row scrollspy">
             <h2 class="col s12 header">Описание</h2>
+
             <p>Демонстрация подключения WMS слоя к картографическому виджету</p>
         </div>
     </div>
 
-    <div id="demo" class="section col s12 m9 l10">
-        <h2 class="col s12 header">Демо</h2>
-        <div id="map"></div>
-    </div>
-
-
-##    <div class="section col s12 m9 l10">
-##        <pre data-start="1"><code class="language-js">
-##            <%include file='_js_scripts.mako'/>
-##        </code></pre>
-##        <pre class="line-numbers" data-src="${request.static_url('rosavto:static/js/pages/' + request.matched_route.name + '.js')}"></pre>
-##    </div>
-
-    <!-- Table of contents -->
-    <div class="col hide-on-small-only m3 l2">
-        <div class="toc-wrapper">
-            <div style="height: 1px;">
-                <ul class="table-of-contents">
-                    <li><a href="#description">Описание</a></li>
-                    <li><a href="#demo">Демо</a></li>
-                </ul>
+    <div id="nav_demo" class="section col s12 m9 l10">
+        <div class="row">
+            <h2 class="col s12 header">Демо</h2>
+        </div>
+        <div class="row">
+            <div id="map">
+                <p class="loaded-status">Построение демо-карты...</p>
             </div>
         </div>
     </div>
+
+    <div id="nav_source_code" class="section col s12 m9 l10">
+        <div class="row">
+            <h2 class="col s12 header">Пример кода</h2>
+        </div>
+        <div class="row">
+            <pre data-src="${request.static_url('rosavto:static/js/pages/' + request.matched_route.name + '.js')}"
+                 class="line-numbers">
+            </pre>
+        </div>
+    </div>
+
+    <!-- Sub-navigation table of contents -->
+    <%
+        sub_navs = [
+            ('nav_description', u'Описание'),
+            ('nav_demo', u'Демо'),
+            ('nav_source_code', u'Пример кода')
+        ]
+    %>
+    <%include file='_sub_navigation.mako' args='sub_navs=sub_navs'/>
 </div>
 
 <%block name="inlineScripts">
-    <script type="text/javascript"
-            src="${request.static_url('rosavto:static/js/pages/' + request.matched_route.name + '.js')}"></script>
+    <script src="${request.static_url('rosavto:static/js/pages/' + request.matched_route.name + '.js')}"></script>
 </%block>
