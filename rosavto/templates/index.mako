@@ -4,7 +4,6 @@
 
 <!--  Outer row  -->
 <div class="row">
-
     <div class="section col s12 m9 l10">
         <div id="description" class="row scrollspy">
             <h2 class="col s12 header">Описание</h2>
@@ -62,18 +61,14 @@
 
     </div>
 
-    <!-- Table of contents -->
-    <div class="col hide-on-small-only m3 l2">
-        <div class="toc-wrapper">
-            <div style="height: 1px;">
-                <ul class="table-of-contents">
-                    <li><a href="#description">Описание</a></li>
-                    <li><a href="#about">О нас</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
+    <!-- Sub-navigation table of contents -->
+    <%
+        sub_navs = [
+            ('description', u'Описание'),
+            ('about', u'О нас')
+        ]
+    %>
+    <%include file='_sub_navigation.mako' args='sub_navs=sub_navs'/>
 </div>
 
 
