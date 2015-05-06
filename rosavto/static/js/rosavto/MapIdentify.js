@@ -10,12 +10,12 @@ define([
         'mustache/mustache',
         'rosavto/ParametersVerification',
         'rosavto/Constants',
+        'centreit/DragAndDrop',
         'leaflet/leaflet',
         'dojo/NodeList-traverse',
-        'centreit/DragAndDrop'
     ],
     function (declare, array, lang, query, on, domAttr, xhr, topic, mustache,
-              ParametersVerification, Constants, L, DnD) {
+              ParametersVerification, Constants, DnD) {
 
         return declare('rosavto.MapIdentify', [ParametersVerification], {
             template: '<div id="{{id}}" class="layers-selector">{{#layers}}<p>{{name}}</p><ul data-layer-id="{{id}}">{{#features}}<li data-id="{{id}}"><a href="javascript:void(0)">{{label}}</a></li>{{/features}}</ul>{{/layers}}</div>',

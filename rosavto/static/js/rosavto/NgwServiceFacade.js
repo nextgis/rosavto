@@ -1,10 +1,9 @@
 define([
         'dojo/_base/declare',
         'dojo/_base/lang',
-        'dojo/request/xhr',
-        'dojo/date/locale'
+        'dojo/request/xhr'
     ],
-    function (declare, lang, xhr, dateLocal) {
+    function (declare, lang, xhr) {
         return declare('rosavto.NgwServiceFacade', null, {
             constructor: function (ngwUrlBase, settings) {
                 this._ngwUrlBase = ngwUrlBase;

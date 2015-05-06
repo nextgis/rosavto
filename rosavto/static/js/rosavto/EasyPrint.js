@@ -2,7 +2,7 @@ define([
         'dojo/_base/declare',
         'leaflet/leaflet'
 ],
-function (declare, L) {
+function (declare) {
     return declare('rosavto.EasyPrint', null, {
         constructor: function () {
             L.Control.EasyPrint = L.Control.extend({

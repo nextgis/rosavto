@@ -5,13 +5,13 @@ define([
     'dojo/_base/array',
     'dojo/request/xhr',
     'rosavto/Loader',
-    'leaflet/leaflet',
     'centreit/StorageProvider',
     'dojo/topic',
     'dojox/lang/functional/object',
     'rosavto/EasyPrint',
-    'rosavto/Constants'
-], function (query, declare, lang, array, xhr, Loader, L, storage, topic, object, EasyPrint, Constants) {
+    'rosavto/Constants',
+    'leaflet/leaflet'
+], function (query, declare, lang, array, xhr, Loader, storage, topic, object, EasyPrint, Constants) {
     return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
@@ -186,7 +186,6 @@ define([
             }
 
             var url;
-
             array.forEach(baseLayers.baseLayers.baselayers, lang.hitch(this, function (baseLayer) {
                 url = baseLayer.url;
                 if (url && url.indexOf('{x}') > -1) {
