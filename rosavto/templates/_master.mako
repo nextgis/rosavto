@@ -2,19 +2,18 @@
 <html>
 <head>
     <title><%block name="title"/></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="icon" type="image/png" href="${request.static_url('rosavto:static/nextgis-favicon-16_16.png')}">
+
     <link type="text/css" rel="stylesheet"
           href="${request.static_url('rosavto:static/contrib/materialize/css/customize.css')}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="${request.static_url('rosavto:static/js/leaflet/leaflet.css')}"/>
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/widget.css')}"/>
     <link rel="stylesheet" href="${request.static_url('rosavto:static/css/main.css')}"/>
-##    <link rel="stylesheet" href="${request.static_url('rosavto:static/contrib/prism/prism.css')}"/>
-##    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <link rel="stylesheet" href="${request.static_url('rosavto:static/contrib/prismjs/prism.css')}"/>
 </head>
-<body>
-
+<body id="NxgDemo">
     <%include file='_navigation.mako'/>
-
 <main>
     <div class="section" id="index-banner">
         <div class="container">
@@ -24,21 +23,13 @@
                     <h4 class="light indigo-text text-lighten-4 center-on-small-only">Демонстрация виджетов к системе
                         NextGIS Web.</h4>
                 </div>
-                <div class="col s12 m3">
-                    <!-- BuySellAds Zone Code -->
-                    <div class="buysellads-header center-on-small-only">
-                        <
-
-                    </div>
-                    <!-- End BuySellAds Zone Code -->
-                </div>
             </div>
         </div>
     </div>
 
     <div class="container">
 
-    ${self.body()}
+        ${self.body()}
 
     </div>
 
@@ -52,7 +43,9 @@
                     </div>
     </div>
 </footer>
+</body>
 
+<script src="${request.static_url('rosavto:static/contrib/prismjs/prism.js')}"></script>
 
 <script type="text/javascript"
         src="${request.static_url('rosavto:static/contrib/jquery/jquery-2.1.3.min.js')}"></script>
@@ -80,8 +73,8 @@
             dojoConfig = {
                 isDebug: true,
                 async: true,
-                ##                cacheBust: true,
-                baseUrl: "${request.static_url('rosavto:static/js/')}",
+                cacheBust: true,
+                baseUrl: "${request.static_url('rosavto:static/js')}",
                 packages: [
                     {name: "rosavto", location: 'rosavto'},
                     {name: "proj4js", location: 'proj4js'},
@@ -90,17 +83,17 @@
                     {name: 'centreit', location: 'centreit'},
                     {name: 'stomp', location: 'stomp'},
                     {name: 'sockjs', location: 'sockjs'}
-                ]
+                ],
+                has: {
+                    "dojo-firebug": true,
+                    "dojo-debug-messages": true
+                }
             };
 </script>
 
-<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.2/dojo/dojo.js"></script>
-##<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-##<script>hljs.initHighlightingOnLoad();</script>
-##<link rel="stylesheet" href="${request.static_url('rosavto:static/contrib/prism/prism.js')}"/>
+<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.7/dojo/dojo.js"></script>
 <script src="${request.static_url('rosavto:static/js/sockjs/sockjs.js')}"></script>
 <script src="${request.static_url('rosavto:static/js/stomp/stomp.js')}"></script>
 <script src="${request.static_url('rosavto:static/js/centreit/MonitoringCard.js')}"></script>
-<%block name="inlineScripts"/>
-</body>
+    <%block name="inlineScripts"/>
 </html>
