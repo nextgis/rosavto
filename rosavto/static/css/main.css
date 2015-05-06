@@ -70,7 +70,6 @@ div.leaflet-marker-icon.camera-a {
     border: 1px solid lightgray;
 }
 
-
 ul.layersStatus {
     list-style: none;
 }
@@ -92,4 +91,30 @@ ul.layersStatus li.loading {
 
 ul.layersStatus li.loading span {
     background-image: url('images/ajax-loader.gif');
+}
+
+/* for code demonstration */
+#NxgDemo pre[class*="language-"].line-numbers {
+    padding: 0;
+}
+
+/* for demo map */
+#map p.loaded-status {
+    color: gray;
+}
+
+#map.leaflet-container p.loaded-status {
+    display: none;
+}
+
+/* rewrite css from materialize */
+#map [type="radio"]:not(:checked), #map [type="radio"]:checked,
+#map [type="checkbox"]:not(:checked), #map [type="checkbox"]:checked {
+    visibility: visible;
+    position: relative;
+    left: 0;
+}
+
+#map label {
+    color: #000000;
 }
