@@ -1,7 +1,7 @@
 ## -*- coding: utf-8 -*-
 
 <%
-    from rosavto.navigation import pages as navigation
+    from rosavto.navigation import pages_config
 %>
 
 <header>
@@ -16,12 +16,12 @@
                 <img height="100%" src="${request.static_url('rosavto:static/images/250x250_icon_x_clr_white.png')}"/>
             </a>
         </li>
-        % for nav in navigation:
-            % if len(nav) == 4:
+        % for nav in pages_config:
+            % if len(nav) == 5:
             <%
                 is_parent_active = False
                 current_route_name = request.matched_route.name
-                for child in nav[3]:
+                for child in nav[4]:
                     if child[0] == current_route_name:
                         is_parent_active = True
                         break
@@ -34,7 +34,7 @@
                             </a>
                             <div class="collapsible-body">
                                 <ul>
-                                    % for child_nav in nav[3]:
+                                    % for child_nav in nav[4]:
                                         <li bold ${'active' if request.matched_route.name == child_nav[0] else ''}>
                                             <a href="${request.route_url(child_nav[0])}"
                                                title="${nav[2]}"
