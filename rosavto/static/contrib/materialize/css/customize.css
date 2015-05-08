@@ -8325,7 +8325,9 @@ a.button-collapse.top-nav {
 
 ul.table-of-contents {
   margin-top: 0;
-  padding-top: 48px; }
+  padding-top: 48px;
+  padding-left: 15px;
+}
 
 code, pre {
   position: relative;
@@ -8520,3 +8522,8 @@ body.parallax-demo footer {
 
 #twitter-widget-0 {
   width: 190px !important; }
+
+/*div.section h2.header,*/
+/*div.section h3.header {*/
+    /*padding-left: 0;*/
+/*}*/
