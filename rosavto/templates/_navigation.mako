@@ -35,7 +35,7 @@
                             <div class="collapsible-body">
                                 <ul>
                                     % for child_nav in nav[4]:
-                                        <li bold ${'active' if request.matched_route.name == child_nav[0] else ''}>
+                                        <li class="bold ${'active' if request.matched_route.name == child_nav[0] else ''}">
                                             <a href="${request.route_url(child_nav[0])}"
                                                title="${nav[2]}"
                                                class="waves-effect waves-teal">${child_nav[1]}</a>
