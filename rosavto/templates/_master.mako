@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
+    <%def name="title()">
+        <%
+            import rosavto.navigation as navigation
+        %>
+        ${navigation.get_page_config(request.matched_route.name)['title']}
+    </%def>
 <head>
-    <title><%block name="title"/></title>
+    <title>${title()}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
     <link rel="icon" type="image/png" href="${request.static_url('rosavto:static/nextgis-favicon-16_16.png')}">
 
     <link type="text/css" rel="stylesheet"
@@ -28,9 +35,7 @@
     </div>
 
     <div class="container">
-
         ${self.body()}
-
     </div>
 
 </main>
