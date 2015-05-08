@@ -1,35 +1,34 @@
 <%inherit file="_master.mako"/>
 
-<%block name="title">Карта + WMS</%block>
-
 <div class="row">
     <div class="section col s12 m9 l10">
         <div id="nav_description" class="row scrollspy">
-            <h2 class="col s12 header">Описание</h2>
-
-            <p>Демонстрация подключения WMS слоя к картографическому виджету</p>
-        </div>
-    </div>
-
-    <div id="nav_demo" class="section col s12 m9 l10">
-        <div class="row">
-            <h2 class="col s12 header">Демо</h2>
-        </div>
-        <div class="row">
-            <div id="map">
-                <p class="loaded-status">Построение демо-карты...</p>
+            <div class="row">
+                <h2 class="col s12 header">${parent.title()}</h2>
+            </div>
+            <div class="row">
+                <p>Демонстрация подключения WMS слоя к картографическому виджету.</p>
             </div>
         </div>
-    </div>
-
-    <div id="nav_source_code" class="section col s12 m9 l10">
-        <div class="row">
-            <h2 class="col s12 header">Пример кода</h2>
+        <div id="nav_demo" class="row scrollspy">
+            <div class="row">
+                <h3 class="col s12 header">Демо</h3>
+            </div>
+            <div class="row">
+                <div id="map">
+                    <p class="loaded-status">Построение демо-карты...</p>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <pre data-src="${request.static_url('rosavto:static/js/pages/' + request.matched_route.name + '.js')}"
-                 class="line-numbers">
-            </pre>
+        <div id="nav_source_code" class="row scrollspy">
+            <div class="row">
+                <h3 class="col s12 header">Пример кода</h3>
+            </div>
+            <div class="row">
+                <pre data-src="${request.static_url('rosavto:static/js/pages/' + request.matched_route.name + '.js')}"
+                     class="line-numbers">
+                </pre>
+            </div>
         </div>
     </div>
 

@@ -1,11 +1,9 @@
 <%inherit file="_master.mako"/>
 
-<%block name="title">Демо-стенд NextGIS Web</%block>
-
 <!--  Outer row  -->
 <div class="row">
     <div class="section col s12 m9 l10">
-        <div id="description" class="row scrollspy">
+        <div id="nav_description" class="row scrollspy">
             <h2 class="col s12 header">Описание</h2>
 
             <p class="caption col s12">Демо-стенд создан для демонстрации возможностей интеграции клиентских
@@ -47,7 +45,7 @@
             </div>
         </div>
 
-        <div id="about" class="row scrollspy">
+        <div id="nav_about" class="row scrollspy">
             <div class="col s12">
                 <h2 class="header">О нас</h2>
 
@@ -64,8 +62,8 @@
     <!-- Sub-navigation table of contents -->
     <%
         sub_navs = [
-            ('description', u'Описание'),
-            ('about', u'О нас')
+            ('nav_description', u'Описание'),
+            ('nav_about', u'О нас')
         ]
     %>
     <%include file='_sub_navigation.mako' args='sub_navs=sub_navs'/>
