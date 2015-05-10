@@ -6,6 +6,11 @@ def index(request):
     return {}
 
 
+@view_config(route_name='widgets_list', renderer='widgets_list.mako')
+def widgets_list(request):
+    return {}
+
+
 @view_config(route_name='wms', renderer='wms.mako')
 def wms(request):
     return {}

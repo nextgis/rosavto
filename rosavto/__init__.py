@@ -15,6 +15,7 @@ def main(global_config, **settings):
     config.include("cornice")
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('index', '/')
+    config.add_route('widgets_list', '/widgets/list')
     config.add_route('wms', '/wms')
     config.add_route('base_layers', '/base_layers')
     config.add_route('layers', '/layers')
