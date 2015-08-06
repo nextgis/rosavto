@@ -64,7 +64,7 @@ define([
             selectObjectOnTileLayer: function (guid) {
                 this.ngwServiceFacade.getGeometriesByGuids(null, [guid]).then(lang.hitch(this, function (geometry) {
                     if (!geometry.features || geometry.features.length < 1) {
-                        throw new Error('ObjectSelector: object with guid "' + guid + '" is not found.');
+                        console.log('Object with GUID="' + guid + '" not found in GIS database');
                     }
                     this._renderMarkerSelected(geometry.features[0]);
                     this._fireAfterSelect(guid, Constants.TileLayer);
