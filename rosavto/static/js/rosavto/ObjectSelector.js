@@ -76,7 +76,7 @@ define([
 
                 this.ngwServiceFacade.getGeometriesByGuids(layersId, [guid]).then(lang.hitch(this, function (geometry) {
                     if (!geometry.features || geometry.features.length < 1) {
-                        throw new Error('ObjectSelector: object with guid is not found.');
+                        console.log('Object with GUID="' + guid + '" not found in GIS database');
                     }
 
                     this._createSelectedObjectsLayer();
