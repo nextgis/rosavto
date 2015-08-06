@@ -25,6 +25,7 @@
                     'dijit/form/Select',
                     'dojo/dom-class',
                     'dojo/_base/lang',
+                    'dojo/topic',
                     'dijit/registry',
                     'rosavto/Map',
                     'rosavto/LayersInfo',
@@ -38,7 +39,7 @@
                     'rosavto/Constants',
                     'dojo/domReady!'],
 
-                function (parser, Select, domClass, lang, registry, Map, LayersInfo, MapIdentify, AttributeGetter,
+                function (parser, Select, domClass, lang, topic, registry, Map, LayersInfo, MapIdentify, AttributeGetter,
                           AttributesServiceFacade, NgwServiceFacade, ObjectSelector, SensorsLayer, RealtimeLayer,
                           Constants) {
                     var ngwServiceFacade = new NgwServiceFacade(ngwProxyUrl),
@@ -161,7 +162,7 @@
                             }
 
                             var keyname = document.getElementById('layerName').getAttribute('data-layer-keyname');
-                            objectSelector.selectObject(value, Constants.TileLayer);
+                            topic.publish('object/select', value, Constants.TileLayer);
                         });
 
                         map.getLMap().on('layeradd', lang.hitch(this, function (layer) {
