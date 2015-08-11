@@ -45,7 +45,7 @@ define([
 
             mustache.parse(this._popupTemplate);
 
-            topic.subscribe("map/events/select/marker", lang.hitch(this, function (LAYER_TYPE, markerId) {
+            topic.subscribe('map/events/select/marker', lang.hitch(this, function (LAYER_TYPE, markerId) {
                 if (LAYER_TYPE !== Constants.SensorsLayer && this._markerSelected) {
                     domClass.remove(this._markerSelected._icon, 'selected');
                     this._markerSelected = null;
