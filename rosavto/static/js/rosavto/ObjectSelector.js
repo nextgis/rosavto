@@ -55,7 +55,7 @@ define([
                         if (markerFound) {
                             sensorLayer._selectMarker(markerFound);
                         } else {
-                            this.zoomToObject(guid, sensorLayer.ngwLayersKeynames);
+                            this.zoomToObjectByNgw(guid, sensorLayer.ngwLayersKeynames);
                         }
                     }
                 }
@@ -71,7 +71,7 @@ define([
                 }));
             },
 
-            zoomToObject: function (guid, keynameLayers) {
+            zoomToObjectByNgw: function (guid, keynameLayers) {
                 var layersId = this.layersInfo.getLayersIdByKeynames(keynameLayers);
 
                 this.ngwServiceFacade.getGeometriesByGuids(layersId, [guid]).then(lang.hitch(this, function (geometry) {
