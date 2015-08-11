@@ -90,7 +90,7 @@ define([
                 this._fireAfterSelect(guid, layerType);
             },
 
-            addObjectByMarker: function (guid, layerType, marker, notFitting) {
+            addMarker: function (guid, layerType, marker, notFitting) {
                 this._createSelectedObjectsLayer();
                 this._selectedObjectsLayer.addLayer(marker);
                 marker.setZIndexOffset(999999);

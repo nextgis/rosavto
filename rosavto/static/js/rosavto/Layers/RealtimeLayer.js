@@ -338,7 +338,7 @@ define([
         selectMarker: function (marker, type, suppressOpenCard) {
             var markerSelectedCloned = new L.Marker(marker._latlng, marker.options);
             markerSelectedCloned.options.icon.options.className += ' pressed';
-            this.options.objectSelector.addObjectByMarker(marker.markerId, Constants.RealtimeLayer, markerSelectedCloned);
+            this.options.objectSelector.addMarker(marker.markerId, Constants.RealtimeLayer, markerSelectedCloned);
         },
 
         deleteMarker: function (markerId) {

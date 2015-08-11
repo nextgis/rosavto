@@ -346,7 +346,7 @@ define([
         _selectMarker: function (markerSelected) {
             var markerSelectedCloned = new L.Marker(markerSelected._latlng, markerSelected.options);
             markerSelectedCloned.options.icon.options.className += ' selected';
-            this.objectSelector.addObjectByMarker(markerSelected.guid, Constants.SensorsLayer, markerSelectedCloned, true);
+            this.objectSelector.addMarker(markerSelected.guid, Constants.SensorsLayer, markerSelectedCloned, true);
         },
 
         findObject: function (guid) {
