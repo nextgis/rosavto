@@ -90,12 +90,14 @@ define([
                 this._fireAfterSelect(guid, layerType);
             },
 
-            addObjectByMarker: function (guid, layerType, marker) {
+            addObjectByMarker: function (guid, layerType, marker, notFitting) {
                 this._createSelectedObjectsLayer();
                 this._selectedObjectsLayer.addLayer(marker);
                 marker.setZIndexOffset(999999);
                 this._bindDndEventMarker(marker);
-                this.map.getLMap().fitBounds(this._selectedObjectsLayer.getBounds());
+                if (!notFitting) {
+                    this.map.getLMap().fitBounds(this._selectedObjectsLayer.getBounds());
+                }
                 this._fireAfterSelect(guid, layerType);
             },
 
