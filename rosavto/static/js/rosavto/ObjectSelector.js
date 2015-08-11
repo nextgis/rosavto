@@ -49,13 +49,13 @@ define([
                 }
 
                 if (layerType === Constants.SensorsLayer) {
-                    var layer = this._getLayerVisibleByKeyname('sensorsLayer');
-                    if (layer._markers) {
-                        var markerFound = layer._markers[guid];
+                    var sensorLayer = this._getLayerVisibleByKeyname('sensorsLayer');
+                    if (sensorLayer._markers) {
+                        var markerFound = sensorLayer._markers[guid];
                         if (markerFound) {
-                            layer._selectMarker(markerFound);
+                            sensorLayer._selectMarker(markerFound);
                         } else {
-                            this.zoomToObject(guid, layer.ngwLayersKeynames);
+                            this.zoomToObject(guid, sensorLayer.ngwLayersKeynames);
                         }
                     }
                 }
