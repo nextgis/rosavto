@@ -292,6 +292,8 @@ define([
                 this._isNewSetData = false;
                 this._subscribeSensorsSubscribes();
             }
+
+            topic.publish('map/layer/sensor/markersBuilt', this);
         },
 
         _createSensorMarker: function (sensor) {
