@@ -216,8 +216,8 @@
                         var objectsSelectSensor = new Select({
                             id: 'objectsSelectSensor',
                             value: new Date(),
-                            onChange: function () {
-
+                            onChange: function (guid) {
+                                topic.publish('object/select', guid, Constants.SensorsLayer);
                             }
                         }, 'objectsSelectSensor');
                         objectsSelectSensor.startup();
@@ -226,7 +226,7 @@
                             disabled:false,
                             label:'Загрузка...',
                             selected:true,
-                            value:-1
+                            value: -1
                         });
 
                         var fillSensorsGuid = function () {
