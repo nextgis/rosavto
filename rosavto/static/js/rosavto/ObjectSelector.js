@@ -55,7 +55,7 @@ define([
                         if (markerFound) {
                             sensorLayer._selectMarker(markerFound);
                         } else {
-                            this.zoomToObjectByNgw(guid, sensorLayer.ngwLayersKeynames);
+                            this.selectInvisibleObjectOnSensorsLayer(guid, sensorLayer.ngwLayersKeynames);
                         }
                     }
                 }
@@ -71,17 +71,25 @@ define([
                 }));
             },
 
-            zoomToObjectByNgw: function (guid, keynameLayers) {
-                var layersId = this.layersInfo.getLayersIdByKeynames(keynameLayers);
+            selectInvisibleObjectOnSensorsLayer: function (guid, ngwLayersKeynames) {
+                var layersId = this.layersInfo.getLayersIdByKeynames(ngwLayersKeynames);
 
                 this.ngwServiceFacade.getGeometriesByGuids(layersId, [guid]).then(lang.hitch(this, function (geometry) {
                     if (!geometry.features || geometry.features.length < 1) {
                         console.log('Object with GUID="' + guid + '" not found in GIS database');
                     }
+                    var guidSelected = guid;
+                    var handleSensorMarkersBuilt = topic.subscribe('map/layer/sensor/markersBuilt', function (sensorLayer) {
+                        handleSensorMarkersBuilt.remove();
+                        var markerFound = sensorLayer._markers[guidSelected];
+                        if (markerFound) {
+                            sensorLayer._selectMarker(markerFound);
+                        }
+                    });
 
                     this._createSelectedObjectsLayer();
-                    this.map.getLMap().removeLayer(this._selectedObjectsLayer);
                     this.map.getLMap().fitBounds(this._selectedObjectsLayer.addObject(geometry.features[0], 'empty', 0).getBounds());
+                    this.map.getLMap().removeLayer(this._selectedObjectsLayer);
                 }));
             },
 
@@ -138,6 +146,9 @@ define([
             _createSelectedObjectsLayer: function () {
                 if (this._selectedObjectsLayer) {
                     this.clearSelectedObject();
+                    if (!this._selectedObjectsLayer._map) {
+                        this.map.getLMap().addLayer(this._selectedObjectsLayer);
+                    }
                 } else {
                     this._selectedObjectsLayer = new StyledGeoJsonLayer(null, this.defaultStylesSettings);
                     this._bindSelectedObjectsLayerEvents();
