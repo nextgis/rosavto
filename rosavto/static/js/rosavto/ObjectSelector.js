@@ -101,7 +101,7 @@ define([
             addMarker: function (guid, layerType, marker, notFitting) {
                 this._createSelectedObjectsLayer();
                 this._selectedObjectsLayer.addLayer(marker);
-                marker.setZIndexOffset(999999);
+                marker.setZIndexOffset(99999999);
                 this._bindDndEventMarker(marker);
                 if (!notFitting) {
                     this.map.getLMap().fitBounds(this._selectedObjectsLayer.getBounds());
