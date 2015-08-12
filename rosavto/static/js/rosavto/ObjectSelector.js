@@ -53,7 +53,7 @@ define([
                     if (sensorLayer._markers) {
                         var markerFound = sensorLayer._markers[guid];
                         if (markerFound) {
-                            sensorLayer._selectMarker(markerFound);
+                            sensorLayer._selectMarker(markerFound, true);
                         } else {
                             this.selectInvisibleObjectOnSensorsLayer(guid, sensorLayer.ngwLayersKeynames);
                         }
@@ -98,12 +98,12 @@ define([
                 this._fireAfterSelect(guid, layerType);
             },
 
-            addMarker: function (guid, layerType, marker, notFitting) {
+            addMarker: function (guid, layerType, marker, isFitting) {
                 this._createSelectedObjectsLayer();
                 this._selectedObjectsLayer.addLayer(marker);
                 marker.setZIndexOffset(99999999);
                 this._bindDndEventMarker(marker);
-                if (!notFitting) {
+                if (isFitting) {
                     this.map.getLMap().fitBounds(this._selectedObjectsLayer.getBounds());
                 }
                 this._fireAfterSelect(guid, layerType);
