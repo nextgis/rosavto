@@ -312,7 +312,7 @@ define([
 
         _markerBindEvents: function (marker) {
             marker.on('click', function (e) {
-                this._selectMarker(e.target);
+                this._selectMarker(e.target, false);
             }, this);
 
             if (marker._icon) {
@@ -335,7 +335,7 @@ define([
             on(marker._icon, 'mouseup', lang.hitch(this, function (e) {
                 if (e.which === 1) {
                     if (DnD.dragStart === false) {
-                        this._selectMarker(marker);
+                        this._selectMarker(marker, false);
                     } else {
                         if (DnD.dragElement) {
                             DnD.dragElement.remove();
@@ -345,10 +345,10 @@ define([
             }));
         },
 
-        _selectMarker: function (markerSelected) {
+        _selectMarker: function (markerSelected, isFitting) {
             var markerSelectedCloned = new L.Marker(markerSelected._latlng, markerSelected.options);
             markerSelectedCloned.options.icon.options.className += ' selected';
-            this.objectSelector.addMarker(markerSelected.guid, Constants.SensorsLayer, markerSelectedCloned, true);
+            this.objectSelector.addMarker(markerSelected.guid, Constants.SensorsLayer, markerSelectedCloned, isFitting);
         },
 
         findObject: function (guid) {
