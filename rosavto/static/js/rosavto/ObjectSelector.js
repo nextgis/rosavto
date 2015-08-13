@@ -66,7 +66,7 @@ define([
                     if (!geometry.features || geometry.features.length < 1) {
                         console.log('Object with GUID="' + guid + '" not found in GIS database');
                     }
-                    this._renderMarkerSelected(geometry.features[0]);
+                    this._renderMarkerSelected(geometry.features[0], true);
                     this._fireAfterSelect(guid, Constants.TileLayer);
                 }));
             },
@@ -94,7 +94,7 @@ define([
             },
 
             selectObjectByFeature: function (guid, feature, layerType) {
-                this._renderMarkerSelected(feature);
+                this._renderMarkerSelected(feature, false);
                 this._fireAfterSelect(guid, layerType);
             },
 
@@ -163,9 +163,36 @@ define([
                     throw new Error('ObjectSelector: _selectedObjectsLayer is not created.');
                 }
 
-                this._selectedObjectsLayer.on('click', lang.hitch(this, function () {
+                this._selectedObjectsLayer.on('click', lang.hitch(this, function (e) {
+                    this._check_later(e);
+                }));
+
+                this.map.getLMap().on('singleclick', lang.hitch(this, function () {
                     this.clearSelectedObject();
                 }));
+
+                this._selectedObjectsLayer.on('dblclick', lang.hitch(this, function () {
+                    this._clear_clickTimeout();
+                    this.map.getLMap().fitBounds(this._selectedObjectsLayer.getBounds());
+                }));
+            },
+
+            _clickTimeout: null,
+            _check_later: function (e)
+            {
+                this._clear_clickTimeout();
+                this._clickTimeout = setTimeout(lang.hitch(this, function () {
+                    this.map.getLMap().fire('singleclick', L.Util.extend(e, {type : 'singleclick'}));
+                }), 500);
+            },
+
+            _clear_clickTimeout: function ()
+            {
+                if (this._clickTimeout != null)
+                {
+                    clearTimeout(this._clickTimeout);
+                    this._clickTimeout = null;
+                }
             },
 
             _removeSelectedObjectsLayer: function () {
@@ -180,17 +207,22 @@ define([
                 this.map.getLMap().off('click', this.clearSelectedObject, this);
             },
 
-            _renderMarkerSelected: function (feature) {
+            _renderMarkerSelected: function (feature, isFitting) {
                 var layerId = feature.properties.__layer__,
-                    style = this._getNgwTileLayerStyle(layerId, feature.properties);
+                    style = this._getNgwTileLayerStyle(layerId, feature.properties),
+                    selectedObject;
 
                 this._createSelectedObjectsLayer();
 
                 if (style) {
                     this._addSelectedStyle(style);
-                    this.map.getLMap().fitBounds(this._selectedObjectsLayer.addObject(feature, 'selected', 0).getBounds());
+                    selectedObject = this._selectedObjectsLayer.addObject(feature, 'selected', 0);
                 } else {
-                    this.map.getLMap().fitBounds(this._selectedObjectsLayer.addObject(feature, 'default', 0).getBounds());
+                    selectedObject = this._selectedObjectsLayer.addObject(feature, 'default', 0);
+                }
+
+                if (isFitting) {
+                    this.map.getLMap().fitBounds(selectedObject.getBounds());
                 }
             },
 
