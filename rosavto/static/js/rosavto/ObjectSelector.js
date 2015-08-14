@@ -39,7 +39,7 @@ define([
                 }));
             },
 
-            selectObject: function (guid, layerType, keyname) {
+            selectObject: function (guid, layerType, keynames) {
 
                 if (layerType === Constants.TileLayer) {
                     this.selectObjectOnTileLayer(guid);
@@ -48,16 +48,21 @@ define([
                 if (layerType === Constants.RealtimeLayer) {
                     if (!this.realtimeLayers || !keyname) return false;
                     var targetRealtimeLayers = array.filter(this.realtimeLayers, function (realtimeLayer) {
-                        return realtimeLayer.keyname === keyname;
+                        return array.indexOf(keynames, realtimeLayer.keyname) !== -1;
                     });
-                    if (targetRealtimeLayers.length < 1) {
-                        console.log('ObjectSelector: RealtimeLayer with keyname "' + keyname + '" not found.');
-                        return false;
+                    var targetRealtimeMarker = null,
+                        targetRealtimeLayer;
+                    for (var i = 0, targetRealtimeLayersCount = targetRealtimeLayers.length;
+                         i < targetRealtimeLayersCount; i++) {
+                         targetRealtimeMarker = targetRealtimeLayers[i].layersById[guid];
+                         if (targetRealtimeMarker){
+                             targetRealtimeLayer = targetRealtimeLayers[i];
+                             break;
+                         }
                     }
-                    var targetRealtimeLayer = targetRealtimeLayers[0];
-                    var targetRealtimeMarker = targetRealtimeLayer.layersById[guid];
+
                     if (!targetRealtimeMarker) {
-                        console.log('ObjectSelector: RealtimeLayer object with guid "' + guid + '" not found on layer "' + keyname + '"');
+                        console.log('ObjectSelector: RealtimeLayer object with guid "' + guid + '" not found on layer "' + keynames + '"');
                         return false;
                     }
                     targetRealtimeLayer.selectMarker(targetRealtimeMarker);
