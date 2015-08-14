@@ -46,7 +46,7 @@ define([
                 }
 
                 if (layerType === Constants.RealtimeLayer) {
-                    if (!this.realtimeLayers || !keyname) return false;
+                    if (!this.realtimeLayers || !keynames) return false;
                     var targetRealtimeLayers = array.filter(this.realtimeLayers, function (realtimeLayer) {
                         return array.indexOf(keynames, realtimeLayer.keyname) !== -1;
                     });
