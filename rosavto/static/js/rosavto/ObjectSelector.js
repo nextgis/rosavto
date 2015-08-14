@@ -26,7 +26,8 @@ define([
                     'map',
                     'ngwServiceFacade',
                     'layersInfo',
-                    'defaultStylesSettings'
+                    'defaultStylesSettings',
+                    'realtimeLayers'
                 ]);
                 lang.mixin(this, settings);
                 this.bindEvents();
@@ -45,7 +46,21 @@ define([
                 }
 
                 if (layerType === Constants.RealtimeLayer) {
-                    // todo: need implement logic for RealtimeLayer
+                    if (!this.realtimeLayers || !keyname) return false;
+                    var targetRealtimeLayers = array.filter(this.realtimeLayers, function (realtimeLayer) {
+                        return realtimeLayer.keyname === keyname;
+                    });
+                    if (targetRealtimeLayers.length < 1) {
+                        console.log('ObjectSelector: RealtimeLayer with keyname "' + keyname + '" not found.');
+                        return false;
+                    }
+                    var targetRealtimeLayer = targetRealtimeLayers[0];
+                    var targetRealtimeMarker = targetRealtimeLayer.layersById[guid];
+                    if (!targetRealtimeMarker) {
+                        console.log('ObjectSelector: RealtimeLayer object with guid "' + guid + '" not found on layer "' + keyname + '"');
+                        return false;
+                    }
+                    targetRealtimeLayer.selectMarker(targetRealtimeMarker);
                 }
 
                 if (layerType === Constants.SensorsLayer) {
@@ -178,18 +193,15 @@ define([
             },
 
             _clickTimeout: null,
-            _check_later: function (e)
-            {
+            _check_later: function (e) {
                 this._clear_clickTimeout();
                 this._clickTimeout = setTimeout(lang.hitch(this, function () {
-                    this.map.getLMap().fire('singleclick', L.Util.extend(e, {type : 'singleclick'}));
+                    this.map.getLMap().fire('singleclick', L.Util.extend(e, {type: 'singleclick'}));
                 }), 500);
             },
 
-            _clear_clickTimeout: function ()
-            {
-                if (this._clickTimeout != null)
-                {
+            _clear_clickTimeout: function () {
+                if (this._clickTimeout != null) {
                     clearTimeout(this._clickTimeout);
                     this._clickTimeout = null;
                 }
