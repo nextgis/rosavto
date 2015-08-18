@@ -27,7 +27,7 @@ define([
                     'ngwServiceFacade',
                     'layersInfo',
                     'defaultStylesSettings',
-                    'realtimeLayers'
+                    'realtimeLayer'
                 ]);
                 lang.mixin(this, settings);
                 this.bindEvents();
@@ -40,32 +40,12 @@ define([
             },
 
             selectObject: function (guid, layerType, keynames) {
-
                 if (layerType === Constants.TileLayer) {
                     this.selectObjectOnTileLayer(guid);
                 }
 
                 if (layerType === Constants.RealtimeLayer) {
-                    if (!this.realtimeLayers || !keynames) return false;
-                    var targetRealtimeLayers = array.filter(this.realtimeLayers, function (realtimeLayer) {
-                        return array.indexOf(keynames, realtimeLayer.keyname) !== -1;
-                    });
-                    var targetRealtimeMarker = null,
-                        targetRealtimeLayer;
-                    for (var i = 0, targetRealtimeLayersCount = targetRealtimeLayers.length;
-                         i < targetRealtimeLayersCount; i++) {
-                         targetRealtimeMarker = targetRealtimeLayers[i].layersById[guid];
-                         if (targetRealtimeMarker){
-                             targetRealtimeLayer = targetRealtimeLayers[i];
-                             break;
-                         }
-                    }
-
-                    if (!targetRealtimeMarker) {
-                        console.log('ObjectSelector: RealtimeLayer object with guid "' + guid + '" not found on layer "' + keynames + '"');
-                        return false;
-                    }
-                    targetRealtimeLayer.selectMarker(targetRealtimeMarker);
+                    this.realtimeLayer.markerToSelectId = guid;
                 }
 
                 if (layerType === Constants.SensorsLayer) {
