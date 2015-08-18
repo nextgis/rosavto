@@ -71,6 +71,7 @@
                             map: map,
                             ngwServiceFacade: ngwServiceFacade,
                             layersInfo: layersInfo,
+                            realtimeLayer: RealtimeLayer,
                             getHistDate: function () {
                                 return '';
                             },
