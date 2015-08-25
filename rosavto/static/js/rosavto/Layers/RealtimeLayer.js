@@ -175,11 +175,8 @@ define([
                 var incidentGuid = mainGuid + '-' + index;
                 var incident = this.addObject(geoJson, type, incidentGuid);
                 if (incidentGuid === RealtimeLayer.currentMarkerId &&
-                    incident.layersById[incidentGuid].feature.geometry.type == 'Point') { //если данный элемент выделен, то мы должны добавить css = 'pressed'
-
-                    incident.layersById[incidentGuid].setIcon(L.divIcon({
-                        className: incident.options.styles[type]['point'].className + ' pressed'
-                    }));
+                    incident.layersById[incidentGuid].feature.geometry.type == 'Point') {
+                    this.selectMarker(incident.layersById[incidentGuid]);
                 }
                 on(incident.layersById[incidentGuid], 'click', function () {
                     var m = incident.layersById[incidentGuid];

@@ -65,11 +65,9 @@ define([
                     }
                     if (targetRealtimeMarker) {
                         targetRealtimeLayer.selectMarker(targetRealtimeMarker);
-                    } else {
-                        console.log('ObjectSelector: RealtimeLayer object with guid "' + realtimeGuid + '" not found on layer "' + keynames + '"');
                     }
 
-                    this.realtimeLayer.markerToSelectId = realtimeGuid;
+                    this.realtimeLayer.currentMarkerId = realtimeGuid;
                 }
 
                 if (layerType === Constants.SensorsLayer) {
