@@ -45,7 +45,31 @@ define([
                 }
 
                 if (layerType === Constants.RealtimeLayer) {
-                    this.realtimeLayer.markerToSelectId = guid;
+                    var realtimeLayers = this.realtimeLayer.layers;
+                    if (!realtimeLayers || !keynames) return false;
+
+                    var realtimeGuid = guid + '-0';
+
+                    var targetRealtimeLayers = array.filter(realtimeLayers, function (realtimeLayer) {
+                        return array.indexOf(keynames, realtimeLayer.keyname) !== -1;
+                    });
+                    var targetRealtimeMarker = null,
+                        targetRealtimeLayer;
+                    for (var i = 0, targetRealtimeLayersCount = targetRealtimeLayers.length;
+                         i < targetRealtimeLayersCount; i++) {
+                        targetRealtimeMarker = targetRealtimeLayers[i].layersById[realtimeGuid];
+                        if (targetRealtimeMarker) {
+                            targetRealtimeLayer = targetRealtimeLayers[i];
+                            break;
+                        }
+                    }
+                    if (targetRealtimeMarker) {
+                        targetRealtimeLayer.selectMarker(targetRealtimeMarker);
+                    } else {
+                        console.log('ObjectSelector: RealtimeLayer object with guid "' + realtimeGuid + '" not found on layer "' + keynames + '"');
+                    }
+
+                    this.realtimeLayer.markerToSelectId = realtimeGuid;
                 }
 
                 if (layerType === Constants.SensorsLayer) {
@@ -242,7 +266,7 @@ define([
                     selectedObjectGroupStyle = style.selectedObjectStyleGroup[featureProperties[style.selectedObjectStyleGroup._fieldType]];
                     if (!selectedObjectGroupStyle) {
                         console.log('ObjectSelector: selected-object-style-group is not found: type "' +
-                        featureProperties[style.selectedObjectStyleGroup._fieldType] + '"');
+                            featureProperties[style.selectedObjectStyleGroup._fieldType] + '"');
                     }
                     return selectedObjectGroupStyle;
                 }
