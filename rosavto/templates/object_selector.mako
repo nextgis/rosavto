@@ -104,7 +104,8 @@
                             layersInfo: layersInfo,
                             objectSelector: objectSelector,
                             fieldIdentify: 'uniq_uid',
-                            debug: true
+                            debug: true,
+                            keynameDefaultLayer: 'borders_dept'
                         });
                         mapIdentify.on();
 
