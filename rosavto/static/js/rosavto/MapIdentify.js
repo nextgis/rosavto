@@ -43,10 +43,15 @@ define([
                         DnD.dragStart = false;
                     }
                     if (DnD.dragStart === false) {
+                        var lmap = this.map._lmap,
+                            zoom = lmap.getZoom(),
+                            latLng = [e.latlng.lng, e.latlng.lat];
+
                         if (this.map.getVisibleNgwLayers().length < 1) {
-                            return false;
+                            this._identifyDefaultLayer(zoom, latLng);
+                        } else {
+                            this._getIdsByClick(zoom, latLng);
                         }
-                        this.getIdsByClick(e);
                     }
                 }));
             },
@@ -61,14 +66,12 @@ define([
             },
 
 
-            getIdsByClick: function (e) {
-                var map = this.map._lmap,
-                    zoom = map.getZoom(),
-                    feature,
+            _getIdsByClick: function (zoom, latLng) {
+                var feature,
                     featuresCount;
 
                 return this.layersInfo.getLayersIdByStyles(this.map.getVisibleNgwLayers()).then(lang.hitch(this, function (layersId) {
-                    this.ngwServiceFacade.identifyGeoFeaturesByLayers(layersId, zoom, [e.latlng.lng, e.latlng.lat])
+                    this.ngwServiceFacade.identifyGeoFeaturesByLayers(layersId, zoom, latLng)
                         .then(lang.hitch(this, function (geoJsonFeatures) {
                                 featuresCount = geoJsonFeatures.features.length;
                                 feature = null;
@@ -82,6 +85,8 @@ define([
                                 if (feature) {
                                     this.objectSelector.selectObjectByFeature(
                                         feature.properties[this.fieldIdentify], feature, Constants.TileLayer);
+                                } else if (this.keynameDefaultLayer) {
+                                    this._identifyDefaultLayer();
                                 }
                             }
                         ));
@@ -94,7 +99,7 @@ define([
                 array.forEach(features, lang.hitch(this, function (feature) {
                     if (significantFeature) {
                         if (this.geometryTypesRank[feature.geometry.type.toUpperCase()] <
-                                this.geometryTypesRank[significantFeature.geometry.type.toUpperCase()]) {
+                            this.geometryTypesRank[significantFeature.geometry.type.toUpperCase()]) {
                             significantFeature = feature;
                         }
                     } else {
@@ -228,6 +233,31 @@ define([
 
             identify: function (layerId, id) {
                 topic.publish('attributes/get', layerId, id);
+            },
+
+            _defaultLayerId: null,
+            _identifyDefaultLayer: function (zoom, latLng) {
+                var defaultLayerId = this._defaultLayerId ? this._defaultLayerId :
+                        this.layersInfo.getLayerIdByKeyname(this.keynameDefaultLayer),
+                    feature,
+                    featuresCount;
+
+                this.ngwServiceFacade.identifyGeoFeaturesByLayers([defaultLayerId], zoom, latLng)
+                    .then(lang.hitch(this, function (geoJsonFeatures) {
+                        featuresCount = geoJsonFeatures.features.length;
+                        feature = null;
+                        if (featuresCount === 1) {
+                            feature = geoJsonFeatures.features[0];
+                        }
+                        else if (featuresCount > 1) {
+                            feature = this._getSignificantFeature(geoJsonFeatures.features);
+                        }
+
+                        if (feature) {
+                            this.objectSelector.selectObjectByFeature(
+                                feature.properties[this.fieldIdentify], feature, Constants.TileLayer);
+                        }
+                    }));
             }
         });
     });
