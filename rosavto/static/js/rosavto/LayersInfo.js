@@ -304,6 +304,15 @@ define([
                 return ids;
             },
 
+            getLayerIdByKeyname: function (keyname) {
+                var resourceLayer = this.store.query({keyname: keyname});
+                if (resourceLayer.length > 0) {
+                    return resourceLayer[0].id;
+                } else {
+                    console.log('LayersInfo.getLayerIdByKeyname: Layer with keyname "' + keyname + '"is not found.');
+                }
+            },
+
             _getLayersIdByStyles: function (idStyles) {
                 var ids = [];
 
