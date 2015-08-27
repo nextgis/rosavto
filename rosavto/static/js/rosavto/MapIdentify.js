@@ -66,12 +66,12 @@ define([
             },
 
 
-            _getIdsByClick: function (zoom, latLng) {
+            _getIdsByClick: function (zoom, latlng) {
                 var feature,
                     featuresCount;
 
                 return this.layersInfo.getLayersIdByStyles(this.map.getVisibleNgwLayers()).then(lang.hitch(this, function (layersId) {
-                    this.ngwServiceFacade.identifyGeoFeaturesByLayers(layersId, zoom, latLng)
+                    this.ngwServiceFacade.identifyGeoFeaturesByLayers(layersId, zoom, latlng)
                         .then(lang.hitch(this, function (geoJsonFeatures) {
                                 featuresCount = geoJsonFeatures.features.length;
                                 feature = null;
@@ -86,7 +86,7 @@ define([
                                     this.objectSelector.selectObjectByFeature(
                                         feature.properties[this.fieldIdentify], feature, Constants.TileLayer);
                                 } else if (this.keynameDefaultLayer) {
-                                    this._identifyDefaultLayer();
+                                    this._identifyDefaultLayer(zoom, latlng);
                                 }
                             }
                         ));
