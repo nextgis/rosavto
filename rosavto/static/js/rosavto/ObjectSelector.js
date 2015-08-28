@@ -87,6 +87,7 @@ define([
                 this.ngwServiceFacade.getGeometriesByGuids(null, [guid]).then(lang.hitch(this, function (geometry) {
                     if (!geometry.features || geometry.features.length < 1) {
                         console.log('Object with GUID="' + guid + '" not found in GIS database');
+                        return false;
                     }
                     this._renderMarkerSelected(geometry.features[0], true);
                     this._fireAfterSelect(guid, Constants.TileLayer);
@@ -99,6 +100,7 @@ define([
                 this.ngwServiceFacade.getGeometriesByGuids(layersId, [guid]).then(lang.hitch(this, function (geometry) {
                     if (!geometry.features || geometry.features.length < 1) {
                         console.log('Object with GUID="' + guid + '" not found in GIS database');
+                        return false;
                     }
                     var guidSelected = guid;
                     var handleSensorMarkersBuilt = topic.subscribe('map/layer/sensor/markersBuilt', function (sensorLayer) {
