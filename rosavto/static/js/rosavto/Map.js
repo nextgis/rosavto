@@ -258,9 +258,14 @@ define([
         },
 
         onMapLayerRemoved: function (layer) {
-            if (layer.layer.keyname) {
-                delete this._layersByKeyname[layer.layer.keyname];
+            var layerKeyname = layer.layer.keyname;
+            if (!layerKeyname) {
+                return false;
             }
+
+            delete this._layersByKeyname[layerKeyname];
+            topic.publish('/map/layer/removed', layerKeyname);
+
             storage.then(function (provider) {
                 provider.put('mapLayerVisibility-' + layer.layer.keyname, false);
             });
