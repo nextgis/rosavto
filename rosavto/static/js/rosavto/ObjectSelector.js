@@ -20,6 +20,7 @@ define([
               ParametersVerification, Loader, StyledGeoJsonLayer, Constants) {
         return declare('rosavto.ObjectSelector', [Loader, ParametersVerification], {
             _selectedObjectsLayer: null,
+            _keynameLayer: null,
 
             constructor: function (settings) {
                 this.verificateRequiredParameters(settings, [
@@ -36,6 +37,12 @@ define([
             bindEvents: function () {
                 topic.subscribe('object/select', lang.hitch(this, function (guid, layerType, keyname) {
                     this.selectObject(guid, layerType, keyname);
+                }));
+                topic.subscribe('/map/layer/removed', lang.hitch(this, function (keyname) {
+                    if (this._keynameLayer === keyname) {
+                        this.clearSelectedObject();
+                        this._keynameLayer = null;
+                    }
                 }));
             },
 
@@ -84,14 +91,25 @@ define([
             },
 
             selectObjectOnTileLayer: function (guid) {
+                var feature;
                 this.ngwServiceFacade.getGeometriesByGuids(null, [guid]).then(lang.hitch(this, function (geometry) {
                     if (!geometry.features || geometry.features.length < 1) {
                         console.log('Object with GUID="' + guid + '" not found in GIS database');
                         return false;
                     }
-                    this._renderMarkerSelected(geometry.features[0], true);
+                    feature = geometry.features[0];
+                    this._setKeyname(feature);
+                    this._renderMarkerSelected(feature, true);
                     this._fireAfterSelect(guid, Constants.TileLayer);
                 }));
+            },
+
+            _setKeyname: function (feature) {
+                var layerId = feature.properties.__layer__;
+                if (layerId) {
+                    var layer = this.layersInfo.getLayerById(layerId);
+                    this._keynameLayer = layer.keyname;
+                }
             },
 
             selectInvisibleObjectOnSensorsLayer: function (guid, ngwLayersKeynames) {
@@ -118,6 +136,7 @@ define([
             },
 
             selectObjectByFeature: function (guid, feature, layerType) {
+                this._setKeyname(feature);
                 this._renderMarkerSelected(feature, false);
                 this._fireAfterSelect(guid, layerType);
             },
