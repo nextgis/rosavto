@@ -19,4 +19,6 @@ backup () {
     fi ;
 }
 
+sudo mount //archi-ctr.tesad.fad.ru/backup/gis/
 backup $1 $2
+sudo unmount //archi-ctr.tesad.fad.ru/backup/gis/
