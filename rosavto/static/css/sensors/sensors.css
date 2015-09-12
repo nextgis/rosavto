@@ -85,10 +85,10 @@
 }
 
 /*img.leaflet-marker-icon {*/
-    /*width: 44px !important;*/
-    /*height: 44px !important;*/
-    /*margin-left: -22px !important;*/
-    /*margin-top: -22px !important;*/
+/*width: 44px !important;*/
+/*height: 44px !important;*/
+/*margin-left: -22px !important;*/
+/*margin-top: -22px !important;*/
 /*}*/
 
 .marker-cluster-RED {
@@ -659,13 +659,19 @@ div.leaflet-marker-icon.obj.cross-117 {
 }
 
 div.leaflet-marker-icon.obj.meteostations {
+    width: 20px !important;
+    height: 20px !important;
     background-image: url('../../icons/layers/023_s.png');
 }
 
 div.leaflet-marker-icon.obj.mchs {
+    width: 20px !important;
+    height: 20px !important;
     background-image: url('../../icons/layers/038_s.png');
 }
 
 div.leaflet-marker-icon.obj.gibdd {
+    width: 20px !important;
+    height: 20px !important;
     background-image: url('../../icons/layers/039_s.png');
 }
