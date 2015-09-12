@@ -657,3 +657,15 @@ div.leaflet-marker-icon.obj.cross-118 {
 div.leaflet-marker-icon.obj.cross-117 {
     background-image: url('../../icons/layers/117_s.png');
 }
+
+div.leaflet-marker-icon.obj.meteostations {
+    background-image: url('../../icons/layers/023_s.png');
+}
+
+div.leaflet-marker-icon.obj.mchs {
+    background-image: url('../../icons/layers/038_s.png');
+}
+
+div.leaflet-marker-icon.obj.gibdd {
+    background-image: url('../../icons/layers/039_s.png');
+}
