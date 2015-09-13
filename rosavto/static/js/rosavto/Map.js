@@ -261,10 +261,7 @@ define([
             this._layersByKeyname[layer.keyname] = layer;
 
             if (LayersInfo.instance) {
-                var zIndex = LayersInfo.instance.getLayerZIndexByKeyname(layer.keyname);
-                if (zIndex && layer.setZIndex) {
-                    layer.setZIndex(zIndex);
-                }
+                this.setLayerZIndex(layer);
             }
 
             storage.then(function (provider) {
@@ -278,11 +275,15 @@ define([
             }
 
             object.forIn(this._layersByKeyname, function (layer, keyname) {
-                var zIndex = LayersInfo.instance.getLayerZIndexByKeyname(layer.keyname);
-                if (zIndex && layer.setZIndex) {
-                    layer.setZIndex(zIndex);
-                }
+                this.setLayerZIndex(layer)
             }, this);
+        },
+
+        setLayerZIndex: function (layer) {
+            var zIndex = LayersInfo.instance.getLayerZIndexByKeyname(layer.keyname);
+            if (zIndex && layer.setZIndex) {
+                layer.setZIndex(zIndex);
+            }
         },
 
         onMapLayerRemoved: function (layer) {
