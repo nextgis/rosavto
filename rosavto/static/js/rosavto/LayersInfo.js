@@ -12,7 +12,7 @@ define([
         'dojox/xml/parser'
     ],
     function (declare, array, lang, query, attr, Memory, Observable, xhr, Deferred, DeferredList, xmlParser) {
-        return declare('rosavto.LayersInfo', null, {
+        var LayersInfo = declare('rosavto.LayersInfo', null, {
             _filled: false,
             constructor: function (ngwServiceFacade) {
                 if (ngwServiceFacade) {
@@ -22,6 +22,10 @@ define([
                 }
 
                 this.store = new Observable(new Memory());
+
+                if (!LayersInfo.instance) {
+                    LayersInfo.instance = this;
+                }
             },
 
             _deferredStore: null,
@@ -325,7 +329,7 @@ define([
                 resourceLayer = resourcesLayers[0];
                 if (resourceLayer.styles && resourceLayer.styles.length > 0 &&
                     resourceLayer.styles[0].json && resourceLayer.styles[0].json.zIndex) {
-                    return(parseInt(resourceLayer.styles[0].json.zIndex, 10));
+                    return (parseInt(resourceLayer.styles[0].json.zIndex, 10));
                 } else {
                     return null;
                 }
@@ -517,4 +521,8 @@ define([
                 }
             }
         });
+
+        LayersInfo.instance = null;
+
+        return LayersInfo;
     });
