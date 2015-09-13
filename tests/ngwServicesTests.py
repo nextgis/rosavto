@@ -1,10 +1,8 @@
 import unittest
-import urllib2, json
+import urllib2
+import json
 
-from sqlalchemy import engine_from_config
 from pyramid.paster import get_appsettings
-
-from rosavto.model import DBSession
 
 
 class NgwServicesTests(unittest.TestCase):
@@ -12,7 +10,8 @@ class NgwServicesTests(unittest.TestCase):
     #     self.config = path_to_config
 
     def setUp(self):
-        self.ngwUrl = 'http://localhost:6543/'
+        settings = get_appsettings('production.ini')
+        self.ngwUrl = settings['proxy_ngw']
 
     def test_get_resource_available(self):
         service_url = self.ngwUrl + 'resource/0/child/'
