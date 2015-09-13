@@ -10,8 +10,9 @@ define([
     'dojo/topic',
     'dojox/lang/functional/object',
     'rosavto/EasyPrint',
-    'rosavto/Constants'
-], function (query, declare, lang, array, xhr, Loader, L, storage, topic, object, EasyPrint, Constants) {
+    'rosavto/Constants',
+    'rosavto/LayersInfo'
+], function (query, declare, lang, array, xhr, Loader, L, storage, topic, object, EasyPrint, Constants, LayersInfo) {
     return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
@@ -251,6 +252,13 @@ define([
             }
 
             this._layersByKeyname[layer.keyname] = layer;
+
+            if (LayersInfo.instance) {
+                var zIndex = LayersInfo.instance.getLayerZIndexByKeyname(layer.keyname);
+                if (zIndex && layer.setZIndex) {
+                    layer.setZIndex(zIndex);
+                }
+            }
 
             storage.then(function (provider) {
                 provider.put('mapLayerVisibility-' + layer.keyname, true);
