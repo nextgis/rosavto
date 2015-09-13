@@ -252,6 +252,9 @@ define([
                             console.log({valueForParsing: valueForParsing});
                         }
                         break;
+                    case 'zIndex':
+                        jsonStyle.zIndex = valueForParsing;
+                        break;
                 }
             },
 
