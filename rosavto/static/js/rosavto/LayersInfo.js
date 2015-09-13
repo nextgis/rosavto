@@ -326,7 +326,7 @@ define([
                 if (resourcesLayers.length < 1) {
                     return null;
                 }
-                resourceLayer = resourcesLayers[0];
+                resourceLayer = resourcesLayers[0].link ? resourcesLayers[0].object : resourcesLayers[0];
                 if (resourceLayer.styles && resourceLayer.styles.length > 0 &&
                     resourceLayer.styles[0].json && resourceLayer.styles[0].json.zIndex) {
                     return (parseInt(resourceLayer.styles[0].json.zIndex, 10));
