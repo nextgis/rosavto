@@ -323,7 +323,7 @@ define([
             getLayerZIndexByKeyname: function (keyname) {
                 var resourcesLayers = this.store.query({keyname: keyname}),
                     resourceLayer;
-                if (!resourcesLayers.length < 0) {
+                if (resourcesLayers.length < 1) {
                     return null;
                 }
                 resourceLayer = resourcesLayers[0];
