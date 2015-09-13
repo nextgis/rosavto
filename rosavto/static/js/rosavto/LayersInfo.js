@@ -316,6 +316,21 @@ define([
                 }
             },
 
+            getLayerZIndexByKeyname: function (keyname) {
+                var resourcesLayers = this.store.query({keyname: keyname}),
+                    resourceLayer;
+                if (!resourcesLayers.length < 0) {
+                    return null;
+                }
+                resourceLayer = resourcesLayers[0];
+                if (resourceLayer.styles && resourceLayer.styles.length > 0 &&
+                    resourceLayer.styles[0].json && resourceLayer.styles[0].json.zIndex) {
+                    return(parseInt(resourceLayer.styles[0].json.zIndex, 10));
+                } else {
+                    return null;
+                }
+            },
+
             _getLayersIdByStyles: function (idStyles) {
                 var ids = [];
 
