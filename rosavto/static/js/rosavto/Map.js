@@ -10,8 +10,9 @@ define([
     'dojo/topic',
     'dojox/lang/functional/object',
     'rosavto/EasyPrint',
-    'rosavto/Constants'
-], function (query, declare, lang, array, xhr, Loader, L, storage, topic, object, EasyPrint, Constants) {
+    'rosavto/Constants',
+    'rosavto/LayersInfo'
+], function (query, declare, lang, array, xhr, Loader, L, storage, topic, object, EasyPrint, Constants, LayersInfo) {
     return declare('rosavto.Map', [Loader], {
         _lmap: {},
         _baseLayers: {},
@@ -29,16 +30,23 @@ define([
 
             this._lmap = new L.Map(domNode, settings);
             this._lmap.on('layeradd', lang.hitch(this, function (layer) {
-                this.onMapLayerAdded(layer);}
+                    this.onMapLayerAdded(layer);
+                }
             ));
-            this._lmap.on('layerremove', lang.hitch(this, function (layer) { this.onMapLayerRemoved(layer);} ));
+            this._lmap.on('layerremove', lang.hitch(this, function (layer) {
+                this.onMapLayerRemoved(layer);
+            }));
             this._lmap.on('moveend', this.onMapMoveEnd);
 
             if (settings.legend) {
                 this._legend = L.control.layers(this._baseLayers, this._overlaylayers).addTo(this._lmap);
             }
 
-            this.buildLoader(domNode);
+            this.buildLoader(domNode, 'map');
+
+            topic.subscribe('loader/for/map/hidden', lang.hitch(this, function () {
+                this.updateZIndexLayers()
+            }));
 
             storage.then(lang.hitch(this, function (provider) {
                 var zoom = provider.get('zoom'), center = provider.get('center');
@@ -252,9 +260,30 @@ define([
 
             this._layersByKeyname[layer.keyname] = layer;
 
+            if (LayersInfo.instance) {
+                this.setLayerZIndex(layer);
+            }
+
             storage.then(function (provider) {
                 provider.put('mapLayerVisibility-' + layer.keyname, true);
             });
+        },
+
+        updateZIndexLayers: function () {
+            if (!LayersInfo.instance) {
+                return false;
+            }
+
+            object.forIn(this._layersByKeyname, function (layer, keyname) {
+                this.setLayerZIndex(layer)
+            }, this);
+        },
+
+        setLayerZIndex: function (layer) {
+            var zIndex = LayersInfo.instance.getLayerZIndexByKeyname(layer.keyname);
+            if (zIndex && layer.setZIndex) {
+                layer.setZIndex(zIndex);
+            }
         },
 
         onMapLayerRemoved: function (layer) {
