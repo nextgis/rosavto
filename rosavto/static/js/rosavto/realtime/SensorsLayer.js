@@ -213,14 +213,17 @@ define([
 
         _getHeadersForLayers: function (subscriber) {
             var bounds = this._map.getBounds();
-
-            return {
+			var headers = {
                 'LatitudeFrom': bounds.getSouth(),
                 'LatitudeTo': bounds.getNorth(),
                 'LongitudeFrom': bounds.getWest(),
                 'LongitudeTo': bounds.getEast(),
                 'ObjectTypes': this._activatedLayers
             };
+			if (this.getHistDate()) {
+				headers.HistoryDate = this.getHistDate();
+			}
+            return headers;
         },
 
         _markers: {},
