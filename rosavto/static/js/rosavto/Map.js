@@ -69,7 +69,7 @@ define([
             topic.subscribe("map/historyDate/change", function () {
                 component.historyDate = arguments[0];
                 object.forIn(component._lmap._layers, function (layer, key) {
-                    if (layer.options && layer.options.subscribeUrl) {
+                    if (layer.options && (layer.options.subscribeUrl || layer.options.objectsSubscribedUrl)) {
                         if (component.historyDate) {
                             layer.options.historyDate = component.historyDate;
                         } else {
