@@ -48,12 +48,12 @@ define([
                 this.updateZIndexLayers()
             }));
 
-            storage.then(lang.hitch(this, function (provider) {
-                var zoom = provider.get('zoom'), center = provider.get('center');
-                if (center) {
-                    this._lmap.setView(center, zoom, {reset: true});
-                }
-            }));
+            //storage.then(lang.hitch(this, function (provider) {
+            //    var zoom = provider.get('zoom'), center = provider.get('center');
+            //    if (center) {
+            //        this._lmap.setView(center, zoom, {reset: true});
+            //    }
+            //}));
 
             var component = this;
             topic.subscribe("map/coordinates/restore", function () {
@@ -152,11 +152,11 @@ define([
             if (typeof name !== 'string') {
                 ngwTileLayer.keyname = name.keyname;
 
-                storage.then(lang.hitch(this, function (provider) {
-                    if (provider.get('mapLayerVisibility-' + ngwTileLayer.keyname) === true) {
-                        this._lmap.addLayer(ngwTileLayer);
-                    }
-                }));
+                //storage.then(lang.hitch(this, function (provider) {
+                //    if (provider.get('mapLayerVisibility-' + ngwTileLayer.keyname) === true) {
+                //        this._lmap.addLayer(ngwTileLayer);
+                //    }
+                //}));
 
                 name = name.name;
             }
@@ -239,11 +239,11 @@ define([
             disable = disable || false;
             geoJsonLayer.keyname = keyname;
             if (!disable) {
-                storage.then(lang.hitch(this, function (provider) {
-                    if (provider.get('mapLayerVisibility-' + geoJsonLayer.keyname) !== false) {
-                        this._lmap.addLayer(geoJsonLayer);
-                    }
-                }));
+                //storage.then(lang.hitch(this, function (provider) {
+                //    if (provider.get('mapLayerVisibility-' + geoJsonLayer.keyname) !== false) {
+                //        this._lmap.addLayer(geoJsonLayer);
+                //    }
+                //}));
             }
             this._overlaylayers[name] = geoJsonLayer;
             if (this._legend) {
@@ -264,9 +264,9 @@ define([
                 this.setLayerZIndex(layer);
             }
 
-            storage.then(function (provider) {
-                provider.put('mapLayerVisibility-' + layer.keyname, true);
-            });
+            //storage.then(function (provider) {
+            //    provider.put('mapLayerVisibility-' + layer.keyname, true);
+            //});
         },
 
         updateZIndexLayers: function () {
@@ -295,22 +295,22 @@ define([
             delete this._layersByKeyname[layerKeyname];
             topic.publish('/map/layer/removed', layerKeyname);
 
-            storage.then(function (provider) {
-                provider.put('mapLayerVisibility-' + layer.layer.keyname, false);
-            });
+            //storage.then(function (provider) {
+            //    provider.put('mapLayerVisibility-' + layer.layer.keyname, false);
+            //});
         },
 
         onMapMoveEnd: function (obj) {
             if (obj && obj.target) {
-                storage.then(function (provider) {
-                    var zoom = obj.target.getZoom(), center = obj.target.getCenter();
-                    if (zoom) {
-                        provider.put('zoom', zoom);
-                    }
-                    if (center) {
-                        provider.put('center', [center.lat, center.lng]);
-                    }
-                });
+                //storage.then(function (provider) {
+                //    var zoom = obj.target.getZoom(), center = obj.target.getCenter();
+                //    if (zoom) {
+                //        provider.put('zoom', zoom);
+                //    }
+                //    if (center) {
+                //        provider.put('center', [center.lat, center.lng]);
+                //    }
+                //});
             }
         },
 
