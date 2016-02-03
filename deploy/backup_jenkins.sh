@@ -8,6 +8,9 @@ backup () {
     temporary_dir="$HOME/temp/$time_label"
     zip_file_name="$HOME/temp/V$1-$2-$time_label.tar.gz"
 
+    echo "-----------------------------------------------"
+    echo "Starting backup: version - $1, server - $2"
+
     echo Creating backup_dir - "$backup_dir"
     mkdir -p "$backup_dir"
     echo backup_dir was created
@@ -16,9 +19,9 @@ backup () {
     mkdir -p "$temporary_dir"
     echo temporary_dir was created
 
-#    echo Dumping database...
-#    pg_dumpall -c -O > "$temporary_dir/db.backup"
-#    echo dump was created
+    echo Dumping database...
+    pg_dumpall -c -O > "$temporary_dir/db.backup"
+    echo dump was created
 
     echo Copying ngw dir - "$HOME/projects/ngw/" - to temporary_dir - "$temporary_dir/"
     mkdir -p "$temporary_dir/ngw"
@@ -46,7 +49,9 @@ backup () {
     rm "$zip_file_name"
     echo OK
 
-    echo Dump was finished successfully.
+    echo "Dump was finished successfully"
+    echo "File - V$1-$2-$time_label.tar.gz"
+    echo "-----------------------------------------------"
 }
 
 backup $1 $2
