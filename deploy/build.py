@@ -3,6 +3,7 @@ import re
 import subprocess
 import os
 from os import path
+import shutil
 
 
 def install_pyramid_app(path_to_app, path_to_python='/home/cloud/projects/env/python'):
@@ -29,6 +30,10 @@ link_to_rosavto = '/home/cloud/projects/widgets/rosavto'
 if not path.exists(link_to_rosavto):
     raise Exception('BUILD: path "{0}" to ROSAVTO symbolic link folder not found'.format(link_to_rosavto))
 
+if not path.islink(link_to_rosavto) and path.isdir(link_to_rosavto):
+    shutil.rmtree(link_to_rosavto)
+    os.symlink('/tmp', link_to_rosavto)
+
 if path.islink(link_to_rosavto):
     path_to_rosavto = path.realpath(link_to_rosavto)
     current_release_version = re.findall(release_version_regex, path_to_rosavto)
@@ -50,6 +55,10 @@ if path.islink(link_to_rosavto):
 link_to_ngw_rosavto = '/home/cloud/projects/ngw/nextgisweb_rosavto'
 if not path.exists(link_to_ngw_rosavto):
     raise Exception('BUILD: path "{0}" to NEXTGISWEB_ROSAVTO symbolic link folder not found'.format(link_to_ngw_rosavto))
+
+if not path.islink(link_to_ngw_rosavto) and path.isdir(link_to_ngw_rosavto):
+    shutil.rmtree(link_to_ngw_rosavto)
+    os.symlink('/tmp', link_to_ngw_rosavto)
 
 if path.islink(link_to_ngw_rosavto):
     path_to_ngw_rosavto = path.realpath(link_to_ngw_rosavto)
