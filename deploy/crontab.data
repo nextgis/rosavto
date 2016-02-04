@@ -1,0 +1,4 @@
+*/10 * * * * /home/cloud/projects/ngw/nextgisweb_rosavto/nextgisweb_rosavto/pg_replica/triggers-ask
+0 * * * * /home/cloud/projects/ngw/nextgisweb_rosavto/nextgisweb_rosavto/pg_replica/changeset-gen
+20 * * * * /home/cloud/projects/ngw/nextgisweb_rosavto/nextgisweb_rosavto/pg_replica/changeset-query-list
+40 * * * * /home/cloud/projects/ngw/nextgisweb_rosavto/nextgisweb_rosavto/pg_replica/changeset-apply
