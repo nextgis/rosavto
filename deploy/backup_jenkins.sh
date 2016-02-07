@@ -19,6 +19,18 @@ backup () {
     mkdir -p "$temporary_dir"
     echo temporary_dir was created
 
+    echo "Stopping rosavto..."
+    supervisorctl -c ~/supervisor/supervisor.conf stop rosavto
+    echo "OK"
+
+    echo "Stopping nextgisweb..."
+    supervisorctl -c ~/supervisor/supervisor.conf stop nextgisweb
+    echo "OK"
+
+    echo "Stopping mapproxy..."
+    supervisorctl -c ~/supervisor/supervisor.conf stop mapproxy
+    echo "OK"
+
     echo Dumping database...
     pg_dumpall -c -O > "$temporary_dir/db.backup"
     echo dump was created
@@ -32,6 +44,22 @@ backup () {
     mkdir -p "$temporary_dir/widgets"
     rsync -a -L --exclude=".*" --exclude ".*/" "$HOME/projects/widgets/" "$temporary_dir/widgets"
     echo OK
+
+    echo "Starting rosavto..."
+    supervisorctl -c ~/supervisor/supervisor.conf start rosavto
+    echo "OK"
+
+    echo "Starting nextgisweb..."
+    supervisorctl -c ~/supervisor/supervisor.conf start nextgisweb
+    echo "OK"
+
+    echo "Starting mapproxy..."
+    supervisorctl -c ~/supervisor/supervisor.conf start mapproxy
+    echo "OK"
+
+    echo "Getting status applications"
+    supervisorctl -c ~/supervisor/supervisor.conf status
+    echo "OK"
 
     echo Creating archive "$zip_file_name"
     tar -zhcf "$zip_file_name" -C "$temporary_dir" .
