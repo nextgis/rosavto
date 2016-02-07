@@ -36,6 +36,10 @@ restore () {
     supervisorctl -c ~/supervisor/supervisor.conf stop nextgisweb
     echo "OK"
 
+    echo "Stopping mapproxy..."
+    supervisorctl -c ~/supervisor/supervisor.conf stop mapproxy
+    echo "OK"
+
     echo "Restoring database..."
     psql -d postgres <  "$temporary_dir/db.backup"
     echo "OK"
@@ -79,6 +83,10 @@ restore () {
 
     echo "Starting nextgisweb..."
     supervisorctl -c ~/supervisor/supervisor.conf start nextgisweb
+    echo "OK"
+
+    echo "Starting mapproxy..."
+    supervisorctl -c ~/supervisor/supervisor.conf start mapproxy
     echo "OK"
 
     echo "Getting status applications"
