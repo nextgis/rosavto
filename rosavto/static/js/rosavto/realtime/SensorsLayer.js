@@ -351,6 +351,8 @@ define([
         _selectMarker: function (markerSelected, isFitting) {
             var markerSelectedCloned = new L.Marker(markerSelected._latlng, markerSelected.options);
             markerSelectedCloned.options.icon.options.className += ' selected';
+            markerSelectedCloned.type = markerSelected.type;
+            markerSelectedCloned.guid = markerSelected.guid;
             this.objectSelector.addMarker(markerSelected.guid, Constants.SensorsLayer, markerSelectedCloned, isFitting);
         },
 
