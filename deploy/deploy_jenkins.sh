@@ -11,7 +11,7 @@ deploy () {
     echo "Stopping apps..."
     supervisorctl -c ~/supervisor/supervisor.conf stop rosavto
     supervisorctl -c ~/supervisor/supervisor.conf stop nextgisweb
-    echo "OK
+    echo "OK"
 
     echo "Getting changes from SVN..."
     svn up /home/cloud/projects/gis
