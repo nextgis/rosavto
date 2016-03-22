@@ -3,7 +3,8 @@ define(['dojo/_base/declare'],
         var Constants = declare('rosavto.Constants', [], {
             RealtimeLayer: 'Rl',
             SensorsLayer: 'Sl',
-            TileLayer: 'Tl'
+            TileLayer: 'Tl',
+            VectorLayer: 'Vl'
         });
 
         if (!_instance) {

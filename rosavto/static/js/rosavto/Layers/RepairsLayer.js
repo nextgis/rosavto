@@ -12,7 +12,8 @@ define([
                 'layersInfo',
                 'map',
                 'getRepairsStatusUrl',
-                'getCurrentTime'
+                'getCurrentTime',
+                'objectSelector'
             ]);
             this._workobj_line_id = this.options.layersInfo.getLayersDictByKeyname()['workobj_line'].layer_id;
             this._workobj_point_id = this.options.layersInfo.getLayersDictByKeyname()['workobj_points'].layer_id;
@@ -31,10 +32,31 @@ define([
 
         _hookMap: function (map) {
             map.on('moveend zoomend', this._buildRepairs, this);
+            this.on('click', lang.hitch(this, this._handleClick));
         },
 
         _unhookMap: function (map) {
             map.off('moveend zoomend', this._buildRepairs, this);
+            this.off('click', lang.hitch(this, this._handleClick));
+        },
+
+        _handleClick: function (event) {
+            var feature = event.layer.feature,
+                selectedLayer = new L.geoJson(feature, {
+                    style: {
+                        weight: 8,
+                        opacity: 1,
+                        color: 'red',
+                        dashArray: '3',
+                        fillOpacity: 0.3,
+                        fillColor: '#ff0000'
+                    }
+                });
+            this.options.objectSelector.addMarker(
+                feature.properties.__id,
+                'Vl',
+                selectedLayer
+            );
         },
 
         _buildRepairs: function () {
@@ -67,7 +89,6 @@ define([
                                     console.log('RepairsLayer: object with guid "' + guid + '" has no status.');
                                 }
                             }
-
                         }
                     }));
                 }));

@@ -51,6 +51,35 @@
 
                     layersInfo = new LayersInfo(ngwServiceFacade);
 
+                    objectSelector = new ObjectSelector({
+                            map: map,
+                            ngwServiceFacade: ngwServiceFacade,
+                            layersInfo: layersInfo,
+                            realtimeLayer: RealtimeLayer,
+                            getHistDate: function () {
+                                return '';
+                            },
+                            afterSelect: function (guid, layerType) {
+                                console.log(guid);
+                                console.log(layerType);
+                                if (Monitoring) {
+                                    Monitoring.getApplication().fireEvent('mapObjectSelected', guid, new Date());
+                                }
+                            },
+                            defaultStylesSettings: {
+                                fields: {
+                                    id: 'uniq_uid',
+                                    type: 'type_name'
+                                },
+                                styles: {
+                                    'default': {
+                                        point: {},
+                                        line: {opacity: 0.5, weight: 15, color: '#FF0000'}
+                                    }
+                                }
+                            }
+                        });
+
                     map.showLoader();
                     layersInfo.fillLayersInfo().then(function (store) {
                         var layersByKeyname = layersInfo.getLayersDictByKeyname();
@@ -74,6 +103,7 @@
                         // Создаем слой ремонтов
                         // Подключаем из rosavto/Layers/RepairsLayer
                         var l = new RepairsLayer(null, {
+                            objectSelector: objectSelector,
                             ngwServiceFacade: ngwServiceFacade,
                             layersInfo: layersInfo,
                             map: map,

@@ -88,6 +88,8 @@ define([
                         }
                     }
                 }
+
+                if (layerType === Constants.VectorLayer) {}
             },
 
             selectObjectOnTileLayer: function (guid) {
@@ -144,8 +146,12 @@ define([
             addMarker: function (guid, layerType, marker, isFitting) {
                 this._createSelectedObjectsLayer();
                 this._selectedObjectsLayer.addLayer(marker);
-                marker.setZIndexOffset(99999999);
-                this._bindDndEventMarker(marker);
+                if (marker.setZIndexOffset) {
+                    marker.setZIndexOffset(99999999);
+                }
+                if (marker._icon) {
+                    this._bindDndEventMarker(marker);
+                }
                 if (isFitting) {
                     this.map.getLMap().fitBounds(this._selectedObjectsLayer.getBounds());
                 }
