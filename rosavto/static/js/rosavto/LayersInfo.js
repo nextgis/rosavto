@@ -434,6 +434,18 @@ define([
                 return listLayers;
             },
 
+            getMapserverStyles: function (keyname) {
+                var layer = this.store.query({keyname: keyname});
+                if (layer.length > 0) {
+                    layer = layer[0];
+                }
+                if (layer.styles) {
+                    return layer.styles;
+                } else {
+                    return [];
+                }
+            },
+
             getStylesByLayersKeynames: function (listKeynames) {
                 var layersResources,
                     style,
