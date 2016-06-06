@@ -414,7 +414,7 @@ define([
                 return dict;
             },
 
-            getStyles: function () {
+            getMapserverStyles: function () {
                 var resourceLayers = this.store.query({type: 'mapserver_style'}),
                     listLayers = [];
 
@@ -423,10 +423,9 @@ define([
                         resourceLayer = resourceLayer.object;
                     }
                     listLayers.push({
-                        layer_id: resourceLayer.id,
                         display_name: resourceLayer.res.display_name || null,
                         keyname: resourceLayer.res.keyname || null,
-                        style_id: resourceLayer.styles ? resourceLayer.styles[0].id : null,
+                        style_id: resourceLayer.id,
                         xml_style: resourceLayer.xml
                     });
                 });
@@ -434,8 +433,10 @@ define([
                 return listLayers;
             },
 
-            getMapserverStyles: function (keyname) {
-                var layer = this.store.query({keyname: keyname});
+            getStylesByKeyname: function (keyname) {
+                var layer = this.store.query({
+                    keyname: keyname
+                });
                 if (layer.length > 0) {
                     layer = layer[0];
                 }
