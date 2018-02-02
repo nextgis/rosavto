@@ -1,4 +1,4 @@
-Frontend modules for "Rosavto" webmap component
+Front-end modules for "Rosavto" webmap component
 =======
 
 ![Main page](https://raw.githubusercontent.com/nextgis/rosavto/master/doc/system-screen.png)
